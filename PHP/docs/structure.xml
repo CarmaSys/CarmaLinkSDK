@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a10" title="">
-  <file path="CarmaLinkAPI.php" hash="d505b8afabc93ee77f5520b2586e1c7b" package="Default">
+  <file path="CarmaLinkAPI.php" hash="f2ed93506adc52ad8c09632c9988d2d8" package="Default">
     <docblock line="3">
       <description><![CDATA[CarmaLink SDK for PHP]]></description>
       <long-description><![CDATA[]]></long-description>
@@ -390,7 +390,7 @@ Can be used to override when setting a configuration which supports buzzer.]]></
       <constant namespace="CarmaLink" line="241" package="Default">
         <name>BUZZER_MED</name>
         <full_name>BUZZER_MED</full_name>
-        <value><![CDATA["MED"]]></value>
+        <value><![CDATA["MEDIUM"]]></value>
       </constant>
       <constant namespace="CarmaLink" line="242" package="Default">
         <name>BUZZER_OFF</name>
