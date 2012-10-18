@@ -20,7 +20,7 @@ Getting Started
 ---------------
 
 * Download the SDK as a zip or clone it locally using the public URL.
-* Obtain your CarmaLinkAPI Key and Secret from a representative.
+* Obtain your CarmaLinkAPI Key and Secret by opening a ticket @ https://support.carmasys.com
 * Create a new instance of the CarmaLinkAPI class sending in required arguments (see language-specific documentation)
  such as:
  * API Key
