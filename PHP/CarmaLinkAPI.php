@@ -238,7 +238,7 @@ class ConfigStatus {
  */
 class BuzzerVolume {
 	const BUZZER_HIGH 	= "HIGH";
-	const BUZZER_MED	= "MED";
+	const BUZZER_MED	= "MEDIUM";
 	const BUZZER_OFF	= "OFF";
 }
 
@@ -272,7 +272,7 @@ class ConfigType {
 	
 	/**
 	 * @access public
-	 * @var array
+	 * @var array 
 	 */
 	public static $valid_config_types = array(
 		self::CONFIG_OVERSPEEDING,
