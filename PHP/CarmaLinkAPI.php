@@ -780,7 +780,8 @@ namespace CarmaLink {
 				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_ACCEL, 
 				ConfigType::CONFIG_IDLING, 
-				ConfigType::CONFIG_OVERSPEEDING
+				ConfigType::CONFIG_OVERSPEEDING,
+				ConfigType::CONFIG_STATUS
 			);
 			$error_data = array();
 			foreach ($configs_to_update as $config_type) {
