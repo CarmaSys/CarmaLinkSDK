@@ -790,14 +790,14 @@ namespace CarmaLink {
 				{
 					if (!$this -> deleteConfig($device -> id, $config_type)) 
 					{
-						$error_data[$device->id] = "$config_type failure to delete.";
+						$error_data[$config_type] = "failure to delete.";
 					}
 				} 
 				else 
 				{
 					if (!$this -> putConfig((int)$device -> id, $config_params, $config_type)) 
 					{
-						$error_data[$device->id] = "$config_type failure to delete.";
+						$error_data[$config_type] = "failure to configure.";
 					}
 				}
 			}
