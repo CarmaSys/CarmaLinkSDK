@@ -1,6 +1,27 @@
 <?php
-
 namespace CarmaLink;
+
+/**
+ * Unit Tests for the CarmaLink PHP SDK
+ * 
+ * For now, configuration section must be filled out for tests to run
+ * @todo Write proper tests with mocks so user doesn't have to fill out
+ * any information
+*/
+ 
+// Configuration
+class CarmaLinkAPITestConfig {
+	// Enter your API keys here
+	const API_KEY = 'SOME_KEY';
+	const API_SECRET = 'SOME_SECRET';
+	// Enter some examples of VALID serial numbers valid under your CarmaLink API key
+	// ex. array(200,250,"200-210","203")
+	public static $VALID_SERIALS  = array();
+	
+	// Enter some examples of INVALID serial numbers valid under your CarmaLink API key
+	// ex. array(1200,242250,"-210","a455l","alskdfjalsdfkj","200-4sa")
+	public static $INVALID_SERIALS = array();
+}
 
 require_once realpath(__DIR__."/../CarmaLinkAPI.php");
 
@@ -11,7 +32,7 @@ class CarmaLinkAPITest extends \PHPUnit_Framework_TestCase
 	const API_PORT_KEY 	= 'PORT';
 	const API_SSL_KEY 	= 'HTTPS';
 
-	const VALID_API_HOST = 'frontend0';
+	const VALID_API_HOST = 'api.carmalink.com';
 	const VALID_API_USES_SSL = true;
 	const VALID_API_PORT = 8282;
 	
@@ -27,9 +48,8 @@ class CarmaLinkAPITest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 
-		$this->validSerials = array("200",200,"200-201","200.201","all");
-		$this->invalidSerials = array("39844",34049,"some","something43434","not","3434-200",
-								"asfdasdf.dddda089ajlkja9999999","34+43","434--");
+		$this->validSerials = CarmaLinkAPITestConfig::$VALID_SERIALS;
+		$this->invalidSerials = CarmaLinkAPITestConfig::$INVALID_SERIALS;
 
 		$this->validOptions = array(
 			self::API_HOST_KEY	=> self::VALID_API_HOST,
@@ -40,8 +60,8 @@ class CarmaLinkAPITest extends \PHPUnit_Framework_TestCase
 			self::API_HOST_KEY	=> self::INVALID_API_HOST,
 			self::API_PORT_KEY	=> self::INVALID_API_PORT
 		);
-		
-		$this->validKeys = array('key'=>'SOME KEY HERE','secret'=>'SOME SECRET HERE');
+		// Enter your valid API keys here
+		$this->validKeys = array('key'=>CarmaLinkAPITest::API_HOST_KEY,'secret'=>CarmaLinkAPITestConfig::API_SECRET);
 		$this->invalidKeys = array('key'=>'asdfasdfasdfasdf','secret'=>'VVERfasDFSFdfDadfdfanbtDFhJytFFDdfdSDdfdF');
 		
 		$this->validAPI	= new CarmaLinkAPI($this->validKeys['key'],$this->validKeys['secret'],$this->validOptions);
@@ -89,7 +109,7 @@ class CarmaLinkAPITest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetEndpointRelativeRoot() 
 	{
-		$realEndpoint = 'v' . CarmaLinkAPI::API_VERSION . '/' . CarmaLinkAPI::API_DEVICES;
+		$realEndpoint = 'v' . CarmaLinkAPI::API_VERSION;
 		$this->assertEquals($realEndpoint, CarmaLinkAPI::getEndpointRelativeRoot() );
 	}
 	
