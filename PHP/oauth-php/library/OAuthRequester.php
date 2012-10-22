@@ -401,13 +401,6 @@ class OAuthRequester extends OAuthRequestSigner
 		curl_setopt($ch, CURLOPT_HTTPHEADER,	 $header);
 		curl_setopt($ch, CURLOPT_USERAGENT,		 'anyMeta/OAuth 1.0 - ($LastChangedRevision: 174 $)');
 		curl_setopt($ch, CURLOPT_URL, 			 $url);
-		// Un comment the following block for internal testing only, not production!
-		/*
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt($ch, CURLOPT_PROXY, 'somehost:someport');
-		 */
-		
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HEADER, 		 true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 		 40);
