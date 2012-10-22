@@ -488,6 +488,22 @@ namespace CarmaLink {
 		const API_METHOD_SUCCESS = 200;
 
 		/**
+		 * @access private
+		 * @var array 	Optional cURL options. Can be set depending on need.
+		 */
+		private static $CURL_OPTS = array(
+			CURLOPT_SSL_VERIFYPEER=>0,
+			CURLOPT_SSL_VERIFYHOST=>0
+		);
+		
+		/**
+		 * @access public
+		 * @var bool	Whether to use additional cURL options when sending API requests
+		 * @see CarmaLinkAPI::$CURL_OPTIONS
+		 */
+		public $use_curl_options = false;
+
+		/**
 		 * @access public
 		 * @var string	Hostname of API URI
 		 */
@@ -511,6 +527,7 @@ namespace CarmaLink {
 		 */
 		public $debug = false;
 
+		
 		/**
 		 * Constructor
 		 *
@@ -755,14 +772,14 @@ namespace CarmaLink {
 		 */
 		private function api($endpoint, $method = self::API_METHOD_GET, $parameters = NULL, $options = array()) {
 			$put_data = NULL;
-			$headers = array();
+			$curl_options = $this->use_curl_options ? self::$CURL_OPTS : array();
 			if ($method === self::API_METHOD_PUT) {
 				$put_data = json_encode($parameters);
-				$headers = array(CURLOPT_HTTPHEADER => array('Content-Type: application/json'));
+				$curl_options[CURLOPT_HTTPHEADER] = array('Content-Type: application/json');
 				$parameters = NULL;
 			}
 			$oauth_request = new \OAuthRequester($endpoint, $method, $parameters, $put_data);
-			$response = $oauth_request -> doRequest(0, $headers);
+			$response = $oauth_request -> doRequest(0, $curl_options);
 			return array(self::RESPONSE_CODE => $response['code'], self::RESPONSE_BODY => $response['body']);
 		}
 
