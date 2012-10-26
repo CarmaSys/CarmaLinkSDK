@@ -409,7 +409,6 @@ namespace CarmaLink {
 
 			if (!$config -> setConfigType($config_type)) {
 				throw new CarmaLinkAPIException('Invalid configuration type : ' . $config_type);
-				return $config;
 			}
 			$config -> buzzer = (string)$device -> getBuzzerVolume();
 			$config -> location = (bool)$device -> getUseGPS();
@@ -426,7 +425,7 @@ namespace CarmaLink {
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING :
-					$config -> threshold = $device -> getSpeedLimit();
+					$config -> threshold = $device -> speedLimit;
 					break;
 
 				case ConfigType::CONFIG_HARD_BRAKING :
@@ -696,11 +695,9 @@ namespace CarmaLink {
 			$this -> setupConfigCall($serials, $endpoint, $config_type);
 			if (empty($config_array) || !$config_type) {
 				throw new CarmaLinkAPIException('API PUT ConfigUpdate was not of type array or not a valid configuration type.');
-				return false;
 			}
 			if (!is_array($config_array)) {
 				throw new CarmaLinkAPIException('API PUT ConfigUpdate was not of type array.');
-				return false;
 			}
 			return $this -> getProperResponse($this -> put($endpoint, $config_array));
 		}

@@ -1,1 +1,9 @@
+.settings
 .project
+.classpath
+target
+test-output
+debug.out
+.gwt
+.factorypath
+*.log
