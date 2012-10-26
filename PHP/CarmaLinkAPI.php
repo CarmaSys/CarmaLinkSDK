@@ -13,7 +13,7 @@
  */
 
 namespace CarmaLink {
-
+	
 	/**
 	 * OAuth-PHP (MIT License) is required to use this library.
 	 *
@@ -475,6 +475,13 @@ namespace CarmaLink {
 	 */
 	class CarmaLinkAPI {
 		const API_VERSION = 1;
+		
+		/**
+		 * @access public
+		 * @var int 
+		 * This is the maximum value of the "limit" API query parameter
+		 */
+		const API_RECORD_LIMIT = 50;
 
 		const API_METHOD_GET = 'GET';
 		const API_METHOD_PUT = 'PUT';
