@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project version="2.0.0a10" title="">
-  <file path="CarmaLinkAPI.php" hash="1a14195e23664ee99996343f494ead18" package="Default">
+  <file path="CarmaLinkAPI.php" hash="2d69d23c88a4d5d1fa8c4968baa54bda" package="Default">
     <docblock line="3">
       <description><![CDATA[CarmaLink SDK for PHP]]></description>
       <long-description><![CDATA[]]></long-description>
@@ -302,1076 +302,1257 @@ Can be used to override when setting a configuration which supports buzzer.]]></
           </tag>
         </docblock>
       </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="196" package="Default">
+        <name>setFuelType</name>
+        <full_name>setFuelType</full_name>
+        <docblock line="191">
+          <description><![CDATA[Set attached automobile's fuel type]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="191" name="param" description="fuel type" type="\CarmaLink\CarmaLink\FuelType" variable="$fuelType">
+            <type by_reference="false">\CarmaLink\CarmaLink\FuelType</type>
+          </tag>
+          <tag line="191" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="196">
+          <name>$fuelType</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="204" package="Default">
+        <name>getFuelType</name>
+        <full_name>getFuelType</full_name>
+        <docblock line="200">
+          <description><![CDATA[Get attached automobile's fuel type]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="200" name="return" description="" type="\CarmaLink\CarmaLink\FuelType">
+            <type by_reference="false">\CarmaLink\CarmaLink\FuelType</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="213" package="Default">
+        <name>setDisplacement</name>
+        <full_name>setDisplacement</full_name>
+        <docblock line="208">
+          <description><![CDATA[Set attached auto's engine displacement]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="208" name="param" description="engine displacement in litres" type="float" variable="$displacement">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag line="208" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="213">
+          <name>$displacement</name>
+          <default><![CDATA[0.0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="221" package="Default">
+        <name>getDisplacement</name>
+        <full_name>getDisplacement</full_name>
+        <docblock line="217">
+          <description><![CDATA[Get attached auto's engine displacement]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="217" name="return" description="litres" type="float">
+            <type by_reference="false">float</type>
+          </tag>
+        </docblock>
+      </method>
     </class>
-    <class final="false" abstract="false" namespace="CarmaLink" line="199" package="Default">
+    <class final="false" abstract="false" namespace="CarmaLink" line="233" package="Default">
       <extends>\Exception</extends>
       <name>CarmaLinkAPIException</name>
       <full_name>\CarmaLink\CarmaLinkAPIException</full_name>
-      <docblock line="193">
+      <docblock line="227">
         <description><![CDATA[Exception class exclusive to this namespace.]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="193" name="class" description="CarmaLinkAPIException"/>
-        <tag line="193" name="todo" description="Add custom error codes, perhaps include any HTTP codes received."/>
+        <tag line="227" name="class" description="CarmaLinkAPIException"/>
+        <tag line="227" name="todo" description="Add custom error codes, perhaps include any HTTP codes received."/>
       </docblock>
-      <constant namespace="CarmaLink" line="200" package="Default">
+      <constant namespace="CarmaLink" line="234" package="Default">
         <name>INVALID_API_KEYS_PROVIDED</name>
         <full_name>INVALID_API_KEYS_PROVIDED</full_name>
         <value><![CDATA["The API key or API secret provided was incorrect."]]></value>
       </constant>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="207" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="241" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <docblock line="201">
+        <docblock line="235">
           <description><![CDATA[Constructor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="201" name="param" description="message Exception message" type="string" variable="$message">
+          <tag line="235" name="param" description="message Exception message" type="string" variable="$message">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="201" name="return" description="" type="void">
+          <tag line="235" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="207">
+        <argument line="241">
           <name>$message</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
     </class>
-    <class final="false" abstract="false" namespace="CarmaLink" line="218" package="Default">
+    <class final="false" abstract="false" namespace="CarmaLink" line="252" package="Default">
       <extends/>
       <name>ConfigStatus</name>
       <full_name>\CarmaLink\ConfigStatus</full_name>
-      <docblock line="213">
+      <docblock line="247">
         <description><![CDATA[Emulates an enum which defines the status of a CarmaLink configuration.]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="213" name="class" description="ConfigStatus"/>
+        <tag line="247" name="class" description="ConfigStatus"/>
       </docblock>
-      <constant namespace="CarmaLink" line="219" package="Default">
+      <constant namespace="CarmaLink" line="253" package="Default">
         <name>UNKNOWN_STATUS</name>
         <full_name>UNKNOWN_STATUS</full_name>
         <value><![CDATA[0]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="220" package="Default">
+      <constant namespace="CarmaLink" line="254" package="Default">
         <name>PENDING_ACTIVATION</name>
         <full_name>PENDING_ACTIVATION</full_name>
         <value><![CDATA[1]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="221" package="Default">
+      <constant namespace="CarmaLink" line="255" package="Default">
         <name>ACTIVATED</name>
         <full_name>ACTIVATED</full_name>
         <value><![CDATA[2]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="222" package="Default">
+      <constant namespace="CarmaLink" line="256" package="Default">
         <name>PENDING_DEACTIVATION</name>
         <full_name>PENDING_DEACTIVATION</full_name>
         <value><![CDATA[3]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="223" package="Default">
+      <constant namespace="CarmaLink" line="257" package="Default">
         <name>DEACTIVATED</name>
         <full_name>DEACTIVATED</full_name>
         <value><![CDATA[4]]></value>
       </constant>
     </class>
-    <class final="false" abstract="false" namespace="CarmaLink" line="231" package="Default">
+    <class final="false" abstract="false" namespace="CarmaLink" line="265" package="Default">
       <extends/>
       <name>BuzzerVolume</name>
       <full_name>\CarmaLink\BuzzerVolume</full_name>
-      <docblock line="226">
+      <docblock line="260">
         <description><![CDATA[When sending configurations for buzzer volume, please use these constants.]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="226" name="class" description="BuzzerVolume"/>
+        <tag line="260" name="class" description="BuzzerVolume"/>
       </docblock>
-      <constant namespace="CarmaLink" line="232" package="Default">
+      <constant namespace="CarmaLink" line="266" package="Default">
         <name>BUZZER_HIGH</name>
         <full_name>BUZZER_HIGH</full_name>
         <value><![CDATA["HIGH"]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="233" package="Default">
+      <constant namespace="CarmaLink" line="267" package="Default">
         <name>BUZZER_MED</name>
         <full_name>BUZZER_MED</full_name>
         <value><![CDATA["MEDIUM"]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="234" package="Default">
+      <constant namespace="CarmaLink" line="268" package="Default">
         <name>BUZZER_OFF</name>
         <full_name>BUZZER_OFF</full_name>
         <value><![CDATA["OFF"]]></value>
       </constant>
     </class>
-    <class final="false" abstract="false" namespace="CarmaLink" line="245" package="Default">
+    <class final="false" abstract="false" namespace="CarmaLink" line="278" package="Default">
+      <extends/>
+      <name>FuelType</name>
+      <full_name>\CarmaLink\FuelType</full_name>
+      <docblock line="271">
+        <description><![CDATA[Type of fuel automobile uses.]]></description>
+        <long-description><![CDATA[<p>When setting or getting the CONFIG_GENERAL fuel parameters, use these values.</p>]]></long-description>
+        <tag line="271" name="class" description="FuelType"/>
+      </docblock>
+      <constant namespace="CarmaLink" line="279" package="Default">
+        <name>FUEL_GASOLINE</name>
+        <full_name>FUEL_GASOLINE</full_name>
+        <value><![CDATA["FUEL_GASOLINE"]]></value>
+      </constant>
+      <constant namespace="CarmaLink" line="280" package="Default">
+        <name>FUEL_DIESEL</name>
+        <full_name>FUEL_DIESEL</full_name>
+        <value><![CDATA["FUEL_DIESEL"]]></value>
+      </constant>
+    </class>
+    <class final="false" abstract="false" namespace="CarmaLink" line="291" package="Default">
       <extends/>
       <name>ConfigType</name>
       <full_name>\CarmaLink\ConfigType</full_name>
-      <docblock line="237">
+      <docblock line="283">
         <description><![CDATA[Type of CarmaLink configuration.]]></description>
         <long-description><![CDATA[<p>When querying the API by either retrieving data or setting the CarmaLink,
 one of the class constants should be used as the report_type parameter.</p>]]></long-description>
-        <tag line="237" name="class" description="ConfigType"/>
+        <tag line="283" name="class" description="ConfigType"/>
       </docblock>
-      <constant namespace="CarmaLink" line="246" package="Default">
+      <constant namespace="CarmaLink" line="292" package="Default">
         <name>CONFIG_OVERSPEEDING</name>
         <full_name>CONFIG_OVERSPEEDING</full_name>
         <value><![CDATA['overspeeding']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="247" package="Default">
+      <constant namespace="CarmaLink" line="293" package="Default">
         <name>CONFIG_IDLING</name>
         <full_name>CONFIG_IDLING</full_name>
         <value><![CDATA['idling']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="248" package="Default">
+      <constant namespace="CarmaLink" line="294" package="Default">
         <name>CONFIG_STATUS</name>
         <full_name>CONFIG_STATUS</full_name>
         <value><![CDATA['status']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="249" package="Default">
+      <constant namespace="CarmaLink" line="295" package="Default">
         <name>CONFIG_ENGINE_FAULT</name>
         <full_name>CONFIG_ENGINE_FAULT</full_name>
         <value><![CDATA['engine_fault']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="250" package="Default">
+      <constant namespace="CarmaLink" line="296" package="Default">
         <name>CONFIG_HARD_BRAKING</name>
         <full_name>CONFIG_HARD_BRAKING</full_name>
         <value><![CDATA['hard_braking']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="251" package="Default">
+      <constant namespace="CarmaLink" line="297" package="Default">
         <name>CONFIG_HARD_ACCEL</name>
         <full_name>CONFIG_HARD_ACCEL</full_name>
         <value><![CDATA['hard_accel']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="252" package="Default">
+      <constant namespace="CarmaLink" line="298" package="Default">
         <name>CONFIG_TRIP_REPORT</name>
         <full_name>CONFIG_TRIP_REPORT</full_name>
         <value><![CDATA['trip_report']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="253" package="Default">
+      <constant namespace="CarmaLink" line="299" package="Default">
         <name>CONFIG_NEW_DEPLOYMENT</name>
         <full_name>CONFIG_NEW_DEPLOYMENT</full_name>
         <value><![CDATA['new_deployment']]></value>
       </constant>
-      <property final="false" static="true" visibility="public" line="259" namespace="CarmaLink" package="Default">
+      <constant namespace="CarmaLink" line="300" package="Default">
+        <name>CONFIG_GENERAL</name>
+        <full_name>CONFIG_GENERAL</full_name>
+        <value><![CDATA['general_config']]></value>
+      </constant>
+      <property final="false" static="true" visibility="public" line="305" namespace="CarmaLink" package="Default">
         <name>$buzzer_config_types</name>
         <default><![CDATA[array(self::CONFIG_OVERSPEEDING, self::CONFIG_HARD_BRAKING, self::CONFIG_HARD_ACCEL)]]></default>
-        <docblock line="255">
+        <docblock line="301">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="255" name="access" description="public"/>
-          <tag line="255" name="var" description="Configuration types which use the buzzer property." type="array">
+          <tag line="301" name="access" description="public"/>
+          <tag line="301" name="var" description="Configuration types which use the buzzer property." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="true" visibility="public" line="265" namespace="CarmaLink" package="Default">
+      <property final="false" static="true" visibility="public" line="311" namespace="CarmaLink" package="Default">
         <name>$valid_config_types</name>
-        <default><![CDATA[array(self::CONFIG_OVERSPEEDING, self::CONFIG_IDLING, self::CONFIG_STATUS, self::CONFIG_ENGINE_FAULT, self::CONFIG_HARD_BRAKING, self::CONFIG_HARD_ACCEL, self::CONFIG_TRIP_REPORT, self::CONFIG_NEW_DEPLOYMENT)]]></default>
-        <docblock line="261">
+        <default><![CDATA[array(self::CONFIG_OVERSPEEDING, self::CONFIG_IDLING, self::CONFIG_STATUS, self::CONFIG_ENGINE_FAULT, self::CONFIG_HARD_BRAKING, self::CONFIG_HARD_ACCEL, self::CONFIG_TRIP_REPORT, self::CONFIG_NEW_DEPLOYMENT, self::CONFIG_GENERAL)]]></default>
+        <docblock line="307">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="261" name="access" description="public"/>
-          <tag line="261" name="var" description="" type="array">
+          <tag line="307" name="access" description="public"/>
+          <tag line="307" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="273" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="329" package="Default">
         <name>validConfigType</name>
         <full_name>validConfigType</full_name>
-        <docblock line="267">
+        <docblock line="323">
           <description><![CDATA[Helper to determine if a string matches a valid configuration type.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="267" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
+          <tag line="323" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
             <type by_reference="false">string</type>
             <type by_reference="false">\CarmaLink\ConfigType</type>
           </tag>
-          <tag line="267" name="return" description="" type="bool">
+          <tag line="323" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="273">
+        <argument line="329">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="283" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="339" package="Default">
         <name>buzzerConfigType</name>
         <full_name>buzzerConfigType</full_name>
-        <docblock line="277">
+        <docblock line="333">
           <description><![CDATA[Helper to determine if a configuration type uses the buzzer property.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="277" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
+          <tag line="333" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
             <type by_reference="false">string</type>
             <type by_reference="false">\CarmaLink\ConfigType</type>
           </tag>
-          <tag line="277" name="return" description="" type="bool">
+          <tag line="333" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="283">
+        <argument line="339">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
     </class>
-    <class final="false" abstract="false" namespace="CarmaLink" line="294" package="Default">
+    <class final="false" abstract="false" namespace="CarmaLink" line="350" package="Default">
+      <extends>\CarmaLink\Config</extends>
+      <name>GeneralConfig</name>
+      <full_name>\CarmaLink\GeneralConfig</full_name>
+      <docblock line="345">
+        <description><![CDATA[Represents a General Configuration for a CarmaLink]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="345" name="class" description="GeneralConfig"/>
+      </docblock>
+      <property final="false" static="false" visibility="public" line="355" namespace="CarmaLink" package="Default">
+        <name>$fuel</name>
+        <default><![CDATA[\CarmaLink\FuelType::FUEL_GASOLINE]]></default>
+        <docblock line="351">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="351" name="access" description="public"/>
+          <tag line="351" name="var" description="Type of fuel the attached automobile uses" type="\CarmaLink\CarmaLink\FuelType">
+            <type by_reference="false">\CarmaLink\CarmaLink\FuelType</type>
+          </tag>
+        </docblock>
+      </property>
+      <property final="false" static="false" visibility="public" line="360" namespace="CarmaLink" package="Default">
+        <name>$displacement</name>
+        <default><![CDATA[0.0]]></default>
+        <docblock line="356">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="356" name="access" description="public"/>
+          <tag line="356" name="var" description="Engine displacement used to correctly calculate fuel effiency etc." type="float">
+            <type by_reference="false">float</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="368" package="Default">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="362">
+          <description><![CDATA[Constructor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="362" name="param" description="Type of fuel" type="\CarmaLink\CarmaLink\FuelType" variable="$fuel">
+            <type by_reference="false">\CarmaLink\CarmaLink\FuelType</type>
+          </tag>
+          <tag line="362" name="param" description="Engine displacement" type="float" variable="$displacement">
+            <type by_reference="false">float</type>
+          </tag>
+          <tag line="362" name="return" description="" type="void">
+            <type by_reference="false">void</type>
+          </tag>
+        </docblock>
+        <argument line="368">
+          <name>$fuel</name>
+          <default><![CDATA[]]></default>
+          <type>\CarmaLink\FuelType</type>
+        </argument>
+        <argument line="368">
+          <name>$displacement</name>
+          <default><![CDATA[0.0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="379" package="Default">
+        <name>toArray</name>
+        <full_name>toArray</full_name>
+        <docblock line="374">
+          <description><![CDATA[Converts object to associative array.]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="374" name="return" description="" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <class final="false" abstract="false" namespace="CarmaLink" line="390" package="Default">
       <extends/>
       <name>Config</name>
       <full_name>\CarmaLink\Config</full_name>
-      <docblock line="289">
+      <docblock line="385">
         <description><![CDATA[Represents a CarmaLink configuration.]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="289" name="class" description="Config"/>
+        <tag line="385" name="class" description="Config"/>
       </docblock>
-      <constant namespace="CarmaLink" line="296" package="Default">
+      <constant namespace="CarmaLink" line="392" package="Default">
         <name>API_THRESHOLD</name>
         <full_name>API_THRESHOLD</full_name>
         <value><![CDATA['threshold']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="297" package="Default">
+      <constant namespace="CarmaLink" line="393" package="Default">
         <name>API_ALLOWANCE</name>
         <full_name>API_ALLOWANCE</full_name>
         <value><![CDATA['allowance']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="298" package="Default">
+      <constant namespace="CarmaLink" line="394" package="Default">
         <name>API_LOCATION</name>
         <full_name>API_LOCATION</full_name>
         <value><![CDATA['location']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="299" package="Default">
+      <constant namespace="CarmaLink" line="395" package="Default">
         <name>API_BUZZER</name>
         <full_name>API_BUZZER</full_name>
         <value><![CDATA['buzzer']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="300" package="Default">
+      <constant namespace="CarmaLink" line="396" package="Default">
         <name>API_DELETE_CONFIG</name>
         <full_name>API_DELETE_CONFIG</full_name>
         <value><![CDATA['OFF']]></value>
       </constant>
-      <property final="false" static="false" visibility="public" line="306" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="402" namespace="CarmaLink" package="Default">
         <name>$threshold</name>
         <default><![CDATA[0]]></default>
-        <docblock line="302">
+        <docblock line="398">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="302" name="access" description="public"/>
-          <tag line="302" name="var" description="" type="int|float">
+          <tag line="398" name="access" description="public"/>
+          <tag line="398" name="var" description="" type="int|float">
             <type by_reference="false">int</type>
             <type by_reference="false">float</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="312" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="408" namespace="CarmaLink" package="Default">
         <name>$allowance</name>
         <default><![CDATA[0]]></default>
-        <docblock line="308">
+        <docblock line="404">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="308" name="access" description="public"/>
-          <tag line="308" name="var" description="" type="int|float">
+          <tag line="404" name="access" description="public"/>
+          <tag line="404" name="var" description="" type="int|float">
             <type by_reference="false">int</type>
             <type by_reference="false">float</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="318" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="414" namespace="CarmaLink" package="Default">
         <name>$location</name>
         <default><![CDATA[false]]></default>
-        <docblock line="314">
+        <docblock line="410">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="314" name="access" description="public"/>
-          <tag line="314" name="var" description="" type="bool">
+          <tag line="410" name="access" description="public"/>
+          <tag line="410" name="var" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="324" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="420" namespace="CarmaLink" package="Default">
         <name>$buzzer</name>
         <default><![CDATA[\CarmaLink\BuzzerVolume::BUZZER_OFF]]></default>
-        <docblock line="320">
+        <docblock line="416">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="320" name="access" description="public"/>
-          <tag line="320" name="var" description="" type="string">
+          <tag line="416" name="access" description="public"/>
+          <tag line="416" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="330" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="426" namespace="CarmaLink" package="Default">
         <name>$params</name>
         <default><![CDATA[null]]></default>
-        <docblock line="326">
+        <docblock line="422">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="326" name="access" description="public"/>
-          <tag line="326" name="var" description="" type="array">
+          <tag line="422" name="access" description="public"/>
+          <tag line="422" name="var" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="336" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="432" namespace="CarmaLink" package="Default">
         <name>$state</name>
         <default><![CDATA[\CarmaLink\ConfigStatus::UNKNOWN_STATUS]]></default>
-        <docblock line="332">
+        <docblock line="428">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="332" name="access" description="public"/>
-          <tag line="332" name="var" description="" type="\CarmaLink\ConfigStatus">
+          <tag line="428" name="access" description="public"/>
+          <tag line="428" name="var" description="" type="\CarmaLink\ConfigStatus">
             <type by_reference="false">\CarmaLink\ConfigStatus</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="protected" line="342" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="protected" line="438" namespace="CarmaLink" package="Default">
         <name>$_config_type</name>
-        <default><![CDATA[\CarmaLink\ConfigType::CONFIG_TRIP_REPORT]]></default>
-        <docblock line="338">
+        <default><![CDATA[]]></default>
+        <docblock line="434">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="338" name="access" description="protected"/>
-          <tag line="338" name="var" description="" type="\CarmaLink\ConfigType">
+          <tag line="434" name="access" description="protected"/>
+          <tag line="434" name="var" description="" type="\CarmaLink\ConfigType">
             <type by_reference="false">\CarmaLink\ConfigType</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="private" line="348" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="private" line="444" namespace="CarmaLink" package="Default">
         <name>$__api_version</name>
         <default><![CDATA[]]></default>
-        <docblock line="344">
+        <docblock line="440">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="344" name="access" description="private"/>
-          <tag line="344" name="var" description="" type="string">
+          <tag line="440" name="access" description="private"/>
+          <tag line="440" name="var" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="358" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="454" package="Default">
         <name>__constructor</name>
         <full_name>__constructor</full_name>
-        <docblock line="350">
+        <docblock line="446">
           <description><![CDATA[Constructor]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="350" name="param" description="threshold" type="int|float" variable="$threshold">
+          <tag line="446" name="param" description="threshold" type="int|float" variable="$threshold">
             <type by_reference="false">int</type>
             <type by_reference="false">float</type>
           </tag>
-          <tag line="350" name="param" description="allowance" type="int|float" variable="$allowance">
+          <tag line="446" name="param" description="allowance" type="int|float" variable="$allowance">
             <type by_reference="false">int</type>
             <type by_reference="false">float</type>
           </tag>
-          <tag line="350" name="param" description="location" type="bool" variable="$location">
+          <tag line="446" name="param" description="location" type="bool" variable="$location">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="350" name="return" description="" type="void">
+          <tag line="446" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="358">
+        <argument line="454">
           <name>$threshold</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
-        <argument line="358">
+        <argument line="454">
           <name>$allowance</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
-        <argument line="358">
+        <argument line="454">
           <name>$location</name>
           <default><![CDATA[false]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="371" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="467" package="Default">
         <name>setConfigType</name>
         <full_name>setConfigType</full_name>
-        <docblock line="365">
+        <docblock line="461">
           <description><![CDATA[Sets the protected member variable if valid.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="365" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
+          <tag line="461" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
             <type by_reference="false">string</type>
             <type by_reference="false">\CarmaLink\ConfigType</type>
           </tag>
-          <tag line="365" name="return" description="" type="bool">
+          <tag line="461" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="371">
+        <argument line="467">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="383" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="479" package="Default">
         <name>toArray</name>
         <full_name>toArray</full_name>
-        <docblock line="378">
+        <docblock line="474">
           <description><![CDATA[Converts object to associative array.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="378" name="return" description="" type="array">
+          <tag line="474" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="396" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="492" package="Default">
         <name>hasBuzzerConfig</name>
         <full_name>hasBuzzerConfig</full_name>
-        <docblock line="391">
+        <docblock line="487">
           <description><![CDATA[Determines if current configuration type utilizes a buzzer property.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="391" name="return" description="" type="bool">
+          <tag line="487" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="407" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="504" package="Default">
         <name>createConfigFromDevice</name>
         <full_name>createConfigFromDevice</full_name>
-        <docblock line="400">
+        <docblock line="496">
           <description><![CDATA[Utility method to create a new Config instance based on a device and report type.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="400" name="param" description="device A custom data object representing a CarmaLink" type="\CarmaLink\CarmaLink" variable="$device">
+          <tag line="496" name="param" description="device A custom data object representing a CarmaLink" type="\CarmaLink\CarmaLink" variable="$device">
             <type by_reference="false">\CarmaLink\CarmaLink</type>
           </tag>
-          <tag line="400" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
+          <tag line="496" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
             <type by_reference="false">string</type>
             <type by_reference="false">\CarmaLink\ConfigType</type>
           </tag>
-          <tag line="400" name="return" description="" type="\CarmaLink\Config">
+          <tag line="496" name="param" description="delete Delete configuration" type="bool" variable="$delete">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="496" name="return" description="" type="\CarmaLink\Config">
             <type by_reference="false">\CarmaLink\Config</type>
           </tag>
         </docblock>
-        <argument line="407">
+        <argument line="504">
           <name>$device</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="407">
+        <argument line="504">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
+        <argument line="504">
+          <name>$delete</name>
+          <default><![CDATA[FALSE]]></default>
+          <type/>
+        </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="464" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="558" package="Default">
         <name>getConfigArray</name>
         <full_name>getConfigArray</full_name>
-        <docblock line="454">
+        <docblock line="548">
           <description><![CDATA[Shortcut method which retreives a configuration object and converts to an array.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="454" name="uses" description="\CarmaLink\Config::createConfigFromDevice()" refers="\CarmaLink\Config::createConfigFromDevice()"/>
-          <tag line="454" name="uses" description="\CarmaLink\Config::toArray()" refers="\CarmaLink\Config::toArray()"/>
-          <tag line="454" name="param" description="device Representation of CarmaLink" type="\CarmaLink\CarmaLink" variable="$device">
+          <tag line="548" name="uses" description="\CarmaLink\Config::createConfigFromDevice()" refers="\CarmaLink\Config::createConfigFromDevice()"/>
+          <tag line="548" name="uses" description="\CarmaLink\Config::toArray()" refers="\CarmaLink\Config::toArray()"/>
+          <tag line="548" name="param" description="device Representation of CarmaLink" type="\CarmaLink\CarmaLink" variable="$device">
             <type by_reference="false">\CarmaLink\CarmaLink</type>
           </tag>
-          <tag line="454" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
+          <tag line="548" name="param" description="config_type" type="string|\CarmaLink\ConfigType" variable="$config_type">
             <type by_reference="false">string</type>
             <type by_reference="false">\CarmaLink\ConfigType</type>
           </tag>
-          <tag line="454" name="return" description="" type="array">
+          <tag line="548" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="464">
+        <argument line="558">
           <name>$device</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="464">
+        <argument line="558">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
     </class>
-    <class final="false" abstract="false" namespace="CarmaLink" line="476" package="Default">
+    <class final="false" abstract="false" namespace="CarmaLink" line="570" package="Default">
       <extends/>
       <name>CarmaLinkAPI</name>
       <full_name>\CarmaLink\CarmaLinkAPI</full_name>
-      <docblock line="471">
+      <docblock line="565">
         <description><![CDATA[Main interface to use the CarmaLink API.]]></description>
         <long-description><![CDATA[]]></long-description>
-        <tag line="471" name="class" description="CarmaLinkAPI"/>
+        <tag line="565" name="class" description="CarmaLinkAPI"/>
       </docblock>
-      <constant namespace="CarmaLink" line="477" package="Default">
+      <constant namespace="CarmaLink" line="571" package="Default">
         <name>API_VERSION</name>
         <full_name>API_VERSION</full_name>
         <value><![CDATA[1]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="479" package="Default">
+      <constant namespace="CarmaLink" line="578" package="Default">
+        <name>API_RECORD_LIMIT</name>
+        <full_name>API_RECORD_LIMIT</full_name>
+        <value><![CDATA[50]]></value>
+        <docblock line="573">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="573" name="access" description="public"/>
+          <tag line="573" name="var" description="This is the maximum value of the &quot;limit&quot; API query parameter" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </constant>
+      <constant namespace="CarmaLink" line="580" package="Default">
         <name>API_METHOD_GET</name>
         <full_name>API_METHOD_GET</full_name>
         <value><![CDATA['GET']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="480" package="Default">
+      <constant namespace="CarmaLink" line="581" package="Default">
         <name>API_METHOD_PUT</name>
         <full_name>API_METHOD_PUT</full_name>
         <value><![CDATA['PUT']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="481" package="Default">
+      <constant namespace="CarmaLink" line="582" package="Default">
         <name>API_METHOD_DELETE</name>
         <full_name>API_METHOD_DELETE</full_name>
         <value><![CDATA['DELETE']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="483" package="Default">
+      <constant namespace="CarmaLink" line="584" package="Default">
         <name>RESPONSE_CODE</name>
         <full_name>RESPONSE_CODE</full_name>
         <value><![CDATA['response_code']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="484" package="Default">
+      <constant namespace="CarmaLink" line="585" package="Default">
         <name>RESPONSE_BODY</name>
         <full_name>RESPONSE_BODY</full_name>
         <value><![CDATA['response_body']]></value>
       </constant>
-      <constant namespace="CarmaLink" line="486" package="Default">
+      <constant namespace="CarmaLink" line="587" package="Default">
         <name>API_METHOD_PUT_SUCCESS</name>
         <full_name>API_METHOD_PUT_SUCCESS</full_name>
         <value><![CDATA[204]]></value>
       </constant>
-      <constant namespace="CarmaLink" line="487" package="Default">
+      <constant namespace="CarmaLink" line="588" package="Default">
         <name>API_METHOD_SUCCESS</name>
         <full_name>API_METHOD_SUCCESS</full_name>
         <value><![CDATA[200]]></value>
       </constant>
-      <property final="false" static="true" visibility="private" line="493" namespace="CarmaLink" package="Default">
+      <property final="false" static="true" visibility="private" line="594" namespace="CarmaLink" package="Default">
         <name>$CURL_OPTS</name>
         <default><![CDATA[array(CURLOPT_SSL_VERIFYPEER => 0, CURLOPT_SSL_VERIFYHOST => 0)]]></default>
-        <docblock line="489">
+        <docblock line="590">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="489" name="access" description="private"/>
-          <tag line="489" name="var" description="Optional cURL options. Can be set depending on need." type="array">
+          <tag line="590" name="access" description="private"/>
+          <tag line="590" name="var" description="Optional cURL options. Can be set depending on need." type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="503" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="604" namespace="CarmaLink" package="Default">
         <name>$use_curl_options</name>
         <default><![CDATA[false]]></default>
-        <docblock line="498">
+        <docblock line="599">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="498" name="access" description="public"/>
-          <tag line="498" name="var" description="Whether to use additional cURL options when sending API requests" type="bool">
+          <tag line="599" name="access" description="public"/>
+          <tag line="599" name="var" description="Whether to use additional cURL options when sending API requests" type="bool">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="498" name="see" description="\CarmaLink\CarmaLinkAPI::$CURL_OPTIONS" refers="\CarmaLink\CarmaLinkAPI::$CURL_OPTIONS"/>
+          <tag line="599" name="see" description="\CarmaLink\CarmaLinkAPI::$CURL_OPTIONS" refers="\CarmaLink\CarmaLinkAPI::$CURL_OPTIONS"/>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="509" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="610" namespace="CarmaLink" package="Default">
         <name>$host</name>
         <default><![CDATA[]]></default>
-        <docblock line="505">
+        <docblock line="606">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="505" name="access" description="public"/>
-          <tag line="505" name="var" description="Hostname of API URI" type="string">
+          <tag line="606" name="access" description="public"/>
+          <tag line="606" name="var" description="Hostname of API URI" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="515" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="616" namespace="CarmaLink" package="Default">
         <name>$port</name>
         <default><![CDATA[80]]></default>
-        <docblock line="511">
+        <docblock line="612">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="511" name="access" description="public"/>
-          <tag line="511" name="var" description="Port to use." type="int">
+          <tag line="612" name="access" description="public"/>
+          <tag line="612" name="var" description="Port to use." type="int">
             <type by_reference="false">int</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="521" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="622" namespace="CarmaLink" package="Default">
         <name>$https</name>
         <default><![CDATA[false]]></default>
-        <docblock line="517">
+        <docblock line="618">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="517" name="access" description="public"/>
-          <tag line="517" name="var" description="Whether to use SSL, should be true for production." type="bool">
+          <tag line="618" name="access" description="public"/>
+          <tag line="618" name="var" description="Whether to use SSL, should be true for production." type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </property>
-      <property final="false" static="false" visibility="public" line="527" namespace="CarmaLink" package="Default">
+      <property final="false" static="false" visibility="public" line="628" namespace="CarmaLink" package="Default">
         <name>$debug</name>
         <default><![CDATA[false]]></default>
-        <docblock line="523">
+        <docblock line="624">
           <description><![CDATA[]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="523" name="access" description="public"/>
-          <tag line="523" name="var" description="Whether to use debug, should be false for production." type="bool">
+          <tag line="624" name="access" description="public"/>
+          <tag line="624" name="var" description="Whether to use debug, should be false for production." type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
       </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="542" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="643" package="Default">
         <name>__construct</name>
         <full_name>__construct</full_name>
-        <docblock line="530">
+        <docblock line="631">
           <description><![CDATA[Constructor]]></description>
           <long-description><![CDATA[<p>Creates a new instance of an CarmaLinkAPI based on OAuth keys and server address.
 Additionally you can specify if you would like debugging enabled.</p>]]></long-description>
-          <tag line="530" name="param" description="consumer_key Valid API key provided by CarmaSys" type="string" variable="$consumer_key">
+          <tag line="631" name="param" description="consumer_key Valid API key provided by CarmaSys" type="string" variable="$consumer_key">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="530" name="param" description="consumer_secret Valid API secret provided by CarmaSys" type="string" variable="$consumer_secret">
+          <tag line="631" name="param" description="consumer_secret Valid API secret provided by CarmaSys" type="string" variable="$consumer_secret">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="530" name="param" description="server_options Array of 'HOST','PORT', and 'HTTPS' which the API will use" type="array" variable="$server_options">
+          <tag line="631" name="param" description="server_options Array of 'HOST','PORT', and 'HTTPS' which the API will use" type="array" variable="$server_options">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="530" name="param" description="debug Enable debugging" type="bool" variable="$debug">
+          <tag line="631" name="param" description="debug Enable debugging" type="bool" variable="$debug">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="530" name="return" description="" type="void">
+          <tag line="631" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="542">
+        <argument line="643">
           <name>$consumer_key</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="542">
+        <argument line="643">
           <name>$consumer_secret</name>
           <default><![CDATA[null]]></default>
           <type/>
         </argument>
-        <argument line="542">
+        <argument line="643">
           <name>$server_options</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
-        <argument line="542">
+        <argument line="643">
           <name>$debug</name>
           <default><![CDATA[false]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="558" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="659" package="Default">
         <name>getEndpointRelativeRoot</name>
         <full_name>getEndpointRelativeRoot</full_name>
-        <docblock line="554">
+        <docblock line="655">
           <description><![CDATA[Gets the relative path to the root endpoint of the API]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="554" name="return" description="" type="string">
+          <tag line="655" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="566" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="667" package="Default">
         <name>getEndpointRootURI</name>
         <full_name>getEndpointRootURI</full_name>
-        <docblock line="562">
+        <docblock line="663">
           <description><![CDATA[Gets the root URI for and API endpoint]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="562" name="return" description="" type="string">
+          <tag line="663" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="CarmaLink" line="577" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="CarmaLink" line="678" package="Default">
         <name>sanitizeSerials</name>
         <full_name>sanitizeSerials</full_name>
-        <docblock line="570">
+        <docblock line="671">
           <description><![CDATA[If parameter is an array it will join it using "."]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="570" name="example" description="sanitizeSerials(array(&quot;204&quot;,209,300)) // &quot;204.209.300&quot;"/>
-          <tag line="570" name="todo" description="Verify serial string is valid"/>
-          <tag line="570" name="param" description="serials Serial numbers to parse" type="int|string|array" variable="$serials">
+          <tag line="671" name="example" description="sanitizeSerials(array(&quot;204&quot;,209,300)) // &quot;204.209.300&quot;"/>
+          <tag line="671" name="todo" description="Verify serial string is valid"/>
+          <tag line="671" name="param" description="serials Serial numbers to parse" type="int|string|array" variable="$serials">
             <type by_reference="false">int</type>
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="570" name="return" description="" type="string">
+          <tag line="671" name="return" description="" type="string">
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="577">
+        <argument line="678">
           <name>$serials</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="591" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="692" package="Default">
         <name>getReportDataArray</name>
         <full_name>getReportDataArray</full_name>
-        <docblock line="584">
+        <docblock line="685">
           <description><![CDATA[Shortcut to getReportData w/ TRUE for the returnAllData param]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="584" name="param" description="serials Serial number(s) of CarmaLink" type="string|int|array" variable="$serials">
+          <tag line="685" name="param" description="serials Serial number(s) of CarmaLink" type="string|int|array" variable="$serials">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="584" name="param" description="report_type Report/view type to query" type="string" variable="$report_type">
+          <tag line="685" name="param" description="report_type Report/view type to query" type="string" variable="$report_type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="584" name="param" description="parameters Key=&gt;value parameters for data filtering to be added to the query string" type="array" variable="$parameters">
+          <tag line="685" name="param" description="parameters Key=&gt;value parameters for data filtering to be added to the query string" type="array" variable="$parameters">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="584" name="return" description="Assoc. array of HTTP response code and HTTP body content" type="array">
+          <tag line="685" name="return" description="Assoc. array of HTTP response code and HTTP body content" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="591">
+        <argument line="692">
           <name>$serials</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="591">
+        <argument line="692">
           <name>$report_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="591">
+        <argument line="692">
           <name>$parameters</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="605" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="707" package="Default">
         <name>getReportData</name>
         <full_name>getReportData</full_name>
-        <docblock line="595">
+        <docblock line="696">
           <description><![CDATA[Gets a CarmaLink data view/report based on provided parameters.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="595" name="param" description="serials Serial number(s) of CarmaLink" type="string|int|array" variable="$serials">
+          <tag line="696" name="param" description="serials Serial number(s) of CarmaLink" type="string|int|array" variable="$serials">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="595" name="param" description="report_type Report/view type to query" type="string" variable="$report_type">
+          <tag line="696" name="param" description="report_type Report/view type to query" type="string" variable="$report_type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="595" name="param" description="parameters Key=&gt;value parameters for data filtering to be added to the query string" type="array" variable="$parameters">
+          <tag line="696" name="param" description="parameters Key=&gt;value parameters for data filtering to be added to the query string" type="array" variable="$parameters">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="595" name="param" description="returnAllData If set to true will return assoc. array of HTTP code and HTTP body" type="bool" variable="$returnAllData">
+          <tag line="696" name="param" description="returnAllData If set to true will return assoc. array of HTTP code and HTTP body" type="bool" variable="$returnAllData">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="595" name="return" description="If returnAllData param is true will return assoc. array of HTTP code and HTTP body&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;otherwise, will return false on error and a JSON string on success" type="bool|string|array">
+          <tag line="696" name="return" description="If returnAllData param is true will return assoc. array of HTTP code and HTTP body&#10;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;&#9;otherwise, will return false on error and a JSON string on success" type="bool|string|array">
             <type by_reference="false">bool</type>
             <type by_reference="false">string</type>
             <type by_reference="false">array</type>
+          </tag>
+          <tag line="696" name="throws" description="" type="\CarmaLink\CarmaLink\CarmaLinkAPIException">
+            <type by_reference="false">\CarmaLink\CarmaLink\CarmaLinkAPIException</type>
           </tag>
         </docblock>
-        <argument line="605">
+        <argument line="707">
           <name>$serials</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
-        <argument line="605">
+        <argument line="707">
           <name>$report_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="605">
+        <argument line="707">
           <name>$parameters</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
-        <argument line="605">
+        <argument line="707">
           <name>$returnAllData</name>
           <default><![CDATA[FALSE]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="protected" namespace="CarmaLink" line="630" package="Default">
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="CarmaLink" line="733" package="Default">
         <name>setupConfigCall</name>
         <full_name>setupConfigCall</full_name>
-        <docblock line="622">
+        <docblock line="725">
           <description><![CDATA[Sets up parameters for a configuration update call]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="622" name="param" description="serials Serial number(s) of the CarmaLink(s)" type="string|int|array" variable="$serials">
+          <tag line="725" name="param" description="serials Serial number(s) of the CarmaLink(s)" type="string|int|array" variable="$serials">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="622" name="param" description="endpoint Empty endpoint reference for the API call" type="string" variable="$endpoint">
+          <tag line="725" name="param" description="endpoint Empty endpoint reference for the API call" type="string" variable="$endpoint">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="622" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
+          <tag line="725" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="622" name="return" description="" type="void">
+          <tag line="725" name="return" description="" type="void">
             <type by_reference="false">void</type>
           </tag>
         </docblock>
-        <argument line="630">
+        <argument line="733">
           <name>$serials</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="630">
+        <argument line="733">
           <name>$endpoint</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="630">
+        <argument line="733">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="642" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="745" package="Default">
         <name>getConfig</name>
         <full_name>getConfig</full_name>
-        <docblock line="635">
+        <docblock line="738">
           <description><![CDATA[Retrieves a configuration object from the CarmaLink based on parameters]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="635" name="param" description="Serial number(s) of the CarmaLink(s)" type="string|int|array" variable="$serials">
+          <tag line="738" name="param" description="Serial number(s) of the CarmaLink(s)" type="string|int|array" variable="$serials">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="635" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
+          <tag line="738" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="635" name="return" description="On success returns JSON-formatted object, on failure false" type="bool|string">
+          <tag line="738" name="return" description="On success returns JSON-formatted object, on failure false" type="bool|string">
             <type by_reference="false">bool</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="642">
+        <argument line="745">
           <name>$serials</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
-        <argument line="642">
+        <argument line="745">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="CarmaLink" line="661" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="CarmaLink" line="764" package="Default">
         <name>getProperResponse</name>
         <full_name>getProperResponse</full_name>
-        <docblock line="654">
+        <docblock line="757">
           <description><![CDATA[Takes a response array from a putConfig or deleteConfig request
 and returns the proper type / value.]]></description>
           <long-description><![CDATA[<p>Mostly a utility DRY method.</p>]]></long-description>
-          <tag line="654" name="param" description="response_data Associative array of response code and body" type="array" variable="$response_data">
+          <tag line="757" name="param" description="response_data Associative array of response code and body" type="array" variable="$response_data">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="654" name="return" description="for single queries will return true/false, for multiple queries will return JSON string" type="bool|string">
+          <tag line="757" name="return" description="for single queries will return true/false, for multiple queries will return JSON string" type="bool|string">
             <type by_reference="false">bool</type>
             <type by_reference="false">string</type>
           </tag>
         </docblock>
-        <argument line="661">
+        <argument line="764">
           <name>$response_data</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="691" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="794" package="Default">
         <name>putConfig</name>
         <full_name>putConfig</full_name>
-        <docblock line="683">
+        <docblock line="786">
           <description><![CDATA[Put / send a CarmaLink a new configuration]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="683" name="param" description="serials Serial number(s) of the CarmaLink(s)" type="string|int|array" variable="$serials">
+          <tag line="786" name="param" description="serials Serial number(s) of the CarmaLink(s)" type="string|int|array" variable="$serials">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="683" name="param" description="config_array Array representation of a CarmaLink\Config object" type="array" variable="$config_array">
+          <tag line="786" name="param" description="config_array Array representation of a CarmaLink\Config object" type="array" variable="$config_array">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="683" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
+          <tag line="786" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="683" name="return" description="" type="bool">
+          <tag line="786" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="691">
+        <argument line="794">
           <name>$serials</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
-        <argument line="691">
+        <argument line="794">
           <name>$config_array</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="691">
+        <argument line="794">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="712" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="815" package="Default">
         <name>deleteConfig</name>
         <full_name>deleteConfig</full_name>
-        <docblock line="705">
+        <docblock line="808">
           <description><![CDATA[Delete a configuration from a CarmaLink]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="705" name="param" description="serials Serial number of the CarmaLink" type="string|int|array" variable="$serials">
+          <tag line="808" name="param" description="serials Serial number of the CarmaLink" type="string|int|array" variable="$serials">
             <type by_reference="false">string</type>
             <type by_reference="false">int</type>
             <type by_reference="false">array</type>
           </tag>
-          <tag line="705" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
+          <tag line="808" name="param" description="config_type Valid configuration type" type="string" variable="$config_type">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="705" name="return" description="" type="bool">
+          <tag line="808" name="return" description="" type="bool">
             <type by_reference="false">bool</type>
           </tag>
         </docblock>
-        <argument line="712">
+        <argument line="815">
           <name>$serials</name>
           <default><![CDATA[0]]></default>
           <type/>
         </argument>
-        <argument line="712">
+        <argument line="815">
           <name>$config_type</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="739" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="842" package="Default">
         <name>get</name>
         <full_name>get</full_name>
-        <docblock line="733">
+        <docblock line="836">
           <description><![CDATA[Performs GET request to API]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="733" name="param" description="endpoint" type="string" variable="$endpoint">
+          <tag line="836" name="param" description="endpoint" type="string" variable="$endpoint">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="733" name="param" description="parameters Any query string parameters to send" type="array" variable="$parameters">
+          <tag line="836" name="param" description="parameters Any query string parameters to send" type="array" variable="$parameters">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="733" name="return" description="" type="array">
+          <tag line="836" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="739">
+        <argument line="842">
           <name>$endpoint</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="739">
+        <argument line="842">
           <name>$parameters</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="749" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="852" package="Default">
         <name>put</name>
         <full_name>put</full_name>
-        <docblock line="743">
+        <docblock line="846">
           <description><![CDATA[Performs PUT request to API]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="743" name="param" description="endpoint" type="string" variable="$endpoint">
+          <tag line="846" name="param" description="endpoint" type="string" variable="$endpoint">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="743" name="param" description="parameters Associative array of options to send" type="array" variable="$parameters">
+          <tag line="846" name="param" description="parameters Associative array of options to send" type="array" variable="$parameters">
             <type by_reference="false">array</type>
           </tag>
-          <tag line="743" name="return" description="" type="array">
+          <tag line="846" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="749">
+        <argument line="852">
           <name>$endpoint</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="749">
+        <argument line="852">
           <name>$parameters</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="758" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="861" package="Default">
         <name>delete</name>
         <full_name>delete</full_name>
-        <docblock line="753">
+        <docblock line="856">
           <description><![CDATA[Performs DELETE request to API]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="753" name="param" description="endpoint" type="string" variable="$endpoint">
+          <tag line="856" name="param" description="endpoint" type="string" variable="$endpoint">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="753" name="return" description="" type="array">
+          <tag line="856" name="return" description="" type="array">
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="758">
+        <argument line="861">
           <name>$endpoint</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="private" namespace="CarmaLink" line="770" package="Default">
+      <method final="false" abstract="false" static="false" visibility="private" namespace="CarmaLink" line="873" package="Default">
         <name>api</name>
         <full_name>api</full_name>
-        <docblock line="762">
+        <docblock line="865">
           <description><![CDATA[All API requests filter through this method.]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="762" name="param" description="endpoint" type="string" variable="$endpoint">
+          <tag line="865" name="param" description="endpoint" type="string" variable="$endpoint">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="762" name="param" description="method default is 'GET'" type="string" variable="$method">
+          <tag line="865" name="param" description="method default is 'GET'" type="string" variable="$method">
             <type by_reference="false">string</type>
           </tag>
-          <tag line="762" name="param" description="parameters Key=&gt;values to send" type="string[]" variable="$parameters">
+          <tag line="865" name="param" description="parameters Key=&gt;values to send" type="string[]" variable="$parameters">
             <type by_reference="false">string[]</type>
           </tag>
-          <tag line="762" name="param" description="options Array for future consideration" type="string[]" variable="$options">
+          <tag line="865" name="param" description="options Array for future consideration" type="string[]" variable="$options">
             <type by_reference="false">string[]</type>
           </tag>
-          <tag line="762" name="return" description="" type="\CarmaLink\(int|\CarmaLink\string)[]">
+          <tag line="865" name="return" description="" type="\CarmaLink\(int|\CarmaLink\string)[]">
             <type by_reference="false">\CarmaLink\(int</type>
             <type by_reference="false">\CarmaLink\string)[]</type>
           </tag>
         </docblock>
-        <argument line="770">
+        <argument line="873">
           <name>$endpoint</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="770">
+        <argument line="873">
           <name>$method</name>
           <default><![CDATA[self::API_METHOD_GET]]></default>
           <type/>
         </argument>
-        <argument line="770">
+        <argument line="873">
           <name>$parameters</name>
           <default><![CDATA[NULL]]></default>
           <type/>
         </argument>
-        <argument line="770">
+        <argument line="873">
           <name>$options</name>
           <default><![CDATA[array()]]></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="791" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="894" package="Default">
         <name>updateDevice</name>
         <full_name>updateDevice</full_name>
-        <docblock line="783">
+        <docblock line="886">
           <description><![CDATA[Updates a device based on a CarmaLinkDevice object]]></description>
           <long-description><![CDATA[]]></long-description>
-          <tag line="783" name="param" description="Object representing a CarmaLink" type="\CarmaLink\CarmaLink\CarmaLink" variable="$device">
+          <tag line="886" name="param" description="Object representing a CarmaLink" type="\CarmaLink\CarmaLink\CarmaLink" variable="$device">
             <type by_reference="false">\CarmaLink\CarmaLink\CarmaLink</type>
           </tag>
-          <tag line="783" name="param" description="if true, the method will return an associative array if any updates or deletions had errors" type="bool" variable="$return_errors">
+          <tag line="886" name="param" description="if true, the method will return an associative array if any updates or deletions had errors" type="bool" variable="$return_errors">
             <type by_reference="false">bool</type>
           </tag>
-          <tag line="783" name="return" description="" type="bool|array">
+          <tag line="886" name="return" description="" type="bool|array">
             <type by_reference="false">bool</type>
             <type by_reference="false">array</type>
           </tag>
         </docblock>
-        <argument line="791">
+        <argument line="894">
           <name>$device</name>
           <default><![CDATA[]]></default>
           <type/>
         </argument>
-        <argument line="791">
+        <argument line="894">
           <name>$return_errors</name>
           <default><![CDATA[FALSE]]></default>
           <type/>
@@ -1379,15 +1560,16 @@ and returns the proper type / value.]]></description>
       </method>
     </class>
     <parse_markers>
-      <critical line="261" code="50019">No short description for property $valid_config_types</critical>
-      <critical line="302" code="50019">No short description for property $threshold</critical>
-      <critical line="308" code="50019">No short description for property $allowance</critical>
-      <critical line="314" code="50019">No short description for property $location</critical>
-      <critical line="320" code="50019">No short description for property $buzzer</critical>
-      <critical line="326" code="50019">No short description for property $params</critical>
-      <critical line="332" code="50019">No short description for property $state</critical>
-      <critical line="338" code="50019">No short description for property $_config_type</critical>
-      <critical line="344" code="50019">No short description for property $__api_version</critical>
+      <critical line="307" code="50019">No short description for property $valid_config_types</critical>
+      <error line="362" code="50016">The type hint of the argument is incorrect for the type definition of the @param tag with argument $fuel in __construct()</error>
+      <critical line="398" code="50019">No short description for property $threshold</critical>
+      <critical line="404" code="50019">No short description for property $allowance</critical>
+      <critical line="410" code="50019">No short description for property $location</critical>
+      <critical line="416" code="50019">No short description for property $buzzer</critical>
+      <critical line="422" code="50019">No short description for property $params</critical>
+      <critical line="428" code="50019">No short description for property $state</critical>
+      <critical line="434" code="50019">No short description for property $_config_type</critical>
+      <critical line="440" code="50019">No short description for property $__api_version</critical>
     </parse_markers>
   </file>
   <package name="Default" full_name="Default"/>
