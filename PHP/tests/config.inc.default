@@ -1,0 +1,24 @@
+<?php
+
+namespace CarmaLink;
+
+// Configuration
+
+class CarmaLinkAPITestConfig {
+
+	// Enter your API keys here
+	const API_KEY = 'YOUR_API_KEY';
+	const API_SECRET = 'YOUR_API_SECRET';
+	
+	const VALID_API_HOST = 'api.carmalink.com';
+	const VALID_API_USES_SSL = TRUE;
+	const VALID_API_PORT = 8282;
+	const VALID_API_TRUST_INSECURE_CERTS = FALSE;
+	
+	const INVALID_API_HOST 	= 'capecodekashdfadsfddddxtuddres.org';
+	const INVALID_API_PORT	= 3432;
+	
+	// Make sure this is a serial of a device your account owns and it has been activated and driven
+	public static $KNOWN_DEVICE_WITH_STATUS_DATA = 0;
+	
+}

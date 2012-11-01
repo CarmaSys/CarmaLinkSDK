@@ -188,6 +188,40 @@ namespace CarmaLink {
 			return $this -> idleTimeLimit;
 		}
 
+		/**
+		 * Set attached automobile's fuel type
+		 * @param CarmaLink\FuelType fuel type
+		 * @return void
+		 */
+		public function setFuelType($fuelType) {
+			$this -> fuelType = $fuelType;
+		}
+		
+		/**
+		 * Get attached automobile's fuel type
+		 * @return CarmaLink\FuelType
+		 */
+		public function getFuelType() {
+			return $this -> fuelType;
+		}
+
+		/**
+		 * Set attached auto's engine displacement
+		 * @param float	engine displacement in litres
+		 * @return void
+		 */
+		public function setDisplacement($displacement = 0.0) {
+			$this -> displacement = $displacement;
+		}
+
+		/**
+		 * Get attached auto's engine displacement
+		 * @return float litres
+		 */
+		public function getDisplacement() {
+			return $this -> displacement;
+		}
+		
 	}
 
 	/**
@@ -233,7 +267,19 @@ namespace CarmaLink {
 		const BUZZER_MED = "MEDIUM";
 		const BUZZER_OFF = "OFF";
 	}
-
+	
+	/**
+	 * Type of fuel automobile uses.
+	 * 
+	 * When setting or getting the CONFIG_GENERAL fuel parameters, use these values.
+	 * 
+	 * @class FuelType
+	 */
+	class FuelType {
+		const FUEL_GASOLINE	= "FUEL_GASOLINE";
+		const FUEL_DIESEL	= "FUEL_DIESEL";
+	}
+	
 	/**
 	 * Type of CarmaLink configuration.
 	 *
@@ -243,15 +289,15 @@ namespace CarmaLink {
 	 * @class ConfigType
 	 */
 	class ConfigType {
-		const CONFIG_OVERSPEEDING = 'overspeeding';
-		const CONFIG_IDLING = 'idling';
-		const CONFIG_STATUS = 'status';
-		const CONFIG_ENGINE_FAULT = 'engine_fault';
-		const CONFIG_HARD_BRAKING = 'hard_braking';
-		const CONFIG_HARD_ACCEL = 'hard_accel';
-		const CONFIG_TRIP_REPORT = 'trip_report';
-		const CONFIG_NEW_DEPLOYMENT = 'new_deployment';
-
+		const CONFIG_OVERSPEEDING 	= 'overspeeding';
+		const CONFIG_IDLING			= 'idling';
+		const CONFIG_STATUS			= 'status';
+		const CONFIG_ENGINE_FAULT	= 'engine_fault';
+		const CONFIG_HARD_BRAKING	= 'hard_braking';
+		const CONFIG_HARD_ACCEL		= 'hard_accel';
+		const CONFIG_TRIP_REPORT	= 'trip_report';
+		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
+		const CONFIG_GENERAL		= 'general_config';
 		/**
 		 * @access public
 		 * @var array Configuration types which use the buzzer property.
@@ -262,7 +308,17 @@ namespace CarmaLink {
 		 * @access public
 		 * @var array
 		 */
-		public static $valid_config_types = array(self::CONFIG_OVERSPEEDING, self::CONFIG_IDLING, self::CONFIG_STATUS, self::CONFIG_ENGINE_FAULT, self::CONFIG_HARD_BRAKING, self::CONFIG_HARD_ACCEL, self::CONFIG_TRIP_REPORT, self::CONFIG_NEW_DEPLOYMENT);
+		public static $valid_config_types = array(
+			self::CONFIG_OVERSPEEDING, 
+			self::CONFIG_IDLING, 
+			self::CONFIG_STATUS, 
+			self::CONFIG_ENGINE_FAULT, 
+			self::CONFIG_HARD_BRAKING, 
+			self::CONFIG_HARD_ACCEL,
+			self::CONFIG_TRIP_REPORT,
+			self::CONFIG_NEW_DEPLOYMENT,
+			self::CONFIG_GENERAL
+		);
 
 		/**
 		 * Helper to determine if a string matches a valid configuration type.
@@ -287,17 +343,57 @@ namespace CarmaLink {
 	}
 
 	/**
+	 * Represents a General Configuration for a CarmaLink
+	 * 
+	 * @class GeneralConfig
+	 */
+	class GeneralConfig extends Config {
+		/**
+		 * @access public 
+		 * @var CarmaLink\FuelType Type of fuel the attached automobile uses
+		 */
+		public $fuel = FuelType::FUEL_GASOLINE;
+		/**
+		 * @access public
+		 * @var float	Engine displacement used to correctly calculate fuel effiency etc.
+		 */
+		public $displacement = 0.0;
+		
+		/**
+		 * Constructor
+		 * @param CarmaLink\FuelType Type of fuel
+		 * @param float	Engine displacement
+		 * @return void
+		 */
+		public function __construct(FuelType $fuel, $displacement = 0.0) {
+			$this -> __api_version = CarmaLinkAPI::API_VERSION;
+			$this -> fuel = $fuel;
+			$this -> displacement = $displacement;
+		}
+		
+		/**
+		 * Converts object to associative array.
+		 *
+		 * @return array
+		 */
+		public function toArray() {
+			return array("fuel" => $this -> fuel, "displacement" => $this -> displacement);
+		}
+		
+	}
+
+	/**
 	 * Represents a CarmaLink configuration.
 	 *
 	 * @class Config
 	 */
 	class Config {
 
-		const API_THRESHOLD = 'threshold';
-		const API_ALLOWANCE = 'allowance';
-		const API_LOCATION = 'location';
-		const API_BUZZER = 'buzzer';
-		const API_DELETE_CONFIG = 'OFF';
+		const API_THRESHOLD		= 'threshold';
+		const API_ALLOWANCE		= 'allowance';
+		const API_LOCATION		= 'location';
+		const API_BUZZER		= 'buzzer';
+		const API_DELETE_CONFIG	= 'OFF';
 
 		/**
 		 * @access public
@@ -339,7 +435,7 @@ namespace CarmaLink {
 		 * @access protected
 		 * @var ConfigType
 		 */
-		protected $_config_type = ConfigType::CONFIG_TRIP_REPORT;
+		protected $_config_type;
 
 		/**
 		 * @access private
@@ -402,9 +498,12 @@ namespace CarmaLink {
 		 *
 		 * @param CarmaLink				device		A custom data object representing a CarmaLink
 		 * @param string|ConfigType 	config_type
+		 * @param bool					delete		Delete configuration
 		 * @return Config
 		 */
-		public static function createConfigFromDevice($device, $config_type) {
+		public static function createConfigFromDevice($device, $config_type, $delete = FALSE) {
+			if($delete) return array();
+
 			$config = new Config();
 
 			if (!$config -> setConfigType($config_type)) {
@@ -439,15 +538,10 @@ namespace CarmaLink {
 				case ConfigType::CONFIG_IDLING :
 					$config -> allowance = $device -> getIdleTimeLimit();
 					break;
+				case ConfigType::CONFIG_GENERAL :
+					$config = new GeneralConfig( $device->getFuelType(), $device->getDisplacement() );
+					break;
 			}
-
-			/***
-			 * @todo refactor this, it's bad. Should rely on something else to
-			 * express a config needs to be deleted (chief)
-			 */
-			if ($config -> threshold === self::API_DELETE_CONFIG || $config -> allowance === self::API_DELETE_CONFIG)
-				return false;
-
 			return $config;
 		}
 
@@ -498,8 +592,8 @@ namespace CarmaLink {
 		 * @var array 	Optional cURL options. Can be set depending on need.
 		 */
 		private static $CURL_OPTS = array(
-			CURLOPT_SSL_VERIFYPEER=>0,
-			CURLOPT_SSL_VERIFYHOST=>0
+			CURLOPT_SSL_VERIFYPEER => 0,
+			CURLOPT_SSL_VERIFYHOST => 0
 		);
 		
 		/**
@@ -608,14 +702,16 @@ namespace CarmaLink {
 		 * @param bool				returnAllData	If set to true will return assoc. array of HTTP code and HTTP body
 		 * @return bool|string|array				If returnAllData param is true will return assoc. array of HTTP code and HTTP body
 		 * 											otherwise, will return false on error and a JSON string on success
+		 * @throws CarmaLink\CarmaLinkAPIException
 		 */
 		public function getReportData($serials = 0, $report_type, $parameters = array(), $returnAllData = FALSE) {
 			if ($serials === 0)
-				return FALSE;
+				throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")");
 			$serials = $this -> sanitizeSerials($serials);
+			
 			$uri = $this -> getEndpointRootURI() . '/' . $this -> getEndpointRelativeRoot() . '/' . $serials . '/data/' . $report_type;
 			$response_data = $this -> get($uri, $parameters);
-
+			
 			if ($returnAllData === TRUE) {
 				return $response_data;
 			}
@@ -802,24 +898,17 @@ namespace CarmaLink {
 				ConfigType::CONFIG_HARD_ACCEL, 
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
-				ConfigType::CONFIG_STATUS
+				ConfigType::CONFIG_STATUS,
+				ConfigType::CONFIG_GENERAL
 			);
+			
 			$error_data = array();
+			
 			foreach ($configs_to_update as $config_type) {
 				$config_params = Config::getConfigArray($device, $config_type);
-				if ($config_params === FALSE) 
+				if (!$this -> putConfig((int)$device -> id, $config_params, $config_type)) 
 				{
-					if (!$this -> deleteConfig($device -> id, $config_type)) 
-					{
-						$error_data[$config_type] = "failure to delete.";
-					}
-				} 
-				else 
-				{
-					if (!$this -> putConfig((int)$device -> id, $config_params, $config_type)) 
-					{
-						$error_data[$config_type] = "failure to configure.";
-					}
+					$error_data[$config_type] = "failure to configure.";
 				}
 			}
 			return $return_errors ? $error_data : (count($error_data) === 0);
