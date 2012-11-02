@@ -361,11 +361,11 @@ namespace CarmaLink {
 		
 		/**
 		 * Constructor
-		 * @param CarmaLink\FuelType Type of fuel
+		 * @param string Type of fuel
 		 * @param float	Engine displacement
 		 * @return void
 		 */
-		public function __construct(FuelType $fuel, $displacement = 0.0) {
+		public function __construct($fuel, $displacement = 0.0) {
 			$this -> __api_version = CarmaLinkAPI::API_VERSION;
 			$this -> fuel = $fuel;
 			$this -> displacement = $displacement;
@@ -738,22 +738,25 @@ namespace CarmaLink {
 		/**
 		 * Retrieves a configuration object from the CarmaLink based on parameters
 		 *
-		 * @param string|int|array		$serials		Serial number(s) of the CarmaLink(s)
-		 * @param string				config_type		Valid configuration type
+		 * @param string|int|array		serials		Serial number(s) of the CarmaLink(s)
+		 * @param string				config_type	Valid configuration type
+		 * @param int					configId	If querying a specific config
 		 * @return bool|string On success returns JSON-formatted object, on failure false
 		 */
-		public function getConfig($serials = 0, $config_type) {
+		public function getConfig($serials = 0, $config_type, $configId = 0) {
 			if ($serials === 0)
 				return false;
+			// setup
 			$endpoint = '';
+			$params = $configId === 0 ? NULL : array('id'=>$configId);
+			
 			$this -> setupConfigCall($serials, $endpoint, $config_type);
-			$response_data = $this -> get($endpoint);
+			$response_data = $this -> get($endpoint, $params);
 			if ((int)$response_data[self::RESPONSE_CODE] !== self::API_METHOD_SUCCESS) {
 				return false;
 			}
 			return $response_data[self::RESPONSE_BODY];
 		}
-
 		/**
 		 * Takes a response array from a putConfig or deleteConfig request
 		 * and returns the proper type / value. Mostly a utility DRY method.
