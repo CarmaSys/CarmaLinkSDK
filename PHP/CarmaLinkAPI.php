@@ -3,7 +3,7 @@
 /**
  * CarmaLink SDK for PHP
  *
- * @version 0.0.1
+ * @version 0.0.2
  *
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
  * @license MIT
@@ -22,6 +22,23 @@ namespace CarmaLink {
 	require_once  realpath(__DIR__ . '/oauth-php/library/OAuthStore.php');
 	require_once  realpath(__DIR__ . '/oauth-php/library/OAuthRequester.php');
 
+	/**
+	 * Monolog for debug/info logging (MIT license)
+	 * 
+	 * @see git://github.com/Seldaek/monolog.git
+	 */
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Logger.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Handler/HandlerInterface.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Handler/AbstractHandler.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Handler/AbstractProcessingHandler.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Handler/StreamHandler.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Formatter/FormatterInterface.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Formatter/NormalizerFormatter.php');
+	require_once realpath(__DIR__. '/monolog/src/Monolog/Formatter/LineFormatter.php');
+	
+	use Monolog\Logger;
+	use Monolog\Handler\StreamHandler;
+	
 	/**
 	 * "Abstract" class representing minimum properties of a CarmaLink
 	 *
@@ -569,6 +586,7 @@ namespace CarmaLink {
 	 */
 	class CarmaLinkAPI {
 		const API_VERSION = 1;
+		const API_NAME = "CarmaLinkAPI";
 		
 		/**
 		 * @access public
@@ -627,6 +645,24 @@ namespace CarmaLink {
 		 */
 		public $debug = false;
 
+		/**
+		 * @access private
+		 * @var _logger	Monolog\Logger
+		 */
+		private static $_logger = NULL;
+		
+		/**
+		 * getLogger gets the static Monolog logging handler
+		 * @access protected
+		 * @return Monolog\Logger
+		 */
+		protected static function getLogger() {
+			if(!self::$_logger) {
+				self::$_logger = new Logger(self::API_NAME);
+				self::$_logger->pushHandler(new StreamHandler(__DIR__."/carmalinkapi.log",Logger::DEBUG));
+			}
+			return self::$_logger;
+		}
 		
 		/**
 		 * Constructor
@@ -649,6 +685,7 @@ namespace CarmaLink {
 			$this -> port = isset($server_options['PORT']) ? $server_options['PORT'] : null;
 			$this -> https = isset($server_options['HTTPS']) ? (bool)$server_options['HTTPS'] : false;
 			$this -> debug = $debug;
+			
 			\OAuthStore::instance("2Leg", array('consumer_key' => $consumer_key, 'consumer_secret' => $consumer_secret));
 		}
 
@@ -881,8 +918,18 @@ namespace CarmaLink {
 				$curl_options[CURLOPT_HTTPHEADER] = array('Content-Type: application/json');
 				$parameters = NULL;
 			}
+			
+			if($this->debug) {
+				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$parameters);
+			}
+			
 			$oauth_request = new \OAuthRequester($endpoint, $method, $parameters, $put_data);
 			$response = $oauth_request -> doRequest(0, $curl_options);
+			
+			if($this->debug) {
+				self::getLogger() -> addDebug("Response - ".$response['code']." body:\n".$response['body']."\n\n");
+			}
+			
 			return array(self::RESPONSE_CODE => $response['code'], self::RESPONSE_BODY => $response['body']);
 		}
 

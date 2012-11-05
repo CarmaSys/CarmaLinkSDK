@@ -1,0 +1,3 @@
+[submodule "PHP/monolog"]
+	path = PHP/monolog
+	url = git://github.com/Seldaek/monolog.git
