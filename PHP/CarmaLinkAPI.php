@@ -920,6 +920,8 @@ namespace CarmaLink {
 			}
 			
 			if($this->debug) {
+				if(!$parameters)
+					$parameters = array();
 				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$parameters);
 			}
 			
