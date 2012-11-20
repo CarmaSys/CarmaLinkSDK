@@ -591,10 +591,10 @@ namespace CarmaLink {
 		/**
 		* @access public
 		* @var string
-		* This is the path to the log file where API requests/responses will be logged if DEBUG is set to TRUE
-		* This path must be writable by the user account that is running the webserver (www for apache usually)
+		* This is the *default* path to the log file where API requests/responses will be logged if DEBUG is set to TRUE
+		* To specify an alternative path include it in the constructor.
 		*/
-		const API_LOG_FILE_DIR = "/var/log/apache2";
+		const API_LOG_FILE_DIR = "/var/log/httpd";
 
 		/**
 		 * @access public
@@ -666,21 +666,25 @@ namespace CarmaLink {
 		 */
 		protected static function getLogger() {
 			if(!self::$_logger) {
-				$logfilePath = self::API_LOG_FILE_DIR."/".self::API_NAME.".log";
-				
-				// Attempt to open the file or create if it doesn't exist. 
-				$handle = fopen($logfilePath,"a+");
-				
-				if(!$handle || !fclose($handle)) {
-					throw new CarmaLinkAPIException("Could not create or open log file at path - ".$logfilePath);
-				}
-				
-				self::$_logger = new Logger(self::API_NAME);
-				self::$_logger->pushHandler(new StreamHandler($logfilePath,Logger::DEBUG));
+				self::setLogger();
 			}
 			return self::$_logger;
 		}
-		
+
+		protected static function setLogger($path = NULL) {
+			$logfilePath = $path === NULL ? self::API_LOG_FILE_DIR."/".self::API_NAME.".log" : $path;
+				
+			// Attempt to open the file or create if it doesn't exist. 
+			$handle = fopen($logfilePath,"a+");
+			
+			if(!$handle || !fclose($handle)) {
+				throw new CarmaLinkAPIException("Could not create or open log file at path - ".$logfilePath);
+			}
+			
+			self::$_logger = new Logger(self::API_NAME);
+			self::$_logger->pushHandler(new StreamHandler($logfilePath,Logger::DEBUG));
+		}
+
 		/**
 		 * Constructor
 		 *
@@ -693,7 +697,7 @@ namespace CarmaLink {
 		 * @param bool 			debug				Enable debugging
 		 * @return void
 		 */
-		public function __construct($consumer_key = null, $consumer_secret = null, $server_options = array(), $debug = false) {
+		public function __construct($consumer_key = null, $consumer_secret = null, $server_options = array(), $debug = false, $log_path = NULL) {
 			if (!$consumer_key || !$consumer_secret || strlen($consumer_key) === 0 || strlen($consumer_secret) === 0) {
 				throw new CarmaLinkAPIException(CarmaLinkAPIException::INVALID_API_KEYS_PROVIDED);
 			}
@@ -703,6 +707,10 @@ namespace CarmaLink {
 			$this -> https = isset($server_options['HTTPS']) ? (bool)$server_options['HTTPS'] : false;
 			$this -> debug = $debug;
 			
+			if($this->debug) {
+				self::setLogger($log_path);
+			}
+
 			\OAuthStore::instance("2Leg", array('consumer_key' => $consumer_key, 'consumer_secret' => $consumer_secret));
 		}
 
