@@ -589,6 +589,14 @@ namespace CarmaLink {
 		const API_NAME = "CarmaLinkAPI";
 		
 		/**
+		* @access public
+		* @var string
+		* This is the path to the log file where API requests/responses will be logged if DEBUG is set to TRUE
+		* This path must be writable by the user account that is running the webserver (www for apache usually)
+		*/
+		const API_LOG_FILE_DIR = "/var/log/apache2";
+
+		/**
 		 * @access public
 		 * @var int 
 		 * This is the maximum value of the "limit" API query parameter
@@ -652,14 +660,23 @@ namespace CarmaLink {
 		private static $_logger = NULL;
 		
 		/**
-		 * getLogger gets the static Monolog logging handler
+		 * getLogger gets the static Monolog logging handler if debug is set to true
 		 * @access protected
 		 * @return Monolog\Logger
 		 */
 		protected static function getLogger() {
 			if(!self::$_logger) {
+				$logfilePath = self::API_LOG_FILE_DIR."/".self::API_NAME.".log";
+				
+				// Attempt to open the file or create if it doesn't exist. 
+				$handle = fopen($logfilePath,"a+");
+				
+				if(!$handle || !fclose($handle)) {
+					throw new CarmaLinkAPIException("Could not create or open log file at path - ".$logfilePath);
+				}
+				
 				self::$_logger = new Logger(self::API_NAME);
-				self::$_logger->pushHandler(new StreamHandler(__DIR__."/carmalinkapi.log",Logger::DEBUG));
+				self::$_logger->pushHandler(new StreamHandler($logfilePath,Logger::DEBUG));
 			}
 			return self::$_logger;
 		}
