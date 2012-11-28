@@ -3,7 +3,7 @@
 /**
  * CarmaLink SDK for PHP
  *
- * @version 0.0.2
+ * @version 0.0.3
  *
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
  * @license MIT
@@ -306,6 +306,10 @@ namespace CarmaLink {
 	 * @class ConfigType
 	 */
 	class ConfigType {
+
+		const CONFIG_IDLING_MINIMUM_ALLOWANCE = 5000; // 5 seconds
+		const CONFIG_STATUS_MINIMUM_PING = 5000; // 5 seconds
+
 		const CONFIG_OVERSPEEDING 	= 'overspeeding';
 		const CONFIG_IDLING			= 'idling';
 		const CONFIG_STATUS			= 'status';
@@ -382,7 +386,7 @@ namespace CarmaLink {
 		 * @param float	Engine displacement
 		 * @return void
 		 */
-		public function __construct($fuel, $displacement = 0.0) {
+		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement = 0.0) {
 			$this -> __api_version = CarmaLinkAPI::API_VERSION;
 			$this -> fuel = $fuel;
 			$this -> displacement = $displacement;
@@ -515,22 +519,23 @@ namespace CarmaLink {
 		 *
 		 * @param CarmaLink				device		A custom data object representing a CarmaLink
 		 * @param string|ConfigType 	config_type
-		 * @param bool					delete		Delete configuration
-		 * @return Config
+		 * @return Config|bool 			return new config object, or false to delete configuration
 		 */
-		public static function createConfigFromDevice($device, $config_type, $delete = FALSE) {
-			if($delete) return array();
-
+		public static function createConfigFromDevice($device, $config_type) {
 			$config = new Config();
 
 			if (!$config -> setConfigType($config_type)) {
 				throw new CarmaLinkAPIException('Invalid configuration type : ' . $config_type);
 			}
+
 			$config -> buzzer = (string)$device -> getBuzzerVolume();
 			$config -> location = (bool)$device -> getUseGPS();
 
 			switch ($config->_config_type) {
+				
 				case ConfigType::CONFIG_STATUS :
+					if( (int)$device -> getPingTime() < ConfigType::CONFIG_STATUS_MINIMUM_PING )
+						return FALSE;
 					$config -> threshold = $device -> getPingTime();
 					break;
 
@@ -538,23 +543,34 @@ namespace CarmaLink {
 					break;
 
 				case ConfigType::CONFIG_ENGINE_FAULT :
+					if(!$device -> getCheckEngineLight())
+						return FALSE;
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING :
+					if( (int)$device -> speedLimit === 0 )
+						return FALSE;
 					$config -> threshold = $device -> speedLimit;
 					break;
 
 				case ConfigType::CONFIG_HARD_BRAKING :
+					if( (int)$device -> getBrakeLimit() === 0 )
+						return FALSE;
 					$config -> threshold = $device -> getBrakeLimit();
 					break;
 
 				case ConfigType::CONFIG_HARD_ACCEL :
+					if( (int)$device -> getAccelLimit() === 0 )
+						return FALSE;
 					$config -> threshold = $device -> getAccelLimit();
 					break;
 
 				case ConfigType::CONFIG_IDLING :
+					if( (int)$device -> getIdleTimeLimit() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE)
+						return FALSE;
 					$config -> allowance = $device -> getIdleTimeLimit();
 					break;
+
 				case ConfigType::CONFIG_GENERAL :
 					$config = new GeneralConfig( $device->getFuelType(), $device->getDisplacement() );
 					break;
@@ -570,11 +586,11 @@ namespace CarmaLink {
 		 *
 		 * @param CarmaLink	device		Representation of CarmaLink
 		 * @param string|ConfigType		config_type
-		 * @return array
+		 * @return array|bool 			returns array of config parameters or false if it should be deleted
 		 */
 		public static function getConfigArray($device, $config_type) {
 			$newConfig = self::createConfigFromDevice($device, $config_type);
-			return ($newConfig !== false) ? $newConfig -> toArray() : false;
+			return ($newConfig !== FALSE) ? $newConfig -> toArray() : FALSE;
 		}
 
 	}
@@ -947,6 +963,9 @@ namespace CarmaLink {
 			if($this->debug) {
 				if(!$parameters)
 					$parameters = array();
+				if(!$parameters && strlen($put_data)) 
+					$parameters = json_decode($put_data,TRUE);
+
 				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$parameters);
 			}
 			
@@ -954,8 +973,8 @@ namespace CarmaLink {
 			$response = $oauth_request -> doRequest(0, $curl_options);
 			
 			if($this->debug) {
-				self::getLogger() -> addDebug("Response - ".$response['code']." body:\n".$response['body']."\n\n");
-			}
+				self::getLogger() -> addDebug("Response - ".$response['code']." body: ".$response['body']);
+			}	
 			
 			return array(self::RESPONSE_CODE => $response['code'], self::RESPONSE_BODY => $response['body']);
 		}
@@ -983,7 +1002,11 @@ namespace CarmaLink {
 			
 			foreach ($configs_to_update as $config_type) {
 				$config_params = Config::getConfigArray($device, $config_type);
-				if (!$this -> putConfig((int)$device -> id, $config_params, $config_type)) 
+				if($config_params === FALSE) {
+					if(!$this-> deleteConfig((int)$device -> id, $config_type)) {
+						$error_data[$config_type] = "failure to delete configuration.";	
+					}
+				} else if (!$this -> putConfig((int)$device -> id, $config_params, $config_type)) 
 				{
 					$error_data[$config_type] = "failure to configure.";
 				}
