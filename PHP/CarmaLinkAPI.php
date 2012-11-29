@@ -378,7 +378,7 @@ namespace CarmaLink {
 		 * @access public
 		 * @var float	Engine displacement used to correctly calculate fuel effiency etc.
 		 */
-		public $displacement = 0.0;
+		public $displacement = 2.0;
 		
 		/**
 		 * Constructor
@@ -386,7 +386,7 @@ namespace CarmaLink {
 		 * @param float	Engine displacement
 		 * @return void
 		 */
-		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement = 0.0) {
+		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement = 2.0) {
 			$this -> __api_version = CarmaLinkAPI::API_VERSION;
 			$this -> fuel = $fuel;
 			$this -> displacement = $displacement;
