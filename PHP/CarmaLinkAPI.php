@@ -227,7 +227,7 @@ namespace CarmaLink {
 		 * @param float	engine displacement in litres
 		 * @return void
 		 */
-		public function setDisplacement($displacement = 0.0) {
+		public function setDisplacement($displacement = 2.0) {
 			$this -> displacement = $displacement;
 		}
 
