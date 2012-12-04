@@ -3,7 +3,7 @@
 /**
  * CarmaLink SDK for PHP
  *
- * @version 0.0.3
+ * @version 1.2.0
  *
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
  * @license MIT
@@ -319,11 +319,17 @@ namespace CarmaLink {
 		const CONFIG_TRIP_REPORT	= 'trip_report';
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
 		const CONFIG_GENERAL		= 'general_config';
+		
 		/**
 		 * @access public
 		 * @var array Configuration types which use the buzzer property.
 		 */
-		public static $buzzer_config_types = array(self::CONFIG_OVERSPEEDING, self::CONFIG_HARD_BRAKING, self::CONFIG_HARD_ACCEL);
+		public static $buzzer_config_types = array(
+			self::CONFIG_IDLING,
+			self::CONFIG_OVERSPEEDING,
+			self::CONFIG_HARD_BRAKING,
+			self::CONFIG_HARD_ACCEL
+		);
 
 		/**
 		 * @access public
@@ -498,7 +504,11 @@ namespace CarmaLink {
 		 * @return array
 		 */
 		public function toArray() {
-			$configArray = array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance, self::API_LOCATION => (bool)$this -> location);
+			$configArray = array(
+				self::API_THRESHOLD => (float)$this -> threshold,
+				self::API_ALLOWANCE => (float)$this -> allowance,
+				self::API_LOCATION => (bool)$this -> location
+			);
 			if ($this -> hasBuzzerConfig()) {
 				$configArray[self::API_BUZZER] = (string)$this -> buzzer;
 			}
@@ -609,13 +619,14 @@ namespace CarmaLink {
 		* @var string
 		* This is the *default* path to the log file where API requests/responses will be logged if DEBUG is set to TRUE
 		* To specify an alternative path include it in the constructor.
+		* @see CarmaLinkAPI::__construct
 		*/
 		const API_LOG_FILE_DIR = "/var/log/httpd";
 
 		/**
 		 * @access public
 		 * @var int 
-		 * This is the maximum value of the "limit" API query parameter
+		 * This is the maximum value of the per-request record "limit" API query parameter 
 		 */
 		const API_RECORD_LIMIT = 50;
 
