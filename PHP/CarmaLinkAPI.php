@@ -186,6 +186,23 @@ namespace CarmaLink {
 		}
 
 		/**
+		 * Set CarmaLink hard cornering limit
+		 * @param float		corneringLimit		Limit in G's
+		 * @return void
+		 */
+		public function setCorneringLimit($corneringLimit = 0.0) {
+			$this -> corneringLimit = (float)$corneringLimit;
+		}
+
+		/**
+		 * Get CarmaLink hard cornering limit
+		 * @return float	In G's
+		 */
+		public function getCorneringLimit() {
+			return $this -> corneringLimit;
+		}
+
+		/**
 		 * Set CarmaLink idle time limit
 		 * @param int	idleTimeLimit	in milliseconds
 		 * @return void
@@ -573,6 +590,12 @@ namespace CarmaLink {
 					if( (int)$device -> getAccelLimit() === 0 )
 						return FALSE;
 					$config -> threshold = $device -> getAccelLimit();
+					break;
+
+				case ConfigType::CONFIG_HARD_CORNERING :
+					if( (int)$device -> getCorneringLimit() === 0 )
+						return FALSE;
+					$config -> threshold = $device -> getCorneringLimit();
 					break;
 
 				case ConfigType::CONFIG_IDLING :
@@ -1003,6 +1026,7 @@ namespace CarmaLink {
 				ConfigType::CONFIG_ENGINE_FAULT, 
 				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_ACCEL, 
+				ConfigType::CONFIG_HARD_CORNERING, 
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
 				ConfigType::CONFIG_STATUS,
