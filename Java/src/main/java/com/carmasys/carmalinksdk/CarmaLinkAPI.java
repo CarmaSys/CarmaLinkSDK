@@ -20,9 +20,6 @@ public class CarmaLinkAPI extends java.lang.Object {
 
 	
 	public static final String API_VERSION 	= "1";
-	public static final String API_KEY		= "YOURKEYHERE";
-	public static final String API_SECRET	= "YOURSECRETHERE";
-	
 	public static final String API_REPORT_PATH	= "data";
 	public static final String API_CONFIG_PATH	= "report_config";
 	
@@ -32,12 +29,12 @@ public class CarmaLinkAPI extends java.lang.Object {
 	private final Boolean		debug;
 	private final OAuthService 	service;
 	
-	public CarmaLinkAPI(String host, Integer port, Boolean ssl, Boolean debug)
+	public CarmaLinkAPI(String key, String secret, String host, Integer port, Boolean ssl, Boolean debug)
 	{
 		this.service = new ServiceBuilder()
 			.provider(CarmaLinkAPIProvider.class)
-			.apiKey(CarmaLinkAPI.API_KEY)
-			.apiSecret(CarmaLinkAPI.API_SECRET)
+			.apiKey(key)
+			.apiSecret(secret)
 			.build();
 		
 		this.host 	= host;

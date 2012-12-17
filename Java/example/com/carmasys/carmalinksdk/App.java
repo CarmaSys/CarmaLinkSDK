@@ -8,7 +8,7 @@ public class App
 {
     public static void main( String[] args )
     {
-    	CarmaLinkAPI api = new CarmaLinkAPI("devfrontend0.carmasys.com",8282,true,true);
+    	CarmaLinkAPI api = new CarmaLinkAPI("KEY","SECRET","devfrontend0.carmasys.com",8282,true,true);
     	Response res = api.getReportData("519", ConfigType.ALL_ACTIVITY, null);
     	
     	//Config c = new Config(4,9.343,false);
