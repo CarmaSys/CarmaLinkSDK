@@ -2,7 +2,6 @@
 package com.carmasys.carmalinksdk;
 
 import java.util.HashMap;
-
 import com.carmasys.carmalinksdk.CarmaLink.BuzzerVolume;
 import com.google.gson.Gson;
 
@@ -20,12 +19,12 @@ public class Config {
 		DEACTIVATED;
 	}
 	
-	private 	Integer 		threshold;
-	private 	Double			allowance;
-	private 	BuzzerVolume	buzzer;	
-	private 	Boolean			location;
-	private 	Status			status;
-	private		ConfigType		configType;
+	private Integer threshold;
+	private Double allowance;
+	private BuzzerVolume buzzer;	
+	private Boolean location;
+	private Status status;
+	private	transient ConfigType configType;
 
 	public Config(Integer threshold, Double allowance) {
 		this(threshold, allowance, null, null);

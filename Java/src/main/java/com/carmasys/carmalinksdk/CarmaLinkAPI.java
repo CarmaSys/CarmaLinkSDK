@@ -4,7 +4,6 @@
 package com.carmasys.carmalinksdk;
 
 import com.carmasys.carmalinksdk.Config.*;
-import com.google.gson.Gson;
 
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.oauth.OAuthService;
@@ -12,6 +11,7 @@ import org.scribe.model.*;
 
 import java.lang.reflect.Array;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
@@ -53,7 +53,7 @@ public class CarmaLinkAPI extends java.lang.Object {
 	
 	public Response putConfig(String serials, Config config) 
 	{
-		String endpoint = this.generateEndpoint(serials, API_REPORT_PATH, config.getConfigType());
+		String endpoint = this.generateEndpoint(serials, API_CONFIG_PATH, config.getConfigType());
 		return this.put(endpoint, config);
 	}
 	
@@ -86,21 +86,24 @@ public class CarmaLinkAPI extends java.lang.Object {
 		return this.api(endpoint, Verb.DELETE, null);
 	}
 	
-	
 	protected Response api(String endpoint, Verb verb, HashMap<String,Object> params){
-		Array put_data = null;
-		Array headers = null;
+
 		Response res = null;
-		
 		OAuthRequest req = new OAuthRequest(verb, endpoint);
 		
 		this.service.signRequest(Token.empty(), req);
 		
 		if(verb == Verb.PUT)
 		{
+			req.addHeader("Content-type", "application/json");
 			req.addPayload((String)params.get("payload"));
+		} else {
+			for(Map.Entry<String, Object> entry : params.entrySet()) {
+				req.addQuerystringParameter(entry.getKey(), (String)entry.getValue());	
+			}
 		}
-		try {
+		try
+		{
 			res = req.send();
 		}
 		catch (Exception e)
