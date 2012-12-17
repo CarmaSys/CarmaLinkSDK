@@ -1,6 +1,8 @@
 
 package com.carmasys.carmalinksdk;
 
+import java.util.HashMap;
+
 import com.carmasys.carmalinksdk.CarmaLink.BuzzerVolume;
 import com.google.gson.Gson;
 

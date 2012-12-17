@@ -36,7 +36,7 @@ public class CarmaLinkAPITest extends TestCase {
      */
     public void testNewAPI()
     {
-        CarmaLinkAPI api = new CarmaLinkAPI("frontend0.carmasys.com",8282,true,true);
+      //  CarmaLinkAPI api = new CarmaLinkAPI("frontend0.carmasys.com",8282,true,true);
     	assertTrue( true );
     }
 
