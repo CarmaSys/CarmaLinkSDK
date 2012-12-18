@@ -23,6 +23,7 @@ public class CarmaLinkAPI extends java.lang.Object {
 	public static final String API_VERSION 	= "1";
 	public static final String API_REPORT_PATH	= "data";
 	public static final String API_CONFIG_PATH	= "report_config";
+	public static final String API_PUT_PAYLOAD	= "payload";
 	
 	private final String 		host;
 	private final Integer		port;
@@ -78,7 +79,7 @@ public class CarmaLinkAPI extends java.lang.Object {
 	
 	protected Response put(String endpoint, Config config) {
 		HashMap<String,Object> params = new HashMap<String,Object>();
-		params.put("payload", config.toJSON());
+		params.put(API_PUT_PAYLOAD, config.toJSON());
 		return this.api(endpoint, Verb.PUT, params);
 	}
 	
@@ -90,18 +91,18 @@ public class CarmaLinkAPI extends java.lang.Object {
 
 		Response res = null;
 		OAuthRequest req = new OAuthRequest(verb, endpoint);
-		
-		this.service.signRequest(Token.empty(), req);
-		
 		if(verb == Verb.PUT)
 		{
 			req.addHeader("Content-type", "application/json");
-			req.addPayload((String)params.get("payload"));
+			req.addPayload((String)params.get(API_PUT_PAYLOAD));
 		} else {
 			for(Map.Entry<String, Object> entry : params.entrySet()) {
-				req.addQuerystringParameter(entry.getKey(), (String)entry.getValue());	
+				req.addQuerystringParameter(entry.getKey(), (String)entry.getValue().toString());	
 			}
 		}
+		
+		this.service.signRequest(Token.empty(), req);
+		
 		try
 		{
 			res = req.send();
