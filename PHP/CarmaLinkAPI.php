@@ -507,7 +507,7 @@ namespace CarmaLink {
 			$configArray = ($this -> _config_type !== ConfigType::CONFIG_TRIP_REPORT ) ? 
 				array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance ) : 
 					array();
-			$configArray[] = self::API_LOCATION => (bool)$this -> location;
+			$configArray[self::API_LOCATION] = (bool)$this -> location;
 			if ($this -> hasBuzzerConfig()) {
 				$configArray[self::API_BUZZER] = (string)$this -> buzzer;
 			}
