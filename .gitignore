@@ -7,4 +7,5 @@ debug.out
 .gwt
 .factorypath
 *.log
-*.sublime-*
+*.sublime-project
+*.sublime-workspace
