@@ -19,8 +19,8 @@ public class Config {
 		DEACTIVATED;
 	}
 	
-	private Integer threshold;
-	private Double allowance;
+	private Float threshold;
+	private Float allowance;
 	private BuzzerVolume buzzer;	
 	private Boolean location;
 	private Status status;
