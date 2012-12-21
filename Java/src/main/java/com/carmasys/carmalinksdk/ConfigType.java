@@ -20,50 +20,52 @@ public enum ConfigType {
 	TRIP_REPORT("trip_report"),
 	STATUS("status"),
 	ENGINE_FAULT("engine_fault"),
+	GENERAL_CONFIG("general_config"),
 	NEW_DEPLOYMENT("new_deployment"),
-	ALL_ACTIVITY("all_activity"),
-	GENERAL_CONFIG("general_config");
+	ALL_ACTIVITY("all_activity");
 
-	private final String data_type;
+	private final String config_type;
 	
 	private static enum ConfigOrReport { CONFIG, REPORT };
 
 	private static final EnumSet<ConfigType> USE_BUZZER = EnumSet.range(ConfigType.OVERSPEEDING, ConfigType.HARD_ACCEL);
-	private static final EnumSet<ConfigType> VALID_CONFIG_TYPES = EnumSet.range(ConfigType.OVERSPEEDING,ConfigType.ENGINE_FAULT);
-	private static final EnumSet<ConfigType> VALID_REPORT_TYPES = EnumSet.range(ConfigType.OVERSPEEDING,ConfigType.ALL_ACTIVITY);
+	private static final EnumSet<ConfigType> VALID_CONFIG_TYPES = 
+			EnumSet.range(ConfigType.OVERSPEEDING,ConfigType.GENERAL_CONFIG);
+	private static final EnumSet<ConfigType> VALID_REPORT_TYPES = 
+			EnumSet.complementOf(EnumSet.of(ConfigType.GENERAL_CONFIG));
 	private static final EnumSet<ConfigType> VALID_ENDPOINTS = EnumSet.allOf(ConfigType.class);
 	
-	ConfigType(String data_type)
+	ConfigType(String config_type)
 	{
-		this.data_type = data_type;
+		this.config_type = config_type;
 	}
 
-	public static Boolean validConfigType(String endpoint) 
+	public static Boolean validConfigType(ConfigType type) 
 	{
-		return ConfigType.validEndpoint(endpoint, ConfigOrReport.CONFIG);
+		return ConfigType.valid(type, ConfigOrReport.CONFIG);
 	}
 
-	public static Boolean validReportType(String endpoint) 
+	public static Boolean validReportType(ConfigType type) 
 	{
-		return ConfigType.validEndpoint(endpoint, ConfigOrReport.REPORT);
+		return ConfigType.valid(type, ConfigOrReport.REPORT);
 	}
 	
-	private static Boolean validEndpoint(String endpoint, ConfigOrReport endpoint_type) 
+	private static Boolean valid(ConfigType type, ConfigOrReport configOrReport) 
 	{
-		EnumSet<ConfigType> valid_endpoints = null;
-		switch(endpoint_type) {
+		EnumSet<ConfigType> valid_types = null;
+		switch(configOrReport) {
 			case CONFIG : 
-				valid_endpoints = ConfigType.VALID_CONFIG_TYPES;
+				valid_types = ConfigType.VALID_CONFIG_TYPES;
 				break;
 			case REPORT:
-				valid_endpoints = ConfigType.VALID_REPORT_TYPES;
+				valid_types = ConfigType.VALID_REPORT_TYPES;
 				break;
 			default:
-				valid_endpoints = ConfigType.VALID_ENDPOINTS;
+				valid_types = ConfigType.VALID_ENDPOINTS;
 				break;
 		}
-		for(final ConfigType data_type : valid_endpoints ) {
-			if(data_type.getDataType() == endpoint)
+		for(final ConfigType checkType : valid_types ) {
+			if(checkType == type)
 			{
 				return true;
 			}
@@ -75,17 +77,9 @@ public enum ConfigType {
 	{
 		return ConfigType.USE_BUZZER.contains(this);
 	}
-	
-	/**
-	 * @return the data_type
-	 */
-	public String getDataType() 
-	{
-		return data_type;
-	}
 
 	public String toString() 
 	{
-		return data_type;
+		return config_type;
 	}
 }
