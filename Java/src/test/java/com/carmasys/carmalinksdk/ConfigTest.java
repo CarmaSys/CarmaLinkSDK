@@ -12,40 +12,40 @@ public class ConfigTest {
 
 	@BeforeClass
 	public void beforeClass() {
-		this.configWithBuzzer = new Config(0, 0.0, true, ConfigType.IDLING);
+		this.configWithBuzzer = new Config(0f, 0f, true, ConfigType.IDLING);
 	}
 
 	@Test
-	public void ConfigIntegerDouble() {
+	public void ConfigFloatFloat() {
 		try {
-			new Config(1, 2.45);
-			new Config(43029, 43.43453534343);
-			new Config(-2323, -342.23234);
-			new Config(434334, 0.2342221109);
+			new Config(1.2f, 2.45f);
+			new Config(43029.24f, 43.43453534343f);
+			new Config(-2323f, -342.23234f);
+			new Config(434334f, 0.2342221109f);
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
 	}
 
 	@Test
-	public void ConfigIntegerDoubleBoolean() {
+	public void ConfigFloatFloatBoolean() {
 		try {
-			new Config(1, 2.9, false);
-			new Config(43029, 4.000433, true);
-			new Config(-2323, -32.23234, true);
-			new Config(434334, 0.2342221109, false);
+			new Config(1.0f, 2.9f, false);
+			new Config(43.34f, 4.000433f, true);
+			new Config(-2323.0f, -32.23234f, true);
+			new Config(434434.345534f, 0.2342221109f, false);
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
 	}
 
 	@Test
-	public void ConfigIntegerDoubleBooleanConfigType() {
+	public void ConfigFloatFloatBooleanConfigType() {
 		try {
-			new Config(1, 2.9, false, ConfigType.HARD_ACCEL);
-			new Config(43029, 4.000433, true, ConfigType.ENGINE_FAULT);
-			new Config(-2323, -32.23234, true, ConfigType.HARD_CORNERING);
-			new Config(434334, 0.2342221109, false, ConfigType.TRIP_REPORT);
+			new Config(1f, 2.9f, false, ConfigType.HARD_ACCEL);
+			new Config(43029f, 4.000433f, true, ConfigType.ENGINE_FAULT);
+			new Config(-2323f, -32.23234f, true, ConfigType.HARD_CORNERING);
+			new Config(434334f, 0.2342221109f, false, ConfigType.TRIP_REPORT);
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 		}
@@ -53,10 +53,10 @@ public class ConfigTest {
 
 	@Test
 	public void getAllowance() {
-		double testDouble = 32.4242323;
+		float testFloat = 32.4242323f;
 		double delta = 0.00001;
-		Config test = new Config(1, testDouble);
-		Assert.assertEquals(testDouble, test.getAllowance(), delta);
+		Config test = new Config(1f, testFloat);
+		Assert.assertEquals(testFloat, test.getAllowance(), delta);
 	}
 
 	@Test
@@ -80,33 +80,61 @@ public class ConfigTest {
 
 	@Test
 	public void getStatus() {
-		Assert.assertNotNull(this.configWithBuzzer.getStatus());
-		
+		this.configWithBuzzer.setStatus(Status.DEACTIVATED);
+		Assert.assertEquals(Status.DEACTIVATED, this.configWithBuzzer.getStatus());
 	}
 
 	@Test
 	public void getThreshold() {
-		throw new RuntimeException("Test not implemented");
+		float threshold = 2.5f;
+		this.configWithBuzzer.setThreshold(threshold);
+		Assert.assertEquals(threshold, this.configWithBuzzer.getThreshold());
 	}
 
 	@Test
 	public void setAllowance() {
-		throw new RuntimeException("Test not implemented");
+		try {
+			this.configWithBuzzer.setAllowance(2.0f);
+			this.configWithBuzzer.setAllowance(-2443.234511f);
+			this.configWithBuzzer.setAllowance(-2443.234511f);
+			this.configWithBuzzer.setAllowance(0f);
+			this.configWithBuzzer.setAllowance(14453f);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void setBuzzer() {
-		throw new RuntimeException("Test not implemented");
+		try {
+			this.configWithBuzzer.setBuzzer(BuzzerVolume.HIGH);
+			this.configWithBuzzer.setBuzzer(BuzzerVolume.MED);
+			this.configWithBuzzer.setBuzzer(BuzzerVolume.OFF);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void setConfigType() {
-		throw new RuntimeException("Test not implemented");
+		try {
+			this.configWithBuzzer.setConfigType(ConfigType.ALL_ACTIVITY);
+			this.configWithBuzzer.setConfigType(ConfigType.GENERAL_CONFIG);
+			this.configWithBuzzer.setConfigType(ConfigType.HARD_ACCEL);
+			this.configWithBuzzer.setConfigType(ConfigType.OVERSPEEDING);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void setLocation() {
-		throw new RuntimeException("Test not implemented");
+		try {
+			this.configWithBuzzer.setLocation(true);
+			this.configWithBuzzer.setLocation(false);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
@@ -121,12 +149,18 @@ public class ConfigTest {
 
 	@Test
 	public void setThreshold() {
-		
+		try {
+			this.configWithBuzzer.setThreshold(3f);
+			this.configWithBuzzer.setThreshold(-24233.434f);
+			this.configWithBuzzer.setThreshold(78.434f);
+		} catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 
 	@Test
 	public void toJSON() {
-		throw new RuntimeException("Test not implemented");
+		// @TODO not sure how to test this exactly.
 	}
 
 }

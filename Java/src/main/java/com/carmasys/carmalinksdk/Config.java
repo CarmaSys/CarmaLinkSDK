@@ -26,15 +26,15 @@ public class Config {
 	private Status status;
 	private	transient ConfigType configType;
 
-	public Config(Integer threshold, Double allowance) {
+	public Config(Float threshold, Float allowance) {
 		this(threshold, allowance, null, null);
 	}
 	
-	public Config(Integer threshold, Double allowance, Boolean location) {
+	public Config(Float threshold, Float allowance, Boolean location) {
 		this(threshold, allowance, location, null);
 	}
 	
-	public Config(Integer threshold, Double allowance, Boolean location, ConfigType configType) {
+	public Config(Float threshold, Float allowance, Boolean location, ConfigType configType) {
 		this.threshold = threshold;
 		this.allowance = allowance;
 		this.location = location;
@@ -59,13 +59,13 @@ public class Config {
 	/**
 	 * @return the allowance
 	 */
-	public Double getAllowance() {
+	public Float getAllowance() {
 		return allowance;
 	}
 	/**
 	 * @param allowance the allowance to set
 	 */
-	public void setAllowance(Double allowance) {
+	public void setAllowance(Float allowance) {
 		this.allowance = allowance;
 	}
 	/**
@@ -95,13 +95,13 @@ public class Config {
 	/**
 	 * @return the threshold
 	 */
-	public Integer getThreshold() {
+	public Float getThreshold() {
 		return threshold;
 	}
 	/**
 	 * @param threshold the threshold to set
 	 */
-	public void setThreshold(Integer threshold) {
+	public void setThreshold(Float threshold) {
 		this.threshold = threshold;
 	}
 	/**
