@@ -186,23 +186,6 @@ namespace CarmaLink {
 		}
 
 		/**
-		 * Set CarmaLink hard cornering limit
-		 * @param float		corneringLimit		Limit in G's
-		 * @return void
-		 */
-		public function setCorneringLimit($corneringLimit = 0.0) {
-			$this -> corneringLimit = (float)$corneringLimit;
-		}
-
-		/**
-		 * Get CarmaLink hard cornering limit
-		 * @return float	In G's
-		 */
-		public function getCorneringLimit() {
-			return $this -> corneringLimit;
-		}
-
-		/**
 		 * Set CarmaLink idle time limit
 		 * @param int	idleTimeLimit	in milliseconds
 		 * @return void
@@ -330,7 +313,6 @@ namespace CarmaLink {
 		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		const CONFIG_HARD_BRAKING	= 'hard_braking';
 		const CONFIG_HARD_ACCEL		= 'hard_accel';
-		const CONFIG_HARD_CORNERING	= 'hard_cornering';
 		const CONFIG_TRIP_REPORT	= 'trip_report';
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
 		const CONFIG_GENERAL		= 'general_config';
@@ -341,7 +323,6 @@ namespace CarmaLink {
 		 */
 		public static $buzzer_config_types = array(
 			self::CONFIG_IDLING,
-			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_OVERSPEEDING,
 			self::CONFIG_HARD_BRAKING,
 			self::CONFIG_HARD_ACCEL
@@ -358,7 +339,6 @@ namespace CarmaLink {
 			self::CONFIG_ENGINE_FAULT, 
 			self::CONFIG_HARD_BRAKING, 
 			self::CONFIG_HARD_ACCEL,
-			self::CONFIG_HARD_CORNERING, 
 			self::CONFIG_TRIP_REPORT,
 			self::CONFIG_NEW_DEPLOYMENT,
 			self::CONFIG_GENERAL
@@ -589,12 +569,6 @@ namespace CarmaLink {
 					if( (int)$device -> getAccelLimit() === 0 )
 						return FALSE;
 					$config -> threshold = $device -> getAccelLimit();
-					break;
-
-				case ConfigType::CONFIG_HARD_CORNERING :
-					if( (int)$device -> getCorneringLimit() === 0 )
-						return FALSE;
-					$config -> threshold = $device -> getCorneringLimit();
 					break;
 
 				case ConfigType::CONFIG_IDLING :
@@ -1026,7 +1000,6 @@ namespace CarmaLink {
 				ConfigType::CONFIG_ENGINE_FAULT, 
 				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_ACCEL, 
-				ConfigType::CONFIG_HARD_CORNERING, 
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
 				ConfigType::CONFIG_STATUS,
