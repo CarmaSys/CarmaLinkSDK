@@ -48,12 +48,24 @@ public class Config {
 	
 	@Override
 	public String toString() {
-		String stringRep =  "Config { " +
-				"threshold="+this.getThreshold()+","+
-				"allowance="+this.getAllowance()+","+
-				"location="+this.getLocation();
-		stringRep += (configType.usesBuzzer()) ? ",buzzer="+this.getBuzzer().toString()+"}":"}";
-		return stringRep;
+		
+		StringBuilder stringRep = 
+			(new StringBuilder("Config { "))
+		    	.append("threshold=")
+		        .append(this.getThreshold())
+		        .append(",")
+		        .append("allowance=")
+		        .append(this.getAllowance())
+		        .append(",")
+		        .append("location=")
+		        .append(this.getLocation());
+		
+		if(configType.usesBuzzer()) {
+			stringRep.append(",buzzer=").append(this.getBuzzer().toString());
+		}
+		
+		stringRep.append("}");
+		return stringRep.toString();
 	}
 	
 	/**

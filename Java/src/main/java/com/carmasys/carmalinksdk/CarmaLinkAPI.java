@@ -19,7 +19,6 @@ import java.util.Map;
  */
 public class CarmaLinkAPI extends java.lang.Object {
 
-	
 	public static final String API_VERSION 	= "1";
 	public static final String API_REPORT_PATH	= "data";
 	public static final String API_CONFIG_PATH	= "report_config";
@@ -60,17 +59,30 @@ public class CarmaLinkAPI extends java.lang.Object {
 	
 	private String generateEndpoint(String serials, String path, ConfigType data_type)
 	{
-		return this.getEndpointURIRoot() + "/" + this.getEndpointRelativeRoot() + "/" + serials + "/" + path + "/" + data_type.toString();
+		return (new StringBuilder(this.getEndpointURIRoot())
+		        	.append("/")
+		        	.append(this.getEndpointRelativeRoot())
+		        	.append("/")
+		        	.append(serials)
+		        	.append("/")
+		        	.append(path)
+		        	.append("/")
+		        	.append(data_type.toString())).toString();
 	}
 	
 	protected final String getEndpointRelativeRoot()
 	{
-		return "v" + CarmaLinkAPI.API_VERSION.toString();
+		return (new StringBuilder("v").append(CarmaLinkAPI.API_VERSION.toString())).toString();
 	}
 	
 	protected final String getEndpointURIRoot()
 	{
-		return "http" + (this.getSSL() ? "s" : "") + "://"  + this.getHost() + ":" + this.getPort();
+		return (new StringBuilder("http")
+		        	.append((this.getSSL() ? "s" : ""))
+		        	.append("://")
+		        	.append(this.getHost())
+		        	.append(":")
+		        	.append(this.getPort())).toString();
 	}
 	
 	protected Response get(String endpoint, HashMap<String,Object> params) {
