@@ -1,5 +1,8 @@
 package com.carmasys.carmalinksdk;
 
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
 import org.testng.annotations.*;
 import org.testng.Assert;
 
@@ -26,12 +29,12 @@ public class ConfigTypeTest {
 	
   @Test
   public void ConfigType() {
-    Assert.assertNotNull(this.hardBraking); 
+    AssertJUnit.assertNotNull(this.hardBraking); 
   }
 
   @Test
   public void toStringTest() {
-    Assert.assertEquals("hard_braking",this.hardBraking.toString());
+    AssertJUnit.assertEquals("hard_braking",this.hardBraking.toString());
   }
 
   @Test

@@ -1,5 +1,9 @@
 package com.carmasys.carmalinksdk;
 
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.DataProvider;
@@ -36,7 +40,7 @@ public class CarmaLinkAPITest {
 	  	try {
 	  		CarmaLinkAPI api = new CarmaLinkAPI("My_KEY","My_SECRET","api.carmalink.com",8080, false, true);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
   }
 

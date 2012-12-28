@@ -1,5 +1,8 @@
 package com.carmasys.carmalinksdk;
 
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -19,20 +22,20 @@ public class CarmaLinkTest {
 	public void getAccelLimit() {
 		float limit = 4.5f;
 		this.device.setAccelLimit(limit);
-		Assert.assertEquals(limit, this.device.getAccelLimit());
+		AssertJUnit.assertEquals(limit, this.device.getAccelLimit());
 	}
 
 	@Test
 	public void getBrakeLimit() {
 		float limit = 24.5f;
 		this.device.setBrakeLimit(limit);
-		Assert.assertEquals(limit, this.device.getBrakeLimit());
+		AssertJUnit.assertEquals(limit, this.device.getBrakeLimit());
 	}
 
 	@Test
 	public void getBuzzerVolume() {
 		this.device.setBuzzerVolume(BuzzerVolume.HIGH);
-		Assert.assertEquals(BuzzerVolume.HIGH, this.device.getBuzzerVolume());
+		AssertJUnit.assertEquals(BuzzerVolume.HIGH, this.device.getBuzzerVolume());
 	}
 
 	@Test
@@ -45,49 +48,49 @@ public class CarmaLinkTest {
 	public void getCornerLimit() {
 		float limit = -2.5f;
 		this.device.setCornerLimit(limit);
-		Assert.assertEquals(limit, this.device.getCornerLimit());
+		AssertJUnit.assertEquals(limit, this.device.getCornerLimit());
 	}
 
 	@Test
 	public void getEngineDisplacement() {
 		float displacement = 4.2f;
 		this.device.setEngineDisplacement(displacement);
-		Assert.assertEquals(displacement, this.device.getEngineDisplacement());
+		AssertJUnit.assertEquals(displacement, this.device.getEngineDisplacement());
 
 	}
 
 	@Test
 	public void getFuelType() {
 		this.device.setFuelType(FuelType.FUEL_DIESEL);
-		Assert.assertEquals(FuelType.FUEL_DIESEL, this.device.getFuelType());
+		AssertJUnit.assertEquals(FuelType.FUEL_DIESEL, this.device.getFuelType());
 	}
 
 	@Test
 	public void getId() {
 		Integer id = 10;
 		this.device.setId(id);
-		Assert.assertEquals(id, this.device.getId());
+		AssertJUnit.assertEquals(id, this.device.getId());
 	}
 
 	@Test
 	public void getIdleTimeLimit() {
 		Integer idle = 1000;
 		this.device.setIdleTimeLimit(idle);
-		Assert.assertEquals(idle, this.device.getIdleTimeLimit());
+		AssertJUnit.assertEquals(idle, this.device.getIdleTimeLimit());
 	}
 
 	@Test
 	public void getPingTime() {
 		Integer ping = 1000;
 		this.device.setPingTime(ping);
-		Assert.assertEquals(ping, this.device.getPingTime());
+		AssertJUnit.assertEquals(ping, this.device.getPingTime());
 	}
 
 	@Test
 	public void getSpeedLimit() {
 		Integer speedLimit = 120;
 		this.device.setSpeedLimit(speedLimit);
-		Assert.assertEquals(speedLimit, this.device.getSpeedLimit());
+		AssertJUnit.assertEquals(speedLimit, this.device.getSpeedLimit());
 	}
 
 	@Test
@@ -104,7 +107,7 @@ public class CarmaLinkTest {
 			this.device.setAccelLimit(3.435629994f);
 			this.device.setAccelLimit(23456.4346667f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -115,7 +118,7 @@ public class CarmaLinkTest {
 			this.device.setBrakeLimit(343.4f);
 			this.device.setBrakeLimit(3f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -125,7 +128,7 @@ public class CarmaLinkTest {
 			this.device.setBuzzerVolume(BuzzerVolume.HIGH);
 			this.device.setBuzzerVolume(BuzzerVolume.OFF);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -134,7 +137,7 @@ public class CarmaLinkTest {
 		try {
 			this.device.setCheckEngineLight(false);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -145,7 +148,7 @@ public class CarmaLinkTest {
 			this.device.setCornerLimit(33.0f);
 			this.device.setCornerLimit(-0.664f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -156,7 +159,7 @@ public class CarmaLinkTest {
 			this.device.setEngineDisplacement(-23.4521f);
 			this.device.setEngineDisplacement(0.45f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -165,7 +168,7 @@ public class CarmaLinkTest {
 		try {
 			this.device.setFuelType(FuelType.FUEL_GASOLINE);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -175,7 +178,7 @@ public class CarmaLinkTest {
 			this.device.setId(2);
 			this.device.setId(432);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -185,7 +188,7 @@ public class CarmaLinkTest {
 			this.device.setIdleTimeLimit(4000);
 			this.device.setIdleTimeLimit(24000);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -196,7 +199,7 @@ public class CarmaLinkTest {
 			this.device.setPingTime(534000);
 			this.device.setPingTime(600);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -207,7 +210,7 @@ public class CarmaLinkTest {
 			this.device.setSpeedLimit(2005);
 			this.device.setSpeedLimit(-1420);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -217,7 +220,7 @@ public class CarmaLinkTest {
 			this.device.setUseGPS(false);
 			this.device.setUseGPS(true);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 

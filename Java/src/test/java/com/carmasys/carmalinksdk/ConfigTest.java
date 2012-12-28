@@ -2,6 +2,9 @@ package com.carmasys.carmalinksdk;
 
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
+import org.testng.AssertJUnit;
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeClass;
 import org.testng.Assert;
 
 import com.carmasys.carmalinksdk.CarmaLink.BuzzerVolume;
@@ -23,7 +26,7 @@ public class ConfigTest {
 			new Config(-2323f, -342.23234f);
 			new Config(434334f, 0.2342221109f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -35,7 +38,7 @@ public class ConfigTest {
 			new Config(-2323.0f, -32.23234f, true);
 			new Config(434434.345534f, 0.2342221109f, false);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -47,7 +50,7 @@ public class ConfigTest {
 			new Config(-2323f, -32.23234f, true, ConfigType.HARD_CORNERING);
 			new Config(434334f, 0.2342221109f, false, ConfigType.TRIP_REPORT);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -56,20 +59,20 @@ public class ConfigTest {
 		float testFloat = 32.4242323f;
 		double delta = 0.00001;
 		Config test = new Config(1f, testFloat);
-		Assert.assertEquals(testFloat, test.getAllowance(), delta);
+		AssertJUnit.assertEquals(testFloat, test.getAllowance(), delta);
 	}
 
 	@Test
 	public void getBuzzer() {
 		this.configWithBuzzer.setBuzzer(BuzzerVolume.HIGH);
-		Assert.assertEquals(this.configWithBuzzer.getBuzzer(),
+		AssertJUnit.assertEquals(this.configWithBuzzer.getBuzzer(),
 				BuzzerVolume.HIGH);
 	}
 
 	@Test
 	public void getConfigType() {
 		this.configWithBuzzer.setConfigType(ConfigType.IDLING);
-		Assert.assertEquals(this.configWithBuzzer.getConfigType(),
+		AssertJUnit.assertEquals(this.configWithBuzzer.getConfigType(),
 				ConfigType.IDLING);
 	}
 
@@ -81,14 +84,14 @@ public class ConfigTest {
 	@Test
 	public void getStatus() {
 		this.configWithBuzzer.setStatus(Status.DEACTIVATED);
-		Assert.assertEquals(Status.DEACTIVATED, this.configWithBuzzer.getStatus());
+		AssertJUnit.assertEquals(Status.DEACTIVATED, this.configWithBuzzer.getStatus());
 	}
 
 	@Test
 	public void getThreshold() {
 		float threshold = 2.5f;
 		this.configWithBuzzer.setThreshold(threshold);
-		Assert.assertEquals(threshold, this.configWithBuzzer.getThreshold());
+		AssertJUnit.assertEquals(threshold, this.configWithBuzzer.getThreshold());
 	}
 
 	@Test
@@ -100,7 +103,7 @@ public class ConfigTest {
 			this.configWithBuzzer.setAllowance(0f);
 			this.configWithBuzzer.setAllowance(14453f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -111,7 +114,7 @@ public class ConfigTest {
 			this.configWithBuzzer.setBuzzer(BuzzerVolume.MED);
 			this.configWithBuzzer.setBuzzer(BuzzerVolume.OFF);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -123,7 +126,7 @@ public class ConfigTest {
 			this.configWithBuzzer.setConfigType(ConfigType.HARD_ACCEL);
 			this.configWithBuzzer.setConfigType(ConfigType.OVERSPEEDING);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -133,7 +136,7 @@ public class ConfigTest {
 			this.configWithBuzzer.setLocation(true);
 			this.configWithBuzzer.setLocation(false);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -143,7 +146,7 @@ public class ConfigTest {
 			this.configWithBuzzer.setStatus(Status.PENDING_ACTIVATION);
 			this.configWithBuzzer.setStatus(Status.ACTIVATED);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
@@ -154,7 +157,7 @@ public class ConfigTest {
 			this.configWithBuzzer.setThreshold(-24233.434f);
 			this.configWithBuzzer.setThreshold(78.434f);
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
+			AssertJUnit.fail(e.getMessage());
 		}
 	}
 
