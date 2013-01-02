@@ -44,7 +44,6 @@ public class CarmaLinkAPI extends java.lang.Object {
 		this.debug 	= debug;
 	}
 	
-	
 	public Response getReportData(String serials, ConfigType data_type, HashMap<String,Object>params)
 	{
 		String endpoint = this.generateEndpoint(serials, API_REPORT_PATH, data_type);
@@ -107,7 +106,7 @@ public class CarmaLinkAPI extends java.lang.Object {
 		{
 			req.addHeader("Content-type", "application/json");
 			req.addPayload((String)params.get(API_PUT_PAYLOAD));
-		} else {
+		} else if(params != null) {
 			for(Map.Entry<String, Object> entry : params.entrySet()) {
 				req.addQuerystringParameter(entry.getKey(), (String)entry.getValue().toString());	
 			}
