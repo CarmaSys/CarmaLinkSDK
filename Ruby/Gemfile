@@ -2,3 +2,12 @@ source 'https://rubygems.org'
 
 # Specify your gem's dependencies in carmalinksdk.gemspec
 gemspec
+gem 'oauth'
+
+group :development do
+    gem 'guard'
+    gem 'rspec'
+    gem 'rb-fsevent', '~> 0.9.1'
+    gem 'guard-rspec'
+end
+

@@ -1,79 +1,136 @@
 module CarmaLinkSDK
 
 	class BaseConfig
-
-		attr_accessor :status 
-		
-		STATUS = { 
-			:unknown => 0,
-			:pending_activation => 1,
-			:activated => 2,
-			:pending_deactivation => 3,
-			:deactivated => 4
-		}
-
-		def initialize
-			@status = STATUS[:unknown]
+		attr_accessor(
+		  :config_type,            
+			:status,
+			:id
+		)
+		STATUS = [ 
+			:unknown,
+			:pending_activation,
+			:activated,
+			:pending_deactivation,
+			:deactivated
+		]
+		def initialize(config_type = nil,id = 0)
+			raise(ArgumentError, 'config_type must not be nil') unless config_type != nil
+			@id = id
+			@status = :unknown
+			@config_type = config_type
 		end
 	end
 
 	class Config < BaseConfig
 
-		CONFIGTYPE = { 
-			:overspeeding => "overspeeding",
-			:idling	=> "idling",
-			:status => "status",
-			:enginefault => "engine_fault",
-			:hard_braking => "hard_braking",
-			:hard_accel => "hard_accel",
-			:trip_report => "trip_report",
-			:new_deployment => "new_deployment",
-			:general => "general_config"
+		class ConfigType
+			ReportTypes = [
+				:overspeeding,
+				:idling,
+				:status,
+				:engine_fault,
+				:hard_braking,
+				:hard_accel,
+				:trip_report,
+				:new_deployment
+			]
+			ConfigTypes = [
+				:overspeeding,
+				:idling,
+				:status,
+				:engine_fault,
+				:hard_braking,
+				:hard_accel,
+				:trip_report,
+				:general_config 
+			]
+			BuzzerTypes = [ 
+				:overspeeding,
+				:hard_braking,
+				:hard_accel,
+				:overspeeding
+			]
+			LocationTypes = [ 
+				:overspeeding,
+				:hard_braking,
+				:hard_accel,
+				:overspeeding,
+				:status,
+				:idling
+			]
+			def ConfigType.is_valid?(type)
+				ConfigTypes.member?(type)
+			end
+			def ConfigType.uses_location?(type) 
+				LocationTypes.member?(type)
+			end
+			def ConfigType.uses_buzzer?(type)
+				BuzzerTypes.member?(type)
+			end
+		end
+		
+		BUZZERVOLUME = { 
+			:medium => "MEDIUM",
+			:high => "HIGH",
+			:off => "OFF"
 		}
 
-		BUZZER_CONFIGTYPES = [ 
-			CONFIGTYPE[:overspeeding],
-			CONFIGTYPE[:hard_braking],
-			CONFIGTYPE[:hard_accel],
-			CONFIGTYPE[:overspeeding]
-		]
-
-		LOCATION_CONFIGTYPES = [ 
-			CONFIGTYPE[:overspeeding],
-			CONFIGTYPE[:hard_braking],
-			CONFIGTYPE[:hard_accel],
-			CONFIGTYPE[:overspeeding],
-			CONFIGTYPE[:status],
-			CONFIGTYPE[:idling]
-		]
-		
-		def initialize(threshold = 0,allowance = 0,location = false,config_type = nil) 
-			super()
-			@threshold = threshold,
-			@allowance = allowance,
-			@location = location,
-			@config_type = config_type
+		attr_accessor(
+			:threshold,
+			:allowance,
+			:location,
+			:buzzer_volume
+		)
+	
+		def initialize(
+			threshold = 0,
+			allowance = 0,
+			config_type = nil,
+			location = false,
+			buzzer_volume = BUZZERVOLUME[:off]
+		) 
+			super(config_type)
+			@threshold = threshold
+			@allowance = allowance
+			@location = location
+			@buzzer_volume = buzzer_volume
+			if(!is_valid?) then
+				raise 'Trying initialize an invalid configuration setup'
+			end
 		end
 
-		def is_valid_config?
-			CONFIGTYPE.has_value?(@config_type)
+		def is_valid?
+				if(!uses_location? && @location == true) then
+					return false
+				end
+				if(!uses_buzzer? && @buzzer_volume != BUZZERVOLUME[:off]) then
+					return false
+				end
+				ConfigType.is_valid?(@config_type)
 		end
-
 		def uses_location?
-			LOCATION_CONFIGTYPES.count(@config_type) == 1
+			ConfigType.uses_location?(@config_type)
 		end
-
 		def uses_buzzer?
-			BUZZER_CONFIGTYPES.count(@config_type) == 1
+			ConfigType.uses_buzzer?(@config_type)
 		end
 
 	end
 
 	class GeneralConfig  < BaseConfig
+		attr_accessor(
+			:fuel_type,
+			:engine_displacement
+		)
 		FUELTYPE = {
 			:gasoline => "FUEL_GASOLINE",
 			:diesel => "FUEL_DIESEL"
 		}
+		def initialize(fuel_type = FUELTYPE[:gasoline], displacement = 2.0)
+				super(:general_config)
+				@fuel_type = fuel_type
+				@engine_displacement = displacement
+		end
 	end
 
 end
