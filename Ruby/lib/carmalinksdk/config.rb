@@ -48,7 +48,7 @@ module CarmaLinkSDK
 				:overspeeding,
 				:hard_braking,
 				:hard_accel,
-				:overspeeding
+				:idling
 			]
 			LocationTypes = [ 
 				:overspeeding,
@@ -58,15 +58,19 @@ module CarmaLinkSDK
 				:status,
 				:idling
 			]
+
 			def ConfigType.is_valid?(type)
 				ConfigTypes.member?(type)
 			end
+
 			def ConfigType.uses_location?(type) 
 				LocationTypes.member?(type)
 			end
+
 			def ConfigType.uses_buzzer?(type)
 				BuzzerTypes.member?(type)
 			end
+
 		end
 		
 		BUZZERVOLUME = { 
@@ -108,9 +112,11 @@ module CarmaLinkSDK
 				end
 				ConfigType.is_valid?(@config_type)
 		end
+
 		def uses_location?
 			ConfigType.uses_location?(@config_type)
 		end
+
 		def uses_buzzer?
 			ConfigType.uses_buzzer?(@config_type)
 		end

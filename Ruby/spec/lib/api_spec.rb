@@ -9,7 +9,7 @@ module CarmaLinkSDK
       @api = API.new('KEY','SECRET')
     end
 
-    describe "#new" do
+    describe ".new" do
 
       context "given less than two parameters" do
         it "raises an exception" do
@@ -64,7 +64,7 @@ module CarmaLinkSDK
       end
     end
 
-    describe "#get_root_uri" do
+    describe ".get_root_uri" do
       it "returns specific URI in accordance with API constant" do
         root_uri = API::get_root_uri
         ssl_str = @api.ssl ? "s" : ""
@@ -72,66 +72,58 @@ module CarmaLinkSDK
       end
     end
 
-    describe "#get_version_string" do
+    describe ".get_version_string" do
       it "is 'v1'" do
         API::get_version_string.should eq "v1"
       end
     end
 
     describe ".sanitize_serials" do
+      pending
       context "valid serials sent as parameters" do
-        it "is true" do
-          pending
-        end
+        it "is true"
       end
       context "invalid serials sent as parameters" do
-        it "raises error" do
-          pending
-        end
+        it "raises error"
       end
     end
 
-    describe "#get_report" do
+    describe ".get_report" do
+      pending
       context "with three parameters" do
-        it "returns a response object" do
-          pending
-        end
-        it "raises exception when sent an invalid report type" do
-          pending
-        end
+        it "returns a response object"
+        it "raises exception when sent an invalid report type"
       end
       context "with two parameters" do
-        it "return a response object" do
-          pending
-        end
+        it "return a response object" 
       end
     end
 
-    describe "#get_config" do
+    describe ".get_config" do
       pending
     end
 
-    describe "#put_config" do
+    describe ".put_config" do
       pending
     end
 
-    describe "#delete_config" do
+    describe ".delete_config" do
       pending
     end
 
-    describe "#get" do
+    describe ".get" do
       pending
     end
 
-    describe "#put" do
+    describe ".put" do
       pending
     end
 
-    describe "#delete" do
+    describe ".delete" do
       pending
     end
 
-    describe "#api" do
+    describe ".api" do
       pending
     end
 

@@ -1,21 +1,21 @@
-
 module CarmaLinkSDK
 	
 	class Device
+
 		attr_accessor(
 			:id,
 			:ping_time
 		)
+
 		PING_DEFAULT = 5000
+
 		def initialize(id = 0)
 			@id = id
 			@ping_time = PING_DEFAULT
 
-			@configs = {
-				:general_config => GeneralConfig.new
-			}
+			@configs = { :general_config => GeneralConfig.new	}
 			
-			Config::ConfigType::ConfigTypes.keys.each do |type|
+			Config::ConfigType::ConfigTypes.each do |type|
 				if(type == :general_config) then
 					next
 				end
@@ -36,4 +36,5 @@ module CarmaLinkSDK
 		end
 
 	end
+
 end
