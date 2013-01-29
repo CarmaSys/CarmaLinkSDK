@@ -13,6 +13,11 @@ namespace CarmaLink;
 		const API_LOCATION		= 'location';
 		const API_BUZZER		= 'buzzer';
 		const API_DELETE_CONFIG	= 'OFF';
+		const API_PARAMS		= 'optionalParams';
+
+		const ODODOMETER = "ODOMETER";
+		const DAYS_TO_NEXT_SERVICE = "DAYS_TO_NEXT_SERVICE";
+		const KM_TO_NEXT_SERVICE = "KM_TO_NEXT_SERVICE";
 
 		/**
 		 * @access public
@@ -98,7 +103,7 @@ namespace CarmaLink;
 		public function toArray() {
 			$configArray = ($this -> _config_type !== ConfigType::CONFIG_TRIP_REPORT ) ? 
 				array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance ) : 
-					array();
+					array( self::API_PARAMS => (!empty($this -> params) ? $this -> params : null) );
 			$configArray[self::API_LOCATION] = (bool)$this -> location;
 			if ($this -> hasBuzzerConfig()) {
 				$configArray[self::API_BUZZER] = (string)$this -> buzzer;
@@ -141,6 +146,16 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_TRIP_REPORT :
+					$params =array();
+					if($device->getUseOdometer()) {
+						$params[] = self::ODODOMETER;
+					}
+					if($device->getUseNextService()) {
+						$params[] = self::KM_TO_NEXT_SERVICE;
+						$params[] = self::DAYS_TO_NEXT_SERVICE;
+					}
+					if(!empty($params))
+						$config -> params = $params;
 					break;
 
 				case ConfigType::CONFIG_ENGINE_FAULT :

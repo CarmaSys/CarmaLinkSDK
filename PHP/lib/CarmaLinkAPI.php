@@ -385,12 +385,9 @@ namespace CarmaLink;
 			}
 			
 			if($this->debug) {
-				if(!$parameters)
-					$parameters = array();
-				if(!$parameters && strlen($put_data)) 
-					$parameters = json_decode($put_data,TRUE);
-
-				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$parameters);
+				$debugParams = (!$parameters && strlen($put_data)) ? json_decode($put_data,TRUE) : null;
+				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",(is_array($debugParams) ? $debugParams : array()) );
+				unset($debugParams);
 			}
 			
 			$oauth_request = new \OAuthRequester($endpoint, $method, $parameters, $put_data);
