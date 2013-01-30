@@ -89,13 +89,19 @@ module CarmaLinkSDK
     end
 
     describe ".get_report" do
-      pending
       context "with three parameters" do
-        it "returns a response object"
-        it "raises exception when sent an invalid report type"
+        before(:all) do
+          config = Config.new(10,10,ConfigType::ConfigTypes[:overspeeding],true)
+          @res = @api.get_report("400",config,{ "limit" => 5 }) 
+        end
+        subject { @res }
+        it { should have }
       end
       context "with two parameters" do
-        it "return a response object" 
+        it "return response status and status text"  do
+          config = Config.new(-6,0,ConfigType::ConfigTypes[:hard_braking],true)
+          expect{@api.get_report("400",config)}.to_not be_empty
+        end
       end
     end
 
