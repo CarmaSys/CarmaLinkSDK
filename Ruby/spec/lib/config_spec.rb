@@ -4,7 +4,7 @@ module CarmaLinkSDK
 
   describe BaseConfig, "A base abstraction of a configuration for a CarmaLink" do
 
-    describe "#new" do
+    describe ".new" do
       context "takes no parameters" do
         it "should raise an exception" do
           expect{BaseConfig.new}.to raise_error
@@ -33,7 +33,7 @@ module CarmaLinkSDK
       @general_config_blank = GeneralConfig.new
     end
 
-    describe "#new" do
+    describe ".new" do
       context "takes no parameters" do
         it "creates and returns new instance of GeneralConfig" do
           @general_config_blank.should be_instance_of GeneralConfig
@@ -73,7 +73,7 @@ module CarmaLinkSDK
       @config = Config.new(1.0,203.4,:foo)
     end
 
-    describe "#new" do
+    describe ".new" do
       context "with no parameters" do
         it "takes no parameters and raises error" do
           expect{Config.new}.to raise_error
@@ -98,7 +98,7 @@ module CarmaLinkSDK
 
     end
 
-    describe "#uses_buzzer?" do
+    describe ".uses_buzzer?" do
       context "configtype uses buzzer" do
         it "returns true" do
           @config.uses_buzzer?.should eq true
@@ -112,7 +112,7 @@ module CarmaLinkSDK
       end
     end
 
-    describe "#uses_location?" do
+    describe ".uses_location?" do
       it "determines if an instance's configuration uses the location flag" do
         config = Config.new(0,0,:bar,true)
         config.uses_location?.should eq true
@@ -124,7 +124,7 @@ module CarmaLinkSDK
       end
     end
 
-    describe "#is_valid?" do
+    describe ".is_valid?" do
       context "valid config" do
         it "should return true when using a location type and location enabled" do
           config_w_location = Config.new(1.0,0,:bar)

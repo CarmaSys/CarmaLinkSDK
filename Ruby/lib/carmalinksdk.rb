@@ -1,4 +1,5 @@
 require "carmalinksdk/version"
+
 module CarmaLinkSDK
 	FUELTYPE = { :gasoline => "FUEL_GASOLINE",  :diesel => "FUEL_DIESEL" }
 end
