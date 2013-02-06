@@ -3,7 +3,6 @@ require 'spec_helper'
 module CarmaLinkSDK
 
   describe BaseConfig, "A base abstraction of a configuration for a CarmaLink" do
-
     describe ".new" do
       context "takes no parameters" do
         it "should raise an exception" do
@@ -54,12 +53,11 @@ module CarmaLinkSDK
 
     before(:all) do
       Config::ConfigType.send(:remove_const, 'ConfigTypes')
-      Config::ConfigType::ConfigTypes = {
-        :foo => "foo",
-        :bar => "bar",
-        :fud => "fud"
-      }
-
+      Config::ConfigType::ConfigTypes = [
+        :foo,
+        :bar,
+        :fud 
+      ]
       Config::ConfigType.send(:remove_const, 'BuzzerTypes')
       Config::ConfigType::BuzzerTypes = [
         :foo,

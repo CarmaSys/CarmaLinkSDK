@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.carmalink.com:8282/v1/534/report_config/overspeeding
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Authorization:
+      - OAuth oauth_consumer_key="CU1ND7JdJqYM2LtBsv7GLN0i", oauth_nonce="5CwsS4npVFZoTlGjZsxZJtYC4qBP44o0oECVll5s",
+        oauth_signature="XA8%2BOxS4SjKfi26fTyLjCGWX6mg%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1360181377", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 06 Feb 2013 20:09:38 GMT
+      Connection:
+      - keep-alive
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '{"threshold":120,"allowance":5000,"location":true,"buzzer":"HIGH","status":"ACTIVATED","configId":1247}'
+    http_version: 
+  recorded_at: Wed, 06 Feb 2013 20:09:38 GMT
+recorded_with: VCR 2.4.0

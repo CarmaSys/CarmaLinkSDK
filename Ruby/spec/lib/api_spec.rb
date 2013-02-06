@@ -59,7 +59,7 @@ module CarmaLinkSDK
 
     describe ".get_report" do
       before(:all) do
-        config = Config.new(10,10,ConfigType::ConfigTypes[:overspeeding],true)
+        config = Config.new(0,10,:overspeeding,true)
         @res_three_params = @api.get_report("400",config,{ "limit" => 5 })
         @res_two_params = @api.get_report("400",config)
       end
@@ -89,9 +89,22 @@ module CarmaLinkSDK
         end
       end
     end
+    
+    vcr_options = { :cassette_name => "configs", :record => :new_episodes }
+    
+    describe ".get_config", :vcr => vcr_options do
+      it "raises error when no parameters are sent" do
+        expect{@api.get_config}.to raise_error
+      end
+      context "when parameter is a Config" do
+        before(:all) do
+          @result = @api.get_config(534,Config.new(0,0,:overspeeding))
+        end
+        it("returns code 200") do
+          @result[:code].should eq 200
+        end
+      end
 
-    describe ".get_config" do
-      pending
     end
 
     describe ".put_config" do
@@ -129,21 +142,6 @@ module CarmaLinkSDK
         expect(@api.api('/some/endpoint',:get,not_a_hash)).to raise_error(ArgumentError)
       end
 
-      vcr_options = { :cassette_name => "reports", :record => :new_episodes }
-      context "GET request", :vcr => vcr_options do
-        before(:all) do
-          @api = API.new(CarmaLinkSDK::Spec[:key],CarmaLinkSDK::Spec[:secret],true)
-          our_serial = 541
-          @endpoint = '/' << our_serial.to_s << '/data/trip_report'
-        end
-        it("doesn't raise an error when sent valid parameters") do
-          expect{@api.api(@endpoint,:get)}.not_to raise_error
-        end
-        it("returns code 200") do
-          @api.api(@endpoint,:get)[:code].should eq 200
-        end
-
-      end
     end
 
   end #CarmaLinkAPI
