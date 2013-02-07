@@ -8,9 +8,9 @@ Gem::Specification.new do |gem|
   gem.version       = CarmaLinkSDK::VERSION
   gem.authors       = ["Christopher Najewicz"]
   gem.email         = ["chris.najewicz@carmasys.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = "Wrapper for using the CarmaLink API"
+  gem.summary       = ""
+  gem.homepage      = "https://github.com/CarmaSys/CarmaLinkSDK"
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

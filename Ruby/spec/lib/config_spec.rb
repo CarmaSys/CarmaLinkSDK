@@ -26,12 +26,9 @@ module CarmaLinkSDK
         :gas => "gas",
         :mr_fusion => "fusion"
       }
-    end
-    before(:each) do
       @general_config = GeneralConfig.new(GeneralConfig::FUELTYPE[:mr_fusion],5.0)
       @general_config_blank = GeneralConfig.new
     end
-
     describe ".new" do
       context "takes no parameters" do
         it "creates and returns new instance of GeneralConfig" do
@@ -46,11 +43,14 @@ module CarmaLinkSDK
         end
       end
     end
-
+    after(:all) do
+      @general_config = nil
+      @general_config_blank = nil
+      reload_config_class
+    end
   end
 
   describe Config, "A report configuration for a CarmaLink" do
-
     before(:all) do
       Config::ConfigType.send(:remove_const, 'ConfigTypes')
       Config::ConfigType::ConfigTypes = [
@@ -63,7 +63,6 @@ module CarmaLinkSDK
         :foo,
         :fud
       ]
-
       Config::ConfigType.send(:remove_const, 'LocationTypes')
       Config::ConfigType::LocationTypes = [
         :bar
@@ -134,6 +133,11 @@ module CarmaLinkSDK
         end
       end
     end
+    after(:all) do
+      @config = nil
+      reload_config_class
+    end
 
   end
+
 end

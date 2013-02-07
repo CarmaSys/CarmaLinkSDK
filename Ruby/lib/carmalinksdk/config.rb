@@ -1,10 +1,13 @@
 
 class CarmaLinkSDK::BaseConfig
+  
   attr_accessor(
+    :optional_params,
     :config_type,
     :status,
     :id
   )
+  
   STATUS = [
     :unknown,
     :pending_activation,
@@ -12,12 +15,15 @@ class CarmaLinkSDK::BaseConfig
     :pending_deactivation,
     :deactivated
   ]
+  
   def initialize(config_type = nil,id = 0)
     raise(ArgumentError, 'config_type must not be nil') unless config_type != nil
     @id = id
     @status = :unknown
     @config_type = config_type
+    @optional_params = []
   end
+
 end
 
 class CarmaLinkSDK::Config < CarmaLinkSDK::BaseConfig
@@ -119,6 +125,26 @@ class CarmaLinkSDK::Config < CarmaLinkSDK::BaseConfig
 
   def uses_buzzer?
     ConfigType.uses_buzzer?(@config_type)
+  end
+
+  def to_h
+    hash = { 
+      :id => id,
+      :config_type => config_type,
+      :threshold => threshold,
+      :allowance => allowance,
+    
+    }
+    if(uses_buzzer?)
+      hash[:buzzer] = buzzer_volume
+    end
+    if(uses_location?)
+      hash[:location] = location
+    end
+    if(!optional_params.empty?)
+      hash[:optionalParams] = optional_params
+    end
+    return hash
   end
 
 end

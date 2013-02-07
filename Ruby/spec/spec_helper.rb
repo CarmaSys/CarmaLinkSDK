@@ -14,6 +14,14 @@ require 'rspec'
 require 'carmalinksdk'
 require 'support/config'
 
+def reload_config_class
+     # this is a hacky workaround for now, but we need to reload the Config classes for other tests
+    Object::CarmaLinkSDK.send(:remove_const, 'BaseConfig')
+    Object::CarmaLinkSDK.send(:remove_const, 'GeneralConfig')
+    Object::CarmaLinkSDK.send(:remove_const, 'Config')
+    load 'carmalinksdk/config.rb'
+end
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

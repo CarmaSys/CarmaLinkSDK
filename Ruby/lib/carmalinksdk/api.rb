@@ -1,7 +1,5 @@
 require 'oauth'
-
-require 'carmalinksdk/utils'
-require 'carmalinksdk/config'
+require 'JSON'
 
 class CarmaLinkSDK::API
 
@@ -26,40 +24,56 @@ class CarmaLinkSDK::API
   #workhorse
   def api(endpoint = nil, method = :get, params = nil)
     raise(ArgumentError,"must be called with a relative endpoint") unless 
-      endpoint != nil && endpoint.is_a?(String) && !endpoint.empty?
+      endpoint.is_a?(String) && !endpoint.strip.empty?
+    raise(ArgumentError,"params must be a valid hash") unless 
+      params == nil || (params !=nil && params.instance_of?(Hash))
+    
+    params = method == :put ? JSON.generate(params) : params
+    headers = method == :put ? { 'Content-Type' => 'application/json' } : nil
 
-    res = @oauth_consumer.request(method,endpoint)
+    res = @oauth_consumer.request(method,endpoint,nil,{},params,headers)
     
     { :code => res.code.to_i, :body => res.body }
   end
 
-  def get_config(serial,config)
+  def _check_get_params(serial, config)
     raise(ArgumentError, "must be called with a valid CarmaLink serial number") unless 
       serial.to_s.is_number? 
     raise(ArgumentError, "must be called with a valid Config object") unless 
       config.instance_of?(CarmaLinkSDK::Config)
+  end
 
+  def _generate_endpoint(serial, config,type = :data)
+    '/' << serial.to_s << '/' << type.to_s << '/' << config.config_type.to_s
+  end
+
+  def get_config(serial, config)
+    _check_get_params(serial,config)
     params = config.id != 0 ? { "id" => config.id } : nil
-    endpoint = '/' << serial.to_s << '/report_config/' << config.config_type.to_s
-
-    get(endpoint,params)
+    get(_generate_endpoint(serial, config, :report_config), params)
   end
 
-  def put_config(config)
+  def put_config(serial, config)
+    config_hash = config.to_h
+    config_hash.delete(:id)
+    config_hash.delete(:config_type)
+    put(_generate_endpoint(serial, config, :report_config), config_hash)
   end
 
-  def get_report(serial,config,params)
+  def get_report(serial, config, params = nil)
+    _check_get_params(serial,config)
+    get(_generate_endpoint(serial, config), params)
   end
 
-  def get(endpoint,params = nil)
-    if(params && !params.is_empty?)
-      endpoint += URI.encode_www_form(params)
+  def get(endpoint, params = nil)
+    if(params && !params.empty?)
+      endpoint = endpoint << "?#{URI.encode_www_form(params)}"
     end
-    api(endpoint,:get)
+    api(endpoint, :get)
   end
 
-  def put(endpoint,params = nil)
-    api(endpoint,:put,params)
+  def put(endpoint, params = nil)
+    api(endpoint, :put, params)
   end
 
   def delete(endpoint)

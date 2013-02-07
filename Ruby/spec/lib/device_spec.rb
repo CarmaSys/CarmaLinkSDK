@@ -69,5 +69,10 @@ module CarmaLinkSDK
      end
     end
 
+    after(:all) do 
+      @device = nil
+      @device_blank = nil
+      reload_config_class
+    end
   end
 end

@@ -35,4 +35,39 @@ http_interactions:
       string: ! '{"threshold":120,"allowance":5000,"location":true,"buzzer":"HIGH","status":"ACTIVATED","configId":1247}'
     http_version: 
   recorded_at: Wed, 06 Feb 2013 20:09:38 GMT
+- request:
+    method: put
+    uri: https://api.carmalink.com:8282/v1/541/report_config/hard_accel
+    body:
+      encoding: UTF-8
+      string: ! '{"threshold":10,"allowance":0,"buzzer":"OFF","location":true}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Content-Length:
+      - '61'
+      Authorization:
+      - OAuth oauth_body_hash="OaNSrgXDbyI%2BFO0%2Bj%2BnqS0jlKXg%3D", oauth_consumer_key="CU1ND7JdJqYM2LtBsv7GLN0i",
+        oauth_nonce="sX75EXjTH2TI1aSrlCns2ELyiAYfEABIAmJct5k", oauth_signature="LJKuWlsPfCT0mO0EHw4DhsEYY2Y%3D",
+        oauth_signature_method="HMAC-SHA1", oauth_timestamp="1360268497", oauth_version="1.0"
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      X-Powered-By:
+      - Express
+      Date:
+      - Thu, 07 Feb 2013 20:21:37 GMT
+      Connection:
+      - keep-alive
+    body:
+      encoding: US-ASCII
+      string: ''
+    http_version: 
+  recorded_at: Thu, 07 Feb 2013 20:21:37 GMT
 recorded_with: VCR 2.4.0
