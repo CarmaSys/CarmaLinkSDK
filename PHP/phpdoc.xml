@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <title>CarmaLinkSDK PHP</title>
+    <parser>
+        <target>docs</target>
+        <markers>
+            <item>TODO</item>
+            <item>FIXME</item>
+        </markers>
+        <extensions>
+            <extension>php</extension>
+        </extensions>
+        <visibility></visibility>
+    </parser>
+    <transformer>
+        <target>docs</target>
+    </transformer>
+    <transformations>
+        <template name="abstract" />
+    </transformations>
+    <files>
+        <file>CarmaLinkAPI.php</file>
+        <directory>lib</directory>
+        <ignore>tests/*</ignore>
+        <ignore>monolog/*</ignore>
+        <ignore>example/*</ignore>
+        <ignore>docs/*</ignore>
+        <ignore>oauth-php/*</ignore>
+    </files>
+</phpdoc>
