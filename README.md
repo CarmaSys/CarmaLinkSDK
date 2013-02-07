@@ -1,4 +1,4 @@
-Carma Systems Inc. CarmaLinkSDK
+Carma Systems Inc. CarmaLinkSDK 1.3.0
 ===============================
 
 The CarmaLinkSDK represents a layer of abstraction for interfacing the CarmaLinkAPI which utilizes
@@ -7,14 +7,14 @@ a RESTful style interface over HTTPS. Authentication is handled by a two-legged 
 The SDK currently supports the following languages: 
 
 * PHP >= 5.3 ([docs](http://carmasys.github.com/CarmaLinkSDK/))
+* Ruby >= 1.9
 
 Future releases aim to support: 
 
-* Java
 * C#/.NET
 * Node.js
 * Python
-* Ruby
+* Java
 
 Getting Started
 ---------------
@@ -53,7 +53,6 @@ $result = $carmaLinkAPI->getReportData("517","all_activity");
       },
       "vehicleVoltage": 13.594035,
       "gsmSignalStrength": -77,
-      "timestamp": 1350513187373
     },
     {
       "configId": 491,
@@ -70,7 +69,6 @@ $result = $carmaLinkAPI->getReportData("517","all_activity");
       },
       "vehicleVoltage": 14.085941,
       "gsmSignalStrength": -77,
-      "timestamp": 1350513173783
     }
   ],
   "faultReports": [],
@@ -119,5 +117,4 @@ $result = $carmaLinkAPI->getReportData("517","all_activity");
 
 Need help?
 ----------------------
-If you need help using the SDK or have an issue, please [submit a support ticket](https://support.carmasys.com/anonymous_requests/new)
-.
+If you need help using the SDK or have an issue, please [submit a support ticket](https://support.carmasys.com/anonymous_requests/new).
