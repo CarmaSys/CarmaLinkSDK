@@ -15,9 +15,9 @@ namespace CarmaLink;
 		const API_DELETE_CONFIG	= 'OFF';
 		const API_PARAMS		= 'optionalParams';
 
-		const ODODOMETER = "ODOMETER";
-		const DAYS_TO_NEXT_SERVICE = "DAYS_TO_NEXT_SERVICE";
-		const KM_TO_NEXT_SERVICE = "KM_TO_NEXT_SERVICE";
+		const ODOMETER = "ODOMETER";
+		const DURATION_TO_SERVICE = "DURATION_TO_SERVICE";
+		const DISTANCE_TO_SERVICE = "DISTANCE_TO_SERVICE";
 
 		/**
 		 * @access public
@@ -148,11 +148,13 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_TRIP_REPORT :
 					$params =array();
 					if($device->getUseOdometer()) {
-						$params[] = self::ODODOMETER;
+						$params[] = self::ODOMETER;
 					}
-					if($device->getUseNextService()) {
-						$params[] = self::KM_TO_NEXT_SERVICE;
-						$params[] = self::DAYS_TO_NEXT_SERVICE;
+					if($device->getUseNextServiceDistance()) {
+						$params[] = self::DISTANCE_TO_SERVICE;
+					}
+					if($device->getUseNextServiceDuration()) {
+						$params[] = self::DURATION_TO_SERVICE;
 					}
 					if(!empty($params))
 						$config -> params = $params;

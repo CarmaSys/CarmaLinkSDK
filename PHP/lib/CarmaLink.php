@@ -28,6 +28,80 @@ namespace CarmaLink;
 		public function getID() {
 			return $this -> id;
 		}
+		
+		/**
+		 * Getter for useNextServiceDuration
+		 *
+		 * @return bool
+		 */
+		public function getUseNextServiceDuration()
+		{
+		    return $this->useNextServiceDuration;
+		}
+		
+		/**
+		 * Setter for useNextServiceDuration
+		 *
+		 * @param bool $use Value to set
+		 * @return self
+		 */
+		public function setUseNextServiceDuration($use)
+		{
+		    $this->useNextServiceDuration = $use;
+		}
+		/**
+		 * Getter for useNextServiceDistance
+		 *
+		 * @return bool
+		 */
+		public function getUseNextServiceDistance()
+		{
+		    return $this->useNextServiceDistance;
+		}
+		
+		/**
+		 * Setter for useNextServiceDistance
+		 *
+		 * @param bool $use Value to set
+		 * @return self
+		 */
+		public function setUseNextServiceDistance($use)
+		{
+		    $this->useNextServiceDistance = $use;
+		}
+		
+		/**
+		 * Shortcut to set useNextService(s)
+		 *
+		 * @param bool $use Value to set
+		 * @return self
+		 */
+		public function setUseNextService($use)
+		{
+		    $this->useNextServiceDistance = $use;
+  		    $this->useNextServiceDuration = $use;
+		}
+		
+		/**
+		 * Getter for useOdometer
+		 *
+		 * @return bool
+		 */
+		public function getUseOdometer()
+		{
+		    return $this->useOdometer;
+		}
+		
+		/**
+		 * Setter for useOdometer
+		 *
+		 * @param bool $Use Value to set
+		 * @return self
+		 */
+		public function setUseOdometer($use)
+		{
+		    $this->useOdometer = $use;
+		}
 
 		/**
 		 * Set CarmaLink engine fault
