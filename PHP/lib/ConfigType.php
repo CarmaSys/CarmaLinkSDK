@@ -20,6 +20,7 @@ namespace CarmaLink;
 		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		const CONFIG_HARD_BRAKING	= 'hard_braking';
 		const CONFIG_HARD_ACCEL		= 'hard_accel';
+		const CONFIG_HARD_CORNERING	= 'hard_cornering';
 		const CONFIG_TRIP_REPORT	= 'trip_report';
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
 		const CONFIG_GENERAL		= 'general_config';
@@ -32,6 +33,7 @@ namespace CarmaLink;
 			self::CONFIG_IDLING,
 			self::CONFIG_OVERSPEEDING,
 			self::CONFIG_HARD_BRAKING,
+			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_HARD_ACCEL
 		);
 
@@ -46,6 +48,7 @@ namespace CarmaLink;
 			self::CONFIG_ENGINE_FAULT, 
 			self::CONFIG_HARD_BRAKING, 
 			self::CONFIG_HARD_ACCEL,
+			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_TRIP_REPORT,
 			self::CONFIG_NEW_DEPLOYMENT,
 			self::CONFIG_GENERAL
@@ -57,7 +60,8 @@ namespace CarmaLink;
 		 */
 		public static $allowance_config_types = array(
 			self::CONFIG_OVERSPEEDING, 
-			self::CONFIG_HARD_BRAKING, 
+			self::CONFIG_HARD_BRAKING,
+			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_HARD_ACCEL
 		);
 

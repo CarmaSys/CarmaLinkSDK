@@ -239,6 +239,40 @@ namespace CarmaLink;
 		public function getBrakeLimitAllowance() {
 			return $this -> brakeLimitAllowance;
 		}
+		
+		/**
+		 * Set CarmaLink hard conering limit
+		 * @param float		cornerLimit		Limit in G's
+		 * @return void
+		 */
+		public function setCorneringLimit($cornerLimit = 0.0) {
+			$this -> corneringLimit = (float)$cornerLimit;
+		}
+
+		/**
+		 * Get CarmaLink hard cornering limit
+		 * @return float	In G's
+		 */
+		public function getCorneringLimit() {
+			return $this -> corneringLimit;
+		}
+
+		/**
+		 * Set CarmaLink hard cornering allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setCorneringLimitAllowance($allowance = 0.0) {
+			$this -> brakeLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink hard cornering allowance
+		 * @return float allowance time in ms
+		 */
+		public function getCorneringLimitAllowance() {
+			return $this -> brakeLimitAllowance;
+		}
 
 		/**
 		 * Set CarmaLink acceleration limit

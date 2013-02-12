@@ -18,6 +18,7 @@ namespace CarmaLink;
 		const ODOMETER = "ODOMETER";
 		const DURATION_TO_SERVICE = "DURATION_TO_SERVICE";
 		const DISTANCE_TO_SERVICE = "DISTANCE_TO_SERVICE";
+		const SPEEDING ="SPEEDING";
 
 		/**
 		 * @access public
@@ -171,7 +172,14 @@ namespace CarmaLink;
 					$config -> threshold = $device -> getSpeedLimit();
 					$config -> allowance = $device -> getSpeedLimitAllowance();
 					break;
-
+				
+				case ConfigType::CONFIG_HARD_CORNERING :
+					if( (int)$device -> getCorneringLimit() === 0 )
+						return FALSE;
+					$config -> threshold = $device -> getCorneringLimit();
+					$config -> allowance = $device -> getCorneringLimitAllowance();
+					break;
+				
 				case ConfigType::CONFIG_HARD_BRAKING :
 					if( (int)$device -> getBrakeLimit() === 0 )
 						return FALSE;
