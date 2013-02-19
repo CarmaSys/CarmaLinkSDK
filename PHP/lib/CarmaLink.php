@@ -207,6 +207,42 @@ namespace CarmaLink;
 		}
 
 		/**
+		 * Set CarmaLink reverse speed limit
+		 * @param int|bool	reverseLimit		Speed in Km/h or FALSE to disable report
+		 * @return void
+		 */
+		public function setReverseLimit($reverseLimit = 0) {
+			if($reverseLimit < 0)
+				$reverseLimit = FALSE;
+			$this -> reverseLimit = $reverseLimit;
+		}
+
+		/**
+		 * Get CarmaLink speed limit
+		 * @return int|bool		Km/h limit or FALSE if report disabled
+		 */
+		public function getReverseLimit() {
+			return $this -> reverseLimit;
+		}
+
+		/**
+		 * Set CarmaLink reverse speed limit allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setReverseLimitAllowance($allowance = 0.0) {
+			$this -> reverseLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink reverse speed limit allowance
+		 * @return float allowance time in ms
+		 */
+		public function getReverseLimitAllowance() {
+			return $this -> reverseLimitAllowance;
+		}
+
+		/**
 		 * Set CarmaLink brake limit
 		 * @param float		brakeLimit		Limit in G's
 		 * @return void

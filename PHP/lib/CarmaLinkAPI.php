@@ -417,6 +417,7 @@ namespace CarmaLink;
 				ConfigType::CONFIG_HARD_CORNERING, 
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
+				ConfigType::CONFIG_REVERSE,
 				ConfigType::CONFIG_STATUS,
 				ConfigType::CONFIG_GENERAL
 			);
