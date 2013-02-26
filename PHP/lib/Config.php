@@ -166,6 +166,11 @@ namespace CarmaLink;
 						return FALSE;
 					break;
 
+				case ConfigType::CONFIG_TIRE_PRESSURE :
+					if(!$device -> getUseTirePressure())
+						return FALSE;
+					break;
+
 				case ConfigType::CONFIG_OVERSPEEDING :
 					if( (int)$device -> speedLimit === 0 )
 						return FALSE;
@@ -199,6 +204,20 @@ namespace CarmaLink;
 						return FALSE;
 					$config -> threshold = $device -> getReverseLimit();
 					$config -> allowance = $device -> getReverseLimitAllowance();
+					break;
+		
+				case ConfigType::CONFIG_PARKINGBRAKE :
+					if( $device -> getParkingBrakeLimit() === FALSE )
+						return FALSE;
+					$config -> threshold = $device -> getParkingBrakeLimit();
+					$config -> allowance = $device -> getParkingBrakeLimitAllowance();
+					break;
+
+				case ConfigType::CONFIG_SEATBELT :
+					if( $device -> getSeatbeltLimit() === FALSE )
+						return FALSE;
+					$config -> threshold = $device -> getSeatbeltLimit();
+					$config -> allowance = $device -> getSeatbeltLimitAllowance();
 					break;
 
 				case ConfigType::CONFIG_IDLING :

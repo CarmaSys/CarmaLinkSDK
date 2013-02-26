@@ -156,6 +156,23 @@ namespace CarmaLink;
 		}
 
 		/**
+		 * Set CarmaLink low tire pressure report
+		 * @param bool	useTP	On/Off
+		 * @return void
+		 */
+		public function setUseTirePressure($useTP) {
+			$this -> useTP = (bool)$useTP;
+		}
+
+		/**
+		 * Get CarmaLink low tire pressure report enabled
+		 * @return bool
+		 */
+		public function getUseTirePressure() {
+			return $this -> useTP;
+		}
+
+		/**
 		 * Sets the CarmaLink's update interval
 		 * @param int	pingTime	The update interval in milliseconds
 		 * @return void
@@ -205,6 +222,75 @@ namespace CarmaLink;
 		public function getSpeedLimitAllowance() {
 			return $this -> speedLimitAllowance;
 		}
+
+		/**
+		 * Set CarmaLink parking brake limit
+		 * @param int|bool		speedLimit		Speed in Km/h
+		 * @return void
+		 */
+		public function setParkingBrakeLimit($speedLimit = 0) {
+			$this -> parkingBrakeLimit = ($speedLimit === FALSE) ? FALSE : (int)$speedLimit;
+		}
+
+		/**
+		 * Get CarmaLink parking brake limit
+		 * @return int|bool	Km/h limit or false if disabled
+		 */
+		public function getParkingBrakeLimit() {
+			return ($this -> parkingBrakeLimit === FALSE || $this-> parkingBrakeLimit < 0) ? FALSE : (int)$this->parkingBrakeLimit;
+		}
+
+		/**
+		 * Set CarmaLink parking brake allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setParkingBrakeLimitAllowance($allowance = 0.0) {
+			$this -> parkingBrakeLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink parking brake allowance
+		 * @return float allowance time in ms
+		 */
+		public function getParkingBrakeLimitAllowance() {
+			return $this -> parkingBrakeLimitAllowance;
+		}
+
+		/**
+		 * Set CarmaLink seatbelt limit
+		 * @param int|bool		speedLimit		Speed in Km/h
+		 * @return void
+		 */
+		public function setSeatbeltLimit($speedLimit = 0) {
+			$this -> seatbeltLimit = ($speedLimit === FALSE) ? FALSE : (int)$speedLimit;
+		}
+
+		/**
+		 * Get CarmaLink seatbelt limit
+		 * @return int|bool	Km/h limit or false if disabled
+		 */
+		public function getSeatbeltLimit() {
+			return ($this -> seatbeltLimit === FALSE || $this-> seatbeltLimit < 0) ? FALSE : (int)$this->seatbeltLimit;
+		}
+
+		/**
+		 * Set CarmaLink seatbelt allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setSeatbeltLimitAllowance($allowance = 0.0) {
+			$this -> seatbeltLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink seatbelt allowance
+		 * @return float allowance time in ms
+		 */
+		public function getSeatbeltLimitAllowance() {
+			return $this -> seatbeltLimitAllowance;
+		}
+
 
 		/**
 		 * Set CarmaLink reverse speed limit

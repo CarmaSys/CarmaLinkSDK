@@ -418,7 +418,10 @@ namespace CarmaLink;
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
 				ConfigType::CONFIG_REVERSE,
+				ConfigType::CONFIG_PARKINGBRAKE,
+				ConfigType::CONFIG_SEATBELT,
 				ConfigType::CONFIG_STATUS,
+				ConfigType::CONFIG_TIRE_PRESSURE,
 				ConfigType::CONFIG_GENERAL
 			);
 			
