@@ -19,6 +19,13 @@ namespace CarmaLink;
 		const DURATION_TO_SERVICE = "DURATION_TO_SERVICE";
 		const DISTANCE_TO_SERVICE = "DISTANCE_TO_SERVICE";
 		const SPEEDING ="SPEEDING";
+		const TIRE_PRESSURE_CHANGE = "TIRE_PRESSURE_CHANGE";
+
+		/**
+		 * @access public
+		 * @var int
+		 */
+		public $id = 0;
 
 		/**
 		 * @access public
@@ -52,6 +59,12 @@ namespace CarmaLink;
 
 		/**
 		 * @access public
+		 * @var array
+		 */
+		public $conditions = null;
+
+		/**
+		 * @access public
 		 * @var ConfigStatus
 		 */
 		public $state = ConfigStatus::UNKNOWN_STATUS;
@@ -74,13 +87,23 @@ namespace CarmaLink;
 		 * @param int|float 		threshold
 		 * @param int|float 		allowance
 		 * @param bool 				location
+		 * @param bool 				location
+		 * @param array 			optional params
+		 * @param array 			optional condition
+		 * @param CarmaLink\ConfigStatus	status
 		 * @return void
 		 */
-		public function __constructor($threshold = 0, $allowance = 0, $location = false) {
+		public function __construct($id = 0, $threshold = 0, $allowance = 0, $location = false, $params = NULL, $conditions = NULL, $state = NULL) {
+			$this -> id = $id;
 			$this -> __api_version = CarmaLinkAPI::API_VERSION;
 			$this -> threshold = $threshold;
 			$this -> allowance = $allowance;
 			$this -> location = $location;
+			$this -> params = $params;
+			$this -> conditions = $conditions;
+			if($state) {
+				$this -> state = $state;
+			}
 		}
 
 		/**
@@ -105,7 +128,9 @@ namespace CarmaLink;
 			$configArray = ($this -> _config_type !== ConfigType::CONFIG_TRIP_REPORT ) ? 
 				array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance ) : 
 					array( self::API_PARAMS => (!empty($this -> params) ? $this -> params : null) );
+			
 			$configArray[self::API_LOCATION] = (bool)$this -> location;
+			
 			if ($this -> hasBuzzerConfig()) {
 				$configArray[self::API_BUZZER] = (string)$this -> buzzer;
 			}
@@ -121,8 +146,35 @@ namespace CarmaLink;
 			return ConfigType::buzzerConfigType($this -> _config_type);
 		}
 
+
+		/**
+		 * Utility to setup a config's optional parameters based on a device
+		 *
+		 * @param CarmaLink 	device 	Custom data object representing CarmaLink
+		 * @param Config 		config 	Config object to setup
+		 * @return array|NULL
+		 */
+		protected static function setupConfigParams($device, $config) {
+			$params = array();
+			if($device->getUseOdometer()) {
+				$params[] = self::ODOMETER;
+			}
+			if($device->getUseNextServiceDistance()) {
+				$params[] = self::DISTANCE_TO_SERVICE;
+			}
+			if($device->getUseNextServiceDuration()) {
+				$params[] = self::DURATION_TO_SERVICE;
+			}
+			if(empty($params)) {
+				return NULL;
+			}
+			return $params;
+		}
+
 		/**
 		 * Utility method to create a new Config instance based on a device and report type.
+		 *
+		 * @deprecated This method will become deprecated in version 1.4.0
 		 *
 		 * @param CarmaLink				device		A custom data object representing a CarmaLink
 		 * @param string|ConfigType 	config_type
@@ -146,29 +198,16 @@ namespace CarmaLink;
 					$config -> threshold = $device -> getPingTime();
 					break;
 
+				case ConfigType::CONFIG_VEHICLE_HEALTH :
+					if($device -> getVehicleHealthConditions() == FALSE) {
+						return FALSE;
+					}
+					$config -> params = self::setupConfigParams($device, $config);
+					$config -> conditions  = $device->getVehicleHealthConditions();
+					break;
+
 				case ConfigType::CONFIG_TRIP_REPORT :
-					$params =array();
-					if($device->getUseOdometer()) {
-						$params[] = self::ODOMETER;
-					}
-					if($device->getUseNextServiceDistance()) {
-						$params[] = self::DISTANCE_TO_SERVICE;
-					}
-					if($device->getUseNextServiceDuration()) {
-						$params[] = self::DURATION_TO_SERVICE;
-					}
-					if(!empty($params))
-						$config -> params = $params;
-					break;
-
-				case ConfigType::CONFIG_ENGINE_FAULT :
-					if(!$device -> getCheckEngineLight())
-						return FALSE;
-					break;
-
-				case ConfigType::CONFIG_TIRE_PRESSURE :
-					if(!$device -> getUseTirePressure())
-						return FALSE;
+					$config -> params = self::setupConfigParams($device, $config);
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING :
@@ -246,6 +285,39 @@ namespace CarmaLink;
 		public static function getConfigArray($device, $config_type) {
 			$newConfig = self::createConfigFromDevice($device, $config_type);
 			return ($newConfig !== FALSE) ? $newConfig -> toArray() : FALSE;
+		}
+
+		/**
+		 * Static factory
+		 * 
+		 * @param string|stdClass 	obj 			Either a JSON string or a stdClass object representing a Config
+		 * @param ConfigType 		config_type 	A valid ConfigType
+		 * @return Config
+		 */
+		public static function Factory($obj,$config_type) {
+			if(!$obj) return FALSE;
+
+			if(!is_object($obj) && is_string($obj)) {
+				try {
+					$obj = json_decode($obj);
+				} catch(Exception $e) {
+					throw new CarmaLinkAPIException("Could not instantiate Config with provided JSON data ".$e->getMessage());	
+				}
+			}
+			foreach (array('configId','threshold','allowance','location','optionalParams','optionalConditions','status') as $prop) {
+				$obj -> $prop = isset($obj -> $prop) ? $obj -> $prop : NULL;				
+			}
+			$config = new Config(
+				(int)$obj -> configId,
+				(float)$obj -> threshold,
+				(float)$obj -> allowance,
+				(bool)$obj -> location,
+				$obj -> optionalParams,
+				$obj -> optionalConditions,
+				$obj -> status
+			);
+			$config -> setConfigType($config_type);
+			return $config;
 		}
 
 	}

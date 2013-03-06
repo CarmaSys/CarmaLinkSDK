@@ -17,7 +17,6 @@ namespace CarmaLink;
 		const CONFIG_OVERSPEEDING 	= 'overspeeding';
 		const CONFIG_IDLING			= 'idling';
 		const CONFIG_STATUS			= 'status';
-		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		const CONFIG_HARD_BRAKING	= 'hard_braking';
 		const CONFIG_HARD_ACCEL		= 'hard_accel';
 		const CONFIG_HARD_CORNERING	= 'hard_cornering';
@@ -26,7 +25,7 @@ namespace CarmaLink;
 		const CONFIG_REVERSE		= 'reverse';
 		const CONFIG_PARKINGBRAKE	= 'parking_brake';
 		const CONFIG_SEATBELT		= 'seatbelt';
-		const CONFIG_TIRE_PRESSURE  = 'tire_pressure';
+		const CONFIG_VEHICLE_HEALTH = 'vehicle_health';
 		const CONFIG_GENERAL		= 'general_config';
 		
 		/**
@@ -52,7 +51,6 @@ namespace CarmaLink;
 			self::CONFIG_OVERSPEEDING, 
 			self::CONFIG_IDLING, 
 			self::CONFIG_STATUS, 
-			self::CONFIG_ENGINE_FAULT, 
 			self::CONFIG_HARD_BRAKING, 
 			self::CONFIG_HARD_ACCEL,
 			self::CONFIG_HARD_CORNERING,
@@ -62,7 +60,7 @@ namespace CarmaLink;
 			self::CONFIG_PARKINGBRAKE,
 			self::CONFIG_SEATBELT,
 			self::CONFIG_GENERAL,
-			self::CONFIG_TIRE_PRESSURE
+			self::CONFIG_VEHICLE_HEALTH
 		);
 	
 		/**

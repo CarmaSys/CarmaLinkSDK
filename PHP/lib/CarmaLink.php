@@ -28,7 +28,39 @@ namespace CarmaLink;
 		public function getID() {
 			return $this -> id;
 		}
+
 		
+		/**
+		 * Getter for vehcileHealthConditions
+		 *
+		 * @return array|bool
+		 */
+		public function getVehicleHealthConditions()
+		{
+			if(count($this->vehicleHealthConditions) === 0) {
+				if($this->getUseTirePressure()) {
+					$this -> setVehicleHealthConditions(Config::TIRE_PRESSURE_CHANGE);
+				} else {
+					return FALSE;
+				}
+			}
+		    return $this->vehicleHealthConditions;
+		}
+		
+		/**
+		 * Setter for useVehicleHealthReport
+		 *
+		 * @param array|string conditions A string or array representing any conditions to set on the vehicle health report
+		 * @return void
+		 */
+		public function setVehicleHealthConditions($conditions = NULL)
+		{
+			if(!$conditions) {
+				throw new CarmaLinkAPIException("Trying to set vehicleHealthConditions NULL");
+			}
+		    $this->useVehicleHealthReport = is_array($conditions) ? $conditions : array($conditions);
+		}
+	
 		/**
 		 * Getter for useNextServiceDuration
 		 *
@@ -43,9 +75,9 @@ namespace CarmaLink;
 		 * Setter for useNextServiceDuration
 		 *
 		 * @param bool $use Value to set
-		 * @return self
+		 * @return void
 		 */
-		public function setUseNextServiceDuration($use)
+		public function setUseNextServiceDuration($use = TRUE)
 		{
 		    $this->useNextServiceDuration = $use;
 		}
@@ -63,9 +95,9 @@ namespace CarmaLink;
 		 * Setter for useNextServiceDistance
 		 *
 		 * @param bool $use Value to set
-		 * @return self
+		 * @return void
 		 */
-		public function setUseNextServiceDistance($use)
+		public function setUseNextServiceDistance($use = TRUE)
 		{
 		    $this->useNextServiceDistance = $use;
 		}
@@ -74,7 +106,7 @@ namespace CarmaLink;
 		 * Shortcut to set useNextService(s)
 		 *
 		 * @param bool $use Value to set
-		 * @return self
+		 * @return void
 		 */
 		public function setUseNextService($use)
 		{
@@ -96,7 +128,7 @@ namespace CarmaLink;
 		 * Setter for useOdometer
 		 *
 		 * @param bool $Use Value to set
-		 * @return self
+		 * @return void
 		 */
 		public function setUseOdometer($use)
 		{
@@ -108,7 +140,7 @@ namespace CarmaLink;
 		 * @param bool		checkEngineLight	Use engine fault
 		 * @return void
 		 */
-		public function setCheckEngineLight($checkEngineLight = false) {
+		public function setCheckEngineLight($checkEngineLight = TRUE) {
 			$this -> checkEngineLight = (bool)$checkEngineLight;
 		}
 
@@ -160,7 +192,7 @@ namespace CarmaLink;
 		 * @param bool	useTP	On/Off
 		 * @return void
 		 */
-		public function setUseTirePressure($useTP) {
+		public function setUseTirePressure($useTP = TRUE) {
 			$this -> useTP = (bool)$useTP;
 		}
 

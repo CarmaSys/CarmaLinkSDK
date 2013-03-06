@@ -238,6 +238,28 @@ namespace CarmaLink;
 		}
 
 		/**
+		 * Get all configurations given a serial
+		 *
+		 * @todo this only works for one serial, make it work w/ array of serials
+		 *
+		 * @param string|int 		serial			Serial number of the CarmaLink
+		 * @return array 	Associative array of configurations
+		 */
+		public function getAllConfigs($serial = 0) {
+			if($serial === 0)
+				return false;
+			
+			$configs = array();
+
+			foreach (ConfigType::$valid_config_types as $config_type) {
+				$new_config = Config::Factory($this -> getConfig($serial, $config_type), $config_type);
+				$configs[] = array($config_type => $new_config);
+			}
+
+			return $configs;
+		}
+
+		/**
 		 * Retrieves a configuration object from the CarmaLink based on parameters
 		 *
 		 * @param string|int|array		serials		Serial number(s) of the CarmaLink(s)
@@ -253,12 +275,16 @@ namespace CarmaLink;
 			$params = $configId === 0 ? NULL : array('id'=>$configId);
 			
 			$this -> setupConfigCall($serials, $endpoint, $config_type);
+			
 			$response_data = $this -> get($endpoint, $params);
+			
 			if ((int)$response_data[self::RESPONSE_CODE] !== self::API_METHOD_SUCCESS) {
 				return false;
 			}
+
 			return $response_data[self::RESPONSE_BODY];
 		}
+
 		/**
 		 * Takes a response array from a putConfig or deleteConfig request
 		 * and returns the proper type / value. Mostly a utility DRY method.
@@ -402,16 +428,19 @@ namespace CarmaLink;
 
 		/**
 		 * Updates a device based on a CarmaLinkDevice object
-		 * 
+ 		 * @deprecated deprecated since version 1.4.0
+		 *
 		 * @param 		CarmaLink\CarmaLink		Object representing a CarmaLink
 		 * @param		bool					if true, the method will return an associative array if any
 		 * 										updates or deletions had errors
 		 * @return 		bool|array  
 		 */
 		public function updateDevice($device, $return_errors = FALSE) {
+			//---------------------------------------------------------------------
+			// Note CONFIG_VEHICLE_HEALTH and CONFIG_TRIP_REPORT *NOT* included here
+			//---------------------------------------------------------------------
+
 			$configs_to_update = array(
-			    ConfigType::CONFIG_TRIP_REPORT,
-				ConfigType::CONFIG_ENGINE_FAULT, 
 				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_ACCEL, 
 				ConfigType::CONFIG_HARD_CORNERING, 
@@ -421,7 +450,6 @@ namespace CarmaLink;
 				ConfigType::CONFIG_PARKINGBRAKE,
 				ConfigType::CONFIG_SEATBELT,
 				ConfigType::CONFIG_STATUS,
-				ConfigType::CONFIG_TIRE_PRESSURE,
 				ConfigType::CONFIG_GENERAL
 			);
 			
