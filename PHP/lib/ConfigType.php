@@ -17,12 +17,15 @@ namespace CarmaLink;
 		const CONFIG_OVERSPEEDING 	= 'overspeeding';
 		const CONFIG_IDLING			= 'idling';
 		const CONFIG_STATUS			= 'status';
-		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		const CONFIG_HARD_BRAKING	= 'hard_braking';
 		const CONFIG_HARD_ACCEL		= 'hard_accel';
 		const CONFIG_TRIP_REPORT	= 'trip_report';
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
 		const CONFIG_GENERAL		= 'general_config';
+		/**
+		 * @deprecated CONFIG_ENGINE_FAULT as of 1.4.0 
+		 */
+		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		
 		/**
 		 * @access public

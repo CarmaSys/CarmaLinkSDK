@@ -122,6 +122,7 @@ namespace CarmaLink;
 
 		/**
 		 * Utility method to create a new Config instance based on a device and report type.
+		 * @deprecated To be deprecated in 1.4.0
 		 *
 		 * @param CarmaLink				device		A custom data object representing a CarmaLink
 		 * @param string|ConfigType 	config_type

@@ -24,7 +24,21 @@ namespace CarmaLink;
 	 * @class CarmaLinkAPI
 	 */
 	class CarmaLinkAPI {
-		const API_VERSION = 1;
+
+		/**
+		* @access public
+		* @var int
+		* The current API level used in construction of CarmaLinkAPI URIs
+		*/
+		const API_LEVEL = 1;
+
+		/**
+		* @access public
+		* @var string
+		* The current API version
+		*/
+		const API_VERSION = "1.3.2";
+
 		const API_NAME = "CarmaLinkAPI";
 		
 		/**
@@ -159,7 +173,7 @@ namespace CarmaLink;
 		 * @return string
 		 */
 		public static function getEndpointRelativeRoot() {
-			return 'v' . self::API_VERSION;
+			return 'v' . self::API_LEVEL;
 		}
 
 		/**
@@ -385,8 +399,14 @@ namespace CarmaLink;
 			}
 			
 			if($this->debug) {
-				$debugParams = (!$parameters && strlen($put_data)) ? json_decode($put_data,TRUE) : null;
-				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",(is_array($debugParams) ? $debugParams : array()) );
+				if(is_array($parameters)) {
+					$debugParams = $parameters;
+				} else if($parameters === NULL && strlen($put_data)) {
+					$debugParams = json_decode($put_data,TRUE);
+				} else {
+					$debugParams = array();
+				} 
+				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$debugParams);
 				unset($debugParams);
 			}
 			
@@ -402,7 +422,8 @@ namespace CarmaLink;
 
 		/**
 		 * Updates a device based on a CarmaLinkDevice object
-		 * 
+		 * @deprecated To be deprecated in version 1.4.0
+		 *
 		 * @param 		CarmaLink\CarmaLink		Object representing a CarmaLink
 		 * @param		bool					if true, the method will return an associative array if any
 		 * 										updates or deletions had errors
