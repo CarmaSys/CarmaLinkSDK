@@ -27,6 +27,10 @@ namespace CarmaLink;
 		const CONFIG_SEATBELT		= 'seatbelt';
 		const CONFIG_VEHICLE_HEALTH = 'vehicle_health';
 		const CONFIG_GENERAL		= 'general_config';
+		/**
+		 * @deprecated CONFIG_ENGINE_FAULT as of 1.4.0 
+		 */
+		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		
 		/**
 		 * @access public

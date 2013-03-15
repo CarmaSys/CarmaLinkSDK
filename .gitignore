@@ -27,3 +27,6 @@ test/tmp
 test/version_tmp
 tmp
 
+PHP/bin
+PHP/vendor
+composer.phar
