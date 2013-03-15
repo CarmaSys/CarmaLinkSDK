@@ -304,7 +304,7 @@ namespace CarmaLink;
 					throw new CarmaLinkAPIException("Could not instantiate Config with provided JSON data ".$e->getMessage());	
 				}
 			}
-			foreach (array('configId','threshold','allowance','location','optionalParams','optionalConditions','status') as $prop) {
+			foreach (array('configId','threshold','allowance','location','buzzer','optionalParams','optionalConditions','status') as $prop) {
 				$obj -> $prop = isset($obj -> $prop) ? $obj -> $prop : NULL;				
 			}
 			$config = new Config(
@@ -316,6 +316,7 @@ namespace CarmaLink;
 				$obj -> optionalConditions,
 				$obj -> status
 			);
+			$config -> buzzer = $obj -> buzzer;
 			$config -> setConfigType($config_type);
 			return $config;
 		}

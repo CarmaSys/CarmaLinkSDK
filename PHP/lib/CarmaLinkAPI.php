@@ -24,7 +24,9 @@ namespace CarmaLink;
 	 * @class CarmaLinkAPI
 	 */
 	class CarmaLinkAPI {
-		const API_VERSION = 1;
+
+		const API_LEVEL = 1;
+		const API_VERSION = "1.4.0";
 		const API_NAME = "CarmaLinkAPI";
 		
 		/**
@@ -159,7 +161,7 @@ namespace CarmaLink;
 		 * @return string
 		 */
 		public static function getEndpointRelativeRoot() {
-			return 'v' . self::API_VERSION;
+			return 'v' . self::API_LEVEL;
 		}
 
 		/**
@@ -411,7 +413,13 @@ namespace CarmaLink;
 			}
 			
 			if($this->debug) {
-				$debugParams = (!$parameters && strlen($put_data)) ? json_decode($put_data,TRUE) : null;
+				if(!$parameters && strlen($put_data)) {
+					$debugParams = json_decode($put_data,TRUE);
+				} else if(is_array($parameters)) {
+					$debugParams = $parameters;
+				} else {
+					$debugParams = NULL;
+				}
 				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",(is_array($debugParams) ? $debugParams : array()) );
 				unset($debugParams);
 			}
@@ -436,6 +444,7 @@ namespace CarmaLink;
 		 * @return 		bool|array  
 		 */
 		public function updateDevice($device, $return_errors = FALSE) {
+		
 			//---------------------------------------------------------------------
 			// Note CONFIG_VEHICLE_HEALTH and CONFIG_TRIP_REPORT *NOT* included here
 			//---------------------------------------------------------------------
