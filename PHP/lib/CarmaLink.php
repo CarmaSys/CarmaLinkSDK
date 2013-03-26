@@ -7,6 +7,9 @@ namespace CarmaLink;
 	 * of a CarmaLink. The getters/setters below are required for some of
 	 * the functionality in this SDK.
 	 *
+	 * @deprecated As of CarmaLinkAPI v1.4.0
+	 * Please define your own interface
+	 *
 	 * @class CarmaLink
 	 */
 	abstract class CarmaLink {

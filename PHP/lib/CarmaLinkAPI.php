@@ -455,7 +455,6 @@ namespace CarmaLink;
 				ConfigType::CONFIG_HARD_CORNERING, 
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
-				ConfigType::CONFIG_REVERSE,
 				ConfigType::CONFIG_PARKINGBRAKE,
 				ConfigType::CONFIG_SEATBELT,
 				ConfigType::CONFIG_STATUS,

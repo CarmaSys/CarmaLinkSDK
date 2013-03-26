@@ -239,13 +239,6 @@ namespace CarmaLink;
 					$config -> allowance = $device -> getAccelLimitAllowance();
 					break;
 
-				case ConfigType::CONFIG_REVERSE :
-					if( $device -> getReverseLimit() === FALSE )
-						return FALSE;
-					$config -> threshold = $device -> getReverseLimit();
-					$config -> allowance = $device -> getReverseLimitAllowance();
-					break;
-		
 				case ConfigType::CONFIG_PARKINGBRAKE :
 					if( $device -> getParkingBrakeLimit() === FALSE )
 						return FALSE;

@@ -22,13 +22,13 @@ namespace CarmaLink;
 		const CONFIG_HARD_CORNERING	= 'hard_cornering';
 		const CONFIG_TRIP_REPORT	= 'trip_report';
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
-		const CONFIG_REVERSE		= 'reverse';
 		const CONFIG_PARKINGBRAKE	= 'parking_brake';
 		const CONFIG_SEATBELT		= 'seatbelt';
 		const CONFIG_VEHICLE_HEALTH = 'vehicle_health';
 		const CONFIG_GENERAL		= 'general_config';
 		/**
 		 * @deprecated CONFIG_ENGINE_FAULT as of 1.4.0 
+		 * @see ConfigType::CONFIG_VEHICLE_HEALTH instead
 		 */
 		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		
@@ -42,7 +42,6 @@ namespace CarmaLink;
 			self::CONFIG_HARD_BRAKING,
 			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_HARD_ACCEL,
-			self::CONFIG_REVERSE,
 			self::CONFIG_PARKINGBRAKE,
 			self::CONFIG_SEATBELT
 		);
@@ -60,7 +59,6 @@ namespace CarmaLink;
 			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_TRIP_REPORT,
 			self::CONFIG_NEW_DEPLOYMENT,
-			self::CONFIG_REVERSE,
 			self::CONFIG_PARKINGBRAKE,
 			self::CONFIG_SEATBELT,
 			self::CONFIG_GENERAL,
@@ -76,7 +74,6 @@ namespace CarmaLink;
 			self::CONFIG_HARD_BRAKING,
 			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_HARD_ACCEL,
-			self::CONFIG_REVERSE,
 			self::CONFIG_PARKINGBRAKE,
 			self::CONFIG_SEATBELT
 		);
