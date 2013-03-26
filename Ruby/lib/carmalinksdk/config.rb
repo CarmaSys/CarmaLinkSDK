@@ -2,6 +2,7 @@
 class CarmaLinkSDK::BaseConfig
   
   attr_accessor(
+    :optional_conditions,
     :optional_params,
     :config_type,
     :status,
@@ -22,6 +23,7 @@ class CarmaLinkSDK::BaseConfig
     @status = :unknown
     @config_type = config_type
     @optional_params = []
+    @optional_conditions = []
   end
 
 end
@@ -34,9 +36,12 @@ class CarmaLinkSDK::Config < CarmaLinkSDK::BaseConfig
       :overspeeding,
       :idling,
       :status,
-      :engine_fault,
+      :hard_cornering,
+      :seatbelt,
       :hard_braking,
       :hard_accel,
+      :parking_brake,
+      :vehicle_health,
       :trip_report,
       :new_deployment
     ]
@@ -44,21 +49,31 @@ class CarmaLinkSDK::Config < CarmaLinkSDK::BaseConfig
       :overspeeding,
       :idling,
       :status,
-      :engine_fault,
+      :seatbelt,
+      :parking_brake,      
       :hard_braking,
+      :vehicle_health,
+      :hard_cornering,
       :hard_accel,
       :trip_report,
       :general_config
     ]
     BuzzerTypes = [
       :overspeeding,
+      :seatbelt,
+      :parking_brake,      
       :hard_braking,
+      :hard_cornering,
       :hard_accel,
       :idling
     ]
     LocationTypes = [
       :overspeeding,
+      :parking_brake,      
+      :seatbelt,
+      :vehicle_health,
       :hard_braking,
+      :hard_cornering,
       :hard_accel,
       :overspeeding,
       :status,
@@ -143,6 +158,9 @@ class CarmaLinkSDK::Config < CarmaLinkSDK::BaseConfig
     end
     if(!optional_params.empty?)
       hash[:optionalParams] = optional_params
+    end
+    if(!optional_conditions.empty?)
+      hash[:optionalConditions] = optional_conditions
     end
     return hash
   end
