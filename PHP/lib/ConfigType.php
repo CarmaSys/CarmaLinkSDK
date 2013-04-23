@@ -19,8 +19,12 @@ namespace CarmaLink;
 		const CONFIG_STATUS			= 'status';
 		const CONFIG_HARD_BRAKING	= 'hard_braking';
 		const CONFIG_HARD_ACCEL		= 'hard_accel';
+		const CONFIG_HARD_CORNERING	= 'hard_cornering';
 		const CONFIG_TRIP_REPORT	= 'trip_report';
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
+		const CONFIG_PARKINGBRAKE	= 'parking_brake';
+		const CONFIG_SEATBELT		= 'seatbelt';
+		const CONFIG_VEHICLE_HEALTH = 'vehicle_health';
 		const CONFIG_GENERAL		= 'general_config';
 		/**
 		 * @deprecated CONFIG_ENGINE_FAULT as of 1.5.0 
@@ -35,7 +39,10 @@ namespace CarmaLink;
 			self::CONFIG_IDLING,
 			self::CONFIG_OVERSPEEDING,
 			self::CONFIG_HARD_BRAKING,
-			self::CONFIG_HARD_ACCEL
+			self::CONFIG_HARD_CORNERING,
+			self::CONFIG_HARD_ACCEL,
+			self::CONFIG_PARKINGBRAKE,
+			self::CONFIG_SEATBELT
 		);
 
 		/**
@@ -46,12 +53,15 @@ namespace CarmaLink;
 			self::CONFIG_OVERSPEEDING, 
 			self::CONFIG_IDLING, 
 			self::CONFIG_STATUS, 
-			self::CONFIG_ENGINE_FAULT, 
 			self::CONFIG_HARD_BRAKING, 
 			self::CONFIG_HARD_ACCEL,
+			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_TRIP_REPORT,
 			self::CONFIG_NEW_DEPLOYMENT,
-			self::CONFIG_GENERAL
+			self::CONFIG_PARKINGBRAKE,
+			self::CONFIG_SEATBELT,
+			self::CONFIG_GENERAL,
+			self::CONFIG_VEHICLE_HEALTH
 		);
 	
 		/**
@@ -60,8 +70,11 @@ namespace CarmaLink;
 		 */
 		public static $allowance_config_types = array(
 			self::CONFIG_OVERSPEEDING, 
-			self::CONFIG_HARD_BRAKING, 
-			self::CONFIG_HARD_ACCEL
+			self::CONFIG_HARD_BRAKING,
+			self::CONFIG_HARD_CORNERING,
+			self::CONFIG_HARD_ACCEL,
+			self::CONFIG_PARKINGBRAKE,
+			self::CONFIG_SEATBELT
 		);
 
 		/**
