@@ -7,6 +7,9 @@ namespace CarmaLink;
 	 * of a CarmaLink. The getters/setters below are required for some of
 	 * the functionality in this SDK.
 	 *
+	 * @deprecated As of CarmaLinkAPI v1.5.0
+	 * Please define your own interface
+	 *
 	 * @class CarmaLink
 	 */
 	abstract class CarmaLink {
@@ -28,7 +31,39 @@ namespace CarmaLink;
 		public function getID() {
 			return $this -> id;
 		}
+
 		
+		/**
+		 * Getter for vehcileHealthConditions
+		 *
+		 * @return array|bool
+		 */
+		public function getVehicleHealthConditions()
+		{
+			if(count($this->vehicleHealthConditions) === 0) {
+				if($this->getUseTirePressure()) {
+					$this -> setVehicleHealthConditions(Config::TIRE_PRESSURE_CHANGE);
+				} else {
+					return FALSE;
+				}
+			}
+		    return $this->vehicleHealthConditions;
+		}
+		
+		/**
+		 * Setter for useVehicleHealthReport
+		 *
+		 * @param array|string conditions A string or array representing any conditions to set on the vehicle health report
+		 * @return void
+		 */
+		public function setVehicleHealthConditions($conditions = NULL)
+		{
+			if(!$conditions) {
+				throw new CarmaLinkAPIException("Trying to set vehicleHealthConditions NULL");
+			}
+		    $this->useVehicleHealthReport = is_array($conditions) ? $conditions : array($conditions);
+		}
+	
 		/**
 		 * Getter for useNextServiceDuration
 		 *
@@ -43,9 +78,9 @@ namespace CarmaLink;
 		 * Setter for useNextServiceDuration
 		 *
 		 * @param bool $use Value to set
-		 * @return self
+		 * @return void
 		 */
-		public function setUseNextServiceDuration($use)
+		public function setUseNextServiceDuration($use = TRUE)
 		{
 		    $this->useNextServiceDuration = $use;
 		}
@@ -63,9 +98,9 @@ namespace CarmaLink;
 		 * Setter for useNextServiceDistance
 		 *
 		 * @param bool $use Value to set
-		 * @return self
+		 * @return void
 		 */
-		public function setUseNextServiceDistance($use)
+		public function setUseNextServiceDistance($use = TRUE)
 		{
 		    $this->useNextServiceDistance = $use;
 		}
@@ -74,7 +109,7 @@ namespace CarmaLink;
 		 * Shortcut to set useNextService(s)
 		 *
 		 * @param bool $use Value to set
-		 * @return self
+		 * @return void
 		 */
 		public function setUseNextService($use)
 		{
@@ -96,7 +131,7 @@ namespace CarmaLink;
 		 * Setter for useOdometer
 		 *
 		 * @param bool $Use Value to set
-		 * @return self
+		 * @return void
 		 */
 		public function setUseOdometer($use)
 		{
@@ -108,7 +143,7 @@ namespace CarmaLink;
 		 * @param bool		checkEngineLight	Use engine fault
 		 * @return void
 		 */
-		public function setCheckEngineLight($checkEngineLight = false) {
+		public function setCheckEngineLight($checkEngineLight = TRUE) {
 			$this -> checkEngineLight = (bool)$checkEngineLight;
 		}
 
@@ -153,6 +188,23 @@ namespace CarmaLink;
 		 */
 		public function getUseGPS() {
 			return $this -> useGPS;
+		}
+
+		/**
+		 * Set CarmaLink low tire pressure report
+		 * @param bool	useTP	On/Off
+		 * @return void
+		 */
+		public function setUseTirePressure($useTP = TRUE) {
+			$this -> useTP = (bool)$useTP;
+		}
+
+		/**
+		 * Get CarmaLink low tire pressure report enabled
+		 * @return bool
+		 */
+		public function getUseTirePressure() {
+			return $this -> useTP;
 		}
 
 		/**
@@ -207,6 +259,111 @@ namespace CarmaLink;
 		}
 
 		/**
+		 * Set CarmaLink parking brake limit
+		 * @param int|bool		speedLimit		Speed in Km/h
+		 * @return void
+		 */
+		public function setParkingBrakeLimit($speedLimit = 0) {
+			$this -> parkingBrakeLimit = ($speedLimit === FALSE) ? FALSE : (int)$speedLimit;
+		}
+
+		/**
+		 * Get CarmaLink parking brake limit
+		 * @return int|bool	Km/h limit or false if disabled
+		 */
+		public function getParkingBrakeLimit() {
+			return ($this -> parkingBrakeLimit === FALSE || $this-> parkingBrakeLimit < 0) ? FALSE : (int)$this->parkingBrakeLimit;
+		}
+
+		/**
+		 * Set CarmaLink parking brake allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setParkingBrakeLimitAllowance($allowance = 0.0) {
+			$this -> parkingBrakeLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink parking brake allowance
+		 * @return float allowance time in ms
+		 */
+		public function getParkingBrakeLimitAllowance() {
+			return $this -> parkingBrakeLimitAllowance;
+		}
+
+		/**
+		 * Set CarmaLink seatbelt limit
+		 * @param int|bool		speedLimit		Speed in Km/h
+		 * @return void
+		 */
+		public function setSeatbeltLimit($speedLimit = 0) {
+			$this -> seatbeltLimit = ($speedLimit === FALSE) ? FALSE : (int)$speedLimit;
+		}
+
+		/**
+		 * Get CarmaLink seatbelt limit
+		 * @return int|bool	Km/h limit or false if disabled
+		 */
+		public function getSeatbeltLimit() {
+			return ($this -> seatbeltLimit === FALSE || $this-> seatbeltLimit < 0) ? FALSE : (int)$this->seatbeltLimit;
+		}
+
+		/**
+		 * Set CarmaLink seatbelt allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setSeatbeltLimitAllowance($allowance = 0.0) {
+			$this -> seatbeltLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink seatbelt allowance
+		 * @return float allowance time in ms
+		 */
+		public function getSeatbeltLimitAllowance() {
+			return $this -> seatbeltLimitAllowance;
+		}
+
+
+		/**
+		 * Set CarmaLink reverse speed limit
+		 * @param int|bool	reverseLimit		Speed in Km/h or FALSE to disable report
+		 * @return void
+		 */
+		public function setReverseLimit($reverseLimit = 0) {
+			if($reverseLimit < 0)
+				$reverseLimit = FALSE;
+			$this -> reverseLimit = $reverseLimit;
+		}
+
+		/**
+		 * Get CarmaLink speed limit
+		 * @return int|bool		Km/h limit or FALSE if report disabled
+		 */
+		public function getReverseLimit() {
+			return $this -> reverseLimit;
+		}
+
+		/**
+		 * Set CarmaLink reverse speed limit allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setReverseLimitAllowance($allowance = 0.0) {
+			$this -> reverseLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink reverse speed limit allowance
+		 * @return float allowance time in ms
+		 */
+		public function getReverseLimitAllowance() {
+			return $this -> reverseLimitAllowance;
+		}
+
+		/**
 		 * Set CarmaLink brake limit
 		 * @param float		brakeLimit		Limit in G's
 		 * @return void
@@ -237,6 +394,40 @@ namespace CarmaLink;
 		 * @return float allowance time in ms
 		 */
 		public function getBrakeLimitAllowance() {
+			return $this -> brakeLimitAllowance;
+		}
+		
+		/**
+		 * Set CarmaLink hard conering limit
+		 * @param float		cornerLimit		Limit in G's
+		 * @return void
+		 */
+		public function setCorneringLimit($cornerLimit = 0.0) {
+			$this -> corneringLimit = (float)$cornerLimit;
+		}
+
+		/**
+		 * Get CarmaLink hard cornering limit
+		 * @return float	In G's
+		 */
+		public function getCorneringLimit() {
+			return $this -> corneringLimit;
+		}
+
+		/**
+		 * Set CarmaLink hard cornering allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setCorneringLimitAllowance($allowance = 0.0) {
+			$this -> brakeLimitAllowance = (float)$allowance;
+		}
+
+		/**
+		 * Get CarmaLink hard cornering allowance
+		 * @return float allowance time in ms
+		 */
+		public function getCorneringLimitAllowance() {
 			return $this -> brakeLimitAllowance;
 		}
 

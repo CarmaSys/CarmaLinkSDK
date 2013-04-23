@@ -37,7 +37,7 @@ namespace CarmaLink;
 		* @var string
 		* The current API version
 		*/
-		const API_VERSION = "1.3.2";
+		const API_VERSION = "1.4.0";
 
 		const API_NAME = "CarmaLinkAPI";
 		
@@ -422,7 +422,7 @@ namespace CarmaLink;
 
 		/**
 		 * Updates a device based on a CarmaLinkDevice object
-		 * @deprecated To be deprecated in version 1.4.0
+		 * @deprecated To be deprecated in version 1.5.0
 		 *
 		 * @param 		CarmaLink\CarmaLink		Object representing a CarmaLink
 		 * @param		bool					if true, the method will return an associative array if any

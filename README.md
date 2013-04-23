@@ -1,4 +1,4 @@
-Carma Systems Inc. CarmaLinkSDK 1.3.2
+Carma Systems Inc. CarmaLinkSDK 1.4.0
 ===============================
 
 The CarmaLinkSDK represents a layer of abstraction for interfacing the CarmaLinkAPI which utilizes

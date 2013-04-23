@@ -23,7 +23,7 @@ namespace CarmaLink;
 		const CONFIG_NEW_DEPLOYMENT	= 'new_deployment';
 		const CONFIG_GENERAL		= 'general_config';
 		/**
-		 * @deprecated CONFIG_ENGINE_FAULT as of 1.4.0 
+		 * @deprecated CONFIG_ENGINE_FAULT as of 1.5.0 
 		 */
 		const CONFIG_ENGINE_FAULT	= 'engine_fault';
 		
