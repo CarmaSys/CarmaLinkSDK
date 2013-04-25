@@ -250,6 +250,28 @@ namespace CarmaLink;
 			$serials = $this -> sanitizeSerials($serials);
 			$endpoint = $this -> getEndpointRootURI() . '/' . $this -> getEndpointRelativeRoot() . '/' . $serials . '/report_config/' . $config_type;
 		}
+		
+		/**
+		 * Get all configurations given a serial
+		 *
+		 * @todo this only works for one serial, make it work w/ array of serials
+		 *
+		 * @param string|int 		serial			Serial number of the CarmaLink
+		 * @return array 	Associative array of configurations
+		 */
+		public function getAllConfigs($serial = 0) {
+			if($serial === 0)
+				return false;
+			
+			$configs = array();
+
+			foreach (ConfigType::$valid_config_types as $config_type) {
+				$new_config = Config::Factory($this -> getConfig($serial, $config_type), $config_type);
+				$configs[] = array($config_type => $new_config);
+			}
+
+			return $configs;
+		}
 
 		/**
 		 * Retrieves a configuration object from the CarmaLink based on parameters
