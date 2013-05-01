@@ -14,6 +14,7 @@ namespace CarmaLink;
 		const API_BUZZER		= 'buzzer';
 		const API_DELETE_CONFIG	= 'OFF';
 		const API_PARAMS		= 'optionalParams';
+		const API_CONDITIONS	= 'optionalConditions';
 
 		const ODOMETER = "ODOMETER";
 		const DURATION_TO_SERVICE = "DURATION_TO_SERVICE";
@@ -128,8 +129,12 @@ namespace CarmaLink;
 			$configArray = ($this -> _config_type !== ConfigType::CONFIG_TRIP_REPORT ) ? 
 				array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance ) : 
 					array( self::API_PARAMS => (!empty($this -> params) ? $this -> params : null) );
-			
+
 			$configArray[self::API_LOCATION] = (bool)$this -> location;
+
+			if(is_array($this -> conditions) && !empty($this -> conditions)) {
+				$configArray[self::API_CONDITIONS] = $this -> conditions; 
+			}
 			
 			if ($this -> hasBuzzerConfig()) {
 				$configArray[self::API_BUZZER] = (string)$this -> buzzer;

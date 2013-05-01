@@ -328,20 +328,21 @@ namespace CarmaLink;
 		 * Put / send a CarmaLink a new configuration
 		 *
 		 * @param string|int|array		serials			Serial number(s) of the CarmaLink(s)
-		 * @param array 				config_array	Array representation of a CarmaLink\Config object
+		 * @param array|Config 			config			CarmaLink\Config object or Array representation
 		 * @param string				config_type 	Valid configuration type
 		 * @return bool
 		 */
-		public function putConfig($serials = 0, $config_array, $config_type) {
+		public function putConfig($serials = 0, $config, $config_type) {
 			if ($serials === 0)
 				return false;
 			$endpoint = '';
+			
 			$this -> setupConfigCall($serials, $endpoint, $config_type);
-			if (empty($config_array) || !$config_type) {
-				throw new CarmaLinkAPIException('API PUT ConfigUpdate was not of type array or not a valid configuration type.');
-			}
-			if (!is_array($config_array)) {
-				throw new CarmaLinkAPIException('API PUT ConfigUpdate was not of type array.');
+			// If config is instance of CarmaLink\Config then convert to associative array, otherwise use given argument assuming array.
+			$config = $config instanceof Config ?  $config -> toArray() : $config;
+
+			if (!is_array($config) && empty($config) || !$config_type) {
+				throw new CarmaLinkAPIException('API putConfig config parameter was not of type array or not a valid configuration type.');
 			}
 			return $this -> getProperResponse($this -> put($endpoint, $config_array));
 		}
