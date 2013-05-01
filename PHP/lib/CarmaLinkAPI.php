@@ -344,7 +344,7 @@ namespace CarmaLink;
 			if (!is_array($config) && empty($config) || !$config_type) {
 				throw new CarmaLinkAPIException('API putConfig config parameter was not of type array or not a valid configuration type.');
 			}
-			return $this -> getProperResponse($this -> put($endpoint, $config_array));
+			return $this -> getProperResponse($this -> put($endpoint, $config));
 		}
 
 		/**
