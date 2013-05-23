@@ -455,12 +455,14 @@ namespace CarmaLink;
 		public function updateDevice($device, $return_errors = FALSE) {
 			$configs_to_update = array(
 			    ConfigType::CONFIG_TRIP_REPORT,
-				ConfigType::CONFIG_ENGINE_FAULT, 
+			    ConfigType::CONFIG_VEHICLE_HEALTH,
 				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_ACCEL, 
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
 				ConfigType::CONFIG_STATUS,
+				ConfigType::CONFIG_PARKINGBRAKE,
+				ConfigType::CONFIG_SEATBELT,
 				ConfigType::CONFIG_GENERAL
 			);
 			
