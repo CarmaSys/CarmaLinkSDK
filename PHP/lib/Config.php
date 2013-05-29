@@ -126,7 +126,7 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function toArray() {
-			$configArray = ($this -> _config_type !== ConfigType::CONFIG_TRIP_REPORT ) ? 
+			$configArray = (!in_array($this -> _config_type,array(ConfigType::CONFIG_TRIP_REPORT, ConfigType::CONFIG_VEHICLE_HEALTH))) ? 
 				array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance ) : 
 					array( self::API_PARAMS => (!empty($this -> params) ? $this -> params : null) );
 
@@ -205,7 +205,7 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_VEHICLE_HEALTH :
-					if($device -> getVehicleHealthConditions() == FALSE) {
+					if($device -> getVehicleHealthConditions() === FALSE) {
 						return FALSE;
 					}
 					$config -> params = self::setupConfigParams($device, $config);

@@ -40,7 +40,7 @@ namespace CarmaLink;
 		 */
 		public function getVehicleHealthConditions()
 		{
-			if(count($this->vehicleHealthConditions) === 0) {
+			if(!isset($this -> vehicleHealthConditions) || count($this->vehicleHealthConditions) === 0) {
 				if($this->getUseTirePressure()) {
 					$this -> setVehicleHealthConditions(Config::TIRE_PRESSURE_CHANGE);
 				} else {
@@ -61,7 +61,7 @@ namespace CarmaLink;
 			if(!$conditions) {
 				throw new CarmaLinkAPIException("Trying to set vehicleHealthConditions NULL");
 			}
-		    $this->useVehicleHealthReport = is_array($conditions) ? $conditions : array($conditions);
+		    $this->vehicleHealthConditions = is_array($conditions) ? $conditions : array($conditions);
 		}
 	
 		/**
