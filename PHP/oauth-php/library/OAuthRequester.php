@@ -404,6 +404,7 @@ class OAuthRequester extends OAuthRequestSigner
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HEADER, 		 true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 		 40);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
 	
 		foreach ($opts as $k => $v)
 		{
@@ -412,9 +413,9 @@ class OAuthRequester extends OAuthRequestSigner
 				curl_setopt($ch, $k, $v);
 			}
 		}
-		
+		usleep(50000);
 		$txt = curl_exec($ch);
-
+		usleep(50000);
 		if ($txt === false) {
 			$error = curl_error($ch);
 			curl_close($ch);
