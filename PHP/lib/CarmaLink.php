@@ -41,11 +41,21 @@ namespace CarmaLink;
 		public function getVehicleHealthConditions()
 		{
 			if(!isset($this -> vehicleHealthConditions) || count($this->vehicleHealthConditions) === 0) {
+				$conditions = new Array();
+				$index = 0;
 				if($this->getUseTirePressure()) {
-					$this -> setVehicleHealthConditions(Config::TIRE_PRESSURE_CHANGE);
-				} else {
-					return FALSE;
+					$conditions[$index] = Config::TIRE_PRESSURE_CHANGE;	
+					$index= $index + 1;
+				} 
+				if($this->getUseEmissionMonitors())
+				{
+					$conditions[$index] = Config::EMISSION_MONITORS;
+					$index= $index + 1;
 				}
+				if(empty($conditions))
+					return FALSE;
+				else
+					$this -> setVehicleHealthConditions($conditions);
 			}
 		    return $this->vehicleHealthConditions;
 		}
@@ -63,6 +73,49 @@ namespace CarmaLink;
 			}
 		    $this->vehicleHealthConditions = is_array($conditions) ? $conditions : array($conditions);
 		}
+		
+		/**
+		 * Getter for useEmissionMonitors
+		 *
+		 * @return bool
+		 */
+		public function getUseEmissionMonitors()
+		{
+		    return $this->useEmissionMonitors;
+		}
+		
+		/**
+		 * Setter for useEmissionMonitors
+		 *
+		 * @param bool $use Value to set
+		 * @return void
+		 */
+		public function setUseEmissionMonistors($use = TRUE)
+		{
+		    $this->useEmissionMonitors = $use;
+		}
+		
+		/**
+		 * Getter for useFuelLevel
+		 *
+		 * @return bool
+		 */
+		public function getUseFuelLevel()
+		{
+		    return $this->useFuelLevel;
+		}
+		
+		/**
+		 * Setter for useFuelLevel
+		 *
+		 * @param bool $use Value to set
+		 * @return void
+		 */
+		public function setUseFuelLevel($use = TRUE)
+		{
+		    $this->useFuelLevel = $use;
+		}
+	
 	
 		/**
 		 * Getter for useNextServiceDuration

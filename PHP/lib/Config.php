@@ -19,6 +19,8 @@ namespace CarmaLink;
 		const ODOMETER = "ODOMETER";
 		const DURATION_TO_SERVICE = "DURATION_TO_SERVICE";
 		const DISTANCE_TO_SERVICE = "DISTANCE_TO_SERVICE";
+		const EMISSION_MONITORS = "EMISSION_MONITORS";
+		const FUEL_LEVEL = "FUEL_LEVEL";
 		const SPEEDING ="SPEEDING";
 		const TIRE_PRESSURE_CHANGE = "TIRE_PRESSURE_CHANGE";
 
@@ -169,6 +171,12 @@ namespace CarmaLink;
 			}
 			if($device->getUseNextServiceDuration()) {
 				$params[] = self::DURATION_TO_SERVICE;
+			}
+			if($device->getUseEmissionMonitors()) {
+				$params[] = self::EMISSION_MONITORS;
+			}
+			if($device->getUseFuelLevel()) {
+				$params[] = self::FUEL_LEVEL;
 			}
 			if(empty($params)) {
 				return NULL;
