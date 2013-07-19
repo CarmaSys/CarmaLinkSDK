@@ -41,7 +41,7 @@ namespace CarmaLink;
 		public function getVehicleHealthConditions()
 		{
 			if(!isset($this -> vehicleHealthConditions) || count($this->vehicleHealthConditions) === 0) {
-				$conditions = new Array();
+				$conditions = Array();
 				$index = 0;
 				if($this->getUseTirePressure()) {
 					$conditions[$index] = Config::TIRE_PRESSURE_CHANGE;	
