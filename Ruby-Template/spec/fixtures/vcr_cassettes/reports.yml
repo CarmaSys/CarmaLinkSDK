@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.carmalink.com:8282/v1/541/data/overspeeding
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Authorization:
+      - OAuth oauth_consumer_key="CU1ND7JdJqYM2LtBsv7GLN0i", oauth_nonce="xsILkYxEtNV44tE9vaWqlqnqdMvUHtIwMvw4MXxMYNo",
+        oauth_signature="uSoxLQcQDlMK0dsNNwxqofAzhmA%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1360265044", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 07 Feb 2013 19:24:05 GMT
+      Connection:
+      - keep-alive
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '[{"configId":1275,"serial":541,"eventStart":1359820755727,"reportTimestamp":1359820762999,"duration":7272,"location":{"longitude":-73.7876984,"latitude":42.6359363,"accuracy":3.4380002,"heading":121.19963,"speed":120},"maxSpeed":125},{"configId":1275,"serial":541,"eventStart":1359820694625,"reportTimestamp":1359820735759,"duration":41134,"location":{"longitude":-73.7973387,"latitude":42.6404783,"accuracy":3.1020002,"heading":122.31071,"speed":120},"maxSpeed":124},{"configId":1275,"serial":541,"eventStart":1359820631097,"reportTimestamp":1359820635336,"duration":4239,"location":{"longitude":-73.82783069999999,"latitude":42.6611419,"accuracy":3.157,"heading":138.63295,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359820600231,"reportTimestamp":1359820605981,"duration":5750,"location":{"longitude":-73.8357596,"latitude":42.6679384,"accuracy":3.1260002,"heading":138.84549,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359820546682,"reportTimestamp":1359820556962,"duration":10280,"location":{"longitude":-73.8460059,"latitude":42.6802566,"accuracy":3.8390002,"heading":176.80092,"speed":120},"maxSpeed":123},{"configId":1275,"serial":541,"eventStart":1359820511573,"reportTimestamp":1359820527308,"duration":15735,"location":{"longitude":-73.8444779,"latitude":42.689100599999996,"accuracy":4.164,"heading":188.64911,"speed":120},"maxSpeed":127},{"configId":1275,"serial":541,"eventStart":1359818284084,"reportTimestamp":1359818295869,"duration":11785,"location":{"longitude":-73.8444296,"latitude":42.6876416,"accuracy":5.4150004,"heading":8.934589,"speed":120},"maxSpeed":123},{"configId":1275,"serial":541,"eventStart":1359818245660,"reportTimestamp":1359818246567,"duration":907,"location":{"longitude":-73.8417018,"latitude":42.673407999999995,"accuracy":2.966,"heading":319.0623,"speed":120},"maxSpeed":121},{"configId":1275,"serial":541,"eventStart":1359818181229,"reportTimestamp":1359818200265,"duration":19036,"location":{"longitude":-73.8294653,"latitude":42.6629228,"accuracy":3.6090002,"heading":319.1194,"speed":120},"maxSpeed":124},{"configId":1275,"serial":541,"eventStart":1359818094382,"reportTimestamp":1359818174584,"duration":80202,"location":{"longitude":-73.8223965,"latitude":42.6568633,"accuracy":3.4220002,"heading":319.16132,"speed":120},"maxSpeed":127},{"configId":1275,"serial":541,"eventStart":1359818070493,"reportTimestamp":1359818071400,"duration":907,"location":{"longitude":-73.7890615,"latitude":42.6369166,"accuracy":3.8490002,"heading":301.7624,"speed":120},"maxSpeed":121},{"configId":1275,"serial":541,"eventStart":1359817959124,"reportTimestamp":1359817988188,"duration":29064,"location":{"longitude":-73.7822533,"latitude":42.616431999999996,"accuracy":4.979,"heading":10.92812,"speed":120},"maxSpeed":124},{"configId":1275,"serial":541,"eventStart":1359817860186,"reportTimestamp":1359817862301,"duration":2115,"location":{"longitude":-73.7874776,"latitude":42.5788473,"accuracy":3.9630003,"heading":12.9459,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359817821161,"reportTimestamp":1359817828733,"duration":7572,"location":{"longitude":-73.7895722,"latitude":42.568903999999996,"accuracy":3.5310001,"heading":1.08512,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359817744592,"reportTimestamp":1359817815401,"duration":70809,"location":{"longitude":-73.7890433,"latitude":42.5648665,"accuracy":3.551,"heading":346.92566,"speed":120},"maxSpeed":129},{"configId":1275,"serial":541,"eventStart":1359655828583,"reportTimestamp":1359655835235,"duration":6652,"location":{"longitude":-73.7911433,"latitude":42.6375886,"accuracy":3.6690001,"heading":123.349815,"speed":120},"maxSpeed":124},{"configId":1275,"serial":541,"eventStart":1359655808003,"reportTimestamp":1359655812545,"duration":4542,"location":{"longitude":-73.7991335,"latitude":42.6413137,"accuracy":4.053,"heading":123.57593,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359655758086,"reportTimestamp":1359655794377,"duration":36291,"location":{"longitude":-73.8053466,"latitude":42.6443452,"accuracy":4.592,"heading":126.16098,"speed":120},"maxSpeed":131},{"configId":1275,"serial":541,"eventStart":1359655595297,"reportTimestamp":1359655707854,"duration":112557,"location":{"longitude":-73.8300082,"latitude":42.6629979,"accuracy":4.716,"heading":139.00787,"speed":120},"maxSpeed":128},{"configId":1275,"serial":541,"eventStart":1359653120145,"reportTimestamp":1359653144040,"duration":23895,"location":{"longitude":-73.8442062,"latitude":42.6885498,"accuracy":3.8380003,"heading":9.141379,"speed":120},"maxSpeed":126},{"configId":1275,"serial":541,"eventStart":1359653082324,"reportTimestamp":1359653109865,"duration":27541,"location":{"longitude":-73.8452236,"latitude":42.678190199999996,"accuracy":2.8200002,"heading":344.86023,"speed":120},"maxSpeed":132},{"configId":1275,"serial":541,"eventStart":1359652950363,"reportTimestamp":1359653069915,"duration":119552,"location":{"longitude":-73.8354428,"latitude":42.6680967,"accuracy":3.265,"heading":319.06778,"speed":120},"maxSpeed":129},{"configId":1068,"serial":541,"eventStart":1358718983138,"reportTimestamp":1358718995312,"duration":12174,"location":{"longitude":-73.7991839,"latitude":42.6413887,"accuracy":2.835,"heading":123.22094,"speed":130},"maxSpeed":132},{"configId":1068,"serial":541,"eventStart":1358718540360,"reportTimestamp":1358718543235,"duration":2875,"location":{"longitude":-73.9197611,"latitude":42.7455734,"accuracy":6.1340003,"heading":134.71811,"speed":130},"maxSpeed":133}]'
+    http_version: 
+  recorded_at: Thu, 07 Feb 2013 19:24:05 GMT
+- request:
+    method: get
+    uri: https://api.carmalink.com:8282/v1/541/data/overspeeding?limit=5
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - ! '*/*'
+      User-Agent:
+      - OAuth gem v0.4.7
+      Authorization:
+      - OAuth oauth_consumer_key="CU1ND7JdJqYM2LtBsv7GLN0i", oauth_nonce="9vIDaHlxYFqtYjbY0gjr6mex6hLZcVyqXDoYyimxK8",
+        oauth_signature="3BKDr1gg7cHBaEQx97O3dYD6cm8%3D", oauth_signature_method="HMAC-SHA1",
+        oauth_timestamp="1360265045", oauth_version="1.0"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      X-Powered-By:
+      - Express
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 07 Feb 2013 19:24:05 GMT
+      Connection:
+      - keep-alive
+      Transfer-Encoding:
+      - chunked
+    body:
+      encoding: US-ASCII
+      string: ! '[{"configId":1275,"serial":541,"eventStart":1359820755727,"reportTimestamp":1359820762999,"duration":7272,"location":{"longitude":-73.7876984,"latitude":42.6359363,"accuracy":3.4380002,"heading":121.19963,"speed":120},"maxSpeed":125},{"configId":1275,"serial":541,"eventStart":1359820694625,"reportTimestamp":1359820735759,"duration":41134,"location":{"longitude":-73.7973387,"latitude":42.6404783,"accuracy":3.1020002,"heading":122.31071,"speed":120},"maxSpeed":124},{"configId":1275,"serial":541,"eventStart":1359820631097,"reportTimestamp":1359820635336,"duration":4239,"location":{"longitude":-73.82783069999999,"latitude":42.6611419,"accuracy":3.157,"heading":138.63295,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359820600231,"reportTimestamp":1359820605981,"duration":5750,"location":{"longitude":-73.8357596,"latitude":42.6679384,"accuracy":3.1260002,"heading":138.84549,"speed":120},"maxSpeed":122},{"configId":1275,"serial":541,"eventStart":1359820546682,"reportTimestamp":1359820556962,"duration":10280,"location":{"longitude":-73.8460059,"latitude":42.6802566,"accuracy":3.8390002,"heading":176.80092,"speed":120},"maxSpeed":123}]'
+    http_version: 
+  recorded_at: Thu, 07 Feb 2013 19:24:05 GMT
+recorded_with: VCR 2.4.0
