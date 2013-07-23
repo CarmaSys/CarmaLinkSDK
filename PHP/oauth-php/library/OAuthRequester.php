@@ -413,9 +413,9 @@ class OAuthRequester extends OAuthRequestSigner
 				curl_setopt($ch, $k, $v);
 			}
 		}
-		usleep(50000);
+
 		$txt = curl_exec($ch);
-		usleep(50000);
+		
 		if ($txt === false) {
 			$error = curl_error($ch);
 			curl_close($ch);
