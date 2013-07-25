@@ -432,7 +432,6 @@ namespace CarmaLink;
 				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$debugParams);
 				unset($debugParams);
 			}
-			
 			$oauth_request = new \OAuthRequester($endpoint, $method, $parameters, $put_data);
 			$response = $oauth_request -> doRequest(0, $curl_options);
 			

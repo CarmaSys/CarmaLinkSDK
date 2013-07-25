@@ -213,7 +213,7 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_VEHICLE_HEALTH :
-					if($device -> getVehicleHealthConditions() === FALSE) {
+					if($device -> useVehicleHealth == FALSE) {
 						return FALSE;
 					}
 					$config -> params = self::setupConfigParams($device, $config);
@@ -221,6 +221,10 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_TRIP_REPORT :
+					if($device->useTrips == FALSE)
+					{
+						return FALSE;
+					}
 					$config -> params = self::setupConfigParams($device, $config);
 					break;
 
