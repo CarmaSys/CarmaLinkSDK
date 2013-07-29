@@ -417,6 +417,10 @@ namespace CarmaLink;
 			$curl_options = $this->use_curl_options ? self::$CURL_OPTS : array();
 			if ($method === self::API_METHOD_PUT) {
 				$put_data = json_encode($parameters);
+				if($put_data == NULL) // if no data was being put.
+				{
+					return array(self::RESPONSE_CODE => 202, self::RESPONSE_BODY => "Nothing to put, no request sent");
+				}
 				$curl_options[CURLOPT_HTTPHEADER] = array('Content-Type: application/json');
 				$parameters = NULL;
 			}
@@ -432,9 +436,9 @@ namespace CarmaLink;
 				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$debugParams);
 				unset($debugParams);
 			}
+			
 			$oauth_request = new \OAuthRequester($endpoint, $method, $parameters, $put_data);
 			$response = $oauth_request -> doRequest(0, $curl_options);
-			
 			if($this->debug) {
 				self::getLogger() -> addDebug("Response - ".$response['code']." body: ".$response['body']);
 			}	

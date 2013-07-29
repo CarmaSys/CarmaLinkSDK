@@ -96,7 +96,7 @@ namespace CarmaLink;
 		 * @param CarmaLink\ConfigStatus	status
 		 * @return void
 		 */
-		public function __construct($id = 0, $threshold = 0, $allowance = 0, $location = false, $params = NULL, $conditions = NULL, $state = NULL) {
+		public function __construct($id = 0, $threshold = NULL, $allowance = NULL, $location = NULL, $params = NULL, $conditions = NULL, $state = NULL, $config_type = NULL) {
 			$this -> id = $id;
 			$this -> __api_version = CarmaLinkAPI::API_VERSION;
 			$this -> threshold = $threshold;
@@ -128,18 +128,35 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function toArray() {
-			$configArray = (!in_array($this -> _config_type,array(ConfigType::CONFIG_TRIP_REPORT, ConfigType::CONFIG_VEHICLE_HEALTH))) ? 
-				array(self::API_THRESHOLD => (float)$this -> threshold, self::API_ALLOWANCE => (float)$this -> allowance ) : 
-					array( self::API_PARAMS => (!empty($this -> params) ? $this -> params : null) );
-
-			$configArray[self::API_LOCATION] = (bool)$this -> location;
+			$configArray = Array();
+			//reasoning behind all of the null checks:
+			//IF an object is null when sent, it should not, by default, consider that a 0.
+			//It should consider it as NULL, and a thing to be ignored. This allows a person
+			//To do simple updates to a threshold via simple requests, such as JUST updating
+			//the buzzer, or threshold. 
+			if(!in_array($this -> _config_type,array(ConfigType::CONFIG_TRIP_REPORT, ConfigType::CONFIG_VEHICLE_HEALTH)))
+			{
+				if($this -> threshold != NULL) 
+					$configArray[self::API_THRESHOLD] = (float) $this -> threshold; 
+				if($this -> allowance != NULL)
+					$configArray[self::API_ALLOWANCE] = (float) $this -> allowance;
+			}
+			else{
+				if($this -> params != NULL)
+					$configArray[self::API_PARAMS] = (!empty($this -> params) ? $this -> params : null);
+			}
+			
+			if($this -> location != NULL)
+				$configArray[self::API_LOCATION] = (bool)$this -> location;
 
 			if(is_array($this -> conditions) && !empty($this -> conditions)) {
-				$configArray[self::API_CONDITIONS] = $this -> conditions; 
+				if($this -> conditions != NULL)
+					$configArray[self::API_CONDITIONS] = $this -> conditions; 
 			}
 			
 			if ($this -> hasBuzzerConfig()) {
-				$configArray[self::API_BUZZER] = (string)$this -> buzzer;
+				if($this -> buzzer != NULL)
+					$configArray[self::API_BUZZER] = (string)$this -> buzzer;
 			}
 			return $configArray;
 		}
@@ -213,7 +230,7 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_VEHICLE_HEALTH :
-					if($device -> useVehicleHealth == FALSE) {
+					if($device ->useVehicleHealth === FALSE) {
 						return FALSE;
 					}
 					$config -> params = self::setupConfigParams($device, $config);
