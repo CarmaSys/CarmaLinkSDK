@@ -1,16 +1,22 @@
-Carma Systems Inc. CarmaLinkSDK 1.4.0
+Carma Systems Inc. CarmaLinkSDK 1.5.0
 ===============================
+
+CarmaLink is a vehicle telematics device providing users with programmable access to their car's onboard data through OBD2, Unified Diagnostic Service (UDS) and other manufacturer specific protocols. CarmaLink also contains onboard GPS and accelerometer chipsets providing users with high quality up to the second data about vehicles and their driver's behavior. 
+
+Also included is an audible live feedback mechanism to notify drivers of unwanted behavior. CarmaLink utilizes a wireless high-speed (currently 3G) cellular network connection to communicate with its backend data processing and warehousing systems known as CarmaLinkAPI. Users are given access to their CarmaLink(s) through the CarmaLinkAPI.
 
 The CarmaLinkSDK represents a layer of abstraction for interfacing the CarmaLinkAPI which utilizes
 a RESTful style interface over HTTPS. Authentication is handled by a two-legged OAuth 1.0a implementation.
 
+The latest CarmaLinkAPI documentation can be found ([here](https://github.com/CarmaSys/CarmaLinkAPI/blob/1.5/README.md))
+
 The SDK currently supports the following languages: 
 
-* PHP >= 5.3 ([docs](http://carmasys.github.com/CarmaLinkSDK/))
-* Ruby >= 1.9
+* PHP >= 5.3 ([docs](http://carmasys.github.io/CarmaLinkSDK/))
 
 Future releases aim to support: 
 
+* Ruby
 * C#/.NET
 * Node.js
 * Python
@@ -20,7 +26,7 @@ Getting Started
 ---------------
 
 * Download the SDK as a zip or clone it locally using the public GitHub URL.
-* Obtain your CarmaLinkAPI Key and Secret by opening a ticket @ https://support.carmasys.com
+* Obtain your CarmaLinkAPI Key and Secret by emailing a request to support@carmasys.com
 * Create a new instance of the CarmaLinkAPI class sending in required arguments (see language-specific documentation) 
 
 ```PHP
@@ -117,4 +123,4 @@ $result = $carmaLinkAPI->getReportData("517","all_activity");
 
 Need help?
 ----------------------
-If you need help using the SDK or have an issue, please [submit a support ticket](https://support.carmasys.com/anonymous_requests/new).
+If you need help using the SDK or have an issue, please email support@carmasys.com.

@@ -3,7 +3,7 @@
 /**
  * CarmaLink SDK for PHP
  *
- * @version 1.4.1
+ * @version 1.5.0
  *
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
  * @license MIT
