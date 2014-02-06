@@ -37,7 +37,7 @@ namespace CarmaLink;
 		* @var string
 		* The current API version
 		*/
-		const API_VERSION = "1.5.0";
+		const API_VERSION = "1.6.0";
 
 		const API_NAME = "CarmaLinkAPI";
 		
@@ -55,17 +55,17 @@ namespace CarmaLink;
 		 * @var int 
 		 * This is the maximum value of the per-request record "limit" API query parameter 
 		 */
-		const API_RECORD_LIMIT = 50;
+		const API_RECORD_LIMIT  = 50;
 
-		const API_METHOD_GET = 'GET';
-		const API_METHOD_PUT = 'PUT';
+		const API_METHOD_GET    = 'GET';
+		const API_METHOD_PUT    = 'PUT';
 		const API_METHOD_DELETE = 'DELETE';
 
-		const RESPONSE_CODE = 'response_code';
-		const RESPONSE_BODY = 'response_body';
+		const RESPONSE_CODE     = 'response_code';
+		const RESPONSE_BODY     = 'response_body';
 
 		const API_METHOD_PUT_SUCCESS = 204;
-		const API_METHOD_SUCCESS = 200;
+		const API_METHOD_SUCCESS     = 200;
 
 		/**
 		 * @access private
@@ -99,13 +99,13 @@ namespace CarmaLink;
 		 * @access public
 		 * @var bool	Whether to use SSL, should be true for production.
 		 */
-		public $https = false;
+		public $isHttps = false;
 
 		/**
 		 * @access public
 		 * @var bool	Whether to use debug, should be false for production.
 		 */
-		public $debug = false;
+		public $isDebugMode = false;
 
 		/**
 		 * @access private
@@ -119,21 +119,17 @@ namespace CarmaLink;
 		 * @return Monolog\Logger
 		 */
 		protected static function getLogger() {
-			if(!self::$_logger) {
-				self::setLogger();
-			}
+			if (!self::$_logger) { self::setLogger(); }
 			return self::$_logger;
 		}
 
 		protected static function setLogger($path = NULL) {
-			$logfilePath = $path === NULL ? self::API_LOG_FILE_DIR."/".self::API_NAME.".log" : $path;
+			$logfilePath = ($path === NULL) ? self::API_LOG_FILE_DIR."/".self::API_NAME.".log" : $path;
 				
 			// Attempt to open the file or create if it doesn't exist. 
 			$handle = fopen($logfilePath,"a+");
 			
-			if(!$handle || !fclose($handle)) {
-				throw new CarmaLinkAPIException("Could not create or open log file at path - ".$logfilePath);
-			}
+			if (!$handle || !fclose($handle)) { throw new CarmaLinkAPIException("Could not create or open log file at path - ".$logfilePath); }
 			
 			self::$_logger = new Logger(self::API_NAME);
 			self::$_logger->pushHandler(new StreamHandler($logfilePath,Logger::DEBUG));
@@ -151,19 +147,17 @@ namespace CarmaLink;
 		 * @param bool 			debug				Enable debugging
 		 * @return void
 		 */
-		public function __construct($consumer_key = null, $consumer_secret = null, $server_options = array(), $debug = false, $log_path = NULL) {
+		public function __construct($consumer_key = null, $consumer_secret = null, $server_options = array(), $is_debug_mode = false, $log_path = NULL) {
 			if (!$consumer_key || !$consumer_secret || strlen($consumer_key) === 0 || strlen($consumer_secret) === 0) {
 				throw new CarmaLinkAPIException(CarmaLinkAPIException::INVALID_API_KEYS_PROVIDED);
 			}
 
-			$this -> host = isset($server_options['HOST']) ? $server_options['HOST'] : null;
-			$this -> port = isset($server_options['PORT']) ? $server_options['PORT'] : null;
-			$this -> https = isset($server_options['HTTPS']) ? (bool)$server_options['HTTPS'] : false;
-			$this -> debug = $debug;
+			$this->host        = isset($server_options['HOST']) ? $server_options['HOST'] : null;
+			$this->port        = isset($server_options['PORT']) ? $server_options['PORT'] : null;
+			$this->isHttps     = isset($server_options['HTTPS']) ? (bool)$server_options['HTTPS'] : false;
+			$this->isDebugMode = $is_debug_mode;
 			
-			if($this->debug) {
-				self::setLogger($log_path);
-			}
+			if ($this->isDebugMode) { self::setLogger($log_path); }
 
 			\OAuthStore::instance("2Leg", array('consumer_key' => $consumer_key, 'consumer_secret' => $consumer_secret));
 		}
@@ -172,17 +166,13 @@ namespace CarmaLink;
 		 * Gets the relative path to the root endpoint of the API
 		 * @return string
 		 */
-		public static function getEndpointRelativeRoot() {
-			return 'v' . self::API_LEVEL;
-		}
+		public static function getEndpointRelativeRoot() { return 'v' . self::API_LEVEL; }
 
 		/**
 		 * Gets the root URI for and API endpoint
 		 * @return string
 		 */
-		public function getEndpointRootURI() {
-			return 'http' . ($this -> https ? 's' : '') . '://' . $this -> host . ':' . $this -> port;
-		}
+		public function getEndpointRootURI() { return 'http' . ($this->isHttps ? 's' : '') . '://' . $this->host . ':' . $this->port; }
 
 		/**
 		 * If parameter is an array it will join it using "."
@@ -191,12 +181,7 @@ namespace CarmaLink;
 		 * @param int|string|array 		serials		Serial numbers to parse
 		 * @return string
 		 */
-		private function sanitizeSerials($serials) {
-			if (is_array($serials)) {
-				return implode(".", $serials);
-			}
-			return $serials;
-		}
+		private function sanitizeSerials($serials) { return (is_array($serials)) ? implode(".", $serials) : $serials; }
 
 		/**
 		 * Shortcut to getReportData w/ TRUE for the returnAllData param
@@ -205,9 +190,7 @@ namespace CarmaLink;
 		 * @param array 			parameters		Key=>value parameters for data filtering to be added to the query string
 		 * @return array 			Assoc. array of HTTP response code and HTTP body content
 		 */
-		public function getReportDataArray($serials, $report_type, $parameters) {
-			return $this -> getReportData($serials, $report_type, $parameters, TRUE);
-		}
+		public function getReportDataArray($serials, $report_type, $parameters) { return $this->getReportData($serials, $report_type, $parameters, TRUE); }
 
 		/**
 		 * Gets a CarmaLink data view/report based on provided parameters.
@@ -221,20 +204,15 @@ namespace CarmaLink;
 		 * @throws CarmaLink\CarmaLinkAPIException
 		 */
 		public function getReportData($serials = 0, $report_type, $parameters = array(), $returnAllData = FALSE) {
-			if ($serials === 0)
-				throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")");
-			$serials = $this -> sanitizeSerials($serials);
+			if ($serials === 0) { throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")"); }
+			$serials = $this->sanitizeSerials($serials);
 			
-			$uri = $this -> getEndpointRootURI() . '/' . $this -> getEndpointRelativeRoot() . '/' . $serials . '/data/' . $report_type;
-			$response_data = $this -> get($uri, $parameters);
+			$uri = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/data/".$report_type;
+			$response_data = $this->get($uri, $parameters);
 			
-			if ($returnAllData === TRUE) {
-				return $response_data;
-			}
+			if ($returnAllData === TRUE) { return $response_data; }
 
-			if ((int)$response_data[self::RESPONSE_CODE] !== self::API_METHOD_SUCCESS) {
-				return FALSE;
-			}
+			if ((int)$response_data[self::RESPONSE_CODE] !== self::API_METHOD_SUCCESS) { return FALSE; }
 			return $response_data[self::RESPONSE_BODY];
 		}
 
@@ -247,8 +225,8 @@ namespace CarmaLink;
 		 * @return void
 		 */
 		protected function setupConfigCall(&$serials, &$endpoint, $config_type) {
-			$serials = $this -> sanitizeSerials($serials);
-			$endpoint = $this -> getEndpointRootURI() . '/' . $this -> getEndpointRelativeRoot() . '/' . $serials . '/report_config/' . $config_type;
+			$serials = $this->sanitizeSerials($serials);
+			$endpoint = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/report_config/".$config_type;
 		}
 		
 		/**
@@ -260,16 +238,13 @@ namespace CarmaLink;
 		 * @return array 	Associative array of configurations
 		 */
 		public function getAllConfigs($serial = 0) {
-			if($serial === 0)
-				return false;
+			if ($serial === 0) { return false; }
 			
 			$configs = array();
-
 			foreach (ConfigType::$valid_config_types as $config_type) {
-				$new_config = Config::Factory($this -> getConfig($serial, $config_type), $config_type);
+				$new_config = Config::Factory($this->getConfig($serial, $config_type), $config_type);
 				$configs[] = array($config_type => $new_config);
 			}
-
 			return $configs;
 		}
 
@@ -282,17 +257,14 @@ namespace CarmaLink;
 		 * @return bool|string On success returns JSON-formatted object, on failure false
 		 */
 		public function getConfig($serials = 0, $config_type, $configId = 0) {
-			if ($serials === 0)
-				return false;
-			// setup
-			$endpoint = '';
-			$params = $configId === 0 ? NULL : array('id'=>$configId);
+			if ($serials === 0) { return false; }
+
+			$endpoint = "";
+			$params = ($configId === 0) ? NULL : array("id" => $configId);
 			
-			$this -> setupConfigCall($serials, $endpoint, $config_type);
-			$response_data = $this -> get($endpoint, $params);
-			if ((int)$response_data[self::RESPONSE_CODE] !== self::API_METHOD_SUCCESS) {
-				return false;
-			}
+			$this->setupConfigCall($serials, $endpoint, $config_type);
+			$response_data = $this->get($endpoint, $params);
+			if ((int)$response_data[self::RESPONSE_CODE] !== self::API_METHOD_SUCCESS) { return false; }
 			return $response_data[self::RESPONSE_BODY];
 		}
 		/**
@@ -303,24 +275,17 @@ namespace CarmaLink;
 		 * @return bool|string	for single queries will return true/false, for multiple queries will return JSON string
 		 */
 		private function getProperResponse($response_data = NULL) {
-			if ($response_data === NULL)
-				return false;
+			if ($response_data === NULL) { return false; }
+
 			switch ((int)$response_data[self::RESPONSE_CODE]) {
-				// For single queries
-				case self::API_METHOD_PUT_SUCCESS :
-					return true;
-					break;
-				// For multiple queries a JSON object is always returned with embedded data
-				case self::API_METHOD_SUCCESS :
-					$body = $response_data[self::RESPONSE_BODY];
-					if (strlen($body) > 0)
-						return $response_data[self::RESPONSE_BODY];
-					else
-						return true;
-				// Otherwise there was an error
-				default :
-					return false;
-					break;
+			// For single queries
+			case self::API_METHOD_PUT_SUCCESS: return true;
+			// For multiple queries a JSON object is always returned with embedded data
+			case self::API_METHOD_SUCCESS :
+				$body = $response_data[self::RESPONSE_BODY];
+				return (strlen($body) > 0) ? $response_data[self::RESPONSE_BODY] : true;
+			// Otherwise there was an error
+			default: return false;
 			}
 		}
 
@@ -333,18 +298,17 @@ namespace CarmaLink;
 		 * @return bool
 		 */
 		public function putConfig($serials = 0, $config, $config_type) {
-			if ($serials === 0)
-				return false;
-			$endpoint = '';
-			
-			$this -> setupConfigCall($serials, $endpoint, $config_type);
+			if ($serials === 0) { return false; }
+
+			$endpoint = "";
+			$this->setupConfigCall($serials, $endpoint, $config_type);
 			// If config is instance of CarmaLink\Config then convert to associative array, otherwise use given argument assuming array.
-			$config = $config instanceof Config ?  $config -> toArray() : $config;
+			$config = $config instanceof Config ? $config->toArray() : $config;
 
 			if (!is_array($config) && empty($config) || !$config_type) {
 				throw new CarmaLinkAPIException('API putConfig config parameter was not of type array or not a valid configuration type.');
 			}
-			return $this -> getProperResponse($this -> put($endpoint, $config));
+			return $this->getProperResponse($this->put($endpoint, $config));
 		}
 
 		/**
@@ -355,23 +319,18 @@ namespace CarmaLink;
 		 * @return bool
 		 */
 		public function deleteConfig($serials = 0, $config_type) {
-			if ($serials === 0)
-				return false;
-			$endpoint = '';
-			$this -> setupConfigCall($serials, $endpoint, $config_type);
-			$response_data = $this -> delete($endpoint);
+			if ($serials === 0) { return false; }
+
+			$endpoint = "";
+			$this->setupConfigCall($serials, $endpoint, $config_type);
+			$response_data = $this->delete($endpoint);
 			switch ((int)$response_data[self::RESPONSE_CODE]) {
-				// For single queries
-				case self::API_METHOD_PUT_SUCCESS :
-					return true;
-					break;
-				// For multiple queries a JSON object is always returned with embedded data
-				case self::API_METHOD_SUCCESS :
-					return $response_data[self::RESPONSE_BODY];
-				// Otherwise there was an error
-				default :
-					return false;
-					break;
+			// For single queries
+			case self::API_METHOD_PUT_SUCCESS: return true;
+			// For multiple queries a JSON object is always returned with embedded data
+			case self::API_METHOD_SUCCESS: return $response_data[self::RESPONSE_BODY];
+			// Otherwise there was an error
+			default: return false;
 			}
 		}
 
@@ -382,7 +341,7 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function get($endpoint, $parameters = NULL) {
-			return $this -> api($endpoint, self::API_METHOD_GET, $parameters);
+			return $this->api($endpoint, self::API_METHOD_GET, $parameters);
 		}
 
 		/**
@@ -392,7 +351,7 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function put($endpoint, $parameters = NULL) {
-			return $this -> api($endpoint, self::API_METHOD_PUT, $parameters);
+			return $this->api($endpoint, self::API_METHOD_PUT, $parameters);
 		}
 
 		/**
@@ -401,7 +360,7 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function delete($endpoint) {
-			return $this -> api($endpoint, self::API_METHOD_DELETE);
+			return $this->api($endpoint, self::API_METHOD_DELETE);
 		}
 
 		/**
@@ -417,31 +376,23 @@ namespace CarmaLink;
 			$curl_options = $this->use_curl_options ? self::$CURL_OPTS : array();
 			if ($method === self::API_METHOD_PUT) {
 				$put_data = json_encode($parameters);
-				if($put_data == NULL) // if no data was being put.
-				{
-					return array(self::RESPONSE_CODE => 202, self::RESPONSE_BODY => "Nothing to put, no request sent");
-				}
+				// if no data was being put.
+				if ($put_data == NULL) { return array(self::RESPONSE_CODE => 202, self::RESPONSE_BODY => "Nothing to put, no request sent"); }
 				$curl_options[CURLOPT_HTTPHEADER] = array('Content-Type: application/json');
 				$parameters = NULL;
 			}
 			
-			if($this->debug) {
-				if(is_array($parameters)) {
-					$debugParams = $parameters;
-				} else if($parameters === NULL && strlen($put_data)) {
-					$debugParams = json_decode($put_data,TRUE);
-				} else {
-					$debugParams = array();
-				} 
-				self::getLogger() -> addDebug("Request - ".$method." ".$endpoint." ",$debugParams);
+			if ($this->isDebugMode) {
+				if      (is_array($parameters))                     { $debugParams = $parameters; }
+				else if ($parameters === NULL && strlen($put_data)) { $debugParams = json_decode($put_data,TRUE); }
+				else                                                { $debugParams = array(); } 
+				self::getLogger()->addDebug("Request - ".$method." ".$endpoint." ",$debugParams);
 				unset($debugParams);
 			}
 			
 			$oauth_request = new \OAuthRequester($endpoint, $method, $parameters, $put_data);
-			$response = $oauth_request -> doRequest(0, $curl_options);
-			if($this->debug) {
-				self::getLogger() -> addDebug("Response - ".$response['code']." body: ".$response['body']);
-			}	
+			$response = $oauth_request->doRequest(0, $curl_options);
+			if ($this->isDebugMode) { self::getLogger()->addDebug("Response - ".$response['code']." body: ".$response['body']); }	
 			
 			return array(self::RESPONSE_CODE => $response['code'], self::RESPONSE_BODY => $response['body']);
 		}
@@ -456,17 +407,18 @@ namespace CarmaLink;
 		 * @return 		bool|array  
 		 */
 		public function updateDevice($device, $return_errors = FALSE) {
+			// NOTE: not yet on this list are digital inputs, driver log, and green band!
 			$configs_to_update = array(
-			    ConfigType::CONFIG_TRIP_REPORT,
-			    ConfigType::CONFIG_VEHICLE_HEALTH,
-				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_ACCEL, 
+				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_CORNERING,
+				ConfigType::CONFIG_STATUS,
 				ConfigType::CONFIG_IDLING, 
 				ConfigType::CONFIG_OVERSPEEDING,
-				ConfigType::CONFIG_STATUS,
-				ConfigType::CONFIG_PARKINGBRAKE,
+				ConfigType::CONFIG_PARKING_BRAKE,
 				ConfigType::CONFIG_SEATBELT,
+			    ConfigType::CONFIG_TRIP_REPORT,
+			    ConfigType::CONFIG_VEHICLE_HEALTH,
 				ConfigType::CONFIG_GENERAL
 			);
 			
@@ -474,12 +426,10 @@ namespace CarmaLink;
 			
 			foreach ($configs_to_update as $config_type) {
 				$config_params = Config::getConfigArray($device, $config_type);
-				if($config_params === FALSE) {
-					if(!$this-> deleteConfig((int)$device -> id, $config_type)) {
-						$error_data[$config_type] = "failure to delete configuration.";	
-					}
-				} else if (!$this -> putConfig((int)$device -> id, $config_params, $config_type)) 
-				{
+				if ($config_params === FALSE) {
+					if (!$this-> deleteConfig((int)$device->id, $config_type)) { $error_data[$config_type] = "failure to delete configuration."; }
+				}
+				else if (!$this->putConfig((int)$device->id, $config_params, $config_type)) {
 					$error_data[$config_type] = "failure to configure.";
 				}
 			}

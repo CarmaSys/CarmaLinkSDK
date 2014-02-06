@@ -8,20 +8,20 @@ namespace CarmaLink;
 	 */
 	class Config {
 
-		const API_THRESHOLD		= 'threshold';
-		const API_ALLOWANCE		= 'allowance';
-		const API_LOCATION		= 'location';
-		const API_BUZZER		= 'buzzer';
-		const API_DELETE_CONFIG	= 'OFF';
-		const API_PARAMS		= 'optionalParams';
-		const API_CONDITIONS	= 'optionalConditions';
+		const API_THRESHOLD        = "threshold";
+		const API_ALLOWANCE        = "allowance";
+		const API_LOCATION         = "location";
+		const API_BUZZER           = "buzzer";
+		const API_DELETE_CONFIG    = "OFF";
+		const API_PARAMS           = "optionalParams";
+		const API_CONDITIONS	   = "optionalConditions";
 
-		const ODOMETER = "ODOMETER";
-		const DURATION_TO_SERVICE = "DURATION_TO_SERVICE";
-		const DISTANCE_TO_SERVICE = "DISTANCE_TO_SERVICE";
-		const EMISSION_MONITORS = "EMISSION_MONITORS";
-		const FUEL_LEVEL = "FUEL_LEVEL";
-		const SPEEDING ="SPEEDING";
+		const ODOMETER             = "ODOMETER";
+		const DURATION_TO_SERVICE  = "DURATION_TO_SERVICE";
+		const DISTANCE_TO_SERVICE  = "DISTANCE_TO_SERVICE";
+		const EMISSION_MONITORS    = "EMISSION_MONITORS";
+		const FUEL_LEVEL           = "FUEL_LEVEL";
+		const SPEEDING             = "SPEEDING";
 		const TIRE_PRESSURE_CHANGE = "TIRE_PRESSURE_CHANGE";
 
 		/**
@@ -97,16 +97,14 @@ namespace CarmaLink;
 		 * @return void
 		 */
 		public function __construct($id = 0, $threshold = NULL, $allowance = NULL, $location = NULL, $params = NULL, $conditions = NULL, $state = NULL, $config_type = NULL) {
-			$this -> id = $id;
-			$this -> __api_version = CarmaLinkAPI::API_VERSION;
-			$this -> threshold = $threshold;
-			$this -> allowance = $allowance;
-			$this -> location = $location;
-			$this -> params = $params;
-			$this -> conditions = $conditions;
-			if($state) {
-				$this -> state = $state;
-			}
+			$this->__api_version = CarmaLinkAPI::API_VERSION;
+			$this->id            = $id;
+			$this->threshold     = $threshold;
+			$this->allowance     = $allowance;
+			$this->location      = $location;
+			$this->params        = $params;
+			$this->conditions    = $conditions;
+			if ($state) { $this->state = $state; }
 		}
 
 		/**
@@ -116,9 +114,8 @@ namespace CarmaLink;
 		 * @return bool
 		 */
 		public function setConfigType($config_type) {
-			if ($config_type === $this -> _config_type || !ConfigType::validConfigType($config_type))
-				return false;
-			$this -> _config_type = $config_type;
+			if ($config_type === $this->_config_type || !ConfigType::isValidConfigType($config_type)) { return false; }
+			$this->_config_type = $config_type;
 			return true;
 		}
 
@@ -128,37 +125,25 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function toArray() {
-			$configArray = Array();
-			//reasoning behind all of the null checks:
-			//IF an object is null when sent, it should not, by default, consider that a 0.
-			//It should consider it as NULL, and a thing to be ignored. This allows a person
-			//To do simple updates to a threshold via simple requests, such as JUST updating
-			//the buzzer, or threshold. 
-			if(!in_array($this -> _config_type,array(ConfigType::CONFIG_TRIP_REPORT, ConfigType::CONFIG_VEHICLE_HEALTH)))
-			{
-				if($this -> threshold != NULL) 
-					$configArray[self::API_THRESHOLD] = (float) $this -> threshold; 
-				if($this -> allowance != NULL)
-					$configArray[self::API_ALLOWANCE] = (float) $this -> allowance;
+			$a = Array();
+			// The reasoning behind all of the null checks:
+			// If an object is null when sent, it should not, by default, consider that a 0. It should consider it as
+			// NULL, and a thing to be ignored. This allows a person to do simple updates to a threshold via simple
+			// requests, such as JUST updating the buzzer, or threshold. 
+			if (!in_array($this->_config_type, array(ConfigType::CONFIG_TRIP_REPORT, ConfigType::CONFIG_VEHICLE_HEALTH))) {
+				if ($this->threshold != NULL) { $a[self::API_THRESHOLD]  = (float) $this->threshold; }
+				if ($this->allowance != NULL) { $a[self::API_ALLOWANCE]  = (float) $this->allowance; }
 			}
-			else{
-				if($this -> params != NULL)
-					$configArray[self::API_PARAMS] = (!empty($this -> params) ? $this -> params : null);
-			}
+			else if ($this->params   != NULL) { $a[self::API_PARAMS]     = (!empty($this->params) ? $this->params : null); }
 			
-			if($this -> location != NULL)
-				$configArray[self::API_LOCATION] = (bool)$this -> location;
+			if      ($this->location != NULL) { $a[self::API_LOCATION]   = (bool)$this->location; }
 
-			if(is_array($this -> conditions) && !empty($this -> conditions)) {
-				if($this -> conditions != NULL)
-					$configArray[self::API_CONDITIONS] = $this -> conditions; 
-			}
-			
-			if ($this -> hasBuzzerConfig()) {
-				if($this -> buzzer != NULL)
-					$configArray[self::API_BUZZER] = (string)$this -> buzzer;
-			}
-			return $configArray;
+			if      (is_array($this->conditions) && !empty($this->conditions) && ($this->conditions != NULL))
+			                                  { $a[self::API_CONDITIONS] = $this->conditions; }
+
+			if      ($this->hasBuzzerConfig() && ($this->buzzer != NULL))
+			                                  { $a[self::API_BUZZER]     = (string)$this->buzzer; }
+			return $a;
 		}
 
 		/**
@@ -166,9 +151,7 @@ namespace CarmaLink;
 		 *
 		 * @return bool
 		 */
-		public function hasBuzzerConfig() {
-			return ConfigType::buzzerConfigType($this -> _config_type);
-		}
+		public function hasBuzzerConfig() { return (bool)ConfigType::isBuzzerConfigType($this->_config_type); }
 
 
 		/**
@@ -179,122 +162,115 @@ namespace CarmaLink;
 		 * @return array|NULL
 		 */
 		protected static function setupConfigParams($device, $config) {
-			$params = array();
-			if($device->getUseOdometer()) {
-				$params[] = self::ODOMETER;
-			}
-			if($device->getUseNextServiceDistance()) {
-				$params[] = self::DISTANCE_TO_SERVICE;
-			}
-			if($device->getUseNextServiceDuration()) {
-				$params[] = self::DURATION_TO_SERVICE;
-			}
-			if($device->getUseEmissionMonitors()) {
-				$params[] = self::EMISSION_MONITORS;
-			}
-			if($device->getUseFuelLevel()) {
-				$params[] = self::FUEL_LEVEL;
-			}
-			if(empty($params)) {
-				return NULL;
-			}
-			return $params;
+			$a = array();
+			if ($device->getUseOdometer())            { $a[] = self::ODOMETER; }
+			if ($device->getUseNextServiceDistance()) { $a[] = self::DISTANCE_TO_SERVICE; }
+			if ($device->getUseNextServiceDuration()) { $a[] = self::DURATION_TO_SERVICE; }
+			if ($device->getUseEmissionMonitors())    { $a[] = self::EMISSION_MONITORS; }
+			if ($device->getUseFuelLevel())           { $a[] = self::FUEL_LEVEL; }
+
+			return (empty($a)) ? NULL : $a;
 		}
 
 		/**
 		 * Utility method to create a new Config instance based on a device and report type.
-		 * @deprecated To be deprecated in a later release 
-		 *
-		 * @deprecated This method will become deprecated in a later release
 		 *
 		 * @param CarmaLink				device		A custom data object representing a CarmaLink
 		 * @param string|ConfigType 	config_type
 		 * @return Config|bool 			return new config object, or false to delete configuration
 		 */
-		public static function createConfigFromDevice($device, $config_type) {
+		private static function createConfigFromDevice($device, $config_type) {
 			$config = new Config();
 
-			if (!$config -> setConfigType($config_type)) {
-				throw new CarmaLinkAPIException('Invalid configuration type : ' . $config_type);
+			if (!$config->setConfigType($config_type)) {
+				throw new CarmaLinkAPIException("Invalid configuration type : " . $config_type);
 			}
 
-			$config -> buzzer = (string)$device -> getBuzzerVolume();
-			$config -> location = (bool)$device -> getUseGPS();
+			$config->buzzer   = (string)$device->getBuzzerVolume();
+			$config->location = (bool)  $device->getUseGps();
 
 			switch ($config->_config_type) {
-				
-				case ConfigType::CONFIG_STATUS :
-					if( (int)$device -> getPingTime() < ConfigType::CONFIG_STATUS_MINIMUM_PING )
-						return FALSE;
-					$config -> threshold = $device -> getPingTime();
-					break;
 
-				case ConfigType::CONFIG_VEHICLE_HEALTH :
-					if($device ->useVehicleHealth === FALSE) {
-						return FALSE;
-					}
-					$config -> params = self::setupConfigParams($device, $config);
-					$config -> conditions  = $device->getVehicleHealthConditions();
-					break;
-
-				case ConfigType::CONFIG_TRIP_REPORT :
-					if($device->useTrips == FALSE)
-					{
-						return FALSE;
-					}
-					$config -> params = self::setupConfigParams($device, $config);
-					break;
-
-				case ConfigType::CONFIG_OVERSPEEDING :
-					if( (int)$device -> speedLimit === 0 )
-						return FALSE;
-					$config -> threshold = $device -> getSpeedLimit();
-					$config -> allowance = $device -> getSpeedLimitAllowance();
+				case CONFIG_DIGITAL_INPUT_0:
+				case CONFIG_DIGITAL_INPUT_1:
+				case CONFIG_DIGITAL_INPUT_2:
+				case CONFIG_DIGITAL_INPUT_3:
+				case CONFIG_DIGITAL_INPUT_4:
+				case CONFIG_DIGITAL_INPUT_5:
+				case CONFIG_DIGITAL_INPUT_6:
+					/* TBD */
+					return FALSE;
 					break;
 				
-				case ConfigType::CONFIG_HARD_CORNERING :
-					if( (int)$device -> getCorneringLimit() === 0 )
-						return FALSE;
-					$config -> threshold = $device -> getCorneringLimit();
-					$config -> allowance = $device -> getCorneringLimitAllowance();
+				case CONFIG_DRIVER_LOG:
+					/* TBD */
+					return FALSE;
+					break;
+
+				case CONFIG_GREEN_BAND:
+					/* TBD */
+					return FALSE;
 					break;
 				
-				case ConfigType::CONFIG_HARD_BRAKING :
-					if( (int)$device -> getBrakeLimit() === 0 )
-						return FALSE;
-					$config -> threshold = $device -> getBrakeLimit();
-					$config -> allowance = $device -> getBrakeLimitAllowance();
+				case ConfigType::CONFIG_HARD_ACCEL:
+					if ((int)$device->getAccelLimit_Gs() === 0) { return FALSE; }
+					$config->threshold = $device->getAccelLimit_Gs();
+					$config->allowance = $device->getAccelLimitAllowance_Msec();
 					break;
 
-				case ConfigType::CONFIG_HARD_ACCEL :
-					if( (int)$device -> getAccelLimit() === 0 )
-						return FALSE;
-					$config -> threshold = $device -> getAccelLimit();
-					$config -> allowance = $device -> getAccelLimitAllowance();
+				case ConfigType::CONFIG_HARD_BRAKING:
+					if ((int)$device->getBrakeLimit_Gs() === 0) { return FALSE; }
+					$config->threshold = $device->getBrakeLimit_Gs();
+					$config->allowance = $device->getBrakeLimitAllowance_Msec();
 					break;
 
-				case ConfigType::CONFIG_PARKINGBRAKE :
-					if( $device -> getParkingBrakeLimit() === FALSE )
-						return FALSE;
-					$config -> threshold = $device -> getParkingBrakeLimit();
-					$config -> allowance = $device -> getParkingBrakeLimitAllowance();
+				case ConfigType::CONFIG_HARD_CORNERING:
+					if ((int)$device->getCorneringLimit_Gs() === 0) { return FALSE; }
+					$config->threshold = $device->getCorneringLimit_Gs();
+					$config->allowance = $device->getCorneringLimitAllowance_Msec();
+					break;
+				
+				case ConfigType::CONFIG_STATUS:
+					if ((int)$device->getPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
+					$config->threshold = $device->getPingTime_Msec();
 					break;
 
-				case ConfigType::CONFIG_SEATBELT :
-					if( $device -> getSeatbeltLimit() === FALSE )
-						return FALSE;
-					$config -> threshold = $device -> getSeatbeltLimit();
-					$config -> allowance = $device -> getSeatbeltLimitAllowance();
+				case ConfigType::CONFIG_IDLING:
+					if ((int)$device->getIdleTimeLimit_Msec() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
+					$config->allowance = $device->getIdleTimeLimit_Msec();
 					break;
 
-				case ConfigType::CONFIG_IDLING :
-					if( (int)$device -> getIdleTimeLimit() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE)
-						return FALSE;
-					$config -> allowance = $device -> getIdleTimeLimit();
+				case ConfigType::CONFIG_OVERSPEEDING:
+					if ((int)$device->speedLimit_Kmph === 0) { return FALSE; }
+					$config->threshold = $device->getSpeedLimit_Kmph();
+					$config->allowance = $device->getSpeedLimitAllowance_Msec();
+					break;
+				
+				case ConfigType::CONFIG_PARKING_BRAKE:
+					if ($device->getParkingBrakeLimit_Kmph() === FALSE) { return FALSE; }
+					$config->threshold = $device->getParkingBrakeLimit_Kmph();
+					$config->allowance = $device->getParkingBrakeLimitAllowance_Msec();
 					break;
 
-				case ConfigType::CONFIG_GENERAL :
-					$config = new GeneralConfig( $device->getFuelType(), $device->getDisplacement() );
+				case ConfigType::CONFIG_SEATBELT:
+					if ($device->getSeatbeltLimit_Kmph() === FALSE) { return FALSE; }
+					$config->threshold = $device->getSeatbeltLimit_Kmph();
+					$config->allowance = $device->getSeatbeltLimitAllowance_Msec();
+					break;
+
+				case ConfigType::CONFIG_TRIP_REPORT:
+					if ($device->useTrips == FALSE) { return FALSE; }
+					$config->params = self::setupConfigParams($device, $config);
+					break;
+
+				case ConfigType::CONFIG_VEHICLE_HEALTH:
+					if ($device->useVehicleHealth === FALSE) { return FALSE; }
+					$config->params     = self::setupConfigParams($device, $config);
+					$config->conditions = $device->getVehicleHealthConditions();
+					break;
+
+				case ConfigType::CONFIG_GENERAL:
+					$config = new GeneralConfig($device->getFuelType(), $device->getDisplacement_L());
 					break;
 			}
 			return $config;
@@ -312,7 +288,7 @@ namespace CarmaLink;
 		 */
 		public static function getConfigArray($device, $config_type) {
 			$newConfig = self::createConfigFromDevice($device, $config_type);
-			return ($newConfig !== FALSE) ? $newConfig -> toArray() : FALSE;
+			return ($newConfig !== FALSE) ? $newConfig->toArray() : FALSE;
 		}
 
 		/**
@@ -322,33 +298,30 @@ namespace CarmaLink;
 		 * @param ConfigType 		config_type 	A valid ConfigType
 		 * @return Config
 		 */
-		public static function Factory($obj,$config_type) {
-			if(!$obj) return FALSE;
+		public static function Factory($obj, $config_type) {
+			if (!$obj) { return FALSE; }
 
-			if(!is_object($obj) && is_string($obj)) {
-				try {
-					$obj = json_decode($obj);
-				} catch(Exception $e) {
-					throw new CarmaLinkAPIException("Could not instantiate Config with provided JSON data ".$e->getMessage());	
-				}
+			if (!is_object($obj) && is_string($obj)) {
+				try { $obj = json_decode($obj); }
+				catch(Exception $e) { throw new CarmaLinkAPIException("Could not instantiate Config with provided JSON data ".$e->getMessage()); }
 			}
-			foreach (array('configId','threshold','allowance','location','buzzer','optionalParams','optionalConditions','status') as $prop) {
-				$obj -> $prop = isset($obj -> $prop) ? $obj -> $prop : NULL;				
+			// set any missing fields to NULL
+			foreach (array("configId","threshold","allowance","location","buzzer","optionalParams","optionalConditions","status") as $prop) {
+				$obj->$prop = isset($obj->$prop) ? $obj->$prop : NULL;				
 			}
 			$config = new Config(
-				(int)$obj -> configId,
-				(float)$obj -> threshold,
-				(float)$obj -> allowance,
-				(bool)$obj -> location,
-				$obj -> optionalParams,
-				$obj -> optionalConditions,
-				$obj -> status
+				(int)$obj->configId,
+				(float)$obj->threshold,
+				(float)$obj->allowance,
+				(bool)$obj->location,
+				$obj->optionalParams,
+				$obj->optionalConditions,
+				$obj->status
 			);
-			$config -> buzzer = $obj -> buzzer;
-			$config -> setConfigType($config_type);
+			$config->buzzer = $obj->buzzer;
+			$config->setConfigType($config_type);
 			return $config;
 		}
-
 	}
 	
 	/**
@@ -366,7 +339,7 @@ namespace CarmaLink;
 		 * @access public
 		 * @var float	Engine displacement used to correctly calculate fuel effiency etc.
 		 */
-		public $displacement = 2.0;
+		public $displacement_L = 2.0;
 		
 		/**
 		 * Constructor
@@ -374,10 +347,10 @@ namespace CarmaLink;
 		 * @param float	Engine displacement
 		 * @return void
 		 */
-		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement = 2.0) {
-			$this -> __api_version = CarmaLinkAPI::API_VERSION;
-			$this -> fuel = $fuel;
-			$this -> displacement = $displacement;
+		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement_L = 2.0) {
+			$this->__api_version   = CarmaLinkAPI::API_VERSION;
+			$this->fuel            = $fuel;
+			$this->displacement_L  = $displacement_L;
 		}
 		
 		/**
@@ -385,8 +358,6 @@ namespace CarmaLink;
 		 *
 		 * @return array
 		 */
-		public function toArray() {
-			return array("fuel" => $this -> fuel, "displacement" => $this -> displacement);
-		}
-		
+		public function toArray() { return array("fuel" => $this->fuel, "displacement" => $this->displacement_L); }		
 	}
+	
