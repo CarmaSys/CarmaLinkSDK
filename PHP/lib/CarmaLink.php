@@ -7,9 +7,6 @@ namespace CarmaLink;
 	 * of a CarmaLink. The getters/setters below are required for some of
 	 * the functionality in this SDK.
 	 *
-	 * @deprecated As of CarmaLinkAPI v1.5.0
-	 * Please define your own interface
-	 *
 	 * @class CarmaLink
 	 */
 	abstract class CarmaLink {
@@ -188,16 +185,16 @@ namespace CarmaLink;
 
 		/**
 		 * Set CarmaLink low tire pressure report
-		 * @param bool	useTP	On/Off
+		 * @param bool	useTirePressure	On/Off
 		 * @return void
 		 */
-		public function setUseTirePressure($useTP = TRUE) { $this->useTP = (bool)$useTP; }
+		public function setUseTirePressure($useTirePressure = TRUE) { $this->useTirePressure = (bool)$useTirePressure; }
 
 		/**
 		 * Get CarmaLink low tire pressure report enabled
 		 * @return bool
 		 */
-		public function getUseTirePressure() { return $this->useTP; }
+		public function getUseTirePressure() { return $this->useTirePressure; }
 
 		/**
 		 * Sets the CarmaLink's update interval
@@ -214,16 +211,16 @@ namespace CarmaLink;
 
 		/**
 		 * Set CarmaLink speed limit
-		 * @param int		speedLimit_Kmph		Speed in Km/h
+		 * @param int		speedLimit_kmph		Speed in Km/h
 		 * @return void
 		 */
-		public function setSpeedLimit_Kmph($speedLimit_Kmph = 0) { $this->speedLimit_Kmph = (int)$speedLimit_Kmph; }
+		public function setSpeedLimit_kmph($speedLimit_kmph = 0) { $this->speedLimit_kmph = (int)$speedLimit_kmph; }
 
 		/**
 		 * Get CarmaLink speed limit
 		 * @return int	Km/h limit
 		 */
-		public function getSpeedLimit_Kmph() { return $this->speedLimit_Kmph; }
+		public function getSpeedLimit_kmph() { return $this->speedLimit_kmph; }
 
 		/**
 		 * Set CarmaLink speed limit allowance
@@ -240,16 +237,16 @@ namespace CarmaLink;
 
 		/**
 		 * Set CarmaLink parking brake limit
-		 * @param int|bool		speedLimit_Kmph		Speed in Km/h
+		 * @param int|bool		speedLimit_kmph		Speed in Km/h
 		 * @return void
 		 */
-		public function setParkingBrakeLimit_Kmph($speedLimit_Kmph = 0) { $this->parkingBrakeLimit_Kmph = ($speedLimit_Kmph === FALSE) ? FALSE : (int)$speedLimit_Kmph; }
+		public function setParkingBrakeLimit_kmph($speedLimit_kmph = 0) { $this->parkingBrakeLimit_kmph = ($speedLimit_kmph === FALSE) ? FALSE : (int)$speedLimit_kmph; }
 
 		/**
 		 * Get CarmaLink parking brake limit
 		 * @return int|bool	Km/h limit or false if disabled
 		 */
-		public function getParkingBrakeLimit_Kmph() { return ($this->parkingBrakeLimit_Kmph === FALSE || $this->parkingBrakeLimit_Kmph < 0) ? FALSE : (int)$this->parkingBrakeLimit_Kmph; }
+		public function getParkingBrakeLimit_kmph() { return ($this->parkingBrakeLimit_kmph === FALSE || $this->parkingBrakeLimit_kmph < 0) ? FALSE : (int)$this->parkingBrakeLimit_kmph; }
 
 		/**
 		 * Set CarmaLink parking brake allowance
@@ -266,16 +263,16 @@ namespace CarmaLink;
 
 		/**
 		 * Set CarmaLink seatbelt limit
-		 * @param int|bool		speedLimit_Kmph		Speed in Km/h
+		 * @param int|bool		speedLimit_kmph		Speed in Km/h
 		 * @return void
 		 */
-		public function setSeatbeltLimit_Kmph($speedLimit_Kmph = 0) { $this->seatbeltLimit_Kmph = ($speedLimit_Kmph === FALSE) ? FALSE : (int)$speedLimit_Kmph; }
+		public function setSeatbeltLimit_kmph($speedLimit_kmph = 0) { $this->seatbeltLimit_kmph = ($speedLimit_kmph === FALSE) ? FALSE : (int)$speedLimit_kmph; }
 
 		/**
 		 * Get CarmaLink seatbelt limit
 		 * @return int|bool	Km/h limit or false if disabled
 		 */
-		public function getSeatbeltLimit_Kmph() { return ($this->seatbeltLimit_Kmph === FALSE || $this->seatbeltLimit_Kmph < 0) ? FALSE : (int)$this->seatbeltLimit_Kmph; }
+		public function getSeatbeltLimit_kmph() { return ($this->seatbeltLimit_kmph === FALSE || $this->seatbeltLimit_kmph < 0) ? FALSE : (int)$this->seatbeltLimit_kmph; }
 
 		/**
 		 * Set CarmaLink seatbelt allowance
@@ -296,13 +293,13 @@ namespace CarmaLink;
 		 * @param int|bool	reverseLimit		Speed in Km/h or FALSE to disable report
 		 * @return void
 		 */
-		public function setReverseLimit_Kmph($reverseLimit_Kmph = 0) { $this->reverseLimit_Kmph = ($reverseLimit_Kmph < 0) ? FALSE : $reverseLimit_Kmph; }
+		public function setReverseLimit_kmph($reverseLimit_kmph = 0) { $this->reverseLimit_kmph = ($reverseLimit_kmph < 0) ? FALSE : $reverseLimit_kmph; }
 
 		/**
 		 * Get CarmaLink speed limit
 		 * @return int|bool		Km/h limit or FALSE if report disabled
 		 */
-		public function getReverseLimit_Kmph() { return $this->reverseLimit_Kmph; }
+		public function getReverseLimit_kmph() { return $this->reverseLimit_kmph; }
 
 		/**
 		 * Set CarmaLink reverse speed limit allowance

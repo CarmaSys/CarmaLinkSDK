@@ -406,7 +406,7 @@ namespace CarmaLink;
 		 * 										updates or deletions had errors
 		 * @return 		bool|array  
 		 */
-		public function updateDevice($device, $return_errors = FALSE) {
+		public function updateDeviceConfigurations($device, $return_errors = FALSE) {
 			// NOTE: not yet on this list are digital inputs, driver log, and green band!
 			$configs_to_update = array(
 				ConfigType::CONFIG_HARD_ACCEL, 

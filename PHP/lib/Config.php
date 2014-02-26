@@ -191,23 +191,23 @@ namespace CarmaLink;
 
 			switch ($config->_config_type) {
 
-				case CONFIG_DIGITAL_INPUT_0:
-				case CONFIG_DIGITAL_INPUT_1:
-				case CONFIG_DIGITAL_INPUT_2:
-				case CONFIG_DIGITAL_INPUT_3:
-				case CONFIG_DIGITAL_INPUT_4:
-				case CONFIG_DIGITAL_INPUT_5:
-				case CONFIG_DIGITAL_INPUT_6:
+				case ConfigType::CONFIG_DIGITAL_INPUT_0:
+				case ConfigType::CONFIG_DIGITAL_INPUT_1:
+				case ConfigType::CONFIG_DIGITAL_INPUT_2:
+				case ConfigType::CONFIG_DIGITAL_INPUT_3:
+				case ConfigType::CONFIG_DIGITAL_INPUT_4:
+				case ConfigType::CONFIG_DIGITAL_INPUT_5:
+				case ConfigType::CONFIG_DIGITAL_INPUT_6:
 					/* TBD */
 					return FALSE;
 					break;
 				
-				case CONFIG_DRIVER_LOG:
+				case ConfigType::CONFIG_DRIVER_LOG:
 					/* TBD */
 					return FALSE;
 					break;
 
-				case CONFIG_GREEN_BAND:
+				case ConfigType::CONFIG_GREEN_BAND:
 					/* TBD */
 					return FALSE;
 					break;
@@ -241,20 +241,20 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING:
-					if ((int)$device->speedLimit_Kmph === 0) { return FALSE; }
-					$config->threshold = $device->getSpeedLimit_Kmph();
+					if ((int)$device->speedLimit_kmph === 0) { return FALSE; }
+					$config->threshold = $device->getSpeedLimit_kmph();
 					$config->allowance = $device->getSpeedLimitAllowance_Msec();
 					break;
 				
 				case ConfigType::CONFIG_PARKING_BRAKE:
-					if ($device->getParkingBrakeLimit_Kmph() === FALSE) { return FALSE; }
-					$config->threshold = $device->getParkingBrakeLimit_Kmph();
+					if ($device->getParkingBrakeLimit_kmph() === FALSE) { return FALSE; }
+					$config->threshold = $device->getParkingBrakeLimit_kmph();
 					$config->allowance = $device->getParkingBrakeLimitAllowance_Msec();
 					break;
 
 				case ConfigType::CONFIG_SEATBELT:
-					if ($device->getSeatbeltLimit_Kmph() === FALSE) { return FALSE; }
-					$config->threshold = $device->getSeatbeltLimit_Kmph();
+					if ($device->getSeatbeltLimit_kmph() === FALSE) { return FALSE; }
+					$config->threshold = $device->getSeatbeltLimit_kmph();
 					$config->allowance = $device->getSeatbeltLimitAllowance_Msec();
 					break;
 

@@ -1,4 +1,4 @@
-Carma Systems Inc. CarmaLinkSDK 1.5.0
+Carma Systems Inc. CarmaLinkSDK 1.6.0
 ===============================
 
 CarmaLink is a vehicle telematics device providing users with programmable access to their car's onboard data through OBD2, Unified Diagnostic Service (UDS) and other manufacturer specific protocols. CarmaLink also contains onboard GPS and accelerometer chipsets providing users with high quality up to the second data about vehicles and their driver's behavior. 
@@ -8,7 +8,7 @@ Also included is an audible live feedback mechanism to notify drivers of unwante
 The CarmaLinkSDK represents a layer of abstraction for interfacing the CarmaLinkAPI which utilizes
 a RESTful style interface over HTTPS. Authentication is handled by a two-legged OAuth 1.0a implementation.
 
-The latest CarmaLinkAPI documentation can be found ([here](https://github.com/CarmaSys/CarmaLinkAPI/blob/1.5/README.md))
+The latest CarmaLinkAPI documentation can be found ([here](https://github.com/CarmaSys/CarmaLinkAPI/blob/1.6/README.md))
 
 The SDK currently supports the following languages: 
 
