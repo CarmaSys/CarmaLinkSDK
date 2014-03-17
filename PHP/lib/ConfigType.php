@@ -34,6 +34,7 @@ namespace CarmaLink;
 		const CONFIG_SEATBELT        = 'seatbelt';
 		const CONFIG_TRIP_REPORT     = 'trip_report';
 		const CONFIG_VEHICLE_HEALTH  = 'vehicle_health';
+		const CONFIG_PARKING         = 'parking';
 
 		const CONFIG_NEW_DEPLOYMENT  = 'new_deployment';
 		const CONFIG_GENERAL         = 'general_config';
@@ -78,6 +79,7 @@ namespace CarmaLink;
 			self::CONFIG_VEHICLE_HEALTH,
 			self::CONFIG_NEW_DEPLOYMENT,
 			self::CONFIG_GENERAL,
+			self::CONFIG_PARKING
 		);
 	
 		/**

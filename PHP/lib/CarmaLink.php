@@ -34,9 +34,9 @@ namespace CarmaLink;
 			if (!isset($this->vehicleHealthConditions) || count($this->vehicleHealthConditions) === 0) {
 				$conditions = Array();
 				$index = 0;
-				if ($this->getUseTirePressure())     { $conditions[$index] = Config::TIRE_PRESSURE_CHANGE; $index++; } 
-				if ($this->getUseEmissionMonitors()) { $conditions[$index] = Config::EMISSION_MONITORS;    $index++; }
-
+				if ($this->getUseTirePressure())     { $conditions[$index] = Config::TIRE_PRESSURE_LOW;   $index++; } 
+				if ($this->getUseEmissionMonitors()) { $conditions[$index] = Config::EMISSION_MONITORS;   $index++; }
+				if ($this->getUseBatteryVoltage())   { $conditions[$index] = Config::BATTERY_VOLTAGE_LOW; $index++; }
 				if (empty($conditions)) { return FALSE; }
 				$this->setVehicleHealthConditions($conditions);
 			}
@@ -55,6 +55,27 @@ namespace CarmaLink;
 		    $this->vehicleHealthConditions = is_array($conditions) ? $conditions : array($conditions);
 		}
 		
+		/**
+		 * Getter for useBatteryVoltage
+		 *
+		 * @return bool
+		 */
+		public function getUseBatteryVoltage() { return $this->useBatteryVoltage; }
+		
+		/**
+		 * Setter for useBatteryVoltage
+		 *
+		 * @param bool $use Value to set
+		 * @return void
+		 */
+		public function setUseBatteryVoltage($use = TRUE) { $this->useBatteryVoltage = $use; }
+		
+		/**
+		 * Getter for useFuelLevel
+		 *
+		 * @return bool
+		 */
+
 		/**
 		 * Getter for useEmissionMonitors
 		 *
@@ -404,6 +425,19 @@ namespace CarmaLink;
 		 * @return int	milliseconds
 		 */
 		public function getIdleTimeLimit_Msec() { return $this->idleTimeLimit_Msec; }
+
+		/**
+		 * Set CarmaLink parking Timeout Threshold_Msec
+		 * @param int	parkingTimeoutThreshold_Msec	in milliseconds
+		 * @return void
+		 */
+		public function setParkingTimeoutThreshold_Msec($parkingTimeoutThreshold_Msec = 0) { $this->parkingTimeoutThreshold_Msec = (int)$parkingTimeoutThreshold_Msec; }
+
+		/**
+		 * Get CarmaLink parking Timeout Allowance_Msec
+		 * @return int	milliseconds
+		 */
+		public function getParkingTimeoutThreshold_Msec() { return $this->parkingTimeoutThreshold_Msec; }
 
 		/**
 		 * Set attached automobile's fuel type

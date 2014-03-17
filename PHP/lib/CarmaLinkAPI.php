@@ -412,14 +412,15 @@ namespace CarmaLink;
 				ConfigType::CONFIG_HARD_ACCEL, 
 				ConfigType::CONFIG_HARD_BRAKING, 
 				ConfigType::CONFIG_HARD_CORNERING,
-				ConfigType::CONFIG_STATUS,
-				ConfigType::CONFIG_IDLING, 
+				ConfigType::CONFIG_IDLING,
 				ConfigType::CONFIG_OVERSPEEDING,
-				ConfigType::CONFIG_PARKING_BRAKE,
+				ConfigType::CONFIG_PARKING,
 				ConfigType::CONFIG_SEATBELT,
-			    ConfigType::CONFIG_TRIP_REPORT,
-			    ConfigType::CONFIG_VEHICLE_HEALTH,
-				ConfigType::CONFIG_GENERAL
+				ConfigType::CONFIG_STATUS,
+			    	ConfigType::CONFIG_TRIP_REPORT,
+			    	ConfigType::CONFIG_VEHICLE_HEALTH,
+				ConfigType::CONFIG_GENERAL,
+				ConfigType::CONFIG_PARKING_BRAKE
 			);
 			
 			$error_data = array();
