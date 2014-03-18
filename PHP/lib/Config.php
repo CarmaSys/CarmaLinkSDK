@@ -247,11 +247,15 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING:
-					if ((int)$device->speedLimit_kmph === 0) { return FALSE; }
+					if ((int)$device->getSpeedLimit_kmph() === 0) { return FALSE; }
 					$config->threshold = $device->getSpeedLimit_kmph();
 					$config->allowance = $device->getSpeedLimitAllowance_Msec();
 					break;
-				
+				case ConfigType::CONFIG_ENGINE_OVERSPEED:
+					if((int)$device->getEngineSpeedLimit_rpm() === 0) { return FALSE; }
+					$config->threshold = $device->getEngineSpeedLimit_rpm();
+					$config->allowance = $device->getEngineSpeedLimitAllowance_Msec();
+					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
 					if ($device->getParkingBrakeLimit_kmph() === FALSE) { return FALSE; }
 					$config->threshold = $device->getParkingBrakeLimit_kmph();

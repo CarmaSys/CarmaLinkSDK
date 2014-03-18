@@ -420,7 +420,8 @@ namespace CarmaLink;
 			    	ConfigType::CONFIG_TRIP_REPORT,
 			    	ConfigType::CONFIG_VEHICLE_HEALTH,
 				ConfigType::CONFIG_GENERAL,
-				ConfigType::CONFIG_PARKING_BRAKE
+				ConfigType::CONFIG_PARKING_BRAKE,
+				ConfigType::CONFIG_ENGINE_OVERSPEED
 			);
 			
 			$error_data = array();

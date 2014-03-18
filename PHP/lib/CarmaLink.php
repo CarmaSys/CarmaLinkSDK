@@ -257,6 +257,32 @@ namespace CarmaLink;
 		public function getSpeedLimitAllowance_Msec() { return $this->speedLimitAllowance_Msec; }
 
 		/**
+		 * Set CarmaLink engine speed limit
+		 * @param int		engineSpeedLimit_rpm		Speed in Rotations per minute
+		 * @return void
+		 */
+		public function setEngineSpeedLimit_rpm($engineSpeedLimit_rpm = 0) { $this->engineSpeedLimit_rpm = (int)$engineSpeedLimit_rpm; }
+
+		/**
+		 * Get CarmaLink engine speed limit
+		 * @return int	Rotations per Minute limit
+		 */
+		public function getEngineSpeedLimit_rpm() { return $this->engineSpeedLimit_rpm; }
+
+		/**
+		 * Set CarmaLink engine speed limit allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setEngineSpeedLimitAllowance_Msec($allowance_Msec = 0.0) { $this->engineSpeedLimitAllowance_Msec = (float)$allowance_Msec; }
+
+		/**
+		 * Get CarmaLink speed limit allowance
+		 * @return float allowance time in ms
+		 */
+		public function getEngineSpeedLimitAllowance_Msec() { return $this->engineSpeedLimitAllowance_Msec; }
+
+		/**
 		 * Set CarmaLink parking brake limit
 		 * @param int|bool		speedLimit_kmph		Speed in Km/h
 		 * @return void

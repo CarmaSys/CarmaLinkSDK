@@ -35,6 +35,7 @@ namespace CarmaLink;
 		const CONFIG_TRIP_REPORT     = 'trip_report';
 		const CONFIG_VEHICLE_HEALTH  = 'vehicle_health';
 		const CONFIG_PARKING         = 'parking';
+		const CONFIG_ENGINE_OVERSPEED= 'engine_overspeed';
 
 		const CONFIG_NEW_DEPLOYMENT  = 'new_deployment';
 		const CONFIG_GENERAL         = 'general_config';
@@ -50,7 +51,8 @@ namespace CarmaLink;
 			self::CONFIG_HARD_CORNERING,
 			self::CONFIG_HARD_ACCEL,
 			self::CONFIG_PARKING_BRAKE,
-			self::CONFIG_SEATBELT
+			self::CONFIG_SEATBELT,
+			self::CONFIG_ENGINE_OVERSPEED
 		);
 
 		/**
@@ -79,7 +81,8 @@ namespace CarmaLink;
 			self::CONFIG_VEHICLE_HEALTH,
 			self::CONFIG_NEW_DEPLOYMENT,
 			self::CONFIG_GENERAL,
-			self::CONFIG_PARKING
+			self::CONFIG_PARKING,
+			self::CONFIG_ENGINE_OVERSPEED
 		);
 	
 		/**
@@ -102,7 +105,8 @@ namespace CarmaLink;
 			self::CONFIG_IDLING, 
 			self::CONFIG_OVERSPEEDING, 
 			self::CONFIG_PARKING_BRAKE,
-			self::CONFIG_SEATBELT
+			self::CONFIG_SEATBELT,
+			self::CONFIG_ENGINE_OVERSPEED
 		);
 
 		/**
