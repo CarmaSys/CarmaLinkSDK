@@ -16,13 +16,16 @@ namespace CarmaLink;
 		const API_PARAMS           = "optionalParams";
 		const API_CONDITIONS	   = "optionalConditions";
 
+		const SPEEDING             = "SPEEDING";
+
 		const ODOMETER             = "ODOMETER";
 		const DURATION_TO_SERVICE  = "DURATION_TO_SERVICE";
 		const DISTANCE_TO_SERVICE  = "DISTANCE_TO_SERVICE";
+		const BATTERY_VOLTAGE      = "BATTERY_VOLTAGE";
+		const BATTERY_VOLTAGE_LOW  = "IS_LOW_BATTERY_VOLTAGE";
 		const EMISSION_MONITORS    = "EMISSION_MONITORS";
 		const FUEL_LEVEL           = "FUEL_LEVEL";
-		const SPEEDING             = "SPEEDING";
-		const TIRE_PRESSURE_CHANGE = "TIRE_PRESSURE_CHANGE";
+		const TIRE_PRESSURE_LOW    = "IS_LOW_TIRE_PRESSURE";
 
 		/**
 		 * @access public
@@ -134,7 +137,7 @@ namespace CarmaLink;
 				if ($this->threshold != NULL) { $a[self::API_THRESHOLD]  = (float) $this->threshold; }
 				if ($this->allowance != NULL) { $a[self::API_ALLOWANCE]  = (float) $this->allowance; }
 			}
-			else if ($this->params   != NULL) { $a[self::API_PARAMS]     = (!empty($this->params) ? $this->params : null); }
+			if ($this->params   != NULL) { $a[self::API_PARAMS]     = (!empty($this->params) ? $this->params : null); }
 			
 			if      ($this->location != NULL) { $a[self::API_LOCATION]   = (bool)$this->location; }
 
@@ -166,6 +169,8 @@ namespace CarmaLink;
 			if ($device->getUseOdometer())            { $a[] = self::ODOMETER; }
 			if ($device->getUseNextServiceDistance()) { $a[] = self::DISTANCE_TO_SERVICE; }
 			if ($device->getUseNextServiceDuration()) { $a[] = self::DURATION_TO_SERVICE; }
+			if ($device->getUseBatteryVoltage())	  { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
+			if ($device->getUseTirePressure())	  { $a[] = self::TIRE_PRESSURE_LOW; }
 			if ($device->getUseEmissionMonitors())    { $a[] = self::EMISSION_MONITORS; }
 			if ($device->getUseFuelLevel())           { $a[] = self::FUEL_LEVEL; }
 
@@ -233,6 +238,7 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_STATUS:
 					if ((int)$device->getPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
 					$config->threshold = $device->getPingTime_Msec();
+					$config->params = $device->getUseBatteryVoltage() ? array(self::BATTERY_VOLTAGE) : NULL;
 					break;
 
 				case ConfigType::CONFIG_IDLING:
@@ -241,17 +247,25 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING:
-					if ((int)$device->speedLimit_kmph === 0) { return FALSE; }
+					if ((int)$device->getSpeedLimit_kmph() === 0) { return FALSE; }
 					$config->threshold = $device->getSpeedLimit_kmph();
 					$config->allowance = $device->getSpeedLimitAllowance_Msec();
 					break;
-				
+				case ConfigType::CONFIG_ENGINE_OVERSPEED:
+					if((int)$device->getEngineSpeedLimit_rpm() === 0) { return FALSE; }
+					$config->threshold = $device->getEngineSpeedLimit_rpm();
+					$config->allowance = $device->getEngineSpeedLimitAllowance_Msec();
+					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
 					if ($device->getParkingBrakeLimit_kmph() === FALSE) { return FALSE; }
 					$config->threshold = $device->getParkingBrakeLimit_kmph();
 					$config->allowance = $device->getParkingBrakeLimitAllowance_Msec();
 					break;
-
+				case ConfigType::CONFIG_PARKING:
+					if($device->getParkingTimeoutThreshold_Msec() == FALSE) { return FALSE; }
+					$config->threshold = $device->getParkingTimeoutThreshold_Msec();
+					$config->params = array(self::BATTERY_VOLTAGE);//($device->getUseBatteryVoltage() ? array(self::BATTERY_VOLTAGE) : NULL);
+					break;
 				case ConfigType::CONFIG_SEATBELT:
 					if ($device->getSeatbeltLimit_kmph() === FALSE) { return FALSE; }
 					$config->threshold = $device->getSeatbeltLimit_kmph();
