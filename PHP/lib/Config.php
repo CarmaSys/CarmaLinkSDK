@@ -218,20 +218,20 @@ namespace CarmaLink;
 					break;
 				
 				case ConfigType::CONFIG_HARD_ACCEL:
-					if ((int)$device->getAccelLimit_Gs() === 0) { return FALSE; }
-					$config->threshold = $device->getAccelLimit_Gs();
+					if ((int)$device->getAccelLimit_Mpss() === 0) { return FALSE; }
+					$config->threshold = $device->getAccelLimit_Mpss();
 					$config->allowance = $device->getAccelLimitAllowance_Msec();
 					break;
 
 				case ConfigType::CONFIG_HARD_BRAKING:
-					if ((int)$device->getBrakeLimit_Gs() === 0) { return FALSE; }
-					$config->threshold = $device->getBrakeLimit_Gs();
+					if ((int)$device->getBrakeLimit_Mpss() === 0) { return FALSE; }
+					$config->threshold = $device->getBrakeLimit_Mpss();
 					$config->allowance = $device->getBrakeLimitAllowance_Msec();
 					break;
 
 				case ConfigType::CONFIG_HARD_CORNERING:
-					if ((int)$device->getCorneringLimit_Gs() === 0) { return FALSE; }
-					$config->threshold = $device->getCorneringLimit_Gs();
+					if ((int)$device->getCorneringLimit_Mpss() === 0) { return FALSE; }
+					$config->threshold = $device->getCorneringLimit_Mpss();
 					$config->allowance = $device->getCorneringLimitAllowance_Msec();
 					break;
 				

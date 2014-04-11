@@ -363,16 +363,16 @@ namespace CarmaLink;
 
 		/**
 		 * Set CarmaLink brake limit
-		 * @param float		brakeLimit		Limit in G's
+		 * @param float		brakeLimit		Limit in Meters per second^2
 		 * @return void
 		 */
-		public function setBrakeLimit_Gs($brakeLimit_Gs = 0.0) { $this->brakeLimit_Gs = (float)$brakeLimit_Gs; }
+		public function setBrakeLimit_Mpss($brakeLimit_Mpss = 0.0) { $this->brakeLimit_Mpss = (float)$brakeLimit_Mpss; }
 
 		/**
 		 * Get CarmaLink brake limit
-		 * @return float	In G's
+		 * @return float	In Meters per second^2
 		 */
-		public function getBrakeLimit_Gs() { return $this->brakeLimit_Gs; }
+		public function getBrakeLimit_Mpss() { return $this->brakeLimit_Mpss; }
 
 		/**
 		 * Set CarmaLink brake limit allowance
@@ -389,16 +389,16 @@ namespace CarmaLink;
 		
 		/**
 		 * Set CarmaLink hard conering limit
-		 * @param float		cornerLimit		Limit in G's
+		 * @param float		cornerLimit		Limit in Meters per second^2
 		 * @return void
 		 */
-		public function setCorneringLimit_Gs($corneringLimit_Gs = 0.0) { $this->corneringLimit_Gs = (float)$corneringLimit_Gs; }
+		public function setCorneringLimit_Mpss($corneringLimit_Mpss = 0.0) { $this->corneringLimit_Mpss = (float)$corneringLimit_Mpss; }
 
 		/**
 		 * Get CarmaLink hard cornering limit
-		 * @return float	In G's
+		 * @return float	In Meters per second^2
 		 */
-		public function getCorneringLimit_Gs() { return $this->corneringLimit_Gs; }
+		public function getCorneringLimit_Mpss() { return $this->corneringLimit_Mpss; }
 
 		/**
 		 * Set CarmaLink hard cornering allowance
@@ -415,16 +415,16 @@ namespace CarmaLink;
 
 		/**
 		 * Set CarmaLink acceleration limit
-		 * @param float		accelLimit		Limit in G's
+		 * @param float		accelLimit		Limit in Meters per second^2
 		 * @return void
 		 */
-		public function setAccelLimit_Gs($accelLimit_Gs = 0.0) { $this->accelLimit_Gs = (float)$accelLimit_Gs; }
+		public function setAccelLimit_Mpss($accelLimit_Mpss = 0.0) { $this->accelLimit_Mpss = (float)$accelLimit_Mpss; }
 
 		/**
 		 * Get CarmaLink acceleration limit
-		 * @return float	In G's
+		 * @return float	In Meters per second^2
 		 */
-		public function getAccelLimit_Gs() { return $this->accelLimit_Gs; }
+		public function getAccelLimit_Mpss() { return $this->accelLimit_Mpss; }
 		
 		/**
 		 * Set CarmaLink accel limit allowance
