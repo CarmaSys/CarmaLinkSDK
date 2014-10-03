@@ -284,7 +284,7 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_GENERAL:
-					$config = new GeneralConfig($device->getFuelType(), $device->getDisplacement_L());
+					$config = new GeneralConfig($device->getFuelType(), $device->getDisplacement_L(), $device->getDevicePaused());
 					break;
 			}
 			return $config;
@@ -354,17 +354,22 @@ namespace CarmaLink;
 		 * @var float	Engine displacement used to correctly calculate fuel effiency etc.
 		 */
 		public $displacement_L = 2.0;
-		
+		/**
+		 * @access public
+		 * @var bool	Status regaurding if the device has been paused or resumed
+		 */
+		public $devicePaused = false;
 		/**
 		 * Constructor
 		 * @param string Type of fuel
 		 * @param float	Engine displacement
 		 * @return void
 		 */
-		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement_L = 2.0) {
+		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement_L = 2.0, $devicePaused = false) {
 			$this->__api_version   = CarmaLinkAPI::API_VERSION;
 			$this->fuel            = $fuel;
 			$this->displacement_L  = $displacement_L;
+			$this->devicePaused = $devicePaused;
 		}
 		
 		/**

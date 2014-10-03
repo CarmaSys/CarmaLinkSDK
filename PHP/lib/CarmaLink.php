@@ -490,5 +490,19 @@ namespace CarmaLink;
 		 * @return float litres
 		 */
 		public function getDisplacement_L() { return $this->displacement_L; }
+		
+		
+		/**
+		 * Set state of device paused (true = paused, false = not).
+		 * @param bool	Is in paused state (true/false). converted to bool if not bool. 
+		 * @return void
+		 */
+		public function setDevicePaused($devicePaused = false) { $this->isPaused = (true && $devicePaused);  }
+		/**
+		 * Get device state is paused
+		 * @return bool isPaused
+		 */
+		public getDevicePaused() { return $this->isPaused; }
+		
 	}
 	
