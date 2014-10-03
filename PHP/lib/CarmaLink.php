@@ -502,7 +502,7 @@ namespace CarmaLink;
 		 * Get device state is paused
 		 * @return bool isPaused
 		 */
-		public getDevicePaused() { return $this->isPaused; }
+		public function getDevicePaused() { return $this->isPaused; }
 		
 	}
 	
