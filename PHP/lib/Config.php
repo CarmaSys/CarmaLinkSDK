@@ -377,6 +377,6 @@ namespace CarmaLink;
 		 *
 		 * @return array
 		 */
-		public function toArray() { return array("fuel" => $this->fuel, "displacement" => $this->displacement_L); }		
+		public function toArray() { return array("fuel" => $this->fuel, "displacement" => $this->displacement_L, "isPaused" => $this->devicePaused); }		
 	}
 	
