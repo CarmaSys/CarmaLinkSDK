@@ -14,6 +14,7 @@ namespace CarmaLink;
 		const CONFIG_IDLING_MINIMUM_ALLOWANCE = 5000; // 5 seconds
 		const CONFIG_STATUS_MINIMUM_PING = 5000; // 5 seconds
 
+		//report configuration types
 		const CONFIG_DIGITAL_INPUT_X = 'digital_input_';
 		const CONFIG_DIGITAL_INPUT_0 = 'digital_input_0';
 		const CONFIG_DIGITAL_INPUT_1 = 'digital_input_1';
@@ -38,7 +39,14 @@ namespace CarmaLink;
 		const CONFIG_ENGINE_OVERSPEED= 'engine_overspeed';
 
 		const CONFIG_NEW_DEPLOYMENT  = 'new_deployment';
-		const CONFIG_GENERAL         = 'general_config';
+		
+		//general config types
+		const CONFIG_GENERAL_ENGINE       = 'engine';
+		const CONFIG_GENERAL_CONNECTIVITY = 'connectivity';
+		const CONFIG_GENERAL_OPERATION    = 'operation';
+		
+		//general config get all resource. fetches all the general config information together.
+		const CONFIG_GENERAL_GET_ALL      = 'all';
 		
 		/**
 		 * @access public
@@ -56,10 +64,11 @@ namespace CarmaLink;
 		);
 
 		/**
+		 * valid read-write report config types
 		 * @access public
 		 * @var array
 		 */
-		public static $valid_config_types = array(
+		public static $valid_rw_report_config_types = array(
 			self::CONFIG_DIGITAL_INPUT_0,
 			self::CONFIG_DIGITAL_INPUT_1,
 			self::CONFIG_DIGITAL_INPUT_2,
@@ -79,13 +88,33 @@ namespace CarmaLink;
 			self::CONFIG_SEATBELT,
 			self::CONFIG_TRIP_REPORT,
 			self::CONFIG_VEHICLE_HEALTH,
-			self::CONFIG_NEW_DEPLOYMENT,
-			self::CONFIG_GENERAL,
 			self::CONFIG_PARKING,
 			self::CONFIG_ENGINE_OVERSPEED
 		);
-	
-		/**
+		/** Valid READ-ONLY report config types
+		 * @access public
+		 * @var array
+		 */
+		public static $valid_r_report_config_types = array(
+			self::CONFIG_NEW_DEPLOYMENT
+		);
+		/** Valid READ-WRITE general configuraiton endpoints.
+		 * @access public
+		 * @var array
+		 */
+		public static $valid_rw_general_config_types = array(
+			self::CONFIG_GENERAL_ENGINE,
+			self::CONFIG_GENERAL_CONNECTIVITY,
+			self::CONFIG_GENERAL_OPERATION,
+		);
+		/** Valid READ-ONLY general configuration endpoints
+		 * @access public 
+		 * @var array
+		 */
+		public static $valid_r_general_config_types = array(
+			self::CONFIG_GENERAL_GET_ALL
+		);
+		/** Configurations that use allowances
 		 * @access public
 		 * @var array
 		 */
@@ -110,13 +139,39 @@ namespace CarmaLink;
 		);
 
 		/**
-		 * Helper to determine if a string matches a valid configuration type.
+		 * Helper to determine if a string matches a valid READ-WRITE report configuration type
 		 *
 		 * @param string|ConfigType 	config_type
 		 * @return bool
 		 */
-		public static function isValidConfigType($config_type) { return (array_search($config_type, self::$valid_config_types) !== false); }
-
+		public static function isValidWritableReportConfigType($config_type) { return (array_search($config_type, self::$valid_rw_report_config_types) !== false); }
+		/**
+		 * Helper to determine if a string matches a valid report configuration type. will have read access
+		 *
+		 * @param string|ConfigType 	config_type
+		 * @return bool
+		 */
+		public static function isValidReportConfigType($config_type) { 
+			return (array_search($config_type, self::$valid_rw_report_config_types) !== false ? true : 
+			                    (array_search($config_type, self::$valid_r_report_config_types) !== false);
+		}
+		/**
+		 * Helper to determine if a string matches a valid READ-WRITE general configuration endpoint
+		 *
+		 * @param string|ConfigType 	config_type
+		 * @return bool
+		 */
+		public static function isValidWritableGeneralConfigType($config_type) { return (array_search($config_type, self::$valid_RW_general_config_types) !== false); }
+		/**
+		 * Helper to determine if a string matches a valid general configuration type, with read access.
+		 *
+		 * @param string|ConfigType 	config_type
+		 * @return bool
+		 */
+		public static function isValidGeneralConfigType($config_type) { 
+			return (array_search($config_type, self::$valid_rw_general_config_types) !== false ? true : 
+			                    (array_search($config_type, self::$valid_r_general_config_types) !== false);
+		}
 		/**
 		 * Helper to determine if a string matches a valid configuration type.
 		 *

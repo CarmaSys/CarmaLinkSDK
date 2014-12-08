@@ -6,6 +6,8 @@
  * @version 1.5.0
  *
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
+ * @version 1.7.0-prerelease1
+ * @author Ryan Gerstein <ryan.gerstein@carmasys.com>
  * @license MIT
  *
  */
@@ -20,9 +22,15 @@ namespace CarmaLink {
 	require_once  realpath(__DIR__ . '/oauth-php/library/OAuthStore.php');
 	require_once  realpath(__DIR__ . '/oauth-php/library/OAuthRequester.php');
 	
+	//carmalink types.
 	require_once realpath(__DIR__. '/lib/CarmaLink.php');
+	require_once realpath(__DIR__. '/lib/VehicleCarmaLink.php');
+	//configs
 	require_once realpath(__DIR__. '/lib/ConfigType.php');
-	require_once realpath(__DIR__. '/lib/Config.php');
+	require_once realpath(__DIR__. '/lib/ReportConfig.php');
+	require_once realpath(__DIR__. '/lib/GeneralConfig.php');
+	
+	//the request api
 	require_once realpath(__DIR__. '/lib/CarmaLinkAPI.php');
 
 	/**
@@ -79,6 +87,18 @@ namespace CarmaLink {
 	class FuelType {
 		const FUEL_GASOLINE	= "FUEL_GASOLINE";
 		const FUEL_DIESEL	= "FUEL_DIESEL";
+	}
+	
+	/**
+	 * Type of protocol detection a device uses
+	 * 
+	 * When setting or getting the CONFIG_GENERAL_OPERATION obdDetection, use these values
+	 * 
+	 * @class OBDDetectionType
+	 */
+	class OBDDectionType {
+		const J1939 = "OBD_DETECTION_J1939";
+		const AUTO  = "OBD_DETECTION_AUTOMATIC";
 	}
 
 } // End of namespace CarmaLink

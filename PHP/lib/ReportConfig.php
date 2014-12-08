@@ -4,9 +4,9 @@ namespace CarmaLink;
 	/**
 	 * Represents a CarmaLink configuration.
 	 *
-	 * @class Config
+	 * @class ReportConfig
 	 */
-	class Config {
+	class ReportConfig {
 
 		const API_THRESHOLD        = "threshold";
 		const API_ALLOWANCE        = "allowance";
@@ -26,6 +26,7 @@ namespace CarmaLink;
 		const EMISSION_MONITORS    = "EMISSION_MONITORS";
 		const FUEL_LEVEL           = "FUEL_LEVEL";
 		const TIRE_PRESSURE_LOW    = "IS_LOW_TIRE_PRESSURE";
+		const FUEL_RATE            = "FUEL_RATE";
 
 		/**
 		 * @access public
@@ -116,8 +117,8 @@ namespace CarmaLink;
 		 * @param string|ConfigType		config_type
 		 * @return bool
 		 */
-		public function setConfigType($config_type) {
-			if ($config_type === $this->_config_type || !ConfigType::isValidConfigType($config_type)) { return false; }
+		public function setReportConfigType($config_type) {
+			if ($config_type === $this->_config_type || !ConfigType::isValidReportConfigType($config_type)) { return false; }
 			$this->_config_type = $config_type;
 			return true;
 		}
@@ -185,9 +186,9 @@ namespace CarmaLink;
 		 * @return Config|bool 			return new config object, or false to delete configuration
 		 */
 		private static function createConfigFromDevice($device, $config_type) {
-			$config = new Config();
+			$config = new ReportConfig();
 
-			if (!$config->setConfigType($config_type)) {
+			if (!$config->setReportConfigType($config_type)) {
 				throw new CarmaLinkAPIException("Invalid configuration type : " . $config_type);
 			}
 
@@ -238,7 +239,10 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_STATUS:
 					if ((int)$device->getPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
 					$config->threshold = $device->getPingTime_Msec();
-					$config->params = $device->getUseBatteryVoltage() ? array(self::BATTERY_VOLTAGE) : NULL;
+					$optParams = array();
+					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
+					if($device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }
+					$config = $optParams
 					break;
 
 				case ConfigType::CONFIG_IDLING:
@@ -282,10 +286,6 @@ namespace CarmaLink;
 					$config->params     = self::setupConfigParams($device, $config);
 					$config->conditions = $device->getVehicleHealthConditions();
 					break;
-
-				case ConfigType::CONFIG_GENERAL:
-					$config = new GeneralConfig($device->getFuelType(), $device->getDisplacement_L(), $device->getDevicePaused());
-					break;
 			}
 			return $config;
 		}
@@ -293,8 +293,8 @@ namespace CarmaLink;
 		/**
 		 * Shortcut method which retreives a configuration object and converts to an array.
 		 *
-		 * @uses Config::createConfigFromDevice()
-		 * @uses Config::toArray()
+		 * @uses ReportConfig::createConfigFromDevice()
+		 * @uses ReportConfig::toArray()
 		 *
 		 * @param CarmaLink	device		Representation of CarmaLink
 		 * @param string|ConfigType		config_type
@@ -310,20 +310,20 @@ namespace CarmaLink;
 		 * 
 		 * @param string|stdClass 	obj 			Either a JSON string or a stdClass object representing a Config
 		 * @param ConfigType 		config_type 	A valid ConfigType
-		 * @return Config
+		 * @return ReportConfig
 		 */
 		public static function Factory($obj, $config_type) {
 			if (!$obj) { return FALSE; }
 
 			if (!is_object($obj) && is_string($obj)) {
 				try { $obj = json_decode($obj); }
-				catch(Exception $e) { throw new CarmaLinkAPIException("Could not instantiate Config with provided JSON data ".$e->getMessage()); }
+				catch(Exception $e) { throw new CarmaLinkAPIException("Could not instantiate ReportConfig with provided JSON data ".$e->getMessage()); }
 			}
 			// set any missing fields to NULL
 			foreach (array("configId","threshold","allowance","location","buzzer","optionalParams","optionalConditions","status") as $prop) {
 				$obj->$prop = isset($obj->$prop) ? $obj->$prop : NULL;				
 			}
-			$config = new Config(
+			$config = new ReportConfig(
 				(int)$obj->configId,
 				(float)$obj->threshold,
 				(float)$obj->allowance,
@@ -333,50 +333,9 @@ namespace CarmaLink;
 				$obj->status
 			);
 			$config->buzzer = $obj->buzzer;
-			$config->setConfigType($config_type);
+			$config->setReportConfigType($config_type);
 			return $config;
 		}
 	}
 	
-	/**
-	 * Represents a General Configuration for a CarmaLink
-	 * 
-	 * @class GeneralConfig
-	 */
-	class GeneralConfig extends Config {
-		/**
-		 * @access public 
-		 * @var CarmaLink\FuelType Type of fuel the attached automobile uses
-		 */
-		public $fuel = FuelType::FUEL_GASOLINE;
-		/**
-		 * @access public
-		 * @var float	Engine displacement used to correctly calculate fuel effiency etc.
-		 */
-		public $displacement_L = 2.0;
-		/**
-		 * @access public
-		 * @var bool	Status regaurding if the device has been paused or resumed
-		 */
-		public $devicePaused = false;
-		/**
-		 * Constructor
-		 * @param string Type of fuel
-		 * @param float	Engine displacement
-		 * @return void
-		 */
-		public function __construct($fuel = FuelType::FUEL_GASOLINE, $displacement_L = 2.0, $devicePaused = false) {
-			$this->__api_version   = CarmaLinkAPI::API_VERSION;
-			$this->fuel            = $fuel;
-			$this->displacement_L  = $displacement_L;
-			$this->devicePaused = $devicePaused;
-		}
-		
-		/**
-		 * Converts object to associative array.
-		 *
-		 * @return array
-		 */
-		public function toArray() { return array("fuel" => $this->fuel, "displacement" => $this->displacement_L, "isPaused" => $this->devicePaused); }		
-	}
 	

@@ -204,8 +204,10 @@ namespace CarmaLink;
 		 * @throws CarmaLink\CarmaLinkAPIException
 		 */
 		public function getReportData($serials = 0, $report_type, $parameters = array(), $returnAllData = FALSE) {
-			if ($serials === 0) { throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")"); }
+			if ($serials === 0 || empty($serials)) { throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")"); }
+			if(!ConfigType::isValidReportConfig($report_type)) { throw new CarmaLinkAPIException('API getReportData can only operate on valid report configs.'); }
 			$serials = $this->sanitizeSerials($serials);
+			
 			
 			$uri = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/data/".$report_type;
 			$response_data = $this->get($uri, $parameters);
@@ -225,8 +227,13 @@ namespace CarmaLink;
 		 * @return void
 		 */
 		protected function setupConfigCall(&$serials, &$endpoint, $config_type) {
+			$config_resource = "";
+			if     (ConfigType::isValidReportConfigType($config_type) ) { $config_resource = "report_config"; }
+			else if(ConfigType::isValidGeneralConfigType($config_type)) { $config_resource = "config"; }
+			else { throw new CarmaLinkAPIException("API does not support config type ".$config_type); }
+			
 			$serials = $this->sanitizeSerials($serials);
-			$endpoint = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/report_config/".$config_type;
+			$endpoint = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/".$config_resource."/".$config_type;
 		}
 		
 		/**
@@ -241,10 +248,12 @@ namespace CarmaLink;
 			if ($serial === 0) { return false; }
 			
 			$configs = array();
-			foreach (ConfigType::$valid_config_types as $config_type) {
-				$new_config = Config::Factory($this->getConfig($serial, $config_type), $config_type);
+			foreach (ConfigType::$valid_report_config_types as $config_type) {
+				$new_config = ReportConfig::Factory($this->getConfig($serial, $config_type), $config_type);
 				$configs[] = array($config_type => $new_config);
 			}
+			//one resource for general config.
+			$configs[] = array("general_config" => GeneralConfig::Factory($this->getConfig($serial, ConfigType::CONFIG_GENERAL_GET_ALL));
 			return $configs;
 		}
 
@@ -257,7 +266,7 @@ namespace CarmaLink;
 		 * @return bool|string On success returns JSON-formatted object, on failure false
 		 */
 		public function getConfig($serials = 0, $config_type, $configId = 0) {
-			if ($serials === 0) { return false; }
+			if ($serials === 0 || empty($serials)) { return false; }
 
 			$endpoint = "";
 			$params = ($configId === 0) ? NULL : array("id" => $configId);
@@ -293,17 +302,37 @@ namespace CarmaLink;
 		 * Put / send a CarmaLink a new configuration
 		 *
 		 * @param string|int|array		serials			Serial number(s) of the CarmaLink(s)
-		 * @param array|Config 			config			CarmaLink\Config object or Array representation
+		 * @param array|Config 			config			Config object or Array representation
 		 * @param string				config_type 	Valid configuration type
 		 * @return bool
 		 */
 		public function putConfig($serials = 0, $config, $config_type) {
-			if ($serials === 0) { return false; }
-
+			if ($serials === 0 || empty($serials)) { return false; }
 			$endpoint = "";
 			$this->setupConfigCall($serials, $endpoint, $config_type);
+			
+			if(ConfigType::isValidGeneralConfigType($config_type)) {
+				if(ConfigType::isValidWritableGeneralConfigType($config_type)) {
+					$config = ($config instanceof GeneralConfig) ? $config->getPartialArrayFromGeneralConfigType($config_type) : $config;
+				} else if ($config_type === ConfigType::CONFIG_GENERAL_GET_ALL) { //special breakup check for the all config, just to make things easier for everyone.
+					//create array of all 3 general configs contaied in GET ALL.
+					$responseArray = array(
+						ConfigType::CONFIG_GENERAL_ENGINE       => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_ENGINE)),
+						ConfigType::CONFIG_GENERAL_CONNECTIVITY => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_CONNECTIVITY)),
+						ConfigType::CONFIG_GENERAL_OPERATION    => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_OPERATION)),
+					);
+					return $responseArray;
+				}
+				else {
+					throw new CarmaLinkAPIException("API putConfig config parameter of '$config_type' was not a valid writable config type");
+				}
+			} else if(ConfigType::isValidWritableReportConfigType($config_type) {
+				$config = ($config instanceof ReportConfig) ? $config->toArray() : $config;
+			} else {
+				throw new CarmaLinkAPIException("API putConfig config parameter of '$config_type' was not a valid writable config type.");
+			}
 			// If config is instance of CarmaLink\Config then convert to associative array, otherwise use given argument assuming array.
-			$config = $config instanceof Config ? $config->toArray() : $config;
+			
 
 			if (!is_array($config) && empty($config) || !$config_type) {
 				throw new CarmaLinkAPIException('API putConfig config parameter was not of type array or not a valid configuration type.');
@@ -313,14 +342,13 @@ namespace CarmaLink;
 
 		/**
 		 * Delete a configuration from a CarmaLink
-		 *
 		 * @param string|int|array		serials			Serial number of the CarmaLink
 		 * @param string 				config_type		Valid configuration type
 		 * @return bool
 		 */
 		public function deleteConfig($serials = 0, $config_type) {
-			if ($serials === 0) { return false; }
-
+			if ($serials === 0 || empty($serials)) { return false; }
+			if (!ConfigType::isValidWritableReportConfigType) { throw new CarmaLinkAPIException('API deleteConfig config parameter must be a valid report config only'); }
 			$endpoint = "";
 			$this->setupConfigCall($serials, $endpoint, $config_type);
 			$response_data = $this->delete($endpoint);
@@ -396,45 +424,5 @@ namespace CarmaLink;
 			
 			return array(self::RESPONSE_CODE => $response['code'], self::RESPONSE_BODY => $response['body']);
 		}
-
-		/**
-		 * Updates a device based on a CarmaLinkDevice object
-		 * @deprecated To be deprecated in version 1.5.0
-		 *
-		 * @param 		CarmaLink\CarmaLink		Object representing a CarmaLink
-		 * @param		bool					if true, the method will return an associative array if any
-		 * 										updates or deletions had errors
-		 * @return 		bool|array  
-		 */
-		public function updateDeviceConfigurations($device, $return_errors = FALSE) {
-			// NOTE: not yet on this list are digital inputs, driver log, and green band!
-			$configs_to_update = array(
-				ConfigType::CONFIG_HARD_ACCEL, 
-				ConfigType::CONFIG_HARD_BRAKING, 
-				ConfigType::CONFIG_HARD_CORNERING,
-				ConfigType::CONFIG_IDLING,
-				ConfigType::CONFIG_OVERSPEEDING,
-				ConfigType::CONFIG_PARKING,
-				ConfigType::CONFIG_SEATBELT,
-				ConfigType::CONFIG_STATUS,
-			    	ConfigType::CONFIG_TRIP_REPORT,
-			    	ConfigType::CONFIG_VEHICLE_HEALTH,
-				ConfigType::CONFIG_GENERAL,
-				ConfigType::CONFIG_PARKING_BRAKE,
-				ConfigType::CONFIG_ENGINE_OVERSPEED
-			);
-			
-			$error_data = array();
-			
-			foreach ($configs_to_update as $config_type) {
-				$config_params = Config::getConfigArray($device, $config_type);
-				if ($config_params === FALSE) {
-					if (!$this-> deleteConfig((int)$device->id, $config_type)) { $error_data[$config_type] = "failure to delete configuration."; }
-				}
-				else if (!$this->putConfig((int)$device->id, $config_params, $config_type)) {
-					$error_data[$config_type] = "failure to configure.";
-				}
-			}
-			return $return_errors ? $error_data : (count($error_data) === 0);
-		}
 	} // End of class CarmaLinkAPI
+?>
