@@ -151,22 +151,25 @@ namespace CarmaLink;
 			if(!ConfigType::isValidGeneralConfig($config_type) {
 				throw new CarmaLinkAPIException("Error on getPartialArrayFromGeneralConfigType, $config_type is not recognized as a valid general config resource");
 			}
-			
+			$configArray = array();
+			//convert to an array with proper SDK names, and then also remove all NULL fields.
 			switch($config_type) {
 			case ConfigType::CONFIG_GENERAL_ENGINE:
-				return array(	//convert to an array with proper SDK names, and then also remove all NULL fields.
+				$configArray = array( 
 					"fuel"                    => $this->fuelType,
 					"displacement"            => $this->engineDisplacement_L,
 					
 				);
+				break;
 			case ConfigType::CONFIG_GENERAL_CONNECTIVITY:
-				return array(
+				$configArray = array(
 					"isPaused"                => $this->isPaused,
 					"connectInterval"         => $this->connectInterval_Mins,
 					"agpsConnectInterval"     => $this->agpsConnectInterval_Hrs,
 				);
+				break;
 			case ConfigType::CONFIG_GENERAL_OPERATION:
-				return array(
+				$configArray = array(
 					"chargingVoltage"         => $this->chargingVoltage_V,
 					"lowBatteryVoltage"       => $this->lowBatteryVoltage_V,
 					"lowBatteryMinutes"       => $this->lowBatteryMinutes,
@@ -174,9 +177,25 @@ namespace CarmaLink;
 					"maximumOffVoltageEnergy" => $this->maximumOffVoltageEnergy,
 					"obdDetection"            => $this->obdDetection
 				);
+				break;
 			default:
+				//function already removes nulls.
 				return $this->toArray();
 			}
+			
+			//get keys of nulls
+			$nullVals = array();
+			foreach($configArray as $key=>$value) {
+				if($value === NULL) {
+					array_push($nullVals, $key);
+				}
+			}
+			
+			//remove nulls
+			foreach($nullVals as $key) {
+				unset($configArray[$key]);
+			}
+			return $configArray
 		}
 
 		 /* Utility method to create a new Config instance based on a device
