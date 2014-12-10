@@ -253,7 +253,7 @@ namespace CarmaLink;
 				$configs[] = array($config_type => $new_config);
 			}
 			//one resource for general config.
-			$configs[] = array("general_config" => GeneralConfig::Factory($this->getConfig($serial, ConfigType::CONFIG_GENERAL_GET_ALL));
+			$configs[] = array("general_config" => GeneralConfig::Factory($this->getConfig($serial, ConfigType::CONFIG_GENERAL_GET_ALL)));
 			return $configs;
 		}
 
@@ -326,7 +326,7 @@ namespace CarmaLink;
 				else {
 					throw new CarmaLinkAPIException("API putConfig config parameter of '$config_type' was not a valid writable config type");
 				}
-			} else if(ConfigType::isValidWritableReportConfigType($config_type) {
+			} else if(ConfigType::isValidWritableReportConfigType($config_type)) {
 				$config = ($config instanceof ReportConfig) ? $config->toArray() : $config;
 			} else {
 				throw new CarmaLinkAPIException("API putConfig config parameter of '$config_type' was not a valid writable config type.");

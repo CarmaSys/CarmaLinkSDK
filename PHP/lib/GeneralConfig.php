@@ -148,7 +148,7 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function getPartialArrayFromGeneralConfigType($config_type) {
-			if(!ConfigType::isValidGeneralConfig($config_type) {
+			if(!ConfigType::isValidGeneralConfig($config_type)) {
 				throw new CarmaLinkAPIException("Error on getPartialArrayFromGeneralConfigType, $config_type is not recognized as a valid general config resource");
 			}
 			$configArray = array();
@@ -195,7 +195,7 @@ namespace CarmaLink;
 			foreach($nullVals as $key) {
 				unset($configArray[$key]);
 			}
-			return $configArray
+			return $configArray;
 		}
 
 		 /* Utility method to create a new Config instance based on a device
@@ -249,19 +249,20 @@ namespace CarmaLink;
 				catch(Exception $e) { throw new CarmaLinkAPIException("Could not instantiate GeneralConfig with provided JSON data ".$e->getMessage()); }
 			}
 			
-			//remember, this is the information from the api. the information stored here is with units.
+			//remember, this is the information from the api. the information stored here is with units, api without units.
 			$config = new GeneralConfig(
-				isset($obj->fuel)                    ? $obj->fuel                    : NULL;
-				isset($obj->displacement)            ? $obj->displacement            : NULL;
-				isset($obj->isPaused)                ? $obj->isPaused                : NULL;
-				isset($obj->connectInterval)         ? $obj->connectInterval         : NULL;
-				isset($obj->agpsConnectInterval)     ? $obj->agpsConnectInterval     : NULL;
-				isset($obj->chargingVoltage)         ? $obj->chargingVoltage         : NULL;
-				isset($obj->lowBatteryVoltage)       ? $obj->lowBatteryVoltage       : NULL;
-				isset($obj->lowBatteryMinutes)       ? $obj->lowBatteryMinutes       : NULL;
-				isset($obj->minimumRunVoltageEnergy) ? $obj->minimumRunVoltageEnergy : NULL;
-				isset($obj->maximumOffVoltageEnergy) ? $obj->maximumOffVoltageEnergy : NULL;
-				isset($obj->obdDetection)            ? $obj->obdDetection            : NULL;
+				isset($obj->fuel)                    ? $obj->fuel                    : NULL,
+				isset($obj->displacement)            ? $obj->displacement            : NULL,
+				isset($obj->isPaused)                ? $obj->isPaused                : NULL,
+				isset($obj->connectInterval)         ? $obj->connectInterval         : NULL,
+				isset($obj->agpsConnectInterval)     ? $obj->agpsConnectInterval     : NULL,
+				isset($obj->chargingVoltage)         ? $obj->chargingVoltage         : NULL,
+				isset($obj->lowBatteryVoltage)       ? $obj->lowBatteryVoltage       : NULL,
+				isset($obj->lowBatteryMinutes)       ? $obj->lowBatteryMinutes       : NULL,
+				isset($obj->minimumRunVoltageEnergy) ? $obj->minimumRunVoltageEnergy : NULL,
+				isset($obj->maximumOffVoltageEnergy) ? $obj->maximumOffVoltageEnergy : NULL,
+				isset($obj->obdDetection)            ? $obj->obdDetection            : NULL
+			);
 
 			return $config;
 		}

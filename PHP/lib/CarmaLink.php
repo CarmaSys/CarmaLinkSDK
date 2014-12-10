@@ -27,7 +27,34 @@ namespace CarmaLink;
 		 * Get CarmaLink Device display name (type of CarmaLink, followed by serial
 		 * @return string name
 		 */
-		public function getName() { return "CarmaLink-".$this->id; }
+		public function getDeviceName() { return "CarmaLink-".$this->id; }
+		
+				/**
+		 * Set CarmaLink global buzzer volume
+		 * Can be used to override when setting a configuration which supports buzzer.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/OFF
+		 * @return void
+		 */
+		public function setBuzzerVolume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->buzzerVolume = $buzzerVolume; }
+
+		/**
+		 * Get global CarmaLink volume setting
+		 * @return BuzzerVolume	HIGH/MED/OFF
+		 */
+		public function getBuzzerVolume() { return $this->buzzerVolume; }
+
+		/**
+		 * Set CarmaLink location tracking / GPS functionality
+		 * @param bool	useGps	On/Off
+		 * @return void
+		 */
+		public function setUseGps($useGps) { $this->useGps = (bool)$useGps; }
+
+		/**
+		 * Get CarmaLink location functionality
+		 * @return bool
+		 */
+		public function getUseGps() { return $this->useGps; }
 		
 		//the following are general configurations that hold true for any and all devices, since the record will always be on every device.
 		

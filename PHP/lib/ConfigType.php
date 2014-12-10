@@ -153,7 +153,7 @@ namespace CarmaLink;
 		 */
 		public static function isValidReportConfigType($config_type) { 
 			return (array_search($config_type, self::$valid_rw_report_config_types) !== false ? true : 
-			                    (array_search($config_type, self::$valid_r_report_config_types) !== false);
+			                    (array_search($config_type, self::$valid_r_report_config_types) !== false));
 		}
 		/**
 		 * Helper to determine if a string matches a valid READ-WRITE general configuration endpoint
@@ -170,7 +170,7 @@ namespace CarmaLink;
 		 */
 		public static function isValidGeneralConfigType($config_type) { 
 			return (array_search($config_type, self::$valid_rw_general_config_types) !== false ? true : 
-			                    (array_search($config_type, self::$valid_r_general_config_types) !== false);
+			                    (array_search($config_type, self::$valid_r_general_config_types) !== false));
 		}
 		/**
 		 * Helper to determine if a string matches a valid configuration type.
