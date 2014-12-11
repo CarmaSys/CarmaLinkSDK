@@ -34,9 +34,10 @@ namespace CarmaLink;
 		const CONFIG_PARKING_BRAKE   = 'parking_brake';
 		const CONFIG_SEATBELT        = 'seatbelt';
 		const CONFIG_TRIP_REPORT     = 'trip_report';
-		const CONFIG_VEHICLE_HEALTH  = 'vehicle_health';
+		const CONFIG_HEALTH          = 'vehicle_health';
 		const CONFIG_PARKING         = 'parking';
 		const CONFIG_ENGINE_OVERSPEED= 'engine_overspeed';
+		const CONFIG_TRANSPORTED     = 'transported';
 
 		const CONFIG_NEW_DEPLOYMENT  = 'new_deployment';
 		
@@ -87,9 +88,10 @@ namespace CarmaLink;
 			self::CONFIG_PARKING_BRAKE,
 			self::CONFIG_SEATBELT,
 			self::CONFIG_TRIP_REPORT,
-			self::CONFIG_VEHICLE_HEALTH,
+			self::CONFIG_HEALTH,
 			self::CONFIG_PARKING,
-			self::CONFIG_ENGINE_OVERSPEED
+			self::CONFIG_ENGINE_OVERSPEED,
+			self::CONFIG_TRANSPORTED
 		);
 		/** Valid READ-ONLY report config types
 		 * @access public

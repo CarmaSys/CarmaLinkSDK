@@ -24,7 +24,6 @@ namespace CarmaLink {
 	
 	//carmalink types.
 	require_once realpath(__DIR__. '/lib/CarmaLink.php');
-	require_once realpath(__DIR__. '/lib/VehicleCarmaLink.php');
 	//configs
 	require_once realpath(__DIR__. '/lib/ConfigType.php');
 	require_once realpath(__DIR__. '/lib/ReportConfig.php');

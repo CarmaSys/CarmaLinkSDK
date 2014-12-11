@@ -160,40 +160,29 @@ namespace CarmaLink;
 		 * @param Config 		config 	Config object to setup
 		 * @return array|NULL
 		 */
-		protected static function setupConfigParams($device, $config) {
+		protected static function setupConfigParams(CarmaLink $device, $config) {
 			$a = array();
-			if (method_exists($device, "getUseOdometer" && 
-				$device->getUseOdometer())            { $a[] = self::ODOMETER; }
-
-			if (method_exists($device, "getUseNextServiceDistance" && 
-				$device->getUseNextServiceDistance()) { $a[] = self::DISTANCE_TO_SERVICE; }
-
-			if (method_exists($device, "getUseNextServiceDuration" && 
-				$device->getUseNextServiceDuration()) { $a[] = self::DURATION_TO_SERVICE; }
-
-			if (method_exists($device, "getUseBatteryVoltage" && 
-				$device->getUseBatteryVoltage())	  { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
-
-			if (method_exists($device, "getUseTirePressure" && 
-				$device->getUseTirePressure())	      { $a[] = self::TIRE_PRESSURE_LOW; }
-
-			if (method_exists($device, "getUseEmissionMonitors" && 
-				$device->getUseEmissionMonitors())    { $a[] = self::EMISSION_MONITORS; }
-
-			if (method_exists($device, "getUseFuelLevel" && 
-				$device->getUseFuelLevel())           { $a[] = self::FUEL_LEVEL; }
+			//all functions are set.
+			if ($device->getUseOdometer())            { $a[] = self::ODOMETER; }
+			if ($device->getUseNextServiceDistance()) { $a[] = self::DISTANCE_TO_SERVICE; }
+			if ($device->getUseNextServiceDuration()) { $a[] = self::DURATION_TO_SERVICE; }
+			if ($device->getUseBatteryVoltage())	  { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
+			if ($device->getUseTirePressure())	      { $a[] = self::TIRE_PRESSURE_LOW; }
+			if ($device->getUseEmissionMonitors())    { $a[] = self::EMISSION_MONITORS; }
+			if ($device->getUseFuelLevel())           { $a[] = self::FUEL_LEVEL; }
+			if ($device->getUseFuelRate())            { $a[] = self::FUEL_RATE; }
 
 			return $a;
 		}
 
 		/**
-		 * Utility method to create a new Config instance based on a vehicle device and report type. assets don't have any of these configurations, so nothing happens there.
+		 * Utility method to create a new Config instance based on a device and report type. assets don't have any of these configurations, so nothing happens there.
 		 *
-		 * @param VehicleCarmaLink		device		A custom data object representing a VehicleCarmaLink
+		 * @param CarmaLink		device		A custom data object representing a CarmaLink
 		 * @param string|ConfigType 	config_type
 		 * @return Config|bool 			return new config object, or false to delete configuration
 		 */
-		private static function createConfigFromVehicleDevice(CarmaLink $device, $config_type) {
+		private static function createConfigFromDevice(CarmaLink $device, $config_type) {
 			$config = new ReportConfig();
 
 			if (!$config->setReportConfigType($config_type)) {
@@ -228,18 +217,16 @@ namespace CarmaLink;
 					break;
 				
 				case ConfigType::CONFIG_HARD_ACCEL:
-					if(!method_exists($device, "getAccelLimit_Mpss") ||
-					   !method_exists($device, "getAccelLimitAllowance_Msec")) {
-						return NULL;
-					}
+					if ($device->getAccelLimit_Mpss() === NULL ||
+						$device->getAccelLimitAllowance_Msec() === NULL) { return null; }
 					if ((int)$device->getAccelLimit_Mpss() === 0) { return FALSE; }
 					$config->threshold = $device->getAccelLimit_Mpss();
 					$config->allowance = $device->getAccelLimitAllowance_Msec();
 					break;
 
 				case ConfigType::CONFIG_HARD_BRAKING:
-					if(!method_exists($device, "getBrakeLimit_Mpss") ||
-					   !method_exists($device, "getBrakeLimitAllowance_Msec")) {
+					if($device->getBrakeLimit_Mpss() === NULL ||
+					   $device->getBrakeLimitAllowance_Msec() === NULL) {
 						return NULL;
 					}
 					if ((int)$device->getBrakeLimit_Mpss() === 0) { return FALSE; }
@@ -248,8 +235,8 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_HARD_CORNERING:
-					if(!method_exists($device, "getCorneringLimit_Mpss") ||
-					   !method_exists($device, "getCorneringLimitAllowance_Msec")) {
+					if($device->getCorneringLimit_Mpss() === NULL ||
+					   $device->getCorneringLimitAllowance_Msec() === NULL) {
 						return NULL;
 					}
 					if ((int)$device->getCorneringLimit_Mpss() === 0) { return FALSE; }
@@ -258,19 +245,19 @@ namespace CarmaLink;
 					break;
 				
 				case ConfigType::CONFIG_STATUS:
-					if(!method_exists($device, "getPingTime_Msec")) {
+					if($device->getPingTime_Msec() !== NULL) {
 						return NULL;
 					}
 					if ((int)$device->getPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
 					$config->threshold = $device->getPingTime_Msec();
 					$optParams = array();
-					if(method_exists($device, "getUseBatteryVoltage") && $device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
-					if(method_exists($device, "getUseFuelRate")       && $device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }
+					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
+					if($device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }
 					$config->optParams = $optParams;
 					break;
 
 				case ConfigType::CONFIG_IDLING:
-					if(!method_exists($device, "getIdleTimeLimit_Msec")) {
+					if($device->getIdleTimeLimit_Msec() === NULL) {
 						return NULL;
 					}
 					if ((int)$device->getIdleTimeLimit_Msec() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
@@ -278,7 +265,7 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING:
-					if(!method_exists($device, "getSpeedLimit_kmph")) {
+					if($device->getSpeedLimit_kmph() === NULL) {
 						return NULL;
 					}
 					if ((int)$device->getSpeedLimit_kmph() === 0) { return FALSE; }
@@ -286,7 +273,7 @@ namespace CarmaLink;
 					$config->allowance = $device->getSpeedLimitAllowance_Msec();
 					break;
 				case ConfigType::CONFIG_ENGINE_OVERSPEED:
-					if(!method_exists($device, "getEngineSpeedLimit_rpm")) {
+					if($device->getEngineSpeedLimit_rpm() === NULL) {
 						return NULL;
 					}
 					if((int)$device->getEngineSpeedLimit_rpm() === 0) { return FALSE; }
@@ -294,7 +281,7 @@ namespace CarmaLink;
 					$config->allowance = $device->getEngineSpeedLimitAllowance_Msec();
 					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
-					if(!method_exists($device, "getParkingBreakLimit_kmph")) {
+					if($device->getParkingBreakLimit_kmph() === NULL) {
 						return NULL;
 					}
 					if ($device->getParkingBrakeLimit_kmph() === FALSE) { return FALSE; }
@@ -302,37 +289,44 @@ namespace CarmaLink;
 					$config->allowance = $device->getParkingBrakeLimitAllowance_Msec();
 					break;
 				case ConfigType::CONFIG_PARKING:
-					if(!method_exists($device, "getParkingTimeoutThreshold_Msec")) {
+					if($device->getParkingTimeoutThreshold_Msec() === NULL) {
 						return NULL;
 					}
 					if($device->getParkingTimeoutThreshold_Msec() == FALSE) { return FALSE; }
 					$config->threshold = $device->getParkingTimeoutThreshold_Msec();
 					$optParams = array();
-					if(method_exists($device, "getUseBatteryVoltage") && $device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
+					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
 					$config->params = $optParams;
 					break;
 				case ConfigType::CONFIG_SEATBELT:
-					if(!method_exists($device, "getSeatbeltLimit_kmph") ||
-					   !method_exists($device, "getSeatbeltLimitAllowance_Msec")) {
+					if($device->getSeatbeltLimit_kmph() === NULL ||
+					   $device->getSeatbeltLimitAllowance_Msec() === NULL) {
 						return NULL;
 					}
 					if ($device->getSeatbeltLimit_kmph() === FALSE) { return FALSE; }
 					$config->threshold = $device->getSeatbeltLimit_kmph();
 					$config->allowance = $device->getSeatbeltLimitAllowance_Msec();
 					break;
-
+				case ConfigType::CONFIG_TRANSPORTED:
+					if($device->getTransportedLimit_Msec() === NULL ||
+					   $device->getTransportedLimitAllowance_Msec() === NULL) {
+					   return NULL;
+					}
+					$config->threshold = $device->getTransportedLimit_Msec();
+					$config->allowance = $device->getTransportedLimitAllowance_Msec();
+					$optParams = array();
+					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
+					$config->params = $optParams;
+					break;
 				case ConfigType::CONFIG_TRIP_REPORT:
-					if ($device->useTrips == FALSE) { return FALSE; }
+					if ($device->getUseTrips() == FALSE) { return FALSE; }
 					$config->params = self::setupConfigParams($device, $config);
 					break;
 
-				case ConfigType::CONFIG_VEHICLE_HEALTH:
-					if(!method_exists($device, "getVehicleHealthConditions")){
-						return NULL;
-					}
-					if ($device->useVehicleHealth === FALSE) { return FALSE; }
+				case ConfigType::CONFIG_HEALTH:
+					if ($device->getUseHealth() === FALSE) { return FALSE; }
 					$config->params     = self::setupConfigParams($device, $config);
-					$config->conditions = $device->getVehicleHealthConditions();
+					$config->conditions = $device->getHealthConditions();
 					break;
 			}
 			return $config;
@@ -348,7 +342,7 @@ namespace CarmaLink;
 		 * @param string|ConfigType		config_type
 		 * @return array|bool|null		returns array of config parameters or false if it should be deleted, and null if the device does not support that config type.
 		 */
-		public static function getConfigArray($device, $config_type) {
+		public static function getConfigArray(CarmaLink $device, $config_type) {
 			$newConfig = self::createConfigFromDevice($device, $config_type);
 			return (!$newConfig) ? $newConfig->toArray() : $newConfig;
 		}
