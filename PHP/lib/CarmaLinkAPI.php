@@ -253,7 +253,7 @@ namespace CarmaLink;
 				$configs[] = array($config_type => $new_config);
 			}
 			//one resource for general config.
-			$configs[] = array("general_config" => GeneralConfig::Factory($this->getConfig($serial, ConfigType::CONFIG_GENERAL_GET_ALL)));
+			$configs[] = array("general_config" => GeneralConfig::Factory($this->getConfig($serial, ConfigType::CONFIG_GENERAL)));
 			return $configs;
 		}
 
@@ -314,7 +314,7 @@ namespace CarmaLink;
 			if(ConfigType::isValidGeneralConfigType($config_type)) {
 				if(ConfigType::isValidWritableGeneralConfigType($config_type)) {
 					$config = ($config instanceof GeneralConfig) ? $config->getPartialArrayFromGeneralConfigType($config_type) : $config;
-				} else if ($config_type === ConfigType::CONFIG_GENERAL_GET_ALL) { //special breakup check for the all config, just to make things easier for everyone.
+				} else if ($config_type === ConfigType::CONFIG_GENERAL) { //special breakup check for the all config, just to make things easier for everyone.
 					//create array of all 3 general configs contaied in GET ALL.
 					$responseArray = array(
 						ConfigType::CONFIG_GENERAL_ENGINE       => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_ENGINE)),

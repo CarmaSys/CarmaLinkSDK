@@ -47,7 +47,7 @@ namespace CarmaLink;
 		const CONFIG_GENERAL_OPERATION    = 'operation';
 		
 		//general config get all resource. fetches all the general config information together.
-		const CONFIG_GENERAL_GET_ALL      = 'all';
+		const CONFIG_GENERAL              = 'all';
 		
 		/**
 		 * @access public
@@ -114,7 +114,7 @@ namespace CarmaLink;
 		 * @var array
 		 */
 		public static $valid_r_general_config_types = array(
-			self::CONFIG_GENERAL_GET_ALL
+			self::CONFIG_GENERAL
 		);
 		/** Configurations that use allowances
 		 * @access public
