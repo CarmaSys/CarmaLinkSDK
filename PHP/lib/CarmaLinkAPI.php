@@ -205,7 +205,7 @@ namespace CarmaLink;
 		 */
 		public function getReportData($serials = 0, $report_type, $parameters = array(), $returnAllData = FALSE) {
 			if ($serials === 0 || empty($serials)) { throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")"); }
-			if(!ConfigType::isValidReportConfig($report_type)) { throw new CarmaLinkAPIException('API getReportData can only operate on valid report configs.'); }
+			if(!ConfigType::isValidReportConfigType($report_type)) { throw new CarmaLinkAPIException('API getReportData can only operate on valid report configs.'); }
 			$serials = $this->sanitizeSerials($serials);
 			
 			
