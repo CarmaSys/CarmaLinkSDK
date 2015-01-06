@@ -102,7 +102,7 @@ namespace CarmaLink;
 			$this->agpsConnectInterval_Hrs = $agpsConnectInterval_Hrs;
 			$this->chargingVoltage_V       = $chargingVoltage_V;
 			$this->lowBatteryVoltage_V     = $lowBatteryVoltage_V;
-			$this->lowBatteryMinutes       = $lowBatteryVoltageMinutes;
+			$this->lowBatteryMinutes       = $lowBatteryMinutes;
 			$this->minimumRunVoltageEnergy = $minimumRunVoltageEnergy;
 			$this->maximumOffVoltageEnergy = $maximumOffVoltageEnergy;
 			$this->obdDetection            = $obdDetection;

@@ -163,7 +163,7 @@ namespace CarmaLink;
 		 * @param string|ConfigType 	config_type
 		 * @return bool
 		 */
-		public static function isValidWritableGeneralConfigType($config_type) { return (array_search($config_type, self::$valid_RW_general_config_types) !== false); }
+		public static function isValidWritableGeneralConfigType($config_type) { return (array_search($config_type, self::$valid_rw_general_config_types) !== false); }
 		/**
 		 * Helper to determine if a string matches a valid general configuration type, with read access.
 		 *

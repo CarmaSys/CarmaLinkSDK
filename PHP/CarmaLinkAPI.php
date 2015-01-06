@@ -95,9 +95,10 @@ namespace CarmaLink {
 	 * 
 	 * @class OBDDetectionType
 	 */
-	class OBDDectionType {
-		const J1939 = "OBD_DETECTION_J1939";
-		const AUTO  = "OBD_DETECTION_AUTOMATIC";
+	class OBDDetectionType {
+		const J1939    = "OBD_DETECTION_J1939";
+		const AUTO     = "OBD_DETECTION_AUTOMATIC";
+		const DISABLED = "OBD_DETECTION_DISABLED";
 	}
 
 } // End of namespace CarmaLink
