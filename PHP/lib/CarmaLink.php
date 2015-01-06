@@ -498,7 +498,33 @@ namespace CarmaLink;
 		 * @return int	milliseconds
 		 */
 		public function getParkingTimeoutThreshold_Msec() { return $this->parkingTimeoutThreshold_Msec; }
+
+		/**
+		 * Get CarmaLink transportedPingTime_Msec
+		 * @return int	milliseconds
+		 */
+		public function getTransportedPingTimeThreshold_Msec() { return $this->transportedPingTimeThreshold_Msec; }
+
+		/**
+		 * Set CarmaLink transport ping
+		 * @param int	transportedPingTime_Msec	in milliseconds
+		 * @return void
+		 */
+		public function setTransportedPingTimeThreshold_Msec($transportedPingTime_Msec = 0) { $this->transportedPingTime_Msec = (int)$transportedPingTime_Msec; }
 		
+		/**
+		 * Get CarmaLink transportedPingTimeAllowance_Msec
+		 * @return int	milliseconds
+		 */
+		public function getTransportedPingTimeAllowance_Msec() { return $this->transportedPingTimeAllowance_Msec; }
+
+		/**
+		 * Set CarmaLink transport ping allowance
+		 * @param int	transportedPingTimeAllowance_Msec	in milliseconds
+		 * @return void
+		 */
+		public function setTransportedPingTimeAllowance_Msec($transportedPingTimeAllowance_Msec = 0) { $this->transportedPingTimeAllowance_Msec = (int)$transportedPingTimeAllowance_Msec; }
+
 		/**
 		 * Set attached automobile's fuel type
 		 * @param CarmaLink\FuelType fuel type

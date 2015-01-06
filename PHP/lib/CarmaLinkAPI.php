@@ -348,7 +348,7 @@ namespace CarmaLink;
 		 */
 		public function deleteConfig($serials = 0, $config_type) {
 			if ($serials === 0 || empty($serials)) { return false; }
-			if (!ConfigType::isValidWritableReportConfigType) { throw new CarmaLinkAPIException('API deleteConfig config parameter must be a valid report config only'); }
+			if (!ConfigType::isValidWritableReportConfigType($config_type)) { throw new CarmaLinkAPIException('API deleteConfig config parameter must be a valid report config only'); }
 			$endpoint = "";
 			$this->setupConfigCall($serials, $endpoint, $config_type);
 			$response_data = $this->delete($endpoint);

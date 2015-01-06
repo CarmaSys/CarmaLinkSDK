@@ -281,7 +281,7 @@ namespace CarmaLink;
 					$config->allowance = $device->getEngineSpeedLimitAllowance_Msec();
 					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
-					if($device->getParkingBreakLimit_kmph() === NULL) {
+					if($device->getParkingBrakeLimit_kmph() === NULL) {
 						return NULL;
 					}
 					if ($device->getParkingBrakeLimit_kmph() === FALSE) { return FALSE; }
@@ -308,8 +308,8 @@ namespace CarmaLink;
 					$config->allowance = $device->getSeatbeltLimitAllowance_Msec();
 					break;
 				case ConfigType::CONFIG_TRANSPORTED:
-					if($device->getTransportedLimit_Msec() === NULL ||
-					   $device->getTransportedLimitAllowance_Msec() === NULL) {
+					if($device->getTransportedPingTime_Msec() === NULL ||
+					   $device->getTransportedPingTimeAllowance_Msec() === NULL) {
 					   return NULL;
 					}
 					$config->threshold = $device->getTransportedLimit_Msec();
@@ -344,7 +344,7 @@ namespace CarmaLink;
 		 */
 		public static function getConfigArray(CarmaLink $device, $config_type) {
 			$newConfig = self::createConfigFromDevice($device, $config_type);
-			return (!$newConfig) ? $newConfig->toArray() : $newConfig;
+			return ($newConfig !== FALSE && $newConfig !== NULL) ? $newConfig->toArray() : $newConfig;
 		}
 
 		/**
