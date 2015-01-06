@@ -583,12 +583,12 @@ namespace CarmaLink;
 		 * @param agpsConnectInterval_Hrs
 		 * @return void
 		 */
-		public function setAGPSConnectInterval_Mins($agpsConnectInterval_Hrs = 0) { $this->agpsConnectInterval_Hrs = $agpsConnectInterval_Hrs; }
+		public function setAGPSConnectInterval_Hrs($agpsConnectInterval_Hrs = 0) { $this->agpsConnectInterval_Hrs = $agpsConnectInterval_Hrs; }
 		/**
 		 * Get device agps connect interval
 		 * @return int agpsConnectInterval_Hrs
 		 */
-		public function getAGPSConnectInterval_Mins() { return $this->agpsConnectInterval_Hrs; }
+		public function getAGPSConnectInterval_Hrs() { return $this->agpsConnectInterval_Hrs; }
 		
 		
 		/**
