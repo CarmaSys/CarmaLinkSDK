@@ -312,8 +312,8 @@ namespace CarmaLink;
 					   $device->getTransportedPingTimeAllowance_Msec() === NULL) {
 					   return NULL;
 					}
-					$config->threshold = $device->getTransportedLimit_Msec();
-					$config->allowance = $device->getTransportedLimitAllowance_Msec();
+					$config->threshold = $device->getTransportedPingTime_Msec();
+					$config->allowance = $device->getTransportedPingTimeAllowance_Msec();
 					$optParams = array();
 					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
 					$config->params = $optParams;
