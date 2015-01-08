@@ -314,6 +314,10 @@ namespace CarmaLink;
 			if(ConfigType::isValidGeneralConfigType($config_type)) {
 				if(ConfigType::isValidWritableGeneralConfigType($config_type)) {
 					$config = ($config instanceof GeneralConfig) ? $config->getPartialArrayFromGeneralConfigType($config_type) : $config;
+					if(empty($config) || $config === null) {
+						//these changes will do nothing. therefore, no reason to send.
+						return true;
+					}
 				} else if ($config_type === ConfigType::CONFIG_GENERAL) { //special breakup check for the all config, just to make things easier for everyone.
 					//create array of all 3 general configs contaied in GET ALL.
 					$responseArray = array(

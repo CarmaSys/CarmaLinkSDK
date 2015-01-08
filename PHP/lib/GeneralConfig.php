@@ -148,7 +148,7 @@ namespace CarmaLink;
 		 * @return array
 		 */
 		public function getPartialArrayFromGeneralConfigType($config_type) {
-			if(!ConfigType::isValidGeneralConfig($config_type)) {
+			if(!ConfigType::isValidGeneralConfigType($config_type)) {
 				throw new CarmaLinkAPIException("Error on getPartialArrayFromGeneralConfigType, $config_type is not recognized as a valid general config resource");
 			}
 			$configArray = array();
