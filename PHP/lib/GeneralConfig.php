@@ -64,9 +64,19 @@ namespace CarmaLink;
 		public $maximumOffVoltageEnergy = NULL;
 		/**
 		 * @access public
-		 * @var string|OBDDecetionType
+		 * @var string|OBDDetectionType
 		 */
 		public $obdDetection = NULL;
+		/**
+		 * @access public
+		 * @var string|LEDModeType
+		 */
+		public $ledMode = NULL;
+		/**
+		 * @access public
+		 * @var int
+		 */
+		public $maximumUptimeHours = NULL;
 
 		/**
 		 * @access private
@@ -88,12 +98,14 @@ namespace CarmaLink;
 		 * @param int                     minimumRunVoltageEnergy
 		 * @param int                     maximumOffVoltageEnergy
 		 * @param string|OBDDetectionType obdDetection
+		 * @param string|LEDModeType      ledMode
+		 * @param int                     maximumUptimeHours
 		 * @return void
 		 */
 		public function __construct($fuelType = NULL, $engineDisplacement_L = NULL, $isPaused = NULL,
 		                            $connectInterval_Mins = NULL, $agpsConnectInterval_Hrs = NULL, $chargingVoltage_V = NULL,
 		                            $lowBatteryVoltage_V = NULL, $lowBatteryMinutes = NULL, $minimumRunVoltageEnergy = NULL,
-		                            $maximumOffVoltageEnergy = NULL, $obdDetection = NULL) {
+		                            $maximumOffVoltageEnergy = NULL, $obdDetection = NULL, $ledMode = NULL, $maximumUptimeHours = NULL) {
 			$this->__api_version = CarmaLinkAPI::API_VERSION;
 			$this->fuelType                = $fuelType;
 			$this->engineDisplacement_L    = $engineDisplacement_L;
@@ -106,6 +118,8 @@ namespace CarmaLink;
 			$this->minimumRunVoltageEnergy = $minimumRunVoltageEnergy;
 			$this->maximumOffVoltageEnergy = $maximumOffVoltageEnergy;
 			$this->obdDetection            = $obdDetection;
+			$this->ledMode                 = $ledMode;
+			$this->maximumUptimeHours      = $maximumUptimeHours;
 		}
 
 		/**
@@ -126,7 +140,9 @@ namespace CarmaLink;
 				"lowBatteryMinutes"       => $this->lowBatteryMinutes,
 				"minimumRunVoltageEnergy" => $this->minimumRunVoltageEnergy,
 				"maximumOffVoltageEnergy" => $this->maximumOffVoltageEnergy,
-				"obdDetection"            => $this->obdDetection);
+				"obdDetection"            => $this->obdDetection,
+				"ledMode"                 => $this->ledMode,
+				"maximumUptimeHours"      => $this->maximumUptimeHours);
 			$nullVals = array();
 			foreach($arr as $key=>$value) {
 				if($value === NULL) {
@@ -175,7 +191,9 @@ namespace CarmaLink;
 					"lowBatteryMinutes"       => $this->lowBatteryMinutes,
 					"minimumRunVoltageEnergy" => $this->minimumRunVoltageEnergy,
 					"maximumOffVoltageEnergy" => $this->maximumOffVoltageEnergy,
-					"obdDetection"            => $this->obdDetection
+					"obdDetection"            => $this->obdDetection,
+					"ledMode"                 => $this->ledMode,
+					"maximumUptimeHours"      => $this->maximumUptimeHours
 				);
 				break;
 			default:
@@ -217,6 +235,8 @@ namespace CarmaLink;
 			$config->minimumRunVoltageEnergy = $device->getMinimumRunVoltageEnergy();
 			$config->maximumOffVoltageEnergy = $device->getMaximumOffVoltageEnergy();
 			$config->obdDetection            = $device->getOBDDetection();
+			$config->ledMode                 = $device->getLEDMode();
+			$config->maximumUptimeHours      = $device->getMaximumUptimeHours();
 			
 			return $config;
 		}
@@ -261,7 +281,9 @@ namespace CarmaLink;
 				isset($obj->lowBatteryMinutes)       ? $obj->lowBatteryMinutes       : NULL,
 				isset($obj->minimumRunVoltageEnergy) ? $obj->minimumRunVoltageEnergy : NULL,
 				isset($obj->maximumOffVoltageEnergy) ? $obj->maximumOffVoltageEnergy : NULL,
-				isset($obj->obdDetection)            ? $obj->obdDetection            : NULL
+				isset($obj->obdDetection)            ? $obj->obdDetection            : NULL,
+				isset($obj->ledMode)                 ? $obj->ledMode                 : NULL,
+				isset($obj->maximumUptimeHours)      ? $obj->maximumUptimeHours      : NULL
 			);
 
 			return $config;

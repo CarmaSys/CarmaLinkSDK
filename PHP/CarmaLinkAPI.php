@@ -100,5 +100,19 @@ namespace CarmaLink {
 		const AUTO     = "OBD_DETECTION_AUTOMATIC";
 		const DISABLED = "OBD_DETECTION_DISABLED";
 	}
+	
+	/**
+	 * Type of led pattern the device uses
+	 * 
+	 * When setting or getting the CONFIG_GENERAL_OPERATION ledMode, use these values
+	 * 
+	 * @class LEDModeType
+	 */
+	class LEDModeType {
+		const OFF       = "OFF";
+		const DEBUG     = "DEBUG";
+		const INSTALLER = "INSTALLER";
+	}
+
 
 } // End of namespace CarmaLink

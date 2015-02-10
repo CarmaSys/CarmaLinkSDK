@@ -567,7 +567,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set state of device connect interval in minutes
-		 * @param connectInterval_Mins
+		 * @param int connectInterval_Mins
 		 * @return void
 		 */
 		public function setConnectInterval_Mins($connectInterval_Mins = 0) { $this->connectInterval_Mins = $connectInterval_Mins;  }
@@ -580,7 +580,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set state of device agps connect interval in hours
-		 * @param agpsConnectInterval_Hrs
+		 * @param int agpsConnectInterval_Hrs
 		 * @return void
 		 */
 		public function setAGPSConnectInterval_Hrs($agpsConnectInterval_Hrs = 0) { $this->agpsConnectInterval_Hrs = $agpsConnectInterval_Hrs; }
@@ -593,7 +593,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set device charging battery voltage of generalconfig
-		 * @param chargingVoltage_V
+		 * @param int chargingVoltage_V
 		 * @return void
 		 */
 		public function setChargingVoltage_V($chargingVoltage_V = 0) { $this->chargingVoltage_V = $chargingVoltage_V; }
@@ -606,7 +606,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set device low  battery voltage 
-		 * @param lowBatteryVoltage_V
+		 * @param int lowBatteryVoltage_V
 		 * @return void
 		 */
 		public function setLowBatteryVoltage_V($lowBatteryVoltage_V = 0) { $this->lowBatteryVoltage_V = $lowBatteryVoltage_V; }
@@ -619,7 +619,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set device low  battery minutes threshold
-		 * @param lowBatteryMinutes
+		 * @param int lowBatteryMinutes
 		 * @return void
 		 */
 		public function setLowBatteryMinutes($lowBatteryMinutes = 0) { $this->lowBatteryMinutes = $lowBatteryMinutes; }
@@ -632,7 +632,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set device minimum run voltage energy
-		 * @param minimumRunVoltageEnergy
+		 * @param int minimumRunVoltageEnergy
 		 * @return void
 		 */
 		public function setMinimumRunVoltageEnergy($minimumRunVoltageEnergy = 0) { $this->minimumRunVoltageEnergy = $minimumRunVoltageEnergy; }
@@ -645,7 +645,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set device maximum off voltage energy
-		 * @param maximumOffVoltageEnergy
+		 * @param int maximumOffVoltageEnergy
 		 * @return void
 		 */
 		public function setMaximumOffVoltageEnergy($maximumOffVoltageEnergy = 0) { $this->maximumOffVoltageEnergy = $maximumOffVoltageEnergy; }
@@ -658,7 +658,7 @@ namespace CarmaLink;
 		
 		/**
 		 * Set device obd detection protocol
-		 * @param obdDetection
+		 * @param string|OBDDetectionType obdDetection
 		 * @return void
 		 */
 		public function setOBDDetection($obdDetection = "") { $this->obdDetection = $obdDetection; }
@@ -667,6 +667,30 @@ namespace CarmaLink;
 		 * @return string|OBDDetectionType obdDetection
 		 */
 		public function getOBDDetection() { return $this->obdDetection; }
+		
+		/**
+		 * Set device led pattern mode
+		 * @param string|LEDModeType ledMode
+		 * @return void
+		 */
+		public function setLEDMode($ledMode = "") { $this->ledMode = $ledMode; }
+		/**
+		 * Get device led patter mode
+		 * @return string|LEDModeType ledMode
+		 */
+		public function getLEDMode() { return $this->ledMode; }
+		
+		/**
+		 * Set device maximum uptime hours
+		 * @param maximumUptimeHours
+		 * @return void
+		 */
+		public function setMaximumUptimeHours($maximumUptimeHours = 0) { $this->maximumUptimeHours = $maximumUptimeHours; }
+		/**
+		 * Get device maximum uptime hours
+		 * @return int maximumUptimeHours
+		 */
+		public function getMaximumUptimeHours() { return $this->maximumUptimeHours; }
 		
 	}
 ?>
