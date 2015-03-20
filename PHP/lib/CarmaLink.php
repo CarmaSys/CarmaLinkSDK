@@ -11,17 +11,17 @@ namespace CarmaLink;
 	 */
 	abstract class CarmaLink {
 		/**
-		 * Set CarmaLink ID or serial number
+		 * Set CarmaLink serial number
 		 * @param int	id	serial number of CarmaLink
 		 * @return void
 		 */
-		public function setId($id) { if ($this->id !== $id) { $this->id = (int)$id; } }
+		public function setSerialNumber($serialNumber) { if ($this->serialNumber !== $serialNumber) { $this->serialNumber = (int)$serialNumber; } }
 
 		/**
-		 * CarmaLink's serial / ID
+		 * CarmaLink's serial
 		 * @return int
 		 */
-		public function getId() { return $this->id; }
+		public function getSerialNumber() { return $this->serialNumber; }
 		
 
 		/**

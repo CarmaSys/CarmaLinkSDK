@@ -37,7 +37,7 @@ namespace CarmaLink;
 		* @var string
 		* The current API version
 		*/
-		const API_VERSION = "1.6.0";
+		const API_VERSION = "1.7.0";
 
 		const API_NAME = "CarmaLinkAPI";
 		
@@ -321,9 +321,9 @@ namespace CarmaLink;
 				} else if ($config_type === ConfigType::CONFIG_GENERAL) { //special breakup check for the all config, just to make things easier for everyone.
 					//create array of all 3 general configs contaied in GET ALL.
 					$responseArray = array(
-						ConfigType::CONFIG_GENERAL_ENGINE       => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_ENGINE)),
-						ConfigType::CONFIG_GENERAL_CONNECTIVITY => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_CONNECTIVITY)),
-						ConfigType::CONFIG_GENERAL_OPERATION    => $this->getProperResponse($this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_OPERATION)),
+						ConfigType::CONFIG_GENERAL_ENGINE       => $this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_ENGINE),
+						ConfigType::CONFIG_GENERAL_CONNECTIVITY => $this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_CONNECTIVITY),
+						ConfigType::CONFIG_GENERAL_OPERATION    => $this->putConfig($serials, $config, ConfigType::CONFIG_GENERAL_OPERATION),
 					);
 					return $responseArray;
 				}
