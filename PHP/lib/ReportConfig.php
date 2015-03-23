@@ -245,7 +245,7 @@ namespace CarmaLink;
 					break;
 				
 				case ConfigType::CONFIG_STATUS:
-					if($device->getPingTime_Msec() !== NULL) {
+					if($device->getPingTime_Msec() === NULL) {
 						return NULL;
 					}
 					if ((int)$device->getPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
