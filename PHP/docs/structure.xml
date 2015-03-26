@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<project title="CarmaLinkSDK PHP" version="2.8.1">
+<project title="CarmaLinkSDK PHP" version="2.8.2">
   <partials/>
   <file path="CarmaLinkAPI.php" generated-path="CarmaLinkAPI.html" hash="6700998561baffea89bd03c82f8ffc38" package="Default">
     <docblock line="0">
@@ -254,80 +254,77 @@
     <markers>
       <todo line="41">Add custom error codes, perhaps include any HTTP codes received.</todo>
     </markers>
-    <parse_markers>
-      <error line="49" code="PPC:ERR-50015">Argument $message is missing from the Docblock of __construct</error>
-    </parse_markers>
     <source>eJytVmFv2zYQ/Sz/ikMwoEmwSMm6YmiSbbEtxVHjyIYtp1gxQGAk2tIqkxpJOXWG/PcdKVuW7WRot+VDJN27e3f3eCR9+WuRFq2Wc3zcgmPoEjEn/Yx9hrF7C1MuYHgzREBjVwsqZMYZnNnv7NO1kZQqRbduKjKpeJFSAQH5gz5m8RNcxtpqs9X3VazZ5VLaMZ//skP5k316UggqaE6JpGdN7tGSMOihp6IZg0uBn/Zs9fkCZ57FlEkKd35YFem0WozMqSxITBsd/tWyWpbu28KoQRtznWCzcIhx0K84jiCTIOifZSZoAopDibwqRWOePQgilrYONgRXklJIlSrOHSfmCbVnnM9yqstyCofrVk5QaQfCRrjmk1CDhs1pWauMEWdYMOYneUFUehhFrj+KIrDhTYNwReWYDsaKC2qj+c3RxX/hGWEkRYFFzYVSOUbrXGunlgWV9k6G3QSaH1mdWvKaTEvEptlMfi2D8Q4x6cu9vRY3ogUXqor+tsgeZVSQfCdUV65SakYC5QFSZN+qQXvor+k20+d9iWmh9EaIcyIl0C9xXspsQfXMmXmrB7gxcZVvk7nmqRwUTzi0kwTiEvfmHKgQuJ30dMrvoaAiJYWEjGGuhAJhS7gJw2GFYyMxxQKS9Uz+QzIsV1GWSPh9Y8LNZeEao0Z+cN/u+26EEdGt99s4Go4G977rufAzHIQoJgLwmS4BS9OvksaCKigEX2QJ7rpHYmrkAitS9gGuQiWb7rCrM4gyxqk3hsp6VRBB5oBIxmaWhcJJMqOWtaluZVq5Y7pSMFjwLDEW7NYqygc8R2BasthERFG8znX43Sr8yHRpYTbK1Pn5iy663Gdc6efmas/LnCjUGI81yso5PKZZnEJCpxlDqx4wqYgq8WSYAmmcWNWmKQXRJe0PgkHHJnJ70RpAY2EmwW0w+BhE47AdTsa4GqcXNTb0AtcPelG7G/r37dAfBIifbfCV3SziD/thrrcV+HbjUSMm9MeLbWU+ppThALAEF267W2kuo4fy6QkvmAXPyznFETZ3xepQpvjf5CBMyT1xOiby3gRuidMEGuJ0Jp8+eaPoxu/d6DnVz4OLXfSuGmJ8+JO7fXhwfa1hfByYPhvXjT7K9OpOS5oDHsF8zh+y3LRS1Q5NPZTSemD/s9WrHpHuILj2e1HPC7xRu18xmcGneGzj/t6osiB5uUW70uQaQ3QhW3qsjQ0trideP+q1x4O+H3gWdrRlaPRt7K7vjb1+7VZ9vioAbnPFY57j9CtabTWC7wu8f40Y/0aLaDDEh5k9/pC4a+J9SfYUGXTc2n1PmV2wodCHs/dv3wP+6eXuuDj/odfVBUQGaUjUnoQDeNFTI3dYdbfh7frjdqdfTdm29xp5Vdgcj068iHAWmJHo/9MUme/wivgKObE+7bmnZMPeEFFvF6i1qTZNfWp0Jr01ZD4aoB/gCdbveyMN1h+VMK3WMzgOeCzRmrzwK7D1NyDaXso=</source>
   </file>
-  <file path="lib/CarmaLink.php" generated-path="lib.CarmaLink.html" hash="fe497266fc39f44d52d06d42b1bd05ff" package="Default">
+  <file path="lib/CarmaLink.php" generated-path="lib.CarmaLink.html" hash="874c00c4e692d128447c259c8765caee" package="Default">
     <docblock line="0">
-      <description></description>
+      <description>CarmaLink Device Class</description>
       <long-description></long-description>
       <tag name="package" line="0" description="Default"/>
     </docblock>
-    <class final="false" abstract="true" namespace="CarmaLink" line="12" package="Default">
+    <class final="false" abstract="true" namespace="CarmaLink" line="17" package="Default">
       <extends/>
       <name>CarmaLink</name>
       <full_name>\CarmaLink\CarmaLink</full_name>
-      <docblock line="12">
+      <docblock line="17">
         <description>"Abstract" class representing minimum properties of a CarmaLink</description>
         <long-description>This class represents a possible starting point for an abstraction
 of a CarmaLink. The getters/setters below are required for some of
 the functionality in this SDK.</long-description>
-        <tag name="class" line="12" description="CarmaLink"/>
-        <tag name="package" line="12" description="Default"/>
+        <tag name="class" line="17" description="CarmaLink"/>
+        <tag name="package" line="17" description="Default"/>
       </docblock>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="18" package="Default">
-        <name>setId</name>
-        <full_name>\CarmaLink\CarmaLink::setId()</full_name>
-        <docblock line="18">
-          <description>Set CarmaLink ID or serial number</description>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="23" package="Default">
+        <name>setSerialNumber</name>
+        <full_name>\CarmaLink\CarmaLink::setSerialNumber()</full_name>
+        <docblock line="23">
+          <description>Set CarmaLink serial number</description>
           <long-description></long-description>
-          <tag name="param" line="18" description="&lt;p&gt;id&#9;serial number of CarmaLink&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="23" description="&lt;p&gt;serialNumber of CarmaLink&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="18" description="" type="void">
+          <tag name="return" line="23" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
         <argument line="0" by_reference="false">
-          <name>$id</name>
+          <name>$serialNumber</name>
           <default></default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="24" package="Default">
-        <name>getId</name>
-        <full_name>\CarmaLink\CarmaLink::getId()</full_name>
-        <docblock line="24">
-          <description>CarmaLink's serial / ID</description>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="29" package="Default">
+        <name>getSerialNumber</name>
+        <full_name>\CarmaLink\CarmaLink::getSerialNumber()</full_name>
+        <docblock line="29">
+          <description>CarmaLink's serial</description>
           <long-description></long-description>
-          <tag name="return" line="24" description="" type="integer">
+          <tag name="return" line="29" description="" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="32" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="37" package="Default">
         <name>getUseTrips</name>
         <full_name>\CarmaLink\CarmaLink::getUseTrips()</full_name>
-        <docblock line="32">
+        <docblock line="37">
           <description>Getter for useTrips</description>
           <long-description></long-description>
-          <tag name="return" line="32" description="" type="boolean">
+          <tag name="return" line="37" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="40" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="45" package="Default">
         <name>setUseTrips</name>
         <full_name>\CarmaLink\CarmaLink::setUseTrips()</full_name>
-        <docblock line="40">
+        <docblock line="45">
           <description>Shortcut to set useTrips</description>
           <long-description></long-description>
-          <tag name="param" line="40" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="45" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="40" description="" type="void">
+          <tag name="return" line="45" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -337,27 +334,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="48" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="53" package="Default">
         <name>getUseHealth</name>
         <full_name>\CarmaLink\CarmaLink::getUseHealth()</full_name>
-        <docblock line="48">
+        <docblock line="53">
           <description>Getter for useHealth</description>
           <long-description></long-description>
-          <tag name="return" line="48" description="" type="boolean">
+          <tag name="return" line="53" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="56" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="61" package="Default">
         <name>setUseHealth</name>
         <full_name>\CarmaLink\CarmaLink::setUseHealth()</full_name>
-        <docblock line="56">
+        <docblock line="61">
           <description>Shortcut to set useHealth</description>
           <long-description></long-description>
-          <tag name="param" line="56" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="61" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="56" description="" type="void">
+          <tag name="return" line="61" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -367,29 +364,29 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="64" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="69" package="Default">
         <name>getHealthConditions</name>
         <full_name>\CarmaLink\CarmaLink::getHealthConditions()</full_name>
-        <docblock line="64">
+        <docblock line="69">
           <description>Getter for HealthConditions</description>
           <long-description></long-description>
-          <tag name="return" line="64" description="" type="array|boolean">
+          <tag name="return" line="69" description="" type="array|boolean">
             <type>array</type>
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="78" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="83" package="Default">
         <name>setHealthConditions</name>
         <full_name>\CarmaLink\CarmaLink::setHealthConditions()</full_name>
-        <docblock line="78">
+        <docblock line="83">
           <description>Setter for useHealthConditions</description>
           <long-description></long-description>
-          <tag name="param" line="78" description="&lt;p&gt;conditions A string or array representing any conditions to set on the health report&lt;/p&gt;" type="array|string" variable="">
+          <tag name="param" line="83" description="&lt;p&gt;conditions A string or array representing any conditions to set on the health report&lt;/p&gt;" type="array|string" variable="">
             <type>array</type>
             <type>string</type>
           </tag>
-          <tag name="return" line="78" description="" type="void">
+          <tag name="return" line="83" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -399,27 +396,27 @@ the functionality in this SDK.</long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="89" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="94" package="Default">
         <name>getUseBatteryVoltage</name>
         <full_name>\CarmaLink\CarmaLink::getUseBatteryVoltage()</full_name>
-        <docblock line="89">
+        <docblock line="94">
           <description>Getter for useBatteryVoltage</description>
           <long-description></long-description>
-          <tag name="return" line="89" description="" type="boolean">
+          <tag name="return" line="94" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="97" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="102" package="Default">
         <name>setUseBatteryVoltage</name>
         <full_name>\CarmaLink\CarmaLink::setUseBatteryVoltage()</full_name>
-        <docblock line="97">
+        <docblock line="102">
           <description>Setter for useBatteryVoltage</description>
           <long-description></long-description>
-          <tag name="param" line="97" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="102" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="97" description="" type="void">
+          <tag name="return" line="102" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -429,27 +426,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="104" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="109" package="Default">
         <name>getUseEmissionMonitors</name>
         <full_name>\CarmaLink\CarmaLink::getUseEmissionMonitors()</full_name>
-        <docblock line="104">
+        <docblock line="109">
           <description>Getter for useEmissionMonitors</description>
           <long-description></long-description>
-          <tag name="return" line="104" description="" type="boolean">
+          <tag name="return" line="109" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="112" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="117" package="Default">
         <name>setUseEmissionMonistors</name>
         <full_name>\CarmaLink\CarmaLink::setUseEmissionMonistors()</full_name>
-        <docblock line="112">
+        <docblock line="117">
           <description>Setter for useEmissionMonitors</description>
           <long-description></long-description>
-          <tag name="param" line="112" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="117" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="112" description="" type="void">
+          <tag name="return" line="117" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -459,27 +456,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="119" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="124" package="Default">
         <name>getUseFuelLevel</name>
         <full_name>\CarmaLink\CarmaLink::getUseFuelLevel()</full_name>
-        <docblock line="119">
+        <docblock line="124">
           <description>Getter for useFuelLevel</description>
           <long-description></long-description>
-          <tag name="return" line="119" description="" type="boolean">
+          <tag name="return" line="124" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="127" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="132" package="Default">
         <name>setUseFuelLevel</name>
         <full_name>\CarmaLink\CarmaLink::setUseFuelLevel()</full_name>
-        <docblock line="127">
+        <docblock line="132">
           <description>Setter for useFuelLevel</description>
           <long-description></long-description>
-          <tag name="param" line="127" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="132" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="127" description="" type="void">
+          <tag name="return" line="132" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -489,27 +486,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="134" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="139" package="Default">
         <name>getUseFuelRate</name>
         <full_name>\CarmaLink\CarmaLink::getUseFuelRate()</full_name>
-        <docblock line="134">
+        <docblock line="139">
           <description>Getter for useFuelRate</description>
           <long-description></long-description>
-          <tag name="return" line="134" description="" type="boolean">
+          <tag name="return" line="139" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="142" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="147" package="Default">
         <name>setUseFuelRate</name>
         <full_name>\CarmaLink\CarmaLink::setUseFuelRate()</full_name>
-        <docblock line="142">
+        <docblock line="147">
           <description>Setter for useFuelRate</description>
           <long-description></long-description>
-          <tag name="param" line="142" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="147" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="142" description="" type="void">
+          <tag name="return" line="147" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -519,27 +516,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="149" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="154" package="Default">
         <name>getUseNextServiceDuration</name>
         <full_name>\CarmaLink\CarmaLink::getUseNextServiceDuration()</full_name>
-        <docblock line="149">
+        <docblock line="154">
           <description>Getter for useNextServiceDuration</description>
           <long-description></long-description>
-          <tag name="return" line="149" description="" type="boolean">
+          <tag name="return" line="154" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="157" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="162" package="Default">
         <name>setUseNextServiceDuration</name>
         <full_name>\CarmaLink\CarmaLink::setUseNextServiceDuration()</full_name>
-        <docblock line="157">
+        <docblock line="162">
           <description>Setter for useNextServiceDuration</description>
           <long-description></long-description>
-          <tag name="param" line="157" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="162" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="157" description="" type="void">
+          <tag name="return" line="162" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -549,27 +546,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="164" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="169" package="Default">
         <name>getUseNextServiceDistance</name>
         <full_name>\CarmaLink\CarmaLink::getUseNextServiceDistance()</full_name>
-        <docblock line="164">
+        <docblock line="169">
           <description>Getter for useNextServiceDistance</description>
           <long-description></long-description>
-          <tag name="return" line="164" description="" type="boolean">
+          <tag name="return" line="169" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="172" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="177" package="Default">
         <name>setUseNextServiceDistance</name>
         <full_name>\CarmaLink\CarmaLink::setUseNextServiceDistance()</full_name>
-        <docblock line="172">
+        <docblock line="177">
           <description>Setter for useNextServiceDistance</description>
           <long-description></long-description>
-          <tag name="param" line="172" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="177" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="172" description="" type="void">
+          <tag name="return" line="177" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -579,16 +576,16 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="180" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="185" package="Default">
         <name>setUseNextService</name>
         <full_name>\CarmaLink\CarmaLink::setUseNextService()</full_name>
-        <docblock line="180">
+        <docblock line="185">
           <description>Shortcut to set useNextService(s)</description>
           <long-description></long-description>
-          <tag name="param" line="180" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
+          <tag name="param" line="185" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="180" description="" type="void">
+          <tag name="return" line="185" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -598,27 +595,27 @@ the functionality in this SDK.</long-description>
           <type>boolean</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="191" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="196" package="Default">
         <name>getUseOdometer</name>
         <full_name>\CarmaLink\CarmaLink::getUseOdometer()</full_name>
-        <docblock line="191">
+        <docblock line="196">
           <description>Getter for useOdometer</description>
           <long-description></long-description>
-          <tag name="return" line="191" description="" type="boolean">
+          <tag name="return" line="196" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="199" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="204" package="Default">
         <name>setUseOdometer</name>
         <full_name>\CarmaLink\CarmaLink::setUseOdometer()</full_name>
-        <docblock line="199">
+        <docblock line="204">
           <description>Setter for useOdometer</description>
           <long-description></long-description>
-          <tag name="param" line="199" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$Use">
+          <tag name="param" line="204" description="&lt;p&gt;Value to set&lt;/p&gt;" type="boolean" variable="$Use">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="199" description="" type="void">
+          <tag name="return" line="204" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -628,16 +625,16 @@ the functionality in this SDK.</long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="206" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="211" package="Default">
         <name>setCheckEngineLight</name>
         <full_name>\CarmaLink\CarmaLink::setCheckEngineLight()</full_name>
-        <docblock line="206">
+        <docblock line="211">
           <description>Set CarmaLink engine fault</description>
           <long-description></long-description>
-          <tag name="param" line="206" description="&lt;p&gt;checkEngineLight&#9;Use engine fault&lt;/p&gt;" type="boolean" variable="">
+          <tag name="param" line="211" description="&lt;p&gt;checkEngineLight&#9;Use engine fault&lt;/p&gt;" type="boolean" variable="">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="206" description="" type="void">
+          <tag name="return" line="211" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -647,28 +644,28 @@ the functionality in this SDK.</long-description>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="212" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="217" package="Default">
         <name>getCheckEngineLight</name>
         <full_name>\CarmaLink\CarmaLink::getCheckEngineLight()</full_name>
-        <docblock line="212">
+        <docblock line="217">
           <description>Get CarmaLink engine fault config</description>
           <long-description></long-description>
-          <tag name="return" line="212" description="" type="boolean">
+          <tag name="return" line="217" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="220" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="225" package="Default">
         <name>setBuzzerVolume</name>
         <full_name>\CarmaLink\CarmaLink::setBuzzerVolume()</full_name>
-        <docblock line="220">
+        <docblock line="225">
           <description>Set CarmaLink global buzzer volume
 Can be used to override when setting a configuration which supports buzzer.</description>
           <long-description></long-description>
-          <tag name="param" line="220" description="&lt;p&gt;buzzerVolume    HIGH/MED/OFF&lt;/p&gt;" type="\CarmaLink\BuzzerVolume" variable="">
+          <tag name="param" line="225" description="&lt;p&gt;buzzerVolume    HIGH/MED/OFF&lt;/p&gt;" type="\CarmaLink\BuzzerVolume" variable="">
             <type>\CarmaLink\BuzzerVolume</type>
           </tag>
-          <tag name="return" line="220" description="" type="void">
+          <tag name="return" line="225" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -678,27 +675,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="226" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="231" package="Default">
         <name>getBuzzerVolume</name>
         <full_name>\CarmaLink\CarmaLink::getBuzzerVolume()</full_name>
-        <docblock line="226">
+        <docblock line="231">
           <description>Get global CarmaLink volume setting</description>
           <long-description></long-description>
-          <tag name="return" line="226" description="HIGH/MED/OFF" type="\CarmaLink\BuzzerVolume">
+          <tag name="return" line="231" description="HIGH/MED/OFF" type="\CarmaLink\BuzzerVolume">
             <type>\CarmaLink\BuzzerVolume</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="233" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="238" package="Default">
         <name>setUseGps</name>
         <full_name>\CarmaLink\CarmaLink::setUseGps()</full_name>
-        <docblock line="233">
+        <docblock line="238">
           <description>Set CarmaLink location tracking / GPS functionality</description>
           <long-description></long-description>
-          <tag name="param" line="233" description="&lt;p&gt;useGps    On/Off&lt;/p&gt;" type="boolean" variable="">
+          <tag name="param" line="238" description="&lt;p&gt;useGps  On/Off&lt;/p&gt;" type="boolean" variable="">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="233" description="" type="void">
+          <tag name="return" line="238" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -708,27 +705,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="239" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="244" package="Default">
         <name>getUseGps</name>
         <full_name>\CarmaLink\CarmaLink::getUseGps()</full_name>
-        <docblock line="239">
+        <docblock line="244">
           <description>Get CarmaLink location functionality</description>
           <long-description></long-description>
-          <tag name="return" line="239" description="" type="boolean">
+          <tag name="return" line="244" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="246" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="251" package="Default">
         <name>setUseTirePressure</name>
         <full_name>\CarmaLink\CarmaLink::setUseTirePressure()</full_name>
-        <docblock line="246">
+        <docblock line="251">
           <description>Set CarmaLink low tire pressure report</description>
           <long-description></long-description>
-          <tag name="param" line="246" description="&lt;p&gt;useTirePressure    On/Off&lt;/p&gt;" type="boolean" variable="">
+          <tag name="param" line="251" description="&lt;p&gt;useTirePressure On/Off&lt;/p&gt;" type="boolean" variable="">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="246" description="" type="void">
+          <tag name="return" line="251" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -738,57 +735,57 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="252" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="257" package="Default">
         <name>getUseTirePressure</name>
         <full_name>\CarmaLink\CarmaLink::getUseTirePressure()</full_name>
-        <docblock line="252">
+        <docblock line="257">
           <description>Get CarmaLink low tire pressure report enabled</description>
           <long-description></long-description>
-          <tag name="return" line="252" description="" type="boolean">
+          <tag name="return" line="257" description="" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="259" package="Default">
-        <name>setPingTime_Msec</name>
-        <full_name>\CarmaLink\CarmaLink::setPingTime_Msec()</full_name>
-        <docblock line="259">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="264" package="Default">
+        <name>setStatusPingTime_Msec</name>
+        <full_name>\CarmaLink\CarmaLink::setStatusPingTime_Msec()</full_name>
+        <docblock line="264">
           <description>Sets the CarmaLink's update interval</description>
           <long-description></long-description>
-          <tag name="param" line="259" description="&lt;p&gt;pingTime_Msec&#9;The update interval in milliseconds&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="264" description="&lt;p&gt;statusPingTime_Msec&#9;The update interval in milliseconds&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="259" description="" type="void">
+          <tag name="return" line="264" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
         <argument line="0" by_reference="false">
-          <name>$pingTime_Msec</name>
+          <name>$statusPingTime_Msec</name>
           <default>5000</default>
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="265" package="Default">
-        <name>getPingTime_Msec</name>
-        <full_name>\CarmaLink\CarmaLink::getPingTime_Msec()</full_name>
-        <docblock line="265">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="270" package="Default">
+        <name>getStatusPingTime_Msec</name>
+        <full_name>\CarmaLink\CarmaLink::getStatusPingTime_Msec()</full_name>
+        <docblock line="270">
           <description>Gets the CarmaLink's update interval</description>
           <long-description></long-description>
-          <tag name="return" line="265" description="milliseconds" type="integer">
+          <tag name="return" line="270" description="milliseconds" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="272" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="277" package="Default">
         <name>setSpeedLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::setSpeedLimit_kmph()</full_name>
-        <docblock line="272">
+        <docblock line="277">
           <description>Set CarmaLink speed limit</description>
           <long-description></long-description>
-          <tag name="param" line="272" description="&lt;p&gt;speedLimit_kmph        Speed in Km/h&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="277" description="&lt;p&gt;speedLimit_kmph     Speed in Km/h&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="272" description="" type="void">
+          <tag name="return" line="277" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -798,27 +795,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="278" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="283" package="Default">
         <name>getSpeedLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::getSpeedLimit_kmph()</full_name>
-        <docblock line="278">
+        <docblock line="283">
           <description>Get CarmaLink speed limit</description>
           <long-description></long-description>
-          <tag name="return" line="278" description="Km/h limit" type="integer">
+          <tag name="return" line="283" description="Km/h limit" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="285" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="290" package="Default">
         <name>setSpeedLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setSpeedLimitAllowance_Msec()</full_name>
-        <docblock line="285">
+        <docblock line="290">
           <description>Set CarmaLink speed limit allowance</description>
           <long-description></long-description>
-          <tag name="param" line="285" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="290" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="285" description="" type="void">
+          <tag name="return" line="290" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -828,27 +825,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="291" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="296" package="Default">
         <name>getSpeedLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getSpeedLimitAllowance_Msec()</full_name>
-        <docblock line="291">
+        <docblock line="296">
           <description>Get CarmaLink speed limit allowance</description>
           <long-description></long-description>
-          <tag name="return" line="291" description="allowance time in ms" type="float">
+          <tag name="return" line="296" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="298" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="303" package="Default">
         <name>setEngineSpeedLimit_rpm</name>
         <full_name>\CarmaLink\CarmaLink::setEngineSpeedLimit_rpm()</full_name>
-        <docblock line="298">
+        <docblock line="303">
           <description>Set CarmaLink engine speed limit</description>
           <long-description></long-description>
-          <tag name="param" line="298" description="&lt;p&gt;engineSpeedLimit_rpm&#9;&#9;Speed in Rotations per minute&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="303" description="&lt;p&gt;engineSpeedLimit_rpm&#9;&#9;Speed in Rotations per minute&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="298" description="" type="void">
+          <tag name="return" line="303" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -858,27 +855,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="304" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="309" package="Default">
         <name>getEngineSpeedLimit_rpm</name>
         <full_name>\CarmaLink\CarmaLink::getEngineSpeedLimit_rpm()</full_name>
-        <docblock line="304">
+        <docblock line="309">
           <description>Get CarmaLink engine speed limit</description>
           <long-description></long-description>
-          <tag name="return" line="304" description="Rotations per Minute limit" type="integer">
+          <tag name="return" line="309" description="Rotations per Minute limit" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="311" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="316" package="Default">
         <name>setEngineSpeedLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setEngineSpeedLimitAllowance_Msec()</full_name>
-        <docblock line="311">
+        <docblock line="316">
           <description>Set CarmaLink engine speed limit allowance</description>
           <long-description></long-description>
-          <tag name="param" line="311" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="316" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="311" description="" type="void">
+          <tag name="return" line="316" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -888,28 +885,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="317" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="322" package="Default">
         <name>getEngineSpeedLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getEngineSpeedLimitAllowance_Msec()</full_name>
-        <docblock line="317">
+        <docblock line="322">
           <description>Get CarmaLink speed limit allowance</description>
           <long-description></long-description>
-          <tag name="return" line="317" description="allowance time in ms" type="float">
+          <tag name="return" line="322" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="324" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="329" package="Default">
         <name>setParkingBrakeLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::setParkingBrakeLimit_kmph()</full_name>
-        <docblock line="324">
+        <docblock line="329">
           <description>Set CarmaLink parking brake limit</description>
           <long-description></long-description>
-          <tag name="param" line="324" description="&lt;p&gt;speedLimit_kmph        Speed in Km/h&lt;/p&gt;" type="integer|boolean" variable="">
+          <tag name="param" line="329" description="&lt;p&gt;speedLimit_kmph     Speed in Km/h&lt;/p&gt;" type="integer|boolean" variable="">
             <type>integer</type>
             <type>boolean</type>
           </tag>
-          <tag name="return" line="324" description="" type="void">
+          <tag name="return" line="329" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -919,28 +916,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="330" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="335" package="Default">
         <name>getParkingBrakeLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::getParkingBrakeLimit_kmph()</full_name>
-        <docblock line="330">
+        <docblock line="335">
           <description>Get CarmaLink parking brake limit</description>
           <long-description></long-description>
-          <tag name="return" line="330" description="Km/h limit or false if disabled" type="integer|boolean">
+          <tag name="return" line="335" description="Km/h limit or false if disabled" type="integer|boolean">
             <type>integer</type>
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="337" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="342" package="Default">
         <name>setParkingBrakeLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setParkingBrakeLimitAllowance_Msec()</full_name>
-        <docblock line="337">
+        <docblock line="342">
           <description>Set CarmaLink parking brake allowance</description>
           <long-description></long-description>
-          <tag name="param" line="337" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="342" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="337" description="" type="void">
+          <tag name="return" line="342" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -950,28 +947,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="343" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="348" package="Default">
         <name>getParkingBrakeLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getParkingBrakeLimitAllowance_Msec()</full_name>
-        <docblock line="343">
+        <docblock line="348">
           <description>Get CarmaLink parking brake allowance</description>
           <long-description></long-description>
-          <tag name="return" line="343" description="allowance time in ms" type="float">
+          <tag name="return" line="348" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="350" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="355" package="Default">
         <name>setSeatbeltLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::setSeatbeltLimit_kmph()</full_name>
-        <docblock line="350">
+        <docblock line="355">
           <description>Set CarmaLink seatbelt limit</description>
           <long-description></long-description>
-          <tag name="param" line="350" description="&lt;p&gt;speedLimit_kmph        Speed in Km/h&lt;/p&gt;" type="integer|boolean" variable="">
+          <tag name="param" line="355" description="&lt;p&gt;speedLimit_kmph     Speed in Km/h&lt;/p&gt;" type="integer|boolean" variable="">
             <type>integer</type>
             <type>boolean</type>
           </tag>
-          <tag name="return" line="350" description="" type="void">
+          <tag name="return" line="355" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -981,28 +978,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="356" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="361" package="Default">
         <name>getSeatbeltLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::getSeatbeltLimit_kmph()</full_name>
-        <docblock line="356">
+        <docblock line="361">
           <description>Get CarmaLink seatbelt limit</description>
           <long-description></long-description>
-          <tag name="return" line="356" description="Km/h limit or false if disabled" type="integer|boolean">
+          <tag name="return" line="361" description="Km/h limit or false if disabled" type="integer|boolean">
             <type>integer</type>
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="363" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="368" package="Default">
         <name>setSeatbeltLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setSeatbeltLimitAllowance_Msec()</full_name>
-        <docblock line="363">
+        <docblock line="368">
           <description>Set CarmaLink seatbelt allowance</description>
           <long-description></long-description>
-          <tag name="param" line="363" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="368" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="363" description="" type="void">
+          <tag name="return" line="368" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1012,28 +1009,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="369" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="374" package="Default">
         <name>getSeatbeltLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getSeatbeltLimitAllowance_Msec()</full_name>
-        <docblock line="369">
+        <docblock line="374">
           <description>Get CarmaLink seatbelt allowance</description>
           <long-description></long-description>
-          <tag name="return" line="369" description="allowance time in ms" type="float">
+          <tag name="return" line="374" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="377" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="382" package="Default">
         <name>setReverseLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::setReverseLimit_kmph()</full_name>
-        <docblock line="377">
+        <docblock line="382">
           <description>Set CarmaLink reverse speed limit</description>
           <long-description></long-description>
-          <tag name="param" line="377" description="&lt;p&gt;reverseLimit        Speed in Km/h or FALSE to disable report&lt;/p&gt;" type="integer|boolean" variable="">
+          <tag name="param" line="382" description="&lt;p&gt;reverseLimit        Speed in Km/h or FALSE to disable report&lt;/p&gt;" type="integer|boolean" variable="">
             <type>integer</type>
             <type>boolean</type>
           </tag>
-          <tag name="return" line="377" description="" type="void">
+          <tag name="return" line="382" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1043,28 +1040,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="383" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="388" package="Default">
         <name>getReverseLimit_kmph</name>
         <full_name>\CarmaLink\CarmaLink::getReverseLimit_kmph()</full_name>
-        <docblock line="383">
+        <docblock line="388">
           <description>Get CarmaLink speed limit</description>
           <long-description></long-description>
-          <tag name="return" line="383" description="Km/h limit or FALSE if report disabled" type="integer|boolean">
+          <tag name="return" line="388" description="Km/h limit or FALSE if report disabled" type="integer|boolean">
             <type>integer</type>
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="390" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="395" package="Default">
         <name>setReverseLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setReverseLimitAllowance_Msec()</full_name>
-        <docblock line="390">
+        <docblock line="395">
           <description>Set CarmaLink reverse speed limit allowance</description>
           <long-description></long-description>
-          <tag name="param" line="390" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="395" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="390" description="" type="void">
+          <tag name="return" line="395" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1074,27 +1071,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="396" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="401" package="Default">
         <name>getReverseLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getReverseLimitAllowance_Msec()</full_name>
-        <docblock line="396">
+        <docblock line="401">
           <description>Get CarmaLink reverse speed limit allowance</description>
           <long-description></long-description>
-          <tag name="return" line="396" description="allowance time in ms" type="float">
+          <tag name="return" line="401" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="403" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="408" package="Default">
         <name>setBrakeLimit_Mpss</name>
         <full_name>\CarmaLink\CarmaLink::setBrakeLimit_Mpss()</full_name>
-        <docblock line="403">
+        <docblock line="408">
           <description>Set CarmaLink brake limit</description>
           <long-description></long-description>
-          <tag name="param" line="403" description="&lt;p&gt;brakeLimit        Limit in Meters per second^2&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="408" description="&lt;p&gt;brakeLimit      Limit in Meters per second^2&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="403" description="" type="void">
+          <tag name="return" line="408" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1104,27 +1101,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="409" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="414" package="Default">
         <name>getBrakeLimit_Mpss</name>
         <full_name>\CarmaLink\CarmaLink::getBrakeLimit_Mpss()</full_name>
-        <docblock line="409">
+        <docblock line="414">
           <description>Get CarmaLink brake limit</description>
           <long-description></long-description>
-          <tag name="return" line="409" description="In Meters per second^2" type="float">
+          <tag name="return" line="414" description="In Meters per second^2" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="416" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="421" package="Default">
         <name>setBrakeLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setBrakeLimitAllowance_Msec()</full_name>
-        <docblock line="416">
+        <docblock line="421">
           <description>Set CarmaLink brake limit allowance</description>
           <long-description></long-description>
-          <tag name="param" line="416" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="421" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="416" description="" type="void">
+          <tag name="return" line="421" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1134,27 +1131,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="422" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="427" package="Default">
         <name>getBrakeLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getBrakeLimitAllowance_Msec()</full_name>
-        <docblock line="422">
+        <docblock line="427">
           <description>Get CarmaLink brake limit allowance</description>
           <long-description></long-description>
-          <tag name="return" line="422" description="allowance time in ms" type="float">
+          <tag name="return" line="427" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="429" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="434" package="Default">
         <name>setCorneringLimit_Mpss</name>
         <full_name>\CarmaLink\CarmaLink::setCorneringLimit_Mpss()</full_name>
-        <docblock line="429">
+        <docblock line="434">
           <description>Set CarmaLink hard conering limit</description>
           <long-description></long-description>
-          <tag name="param" line="429" description="&lt;p&gt;cornerLimit        Limit in Meters per second^2&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="434" description="&lt;p&gt;cornerLimit     Limit in Meters per second^2&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="429" description="" type="void">
+          <tag name="return" line="434" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1164,27 +1161,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="435" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="440" package="Default">
         <name>getCorneringLimit_Mpss</name>
         <full_name>\CarmaLink\CarmaLink::getCorneringLimit_Mpss()</full_name>
-        <docblock line="435">
+        <docblock line="440">
           <description>Get CarmaLink hard cornering limit</description>
           <long-description></long-description>
-          <tag name="return" line="435" description="In Meters per second^2" type="float">
+          <tag name="return" line="440" description="In Meters per second^2" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="442" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="447" package="Default">
         <name>setCorneringLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setCorneringLimitAllowance_Msec()</full_name>
-        <docblock line="442">
+        <docblock line="447">
           <description>Set CarmaLink hard cornering allowance</description>
           <long-description></long-description>
-          <tag name="param" line="442" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="447" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="442" description="" type="void">
+          <tag name="return" line="447" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1194,27 +1191,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="448" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="453" package="Default">
         <name>getCorneringLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getCorneringLimitAllowance_Msec()</full_name>
-        <docblock line="448">
+        <docblock line="453">
           <description>Get CarmaLink hard cornering allowance</description>
           <long-description></long-description>
-          <tag name="return" line="448" description="allowance time in ms" type="float">
+          <tag name="return" line="453" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="455" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="460" package="Default">
         <name>setAccelLimit_Mpss</name>
         <full_name>\CarmaLink\CarmaLink::setAccelLimit_Mpss()</full_name>
-        <docblock line="455">
+        <docblock line="460">
           <description>Set CarmaLink acceleration limit</description>
           <long-description></long-description>
-          <tag name="param" line="455" description="&lt;p&gt;accelLimit        Limit in Meters per second^2&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="460" description="&lt;p&gt;accelLimit      Limit in Meters per second^2&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="455" description="" type="void">
+          <tag name="return" line="460" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1224,27 +1221,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="461" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="466" package="Default">
         <name>getAccelLimit_Mpss</name>
         <full_name>\CarmaLink\CarmaLink::getAccelLimit_Mpss()</full_name>
-        <docblock line="461">
+        <docblock line="466">
           <description>Get CarmaLink acceleration limit</description>
           <long-description></long-description>
-          <tag name="return" line="461" description="In Meters per second^2" type="float">
+          <tag name="return" line="466" description="In Meters per second^2" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="468" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="473" package="Default">
         <name>setAccelLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setAccelLimitAllowance_Msec()</full_name>
-        <docblock line="468">
+        <docblock line="473">
           <description>Set CarmaLink accel limit allowance</description>
           <long-description></long-description>
-          <tag name="param" line="468" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="473" description="&lt;p&gt;allowance&#9;&#9;allowance time in ms&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="468" description="" type="void">
+          <tag name="return" line="473" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1254,27 +1251,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="474" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="479" package="Default">
         <name>getAccelLimitAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getAccelLimitAllowance_Msec()</full_name>
-        <docblock line="474">
+        <docblock line="479">
           <description>Get CarmaLink accel limit allowance</description>
           <long-description></long-description>
-          <tag name="return" line="474" description="allowance time in ms" type="float">
+          <tag name="return" line="479" description="allowance time in ms" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="481" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="486" package="Default">
         <name>setIdleTimeLimit_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setIdleTimeLimit_Msec()</full_name>
-        <docblock line="481">
+        <docblock line="486">
           <description>Set CarmaLink idle time limit</description>
           <long-description></long-description>
-          <tag name="param" line="481" description="&lt;p&gt;idleTimeLimit&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="486" description="&lt;p&gt;idleTimeLimit&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="481" description="" type="void">
+          <tag name="return" line="486" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1284,27 +1281,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="487" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="492" package="Default">
         <name>getIdleTimeLimit_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getIdleTimeLimit_Msec()</full_name>
-        <docblock line="487">
+        <docblock line="492">
           <description>Get CarmaLink idle time limit</description>
           <long-description></long-description>
-          <tag name="return" line="487" description="milliseconds" type="integer">
+          <tag name="return" line="492" description="milliseconds" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="494" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="499" package="Default">
         <name>setParkingTimeoutThreshold_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setParkingTimeoutThreshold_Msec()</full_name>
-        <docblock line="494">
+        <docblock line="499">
           <description>Set CarmaLink parking Timeout Threshold_Msec</description>
           <long-description></long-description>
-          <tag name="param" line="494" description="&lt;p&gt;parkingTimeoutThreshold_Msec&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="499" description="&lt;p&gt;parkingTimeoutThreshold_Msec&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="494" description="" type="void">
+          <tag name="return" line="499" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1314,27 +1311,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="500" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="505" package="Default">
         <name>getParkingTimeoutThreshold_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getParkingTimeoutThreshold_Msec()</full_name>
-        <docblock line="500">
+        <docblock line="505">
           <description>Get CarmaLink parking Timeout Allowance_Msec</description>
           <long-description></long-description>
-          <tag name="return" line="500" description="milliseconds" type="integer">
+          <tag name="return" line="505" description="milliseconds" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="507" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="512" package="Default">
         <name>setTransportedPingTime_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setTransportedPingTime_Msec()</full_name>
-        <docblock line="507">
+        <docblock line="512">
           <description>Set CarmaLink transport ping</description>
           <long-description></long-description>
-          <tag name="param" line="507" description="&lt;p&gt;transportedPingTime_Msec&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="512" description="&lt;p&gt;transportedPingTime_Msec&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="507" description="" type="void">
+          <tag name="return" line="512" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1344,38 +1341,38 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="513" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="518" package="Default">
         <name>getTransportedPingTime_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getTransportedPingTime_Msec()</full_name>
-        <docblock line="513">
+        <docblock line="518">
           <description>Get CarmaLink transportedPingTime_Msec</description>
           <long-description></long-description>
-          <tag name="return" line="513" description="milliseconds" type="integer">
+          <tag name="return" line="518" description="milliseconds" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="519" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="524" package="Default">
         <name>getTransportedPingTimeAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::getTransportedPingTimeAllowance_Msec()</full_name>
-        <docblock line="519">
+        <docblock line="524">
           <description>Get CarmaLink transportedPingTimeAllowance_Msec</description>
           <long-description></long-description>
-          <tag name="return" line="519" description="milliseconds" type="integer">
+          <tag name="return" line="524" description="milliseconds" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="526" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="531" package="Default">
         <name>setTransportedPingTimeAllowance_Msec</name>
         <full_name>\CarmaLink\CarmaLink::setTransportedPingTimeAllowance_Msec()</full_name>
-        <docblock line="526">
+        <docblock line="531">
           <description>Set CarmaLink transport ping allowance</description>
           <long-description></long-description>
-          <tag name="param" line="526" description="&lt;p&gt;transportedPingTimeAllowance_Msec&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="531" description="&lt;p&gt;transportedPingTimeAllowance_Msec&#9;in milliseconds&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="526" description="" type="void">
+          <tag name="return" line="531" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1385,16 +1382,16 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="533" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="538" package="Default">
         <name>setFuelType</name>
         <full_name>\CarmaLink\CarmaLink::setFuelType()</full_name>
-        <docblock line="533">
+        <docblock line="538">
           <description>Set attached automobile's fuel type</description>
           <long-description></long-description>
-          <tag name="param" line="533" description="&lt;p&gt;fuel type&lt;/p&gt;" type="\CarmaLink\CarmaLink\FuelType" variable="">
+          <tag name="param" line="538" description="&lt;p&gt;fuel type&lt;/p&gt;" type="\CarmaLink\CarmaLink\FuelType" variable="">
             <type>\CarmaLink\CarmaLink\FuelType</type>
           </tag>
-          <tag name="return" line="533" description="" type="void">
+          <tag name="return" line="538" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1404,27 +1401,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="539" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="544" package="Default">
         <name>getFuelType</name>
         <full_name>\CarmaLink\CarmaLink::getFuelType()</full_name>
-        <docblock line="539">
+        <docblock line="544">
           <description>Get attached automobile's fuel type</description>
           <long-description></long-description>
-          <tag name="return" line="539" description="" type="\CarmaLink\CarmaLink\FuelType">
+          <tag name="return" line="544" description="" type="\CarmaLink\CarmaLink\FuelType">
             <type>\CarmaLink\CarmaLink\FuelType</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="546" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="551" package="Default">
         <name>setDisplacement_L</name>
         <full_name>\CarmaLink\CarmaLink::setDisplacement_L()</full_name>
-        <docblock line="546">
+        <docblock line="551">
           <description>Set attached auto's engine displacement</description>
           <long-description></long-description>
-          <tag name="param" line="546" description="&lt;p&gt;engine displacement in litres&lt;/p&gt;" type="float" variable="">
+          <tag name="param" line="551" description="&lt;p&gt;engine displacement in litres&lt;/p&gt;" type="float" variable="">
             <type>float</type>
           </tag>
-          <tag name="return" line="546" description="" type="void">
+          <tag name="return" line="551" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1434,27 +1431,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="552" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="557" package="Default">
         <name>getDisplacement_L</name>
         <full_name>\CarmaLink\CarmaLink::getDisplacement_L()</full_name>
-        <docblock line="552">
+        <docblock line="557">
           <description>Get attached auto's engine displacement</description>
           <long-description></long-description>
-          <tag name="return" line="552" description="litres" type="float">
+          <tag name="return" line="557" description="litres" type="float">
             <type>float</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="560" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="565" package="Default">
         <name>setDevicePaused</name>
         <full_name>\CarmaLink\CarmaLink::setDevicePaused()</full_name>
-        <docblock line="560">
+        <docblock line="565">
           <description>Set state of device paused (true = paused, false = not).</description>
           <long-description></long-description>
-          <tag name="param" line="560" description="&lt;p&gt;Is in paused state (true/false). converted to bool if not bool.&lt;/p&gt;" type="boolean" variable="">
+          <tag name="param" line="565" description="&lt;p&gt;Is in paused state (true/false). converted to bool if not bool.&lt;/p&gt;" type="boolean" variable="">
             <type>boolean</type>
           </tag>
-          <tag name="return" line="560" description="" type="void">
+          <tag name="return" line="565" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1464,27 +1461,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="565" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="570" package="Default">
         <name>getDevicePaused</name>
         <full_name>\CarmaLink\CarmaLink::getDevicePaused()</full_name>
-        <docblock line="565">
+        <docblock line="570">
           <description>Get device state is paused</description>
           <long-description></long-description>
-          <tag name="return" line="565" description="isPaused" type="boolean">
+          <tag name="return" line="570" description="isPaused" type="boolean">
             <type>boolean</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="573" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="578" package="Default">
         <name>setConnectInterval_Mins</name>
         <full_name>\CarmaLink\CarmaLink::setConnectInterval_Mins()</full_name>
-        <docblock line="573">
+        <docblock line="578">
           <description>Set state of device connect interval in minutes</description>
           <long-description></long-description>
-          <tag name="param" line="573" description="&lt;p&gt;connectInterval_Mins&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="578" description="&lt;p&gt;connectInterval_Mins&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="573" description="" type="void">
+          <tag name="return" line="578" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1494,27 +1491,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="578" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="583" package="Default">
         <name>getConnectInterval_Mins</name>
         <full_name>\CarmaLink\CarmaLink::getConnectInterval_Mins()</full_name>
-        <docblock line="578">
+        <docblock line="583">
           <description>Get device connect interval</description>
           <long-description></long-description>
-          <tag name="return" line="578" description="connectInterval_Mins" type="integer">
+          <tag name="return" line="583" description="connectInterval_Mins" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="586" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="591" package="Default">
         <name>setAGPSConnectInterval_Hrs</name>
         <full_name>\CarmaLink\CarmaLink::setAGPSConnectInterval_Hrs()</full_name>
-        <docblock line="586">
+        <docblock line="591">
           <description>Set state of device agps connect interval in hours</description>
           <long-description></long-description>
-          <tag name="param" line="586" description="&lt;p&gt;agpsConnectInterval_Hrs&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="591" description="&lt;p&gt;agpsConnectInterval_Hrs&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="586" description="" type="void">
+          <tag name="return" line="591" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1524,27 +1521,57 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="591" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="596" package="Default">
         <name>getAGPSConnectInterval_Hrs</name>
         <full_name>\CarmaLink\CarmaLink::getAGPSConnectInterval_Hrs()</full_name>
-        <docblock line="591">
+        <docblock line="596">
           <description>Get device agps connect interval</description>
           <long-description></long-description>
-          <tag name="return" line="591" description="agpsConnectInterval_Hrs" type="integer">
+          <tag name="return" line="596" description="agpsConnectInterval_Hrs" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="599" package="Default">
-        <name>setChargingVoltage_V</name>
-        <full_name>\CarmaLink\CarmaLink::setChargingVoltage_V()</full_name>
-        <docblock line="599">
-          <description>Set device charging battery voltage of generalconfig</description>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="604" package="Default">
+        <name>setPingInterval_Mins</name>
+        <full_name>\CarmaLink\CarmaLink::setPingInterval_Mins()</full_name>
+        <docblock line="604">
+          <description>Set state of device ping interval in munytes</description>
           <long-description></long-description>
-          <tag name="param" line="599" description="&lt;p&gt;chargingVoltage_V&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="604" description="&lt;p&gt;pingInterval_Mins&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="599" description="" type="void">
+          <tag name="return" line="604" description="" type="void">
+            <type>void</type>
+          </tag>
+        </docblock>
+        <argument line="0" by_reference="false">
+          <name>$pingInterval_Mins</name>
+          <default>0</default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="609" package="Default">
+        <name>getPingInterval_Mins</name>
+        <full_name>\CarmaLink\CarmaLink::getPingInterval_Mins()</full_name>
+        <docblock line="609">
+          <description>Get device agps connect interval</description>
+          <long-description></long-description>
+          <tag name="return" line="609" description="pingInterval_Mins" type="integer">
+            <type>integer</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="617" package="Default">
+        <name>setChargingVoltage_V</name>
+        <full_name>\CarmaLink\CarmaLink::setChargingVoltage_V()</full_name>
+        <docblock line="617">
+          <description>Set device charging battery voltage of generalconfig</description>
+          <long-description></long-description>
+          <tag name="param" line="617" description="&lt;p&gt;chargingVoltage_V&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="return" line="617" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1554,27 +1581,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="604" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="622" package="Default">
         <name>getChargingVoltage_V</name>
         <full_name>\CarmaLink\CarmaLink::getChargingVoltage_V()</full_name>
-        <docblock line="604">
+        <docblock line="622">
           <description>Get device charging battery voltage</description>
           <long-description></long-description>
-          <tag name="return" line="604" description="chargingVoltage_V" type="integer">
+          <tag name="return" line="622" description="chargingVoltage_V" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="612" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="630" package="Default">
         <name>setLowBatteryVoltage_V</name>
         <full_name>\CarmaLink\CarmaLink::setLowBatteryVoltage_V()</full_name>
-        <docblock line="612">
+        <docblock line="630">
           <description>Set device low  battery voltage</description>
           <long-description></long-description>
-          <tag name="param" line="612" description="&lt;p&gt;lowBatteryVoltage_V&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="630" description="&lt;p&gt;lowBatteryVoltage_V&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="612" description="" type="void">
+          <tag name="return" line="630" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1584,27 +1611,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="617" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="635" package="Default">
         <name>getLowBatteryVoltage_V</name>
         <full_name>\CarmaLink\CarmaLink::getLowBatteryVoltage_V()</full_name>
-        <docblock line="617">
+        <docblock line="635">
           <description>Get low battery voltage threshold</description>
           <long-description></long-description>
-          <tag name="return" line="617" description="lowBatteryVoltage_V" type="integer">
+          <tag name="return" line="635" description="lowBatteryVoltage_V" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="625" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="643" package="Default">
         <name>setLowBatteryMinutes</name>
         <full_name>\CarmaLink\CarmaLink::setLowBatteryMinutes()</full_name>
-        <docblock line="625">
+        <docblock line="643">
           <description>Set device low  battery minutes threshold</description>
           <long-description></long-description>
-          <tag name="param" line="625" description="&lt;p&gt;lowBatteryMinutes&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="643" description="&lt;p&gt;lowBatteryMinutes&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="625" description="" type="void">
+          <tag name="return" line="643" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1614,27 +1641,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="630" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="648" package="Default">
         <name>getLowBatteryMinutes</name>
         <full_name>\CarmaLink\CarmaLink::getLowBatteryMinutes()</full_name>
-        <docblock line="630">
+        <docblock line="648">
           <description>Get low battery voltage time threshold (in minutes)</description>
           <long-description></long-description>
-          <tag name="return" line="630" description="lowBatteryMinutes" type="integer">
+          <tag name="return" line="648" description="lowBatteryMinutes" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="638" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="656" package="Default">
         <name>setMinimumRunVoltageEnergy</name>
         <full_name>\CarmaLink\CarmaLink::setMinimumRunVoltageEnergy()</full_name>
-        <docblock line="638">
+        <docblock line="656">
           <description>Set device minimum run voltage energy</description>
           <long-description></long-description>
-          <tag name="param" line="638" description="&lt;p&gt;minimumRunVoltageEnergy&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="656" description="&lt;p&gt;minimumRunVoltageEnergy&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="638" description="" type="void">
+          <tag name="return" line="656" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1644,27 +1671,27 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="643" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="661" package="Default">
         <name>getMinimumRunVoltageEnergy</name>
         <full_name>\CarmaLink\CarmaLink::getMinimumRunVoltageEnergy()</full_name>
-        <docblock line="643">
+        <docblock line="661">
           <description>Get minimum run voltage energy</description>
           <long-description></long-description>
-          <tag name="return" line="643" description="minimumRunVoltageEnergy" type="integer">
+          <tag name="return" line="661" description="minimumRunVoltageEnergy" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="651" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="669" package="Default">
         <name>setMaximumOffVoltageEnergy</name>
         <full_name>\CarmaLink\CarmaLink::setMaximumOffVoltageEnergy()</full_name>
-        <docblock line="651">
+        <docblock line="669">
           <description>Set device maximum off voltage energy</description>
           <long-description></long-description>
-          <tag name="param" line="651" description="&lt;p&gt;maximumOffVoltageEnergy&lt;/p&gt;" type="integer" variable="">
+          <tag name="param" line="669" description="&lt;p&gt;maximumOffVoltageEnergy&lt;/p&gt;" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="651" description="" type="void">
+          <tag name="return" line="669" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1674,28 +1701,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="656" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="674" package="Default">
         <name>getMaximumOffVoltageEnergy</name>
         <full_name>\CarmaLink\CarmaLink::getMaximumOffVoltageEnergy()</full_name>
-        <docblock line="656">
+        <docblock line="674">
           <description>Get maximum off voltage energy</description>
           <long-description></long-description>
-          <tag name="return" line="656" description="maximumOffVoltageEnergy" type="integer">
+          <tag name="return" line="674" description="maximumOffVoltageEnergy" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="664" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="682" package="Default">
         <name>setOBDDetection</name>
         <full_name>\CarmaLink\CarmaLink::setOBDDetection()</full_name>
-        <docblock line="664">
+        <docblock line="682">
           <description>Set device obd detection protocol</description>
           <long-description></long-description>
-          <tag name="param" line="664" description="&lt;p&gt;obdDetection&lt;/p&gt;" type="string|\CarmaLink\OBDDetectionType" variable="">
+          <tag name="param" line="682" description="&lt;p&gt;obdDetection&lt;/p&gt;" type="string|\CarmaLink\OBDDetectionType" variable="">
             <type>string</type>
             <type>\CarmaLink\OBDDetectionType</type>
           </tag>
-          <tag name="return" line="664" description="" type="void">
+          <tag name="return" line="682" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1705,29 +1732,29 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="669" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="687" package="Default">
         <name>getOBDDetection</name>
         <full_name>\CarmaLink\CarmaLink::getOBDDetection()</full_name>
-        <docblock line="669">
+        <docblock line="687">
           <description>Get obd detection protocol</description>
           <long-description></long-description>
-          <tag name="return" line="669" description="obdDetection" type="string|\CarmaLink\OBDDetectionType">
+          <tag name="return" line="687" description="obdDetection" type="string|\CarmaLink\OBDDetectionType">
             <type>string</type>
             <type>\CarmaLink\OBDDetectionType</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="676" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="694" package="Default">
         <name>setLEDMode</name>
         <full_name>\CarmaLink\CarmaLink::setLEDMode()</full_name>
-        <docblock line="676">
+        <docblock line="694">
           <description>Set device led pattern mode</description>
           <long-description></long-description>
-          <tag name="param" line="676" description="&lt;p&gt;ledMode&lt;/p&gt;" type="string|\CarmaLink\LEDModeType" variable="">
+          <tag name="param" line="694" description="&lt;p&gt;ledMode&lt;/p&gt;" type="string|\CarmaLink\LEDModeType" variable="">
             <type>string</type>
             <type>\CarmaLink\LEDModeType</type>
           </tag>
-          <tag name="return" line="676" description="" type="void">
+          <tag name="return" line="694" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1737,28 +1764,28 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="681" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="699" package="Default">
         <name>getLEDMode</name>
         <full_name>\CarmaLink\CarmaLink::getLEDMode()</full_name>
-        <docblock line="681">
+        <docblock line="699">
           <description>Get device led patter mode</description>
           <long-description></long-description>
-          <tag name="return" line="681" description="ledMode" type="string|\CarmaLink\LEDModeType">
+          <tag name="return" line="699" description="ledMode" type="string|\CarmaLink\LEDModeType">
             <type>string</type>
             <type>\CarmaLink\LEDModeType</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="688" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="706" package="Default">
         <name>setMaximumUptimeHours</name>
         <full_name>\CarmaLink\CarmaLink::setMaximumUptimeHours()</full_name>
-        <docblock line="688">
+        <docblock line="706">
           <description>Set device maximum uptime hours</description>
           <long-description></long-description>
-          <tag name="param" line="688" description="" type="\CarmaLink\maximumUptimeHours" variable="">
+          <tag name="param" line="706" description="" type="\CarmaLink\maximumUptimeHours" variable="">
             <type>\CarmaLink\maximumUptimeHours</type>
           </tag>
-          <tag name="return" line="688" description="" type="void">
+          <tag name="return" line="706" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -1768,74 +1795,21 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="693" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="711" package="Default">
         <name>getMaximumUptimeHours</name>
         <full_name>\CarmaLink\CarmaLink::getMaximumUptimeHours()</full_name>
-        <docblock line="693">
+        <docblock line="711">
           <description>Get device maximum uptime hours</description>
           <long-description></long-description>
-          <tag name="return" line="693" description="maximumUptimeHours" type="integer">
+          <tag name="return" line="711" description="maximumUptimeHours" type="integer">
             <type>integer</type>
           </tag>
         </docblock>
       </method>
     </class>
-    <parse_markers>
-      <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="18" code="PPC:ERR-50015">Argument $id is missing from the Docblock of setId</error>
-      <error line="40" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseTrips</error>
-      <error line="56" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseHealth</error>
-      <error line="78" code="PPC:ERR-50015">Argument $conditions is missing from the Docblock of setHealthConditions</error>
-      <error line="97" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseBatteryVoltage</error>
-      <error line="112" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseEmissionMonistors</error>
-      <error line="127" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseFuelLevel</error>
-      <error line="142" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseFuelRate</error>
-      <error line="157" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseNextServiceDuration</error>
-      <error line="172" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseNextServiceDistance</error>
-      <error line="180" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseNextService</error>
-      <error line="199" code="PPC:ERR-50015">Argument $use is missing from the Docblock of setUseOdometer</error>
-      <error line="206" code="PPC:ERR-50015">Argument $checkEngineLight is missing from the Docblock of setCheckEngineLight</error>
-      <error line="220" code="PPC:ERR-50015">Argument $buzzerVolume is missing from the Docblock of setBuzzerVolume</error>
-      <error line="233" code="PPC:ERR-50015">Argument $useGps is missing from the Docblock of setUseGps</error>
-      <error line="246" code="PPC:ERR-50015">Argument $useTirePressure is missing from the Docblock of setUseTirePressure</error>
-      <error line="259" code="PPC:ERR-50015">Argument $pingTime_Msec is missing from the Docblock of setPingTime_Msec</error>
-      <error line="272" code="PPC:ERR-50015">Argument $speedLimit_kmph is missing from the Docblock of setSpeedLimit_kmph</error>
-      <error line="285" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setSpeedLimitAllowance_Msec</error>
-      <error line="298" code="PPC:ERR-50015">Argument $engineSpeedLimit_rpm is missing from the Docblock of setEngineSpeedLimit_rpm</error>
-      <error line="311" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setEngineSpeedLimitAllowance_Msec</error>
-      <error line="324" code="PPC:ERR-50015">Argument $speedLimit_kmph is missing from the Docblock of setParkingBrakeLimit_kmph</error>
-      <error line="337" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setParkingBrakeLimitAllowance_Msec</error>
-      <error line="350" code="PPC:ERR-50015">Argument $speedLimit_kmph is missing from the Docblock of setSeatbeltLimit_kmph</error>
-      <error line="363" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setSeatbeltLimitAllowance_Msec</error>
-      <error line="377" code="PPC:ERR-50015">Argument $reverseLimit_kmph is missing from the Docblock of setReverseLimit_kmph</error>
-      <error line="390" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setReverseLimitAllowance_Msec</error>
-      <error line="403" code="PPC:ERR-50015">Argument $brakeLimit_Mpss is missing from the Docblock of setBrakeLimit_Mpss</error>
-      <error line="416" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setBrakeLimitAllowance_Msec</error>
-      <error line="429" code="PPC:ERR-50015">Argument $corneringLimit_Mpss is missing from the Docblock of setCorneringLimit_Mpss</error>
-      <error line="442" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setCorneringLimitAllowance_Msec</error>
-      <error line="455" code="PPC:ERR-50015">Argument $accelLimit_Mpss is missing from the Docblock of setAccelLimit_Mpss</error>
-      <error line="468" code="PPC:ERR-50015">Argument $allowance_Msec is missing from the Docblock of setAccelLimitAllowance_Msec</error>
-      <error line="481" code="PPC:ERR-50015">Argument $idleTimeLimit_Msec is missing from the Docblock of setIdleTimeLimit_Msec</error>
-      <error line="494" code="PPC:ERR-50015">Argument $parkingTimeoutThreshold_Msec is missing from the Docblock of setParkingTimeoutThreshold_Msec</error>
-      <error line="507" code="PPC:ERR-50015">Argument $transportedPingTime_Msec is missing from the Docblock of setTransportedPingTime_Msec</error>
-      <error line="526" code="PPC:ERR-50015">Argument $transportedPingTimeAllowance_Msec is missing from the Docblock of setTransportedPingTimeAllowance_Msec</error>
-      <error line="533" code="PPC:ERR-50015">Argument $fuelType is missing from the Docblock of setFuelType</error>
-      <error line="546" code="PPC:ERR-50015">Argument $displacement_L is missing from the Docblock of setDisplacement_L</error>
-      <error line="560" code="PPC:ERR-50015">Argument $devicePaused is missing from the Docblock of setDevicePaused</error>
-      <error line="573" code="PPC:ERR-50015">Argument $connectInterval_Mins is missing from the Docblock of setConnectInterval_Mins</error>
-      <error line="586" code="PPC:ERR-50015">Argument $agpsConnectInterval_Hrs is missing from the Docblock of setAGPSConnectInterval_Hrs</error>
-      <error line="599" code="PPC:ERR-50015">Argument $chargingVoltage_V is missing from the Docblock of setChargingVoltage_V</error>
-      <error line="612" code="PPC:ERR-50015">Argument $lowBatteryVoltage_V is missing from the Docblock of setLowBatteryVoltage_V</error>
-      <error line="625" code="PPC:ERR-50015">Argument $lowBatteryMinutes is missing from the Docblock of setLowBatteryMinutes</error>
-      <error line="638" code="PPC:ERR-50015">Argument $minimumRunVoltageEnergy is missing from the Docblock of setMinimumRunVoltageEnergy</error>
-      <error line="651" code="PPC:ERR-50015">Argument $maximumOffVoltageEnergy is missing from the Docblock of setMaximumOffVoltageEnergy</error>
-      <error line="664" code="PPC:ERR-50015">Argument $obdDetection is missing from the Docblock of setOBDDetection</error>
-      <error line="676" code="PPC:ERR-50015">Argument $ledMode is missing from the Docblock of setLEDMode</error>
-      <error line="688" code="PPC:ERR-50015">Argument $maximumUptimeHours is missing from the Docblock of setMaximumUptimeHours</error>
-    </parse_markers>
-    <source>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</source>
+    <source>eJzNXFtv2zgWfnZ+BScwZuxiNy4G2Jd2Mp2kSZNgkibIpQ+DxQa0TNtCZUkrUWkz0/735U0yL4eUZHuC7UNji4eH3/k+Ht4k+Zd3+TLfm7x6tTdAr9B7XKzwZZx+RifkKY4Iep/gshRFzX+TvRSvSJljXlzbv21c7B9NS1rgiO6jiFdGBckLUpKUxukCreI0XlUrlBdZTgoakxJlc4TXjrgP4ed+GZe2h5JZ5llZxtOEoJLiQvjMszilaJ4VCKcIq9bjLBVuTO8HzC1BC0IpKcpJKf+iKUmyLwgXhLX03youyEx4K7MVYfWFG8qqzatU+MVJTJ9RnLKLDOLdye8HDejfJGAjmsneoAaFrGL0195gIIjjle8I1YpKUsQ4QWm1mpJCGvyW4wKvWMt0IEs/ikIeo9aisCwIrYoUPWXxTFxhIAZ5NU3iqAmDtUDvNDejoe50jP5C8RyNhjzIf/5qtPfD4SFyjCHDQzRiYMeG7Vv0HX3f0+NusP9UqqjNIJgLbwwLKwaORFUDALG2mQ+j8TPRB4TeVUnuizgvRYEJYZplSQjDg6oKtF97VW3rei+zgkYVRTTjWoDtS8V582jIytEnnFREVegndQOR+9EEq1tlYvESDjNA0DnBCV1uxpCsC1Mkyzpx5ELYKUkKpcuSLNBogkmSZu+zdBZzr1BvwkWBn79pjO3BnNmuRmNmx4eMAc/MHxS0pWXFUU8m5QonCYqWJPp8wGsMmnRw3Qo8o/H4LTfkcSH2z5TIboSbOloBPQXmQQomaWAjIx/Eo8YQHSF1jY/o3MacQnD6rFurjpGlYoyWOHkF1m/6ae/QMtRaOUQfHy4vLf4jg3O6LNgskpIv6wHt6Obi9GtEcm4z2r8vnjl+BdhmVDSwP5YdiwvgYZ5BictHKZmB4B3SAb9Brgkkmpnex5h/e/6UJRQvyGZpbvqA0920AdK+I6qdZr4FXDg8RPe3D6fmQGDaGQOCn9nTVczWLVl6laUxzYoNJxnbC8yubdXGbwjbThnWGyoFfi/JNqaONH+oSHJJnkiyGb9NdZjYpriNURDGTqlcI/VS2Jjo3IWpu8V0w6yva/uJ46VdeLMx7Jw2ATPIGrdQhS2kfSRf+QKU75VOqgLLbccm/AGOYCoBwzZWW0DulGAoDi/XgLG+DO3EOhtIcBpt2GsBR+2sK8M+rAMg/zbW6zg6sa6MvaMrsP7Wqo/K8UuEJBfjau2lLY3CsewhFLK2+lvr0uh6lq0IVVvx3h2trg33rrq0rUtBGHTSH7YlvYHpbn/qIk+CmocXJF3EKUFzXCXUwTkYiG3JqbC5jBdLOuDAgTodgb+33LFFr3XFzQPAYsTBjZ26wFDkiZRvS+bxol/ncMC7PaQNkcn9IsmmOEHT6s8/mVpPWVKt5MDDbBgcwjvSjHeQ7IkURTwj6MuSCB7l9kpFUefHl2UcLVFZ5XxHVSq3B4aox+LaJ9HSYKp/Ob84O59cnZ5Mrj986Kep7nM01J0ypfTCN2+OH/744/T2kTWh6WvVMDxAiirW1jRK4mpaTPDHwRg9QhsRuSKHAJoCJ1kkpeFnip+5ZhN0dnNnnk+6WcdkP8vLwXU6uZ7Pe48MZ+rkiP01x4UzcXSkckd+D2dMAx/C231EPfOdtgEAbP6+IBoXBPFDhbISx77acYFJ2T0zvFF2m3Kn+xAk6hfAKdoyWLOrF7TRDEfJRiw8TcisN+FGFPA5ZwAck6AUJzT6aW+Vz/hKO07ZvPLUHPtqp9wU06q8YV38Pl6Rx6uSRAN+gG/V42fxqzhJYlaepbOyn0B3biOjIdAy0+Ffr1+/1s+6QSN15O2WAXp1pWR9Ej5wAvUdiwNhAafj7TCt2xI5YbNHEq9i6sg1EIWXvOzx8ypfDgZ3wprJ8/tqsuwpi+mLSWJeYEwbWjilSgfzejhn3OA04nkIWpmPdgs2QHkYkZduhBOW0802oiZ+nmSYUd8Uah9Z/q+ISI6+KdFAPKp9qbzAxneuwQGswpFtOBJAx5aHzno40atQhFfkDblVJSvAkFxHQeTgAjiYLdJG6zBFvtJS5jajWJ7l5mwdt4rTipJ+Mp4CDYyGULNWMnlMZEZBhZ3WyMHsMqO9EtG2ZxsYoathF8ht+r1g+tlR9UxCO9r/71RsCbZdzD5pyTQTC+ZpgT8TOC+/yS3qLqeyG9nqMW+0+4yWg7W4fG7Fw0P04ejy7pTfBRIf0JtN5j8/PetMlfysJ0N+l26OE7aBj+doFpfrxaVHcA8bmtCjFgbqaNG3by1k/cIZtSkJ1ejTfV5uQHAo6zkiOLHuZEgIs7HVoNAWsDsqtITYssoimE5JQl9sRLhTDfZY3zo1/taRAGRkh4MAQAAwAEBBA8kPmAUS37Xu2DlecP2tQ+y7BPfX3XTq9xGw3RI8ECP0FJfX2nliyZSvIE+kKINLcdmblaFowUpu3r1lV6JZ3b03esbkVmtDpX1hX7ISHyqHalk93rXYfOurBkAz3WVDLN3VsVKXrHfDd5Vuxd0q7wsmqh5QzzwtvFU3TNMuTGyVsYFgwzL2mYp9K3Ol3rSZ3wcD8YfDviLiMV6+cZQHY//5uZ+M2iLwKi/L0XBqXnDEc8trxaySsGTedbaM9sIfmu8egxUIcJshjM8rxgsm1cbL3Olu17eh6LdKpB7LWl9I4J1iDfsSFzN+I4+IBym96RRlBTPZeT69F25Zy3pORe5FR0HYphYPKA0rqFgoABq2TDQoQuDGbTtgULYa8MvlnBlPz7yLApU3zL0WIrZKv2CsbSL2mctwFJGEqPvo3hwUVjtPwaPGq0o/bF5wRHTLG93MkrBw3pi3TDg7HlcnAGZohBTmLz63rcPomWPYU3HD/ApFv1VyeQMMCdYnqeJZorDAt1V4Ob+XKTNqqzvDF7orJVPsXLP2a6CBPH9wi8IiwaFucC8YCMSVox0dfBjK62QVRffLgpTLLJmJuo4uylxZm8bbyXQT8DwahtqFT9x9plLEkFG389KaMLPXb65uMH7vSWmnAEzFaYHTUmz28/UjUWuFm2IyMx/Z2Erde4/X0dDXnqVqwEwdC3oMwHcNIDqsepsr6Y3VVTEEuhfkXfVCAHvrDNAKp09/9Mzinp5ptrPzLmrP7q0I2jutO+/7em87h5hSHC3JDOGKZqtsGifkp5LFxNYE9Dk3CWz4/jd/NeKeFTuGHXmq64+Gc/VJi7i+xB/WrD/DGdgNvMLkog914gah21d1TEE6GRb19MAsLvMER2RFUmjlD1jx9VUSUzYk92P2RPPxeDkazozvjNKfjcWkU2xVgAaR7jEa60ctGg/nFnaXeReb6BO2CPxRNv6+PprJny7IsXjQeUSLincq+fUf6jbVIUozOjYfYxan3Bcl10DVlS6Fh4moNz7ghypPhGcbvxcgHruP59yZ+HyAeuomoN6I1phq2jeGULaorSzLpkgG9eOPyKgzfouc15JrNmQocalCM2HKMJT7oFY6XmAJqVx01oiRmZKIWk9y8md/yj1rEK9tL5Tp41Wc9j7kcD2IF2Sdq9Zo7DEBqwY0sKN1Jlt/jN6jDCAi6AgDwtlRI7zIS1CoZVYVrkzc3IZ1XvTdJp/d3AFO2C4Z9m7p5bfyOXDf5w+G7yoXCtu3VfYECeyUQ6C7DIV8eWTkWJU+QznGDbdIsBu7Ott+2ZfsPRdQ7lbaWh44MN+GygkD2EXBEAEx6uRf4mIhHpeRr4/zF0zE++NMpgVJSYET4/UhbeBTNdUL54+feo56dnX+epR1yR7vgHK3kl8UX6zAgAfG5n1Vyo4EelcKROnXhb8n4WjiaMCszNf++6pw6ToYDQGvlhKwBVQRUIOHZkdG6/2+q4UvRo8aUESuHl6kHRVRqwEHNyTNlbFy6C2Mqq7Loi55RVmXu5W6CsLP95ro+KaujnkckkiPtVWgOrKQPAZqvzj1D3gVVdqEwEevxbMjjDK9rVIl/alu11GeK9jJaOjxbknlt/I5AGRrjVlTKBS0RydfiK5aQcgBzfBXgT+bz1s1k6bX8/k2msFOmGZwga2Z18rnANKsLWZds0DQPs08IQKahSD7NcumM/aREtliXmQ0izLzDTn5K0nfro9PTmpDcYDCqjYX+gmnuxoNdT+M/P19TSOrzLAF1AhGo8B1DscjiQHe1cFF6Jt+2A47F2MiG4mzGYE4vzw9uWJFAh+zv1qbdZ11pAM218jaNr/ry7WFf7W1BqzjNVn1AfZNHQoeMGHoaFrGmyoXk5u7T1QGD6L8XCvuN8Bo9ZuxRbsGDyumAVDNT3QgLnc0sYMLDyR6KN4xxAG5N/iOJpPTdMY3EfZPT777de9/2RURKA==</source>
   </file>
-  <file path="lib/GeneralConfig.php" generated-path="lib.GeneralConfig.html" hash="551d626b1a478b8e1d20a7018448167c" package="Default">
+  <file path="lib/GeneralConfig.php" generated-path="lib.GeneralConfig.html" hash="5b509494c97031d8864e69a470bd2db1" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -1919,21 +1893,21 @@ Can be used to override when setting a configuration which supports buzzer.</des
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="44" package="Default">
-        <name>$chargingVoltage_V</name>
-        <full_name>\CarmaLink\GeneralConfig::chargingVoltage_V</full_name>
+        <name>$pingInteval_Mins</name>
+        <full_name>\CarmaLink\GeneralConfig::pingInteval_Mins</full_name>
         <default>NULL</default>
         <docblock line="44">
           <description></description>
           <long-description></long-description>
           <tag name="access" line="44" description="public"/>
-          <tag name="var" line="44" description="" type="float" variable="">
-            <type>float</type>
+          <tag name="var" line="44" description="" type="integer" variable="">
+            <type>integer</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="49" package="Default">
-        <name>$lowBatteryVoltage_V</name>
-        <full_name>\CarmaLink\GeneralConfig::lowBatteryVoltage_V</full_name>
+        <name>$chargingVoltage_V</name>
+        <full_name>\CarmaLink\GeneralConfig::chargingVoltage_V</full_name>
         <default>NULL</default>
         <docblock line="49">
           <description></description>
@@ -1945,21 +1919,21 @@ Can be used to override when setting a configuration which supports buzzer.</des
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="54" package="Default">
-        <name>$lowBatteryMinutes</name>
-        <full_name>\CarmaLink\GeneralConfig::lowBatteryMinutes</full_name>
+        <name>$lowBatteryVoltage_V</name>
+        <full_name>\CarmaLink\GeneralConfig::lowBatteryVoltage_V</full_name>
         <default>NULL</default>
         <docblock line="54">
           <description></description>
           <long-description></long-description>
           <tag name="access" line="54" description="public"/>
-          <tag name="var" line="54" description="" type="integer" variable="">
-            <type>integer</type>
+          <tag name="var" line="54" description="" type="float" variable="">
+            <type>float</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="59" package="Default">
-        <name>$minimumRunVoltageEnergy</name>
-        <full_name>\CarmaLink\GeneralConfig::minimumRunVoltageEnergy</full_name>
+        <name>$lowBatteryMinutes</name>
+        <full_name>\CarmaLink\GeneralConfig::lowBatteryMinutes</full_name>
         <default>NULL</default>
         <docblock line="59">
           <description></description>
@@ -1971,8 +1945,8 @@ Can be used to override when setting a configuration which supports buzzer.</des
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="64" package="Default">
-        <name>$maximumOffVoltageEnergy</name>
-        <full_name>\CarmaLink\GeneralConfig::maximumOffVoltageEnergy</full_name>
+        <name>$minimumRunVoltageEnergy</name>
+        <full_name>\CarmaLink\GeneralConfig::minimumRunVoltageEnergy</full_name>
         <default>NULL</default>
         <docblock line="64">
           <description></description>
@@ -1984,111 +1958,127 @@ Can be used to override when setting a configuration which supports buzzer.</des
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="69" package="Default">
-        <name>$obdDetection</name>
-        <full_name>\CarmaLink\GeneralConfig::obdDetection</full_name>
+        <name>$maximumOffVoltageEnergy</name>
+        <full_name>\CarmaLink\GeneralConfig::maximumOffVoltageEnergy</full_name>
         <default>NULL</default>
         <docblock line="69">
           <description></description>
           <long-description></long-description>
           <tag name="access" line="69" description="public"/>
-          <tag name="var" line="69" description="" type="string|\CarmaLink\OBDDetectionType" variable="">
-            <type>string</type>
-            <type>\CarmaLink\OBDDetectionType</type>
+          <tag name="var" line="69" description="" type="integer" variable="">
+            <type>integer</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="74" package="Default">
-        <name>$ledMode</name>
-        <full_name>\CarmaLink\GeneralConfig::ledMode</full_name>
+        <name>$obdDetection</name>
+        <full_name>\CarmaLink\GeneralConfig::obdDetection</full_name>
         <default>NULL</default>
         <docblock line="74">
           <description></description>
           <long-description></long-description>
           <tag name="access" line="74" description="public"/>
-          <tag name="var" line="74" description="" type="string|\CarmaLink\LEDModeType" variable="">
+          <tag name="var" line="74" description="" type="string|\CarmaLink\OBDDetectionType" variable="">
             <type>string</type>
-            <type>\CarmaLink\LEDModeType</type>
+            <type>\CarmaLink\OBDDetectionType</type>
           </tag>
         </docblock>
       </property>
       <property static="false" visibility="public" namespace="CarmaLink" line="79" package="Default">
-        <name>$maximumUptimeHours</name>
-        <full_name>\CarmaLink\GeneralConfig::maximumUptimeHours</full_name>
+        <name>$ledMode</name>
+        <full_name>\CarmaLink\GeneralConfig::ledMode</full_name>
         <default>NULL</default>
         <docblock line="79">
           <description></description>
           <long-description></long-description>
           <tag name="access" line="79" description="public"/>
-          <tag name="var" line="79" description="" type="integer" variable="">
-            <type>integer</type>
-          </tag>
-        </docblock>
-      </property>
-      <property static="false" visibility="private" namespace="CarmaLink" line="85" package="Default">
-        <name>$__api_version</name>
-        <full_name>\CarmaLink\GeneralConfig::__api_version</full_name>
-        <default></default>
-        <docblock line="85">
-          <description></description>
-          <long-description></long-description>
-          <tag name="access" line="85" description="private"/>
-          <tag name="var" line="85" description="" type="string" variable="">
-            <type>string</type>
-          </tag>
-        </docblock>
-      </property>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="105" package="Default">
-        <name>__construct</name>
-        <full_name>\CarmaLink\GeneralConfig::__construct()</full_name>
-        <docblock line="105">
-          <description>Constructor</description>
-          <long-description></long-description>
-          <tag name="param" line="105" description="&lt;p&gt;fuelType&lt;/p&gt;" type="string|\CarmaLink\FuelType" variable="">
-            <type>string</type>
-            <type>\CarmaLink\FuelType</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;engineDisplacement_L&lt;/p&gt;" type="float|integer" variable="">
-            <type>float</type>
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;isPaused&lt;/p&gt;" type="boolean" variable="">
-            <type>boolean</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;connectInterval_Mins&lt;/p&gt;" type="integer" variable="">
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;agpsConnectInterval_Hrs&lt;/p&gt;" type="integer" variable="">
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;chargingVoltage_V&lt;/p&gt;" type="float|integer" variable="">
-            <type>float</type>
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;lowBatteryVoltage_V&lt;/p&gt;" type="float|integer" variable="">
-            <type>float</type>
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;lowBatteryMinutes&lt;/p&gt;" type="integer" variable="">
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;minimumRunVoltageEnergy&lt;/p&gt;" type="integer" variable="">
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;maximumOffVoltageEnergy&lt;/p&gt;" type="integer" variable="">
-            <type>integer</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;obdDetection&lt;/p&gt;" type="string|\CarmaLink\OBDDetectionType" variable="">
-            <type>string</type>
-            <type>\CarmaLink\OBDDetectionType</type>
-          </tag>
-          <tag name="param" line="105" description="&lt;p&gt;ledMode&lt;/p&gt;" type="string|\CarmaLink\LEDModeType" variable="">
+          <tag name="var" line="79" description="" type="string|\CarmaLink\LEDModeType" variable="">
             <type>string</type>
             <type>\CarmaLink\LEDModeType</type>
           </tag>
-          <tag name="param" line="105" description="&lt;p&gt;maximumUptimeHours&lt;/p&gt;" type="integer" variable="">
+        </docblock>
+      </property>
+      <property static="false" visibility="public" namespace="CarmaLink" line="84" package="Default">
+        <name>$maximumUptimeHours</name>
+        <full_name>\CarmaLink\GeneralConfig::maximumUptimeHours</full_name>
+        <default>NULL</default>
+        <docblock line="84">
+          <description></description>
+          <long-description></long-description>
+          <tag name="access" line="84" description="public"/>
+          <tag name="var" line="84" description="" type="integer" variable="">
             <type>integer</type>
           </tag>
-          <tag name="return" line="105" description="" type="void">
+        </docblock>
+      </property>
+      <property static="false" visibility="private" namespace="CarmaLink" line="90" package="Default">
+        <name>$__api_version</name>
+        <full_name>\CarmaLink\GeneralConfig::__api_version</full_name>
+        <default></default>
+        <docblock line="90">
+          <description></description>
+          <long-description></long-description>
+          <tag name="access" line="90" description="private"/>
+          <tag name="var" line="90" description="" type="string" variable="">
+            <type>string</type>
+          </tag>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="111" package="Default">
+        <name>__construct</name>
+        <full_name>\CarmaLink\GeneralConfig::__construct()</full_name>
+        <docblock line="111">
+          <description>Constructor</description>
+          <long-description></long-description>
+          <tag name="param" line="111" description="&lt;p&gt;fuelType&lt;/p&gt;" type="string|\CarmaLink\FuelType" variable="">
+            <type>string</type>
+            <type>\CarmaLink\FuelType</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;engineDisplacement_L&lt;/p&gt;" type="float|integer" variable="">
+            <type>float</type>
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;isPaused&lt;/p&gt;" type="boolean" variable="">
+            <type>boolean</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;connectInterval_Mins&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;agpsConnectInterval_Hrs&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;pingInterval_Mins&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;chargingVoltage_V&lt;/p&gt;" type="float|integer" variable="">
+            <type>float</type>
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;lowBatteryVoltage_V&lt;/p&gt;" type="float|integer" variable="">
+            <type>float</type>
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;lowBatteryMinutes&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;minimumRunVoltageEnergy&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;maximumOffVoltageEnergy&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;obdDetection&lt;/p&gt;" type="string|\CarmaLink\OBDDetectionType" variable="">
+            <type>string</type>
+            <type>\CarmaLink\OBDDetectionType</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;ledMode&lt;/p&gt;" type="string|\CarmaLink\LEDModeType" variable="">
+            <type>string</type>
+            <type>\CarmaLink\LEDModeType</type>
+          </tag>
+          <tag name="param" line="111" description="&lt;p&gt;maximumUptimeHours&lt;/p&gt;" type="integer" variable="">
+            <type>integer</type>
+          </tag>
+          <tag name="return" line="111" description="" type="void">
             <type>void</type>
           </tag>
         </docblock>
@@ -2114,6 +2104,11 @@ Can be used to override when setting a configuration which supports buzzer.</des
         </argument>
         <argument line="0" by_reference="false">
           <name>$agpsConnectInterval_Hrs</name>
+          <default>NULL</default>
+          <type/>
+        </argument>
+        <argument line="0" by_reference="false">
+          <name>$pingInterval_Mins</name>
           <default>NULL</default>
           <type/>
         </argument>
@@ -2158,29 +2153,29 @@ Can be used to override when setting a configuration which supports buzzer.</des
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="130" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="137" package="Default">
         <name>toArray</name>
         <full_name>\CarmaLink\GeneralConfig::toArray()</full_name>
-        <docblock line="130">
+        <docblock line="137">
           <description>Converts object to an associative array.</description>
           <long-description></long-description>
-          <tag name="return" line="130" description="" type="array">
+          <tag name="return" line="137" description="" type="array">
             <type>array</type>
           </tag>
         </docblock>
       </method>
-      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="166" package="Default">
+      <method final="false" abstract="false" static="false" visibility="public" namespace="CarmaLink" line="174" package="Default">
         <name>getPartialArrayFromGeneralConfigType</name>
         <full_name>\CarmaLink\GeneralConfig::getPartialArrayFromGeneralConfigType()</full_name>
-        <docblock line="166">
+        <docblock line="174">
           <description>pulls only partial array from the general config based on the resource type of the config
 Example being sending in operation. Fails when no general config resource is found.</description>
           <long-description></long-description>
-          <tag name="param" line="166" description="&lt;p&gt;config_type&lt;/p&gt;" type="string|\CarmaLink\ConfigType" variable="">
+          <tag name="param" line="174" description="&lt;p&gt;config_type&lt;/p&gt;" type="string|\CarmaLink\ConfigType" variable="">
             <type>string</type>
             <type>\CarmaLink\ConfigType</type>
           </tag>
-          <tag name="return" line="166" description="" type="array">
+          <tag name="return" line="174" description="" type="array">
             <type>array</type>
           </tag>
         </docblock>
@@ -2190,10 +2185,10 @@ Example being sending in operation. Fails when no general config resource is fou
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="private" namespace="CarmaLink" line="224" package="Default">
+      <method final="false" abstract="false" static="true" visibility="private" namespace="CarmaLink" line="232" package="Default">
         <name>createConfigFromDevice</name>
         <full_name>\CarmaLink\GeneralConfig::createConfigFromDevice()</full_name>
-        <docblock line="224">
+        <docblock line="232">
           <description></description>
           <long-description></long-description>
         </docblock>
@@ -2203,18 +2198,18 @@ Example being sending in operation. Fails when no general config resource is fou
           <type>\CarmaLink\CarmaLink</type>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="253" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="262" package="Default">
         <name>getConfigArray</name>
         <full_name>\CarmaLink\GeneralConfig::getConfigArray()</full_name>
-        <docblock line="253">
+        <docblock line="262">
           <description>Shortcut method which retreives a configuration object and converts to an array.</description>
           <long-description></long-description>
-          <tag name="uses" line="253" description="" link="GeneralConfig::createConfigFromDevice()"/>
-          <tag name="uses" line="253" description="" link="GeneralConfig::toArray()"/>
-          <tag name="param" line="253" description="&lt;p&gt;device&#9;&#9;Representation of CarmaLink&lt;/p&gt;" type="\CarmaLink\CarmaLink" variable="">
+          <tag name="uses" line="262" description="" link="GeneralConfig::createConfigFromDevice()"/>
+          <tag name="uses" line="262" description="" link="GeneralConfig::toArray()"/>
+          <tag name="param" line="262" description="&lt;p&gt;device&#9;&#9;Representation of CarmaLink&lt;/p&gt;" type="\CarmaLink\CarmaLink" variable="">
             <type>\CarmaLink\CarmaLink</type>
           </tag>
-          <tag name="return" line="253" description="returns array of config parameters or false if it should be deleted" type="array|boolean">
+          <tag name="return" line="262" description="returns array of config parameters or false if it should be deleted" type="array|boolean">
             <type>array</type>
             <type>boolean</type>
           </tag>
@@ -2225,17 +2220,17 @@ Example being sending in operation. Fails when no general config resource is fou
           <type/>
         </argument>
       </method>
-      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="264" package="Default">
+      <method final="false" abstract="false" static="true" visibility="public" namespace="CarmaLink" line="273" package="Default">
         <name>Factory</name>
         <full_name>\CarmaLink\GeneralConfig::Factory()</full_name>
-        <docblock line="264">
+        <docblock line="273">
           <description>Static factory</description>
           <long-description></long-description>
-          <tag name="param" line="264" description="&lt;p&gt;obj             Either a JSON string or a stdClass object representing a general config from the API (no units)&lt;/p&gt;" type="string|\CarmaLink\stdClass" variable="">
+          <tag name="param" line="273" description="&lt;p&gt;obj             Either a JSON string or a stdClass object representing a general config from the API (no units)&lt;/p&gt;" type="string|\CarmaLink\stdClass" variable="">
             <type>string</type>
             <type>\CarmaLink\stdClass</type>
           </tag>
-          <tag name="return" line="264" description="" type="\CarmaLink\GeneralConfig">
+          <tag name="return" line="273" description="" type="\CarmaLink\GeneralConfig">
             <type>\CarmaLink\GeneralConfig</type>
           </tag>
         </docblock>
@@ -2248,30 +2243,27 @@ Example being sending in operation. Fails when no general config resource is fou
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="105" code="PPC:ERR-50015">Argument $fuelType is missing from the Docblock of __construct</error>
-      <error line="166" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of getPartialArrayFromGeneralConfigType</error>
-      <error line="224" code="PPC:ERR-50015">Argument $device is missing from the Docblock of createConfigFromDevice</error>
-      <error line="224" code="PPC:ERR-50008">No summary for method ""</error>
-      <error line="253" code="PPC:ERR-50015">Argument $device is missing from the Docblock of getConfigArray</error>
-      <error line="264" code="PPC:ERR-50015">Argument $obj is missing from the Docblock of Factory</error>
+      <error line="232" code="PPC:ERR-50015">Argument $device is missing from the Docblock of createConfigFromDevice</error>
+      <error line="232" code="PPC:ERR-50008">No summary for method createConfigFromDevice()</error>
       <error line="15" code="PPC:ERR-50007">No summary for property $fuelType</error>
       <error line="21" code="PPC:ERR-50007">No summary for property $engineDisplacement_L</error>
       <error line="27" code="PPC:ERR-50007">No summary for property $isPaused</error>
       <error line="33" code="PPC:ERR-50007">No summary for property $connectInterval_Mins</error>
       <error line="39" code="PPC:ERR-50007">No summary for property $agpsConnectInterval_Hrs</error>
-      <error line="44" code="PPC:ERR-50007">No summary for property $chargingVoltage_V</error>
-      <error line="49" code="PPC:ERR-50007">No summary for property $lowBatteryVoltage_V</error>
-      <error line="54" code="PPC:ERR-50007">No summary for property $lowBatteryMinutes</error>
-      <error line="59" code="PPC:ERR-50007">No summary for property $minimumRunVoltageEnergy</error>
-      <error line="64" code="PPC:ERR-50007">No summary for property $maximumOffVoltageEnergy</error>
-      <error line="69" code="PPC:ERR-50007">No summary for property $obdDetection</error>
-      <error line="74" code="PPC:ERR-50007">No summary for property $ledMode</error>
-      <error line="79" code="PPC:ERR-50007">No summary for property $maximumUptimeHours</error>
-      <error line="85" code="PPC:ERR-50007">No summary for property $__api_version</error>
+      <error line="44" code="PPC:ERR-50007">No summary for property $pingInteval_Mins</error>
+      <error line="49" code="PPC:ERR-50007">No summary for property $chargingVoltage_V</error>
+      <error line="54" code="PPC:ERR-50007">No summary for property $lowBatteryVoltage_V</error>
+      <error line="59" code="PPC:ERR-50007">No summary for property $lowBatteryMinutes</error>
+      <error line="64" code="PPC:ERR-50007">No summary for property $minimumRunVoltageEnergy</error>
+      <error line="69" code="PPC:ERR-50007">No summary for property $maximumOffVoltageEnergy</error>
+      <error line="74" code="PPC:ERR-50007">No summary for property $obdDetection</error>
+      <error line="79" code="PPC:ERR-50007">No summary for property $ledMode</error>
+      <error line="84" code="PPC:ERR-50007">No summary for property $maximumUptimeHours</error>
+      <error line="90" code="PPC:ERR-50007">No summary for property $__api_version</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
-  <file path="lib/CarmaLinkAPI.php" generated-path="lib.CarmaLinkAPI.html" hash="5b46bff4ca6a2be033678e09a515fd9e" package="Default">
+  <file path="lib/CarmaLinkAPI.php" generated-path="lib.CarmaLinkAPI.html" hash="dd56a448ea2ef4d7cf8624a608345ced" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -2305,7 +2297,7 @@ Example being sending in operation. Fails when no general config resource is fou
       <constant namespace="CarmaLink" line="40" package="Default">
         <name>API_VERSION</name>
         <full_name>\CarmaLink\CarmaLinkAPI::API_VERSION</full_name>
-        <value>"1.6.0"</value>
+        <value>"1.7.0"</value>
         <docblock line="40">
           <description></description>
           <long-description></long-description>
@@ -2544,10 +2536,10 @@ Additionally you can specify if you would like debugging enabled.</long-descript
           <tag name="param" line="150" description="&lt;p&gt;consumer_secret&#9;&#9;Valid API secret provided by CarmaSys&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
-          <tag name="param" line="150" description="&lt;p&gt;server_options        Array of 'HOST','PORT', and 'HTTPS' which the API will use&lt;/p&gt;" type="array" variable="">
+          <tag name="param" line="150" description="&lt;p&gt;server_options      Array of 'HOST','PORT', and 'HTTPS' which the API will use&lt;/p&gt;" type="array" variable="">
             <type>array</type>
           </tag>
-          <tag name="param" line="150" description="&lt;p&gt;debug&#9;&#9;&#9;&#9;Enable debugging&lt;/p&gt;" type="boolean" variable="">
+          <tag name="param" line="150" description="&lt;p&gt;is_debug_mode&#9;&#9;Enable debugging&lt;/p&gt;" type="boolean" variable="">
             <type>boolean</type>
           </tag>
           <tag name="return" line="150" description="" type="void">
@@ -2631,7 +2623,7 @@ Additionally you can specify if you would like debugging enabled.</long-descript
         <docblock line="193">
           <description>Shortcut to getReportData w/ TRUE for the returnAllData param</description>
           <long-description></long-description>
-          <tag name="param" line="193" description="&lt;p&gt;serials            Serial number(s) of CarmaLink&lt;/p&gt;" type="string|integer|array" variable="">
+          <tag name="param" line="193" description="&lt;p&gt;serials         Serial number(s) of CarmaLink&lt;/p&gt;" type="string|integer|array" variable="">
             <type>string</type>
             <type>integer</type>
             <type>array</type>
@@ -2639,7 +2631,7 @@ Additionally you can specify if you would like debugging enabled.</long-descript
           <tag name="param" line="193" description="&lt;p&gt;report_type     Report/view type to query&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
-          <tag name="param" line="193" description="&lt;p&gt;parameters        Key=&gt;value parameters for data filtering to be added to the query string&lt;/p&gt;" type="array" variable="">
+          <tag name="param" line="193" description="&lt;p&gt;parameters      Key=&gt;value parameters for data filtering to be added to the query string&lt;/p&gt;" type="array" variable="">
             <type>array</type>
           </tag>
           <tag name="return" line="193" description="Assoc. array of HTTP response code and HTTP body content" type="array">
@@ -2668,7 +2660,7 @@ Additionally you can specify if you would like debugging enabled.</long-descript
         <docblock line="206">
           <description>Gets a CarmaLink data view/report based on provided parameters.</description>
           <long-description></long-description>
-          <tag name="param" line="206" description="&lt;p&gt;serials            Serial number(s) of CarmaLink&lt;/p&gt;" type="string|integer|array" variable="">
+          <tag name="param" line="206" description="&lt;p&gt;serials         Serial number(s) of CarmaLink&lt;/p&gt;" type="string|integer|array" variable="">
             <type>string</type>
             <type>integer</type>
             <type>array</type>
@@ -2676,7 +2668,7 @@ Additionally you can specify if you would like debugging enabled.</long-descript
           <tag name="param" line="206" description="&lt;p&gt;report_type     Report/view type to query&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
-          <tag name="param" line="206" description="&lt;p&gt;parameters        Key=&gt;value parameters for data filtering to be added to the query string&lt;/p&gt;" type="array" variable="">
+          <tag name="param" line="206" description="&lt;p&gt;parameters      Key=&gt;value parameters for data filtering to be added to the query string&lt;/p&gt;" type="array" variable="">
             <type>array</type>
           </tag>
           <tag name="param" line="206" description="&lt;p&gt;returnAllData&#9;If set to true will return assoc. array of HTTP code and HTTP body&lt;/p&gt;" type="boolean" variable="">
@@ -2718,7 +2710,7 @@ Additionally you can specify if you would like debugging enabled.</long-descript
         <docblock line="229">
           <description>Sets up parameters for a configuration update call</description>
           <long-description></long-description>
-          <tag name="param" line="229" description="&lt;p&gt;serials            Serial number(s) of the CarmaLink(s)&lt;/p&gt;" type="string|integer|array" variable="">
+          <tag name="param" line="229" description="&lt;p&gt;serials         Serial number(s) of the CarmaLink(s)&lt;/p&gt;" type="string|integer|array" variable="">
             <type>string</type>
             <type>integer</type>
             <type>array</type>
@@ -2776,7 +2768,7 @@ Additionally you can specify if you would like debugging enabled.</long-descript
         <docblock line="268">
           <description>Retrieves a configuration object from the CarmaLink based on parameters</description>
           <long-description></long-description>
-          <tag name="param" line="268" description="&lt;p&gt;serials        Serial number(s) of the CarmaLink(s)&lt;/p&gt;" type="string|integer|array" variable="">
+          <tag name="param" line="268" description="&lt;p&gt;serials     Serial number(s) of the CarmaLink(s)&lt;/p&gt;" type="string|integer|array" variable="">
             <type>string</type>
             <type>integer</type>
             <type>array</type>
@@ -2835,7 +2827,7 @@ and returns the proper type / value. Mostly a utility DRY method.</description>
         <docblock line="309">
           <description>Put / send a CarmaLink a new configuration</description>
           <long-description></long-description>
-          <tag name="param" line="309" description="&lt;p&gt;serials            Serial number(s) of the CarmaLink(s)&lt;/p&gt;" type="string|integer|array" variable="">
+          <tag name="param" line="309" description="&lt;p&gt;serials         Serial number(s) of the CarmaLink(s)&lt;/p&gt;" type="string|integer|array" variable="">
             <type>string</type>
             <type>integer</type>
             <type>array</type>
@@ -2978,10 +2970,10 @@ and returns the proper type / value. Mostly a utility DRY method.</description>
           <tag name="param" line="406" description="&lt;p&gt;endpoint&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
-          <tag name="param" line="406" description="&lt;p&gt;method            default is 'GET'&lt;/p&gt;" type="string" variable="">
+          <tag name="param" line="406" description="&lt;p&gt;method          default is 'GET'&lt;/p&gt;" type="string" variable="">
             <type>string</type>
           </tag>
-          <tag name="param" line="406" description="&lt;p&gt;parameters        Key=&gt;values to send&lt;/p&gt;" type="array&lt;mixed,string&gt;" variable="">
+          <tag name="param" line="406" description="&lt;p&gt;parameters      Key=&gt;values to send&lt;/p&gt;" type="array&lt;mixed,string&gt;" variable="">
             <type>array&lt;mixed,string&gt;</type>
           </tag>
           <tag name="param" line="406" description="&lt;p&gt;options&#9;&#9;&#9;Array for future consideration&lt;/p&gt;" type="array&lt;mixed,string&gt;" variable="">
@@ -3021,24 +3013,10 @@ and returns the proper type / value. Mostly a utility DRY method.</description>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
       <error line="126" code="PPC:ERR-50015">Argument $path is missing from the Docblock of setLogger</error>
-      <error line="126" code="PPC:ERR-50008">No summary for method ""</error>
-      <error line="150" code="PPC:ERR-50015">Argument $consumer_key is missing from the Docblock of __construct</error>
+      <error line="126" code="PPC:ERR-50008">No summary for method setLogger()</error>
       <error line="150" code="PPC:ERR-50015">Argument $log_path is missing from the Docblock of __construct</error>
-      <error line="184" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of sanitizeSerials</error>
-      <error line="193" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of getReportDataArray</error>
-      <error line="206" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of getReportData</error>
-      <error line="229" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of setupConfigCall</error>
-      <error line="247" code="PPC:ERR-50015">Argument $serial is missing from the Docblock of getAllConfigs</error>
-      <error line="268" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of getConfig</error>
-      <error line="286" code="PPC:ERR-50015">Argument $response_data is missing from the Docblock of getProperResponse</error>
-      <error line="309" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of putConfig</error>
-      <error line="353" code="PPC:ERR-50015">Argument $serials is missing from the Docblock of deleteConfig</error>
-      <error line="375" code="PPC:ERR-50015">Argument $endpoint is missing from the Docblock of get</error>
-      <error line="385" code="PPC:ERR-50015">Argument $endpoint is missing from the Docblock of put</error>
-      <error line="394" code="PPC:ERR-50015">Argument $endpoint is missing from the Docblock of delete</error>
-      <error line="406" code="PPC:ERR-50015">Argument $endpoint is missing from the Docblock of api</error>
     </parse_markers>
-    <source>eJzlG2tz27jxM/0rEI0nklKF8uXaTivXSXW2kqinWB7JSSeTZDS0CFmMKVLlw47vkv/e3cWDAEnJcs750nraiwiAu4t97wL8x4v1cr0XeSuerr05Z8desvJGQXR16OztOd0nT/Yc9oS9iaM4jC/ZIk6Yzy/yy24QLWIGQ5dBdMlab4bnLAzmPEp5m16g//wz5Zwts2yd9rrdyyBb5hfuPF51pzz0PX7VXQmoLkzh+u6ek/D/5EHCZ3EEpCTcC9detmzNZifDyWzmsmbXddVb3TSZdyVd3REQwhMXttJsH34/mNde5Ic8Uf8Oo4wnC+DKgwHuX6RZ4s0z+fzgcM+SeM7TFGTy0BimGby0eiioL2PQsgy4W/x6OGYXwE/xVxj8xhM99oDQwUp4Fe6ek6dcGcxHoZiH9qDk4keLp4emuXlBxALFEJbFDF/PloZ5sv7Z0MXFwtLmoZemxSxMSouqTrDfAZNA5cCb3hw1hq3zCzBgMXTtJYidHs4B6TxPEh5liJKF/JqHSI4PS9g8jkDx8nkWxBGLFzaet5NhijCACocWIoDZaPBuMGJH7KfDXcgA6KDMtZRc8yQFtFUM7waT6XB8CjgaP7l/dQ8ahKmYP+2/GeCkSSyscZz70hOkDP6HYnni84WXh9kThlqEAsNR8phByNnNkieciEat42mWdhPwt0ART9lNEIbsglZfIlcX7GTwy9tXCDrlGcI6n7wdCJQxS9d8HixumRcxLwQFibwsuOYCbRDNw9znLMhQNkiBlk+cuGIT6JLNjfd6s5leVSOt8avZy+FogGaBPOsCE7poBujW/YYhQ1bDNFYoExOPJtNW3pdgla/YtRfmHLUHB9c8eSqZBMyax4nPGmGwCrIG8Q8mklvYbQIBC3YvoNokTwbH48nJbDTEoAQ0/+WgJP83g/PX45PZqwFM44Im/Goe1i05e6uWwK/6JSeD0eAc1akpfjUNZJPB9Gx8Oh3MjscnAyYhKcED131uwNSLfxmfvK8svoj922b9PoC02fTt8fFgOoVXnh38uZZOtUIAfnZwsEF0SXDtZdyQnZck3i1zxmu0cS9k87eTEYvpKXVBlSLUXVRUn6955GM6AL4g4tx3tXAkVLAe0NY52z8GGLPx2TkSTPBbsMjBURicTacjtOHhy/dngwFo3XN20Kmffz2entM8TLctC96mjRdxHDr/XnJQt0T5Vs/3g5oNouVGsDuxL9OAJbyqOenNgQuaFhwgIth+joLPk3CmEByxhRemfEdDEu7HeR2nGaZsaDTS01YwLWHN7ubpOGdxkkluuBVga5w8Yn/bpDW7sBjE1mHpMs5DH1UGHA6nfHKdxL6IIFW8Qfoa08d7cqkOO2WtJn4CuAMBJ/jiG7DVO4ioGM6MHHri2KnARpuQywHL6dvRqKzMlzwT7+Mv4T7liyo1V7n4UqQTGEdoz0YcQZaXqY4zPs+4L4cTnuVJxDaSLFcr3Is8EqFfk9dqQ3oBtgrYW49SHi7AIOTOYIaJkbRYfci+4XKJ134BefBtbyveAtI+RUDBPEnDPoDB8HsmZtSSI7XohcRXjnNuo9twiylMF9yGC8AarMcICFJG8nG6XdaH9G+1JgbH4AFJNhT1QbXmkOCBjIEbEJP9mKdRM2P8S5BmLiMShbRQtfDdlklyp+H9qUFezdEcVeu/fmWPFvMwTnlLDrWRvdkyiW/A995YPmnwZc7J27Qax6T9UZwpyoBGIlqnKl4mcomnrOGa1ChJ4f9tMQHxiFHKweabIN9e//T5Ok+XMutt4atWHmzzQEDt9Sglare1SmjDOC4yHBqQo7S7lHlEWgBLPEzzwV1CvLKS1AsPU1lQpXE/h21f8Vt4KwJN4wkkmBgXIAanwjGwvo4S4S27jXM2B3AqIwMB4dANsTgMrqTPIaPkkXcRqogobY2SGOXRKWDnK57MgALHeQdVi0+uHR7RSq8DH8i8uBXET2/TGiDMgJJyEHBmAhIjd8OS8d4RDFBxynH6NA4cbGLUbXaaZ+MJ/EPMar4+Pz+bNiFaBvMlGQBipMQWfK8FHn0zQHeIN2hFA2JNwSvbE13HgV92ytr6jcy1tW8yEFUyD8MO2y8xpJiwt6fzkHYHff6MqJmtDK8P46CXs6qXEXZpYUfrrGCGQSA1RCM3F7fJIR3UTos35QqJzrnLxmtHe73h6bv+aHgyQ8v8dfB+OjubjN8NTwYnwkTJqJz9DNLzp88xdWDy7wjiB3jZVolhH4QWfEIvumEKnCXy+tAATGnEXYBJr+oBi6kawCpP2E4xKSlBbqEatjetAAQy0psYzETA1hHLR1fX1wU+rUzkV/Hdj+SApuDHeK+nPFar8WzELxsdqZ1NU3OamPlautRhzZLulNZIhapxo69UVpHw0KgoZSGbxBAxIAlex1jJyUqNegymrera2LLWmlRhICFNJK4JgMfEgUlAzesmc83gjC0DyacaipE4yIApl0NvhL5HEbsLhbWkAVCAaVGFJS8S1iop3QvWTJugM81mG2abvW4XV5m2hKPGGJpBeTvDhVHVBinV9+RxIXEgR/o5xp5QBg4VXX3Dbcit8S/eag0ONPUiiE2/8SlPAlDeltCYBtSDjc6zg793fj44gBwB8hUccmHEhREFJIv9mL2DNyGOpQRAxRQg5RpjiOXEgUFfxfxXI1wgWscR+MFCVxc8SVGD4B0dBDYIQubCRV5X2sy+BG+IowUmKPaoJ9GyA2AG2FwLGCS8vHitp3+XGT9dgjTmOeVvoAATjtI58TKP3XSp80J6JUwDEffDkGaJEzVR+CsyR3JFM8XmSgsIMptl9bEckmIkZZbdrjlzBF3d6wAcP40AudQMqQ3ejtYlQP4rvz16LposxbBo5eNGINeCAcQJIC+oFIb0QFq+6LcY4tIi1Kj6aRrPXfkM20InylTjgmGXg6yShrGNgU2pjEvT3GCGhRT6lohBpAZXOpiNqw0ZqiHNzIKzC4gOybtd62k8o/VKbENJdAWkIonU2VUBdGPO9z+vKEXC5+gST1qPA+7OKEqFh1OKVadPVTWytRGxWC4JUQKSGpul9uMfQuoUfzH2GG4CzA9NcKK5AArBk0RGJY/9azo+VVJDH5dTDa48MKZ1RqP+Y20et5vNaF2HTOVgi75bWa/NqSP2sj+aDowct4Cp8lWsei3vu0MB+iag0ykRU1SoEcpOikZqpHptOCAtjBSwdQnJQtSDwlTidBvthipMg0XrERSDi+DyHPYJKVRKtY/gSjHRMrmxE81NJMWODFj2xRHUgFA7J1RGR3JHktw54UvdpqLOkIj0ThtDnM4m6b08CYp36hIU6lbUzFu5lVikudZFduKIwQuR7OqGsy+0oADcQlJsj2vnvSUFAi0hb2q4ZQu4ynvx3RYQ3LanP4j0z2qhf2KPAGqRF9qtbQMT6a7dWtoOHXvun6pZ8RQ9f74ue0NPyjcH2aPx5WsflWDuheEuzv4Ob28d88FYbbvAcVSGCxU02mGRnid8wROO7Q6VuKACa+Kq4cMRuyEtUB0De4M4s60u1/05szGXr4XVHQPm1uMi/D7eV6SK+lyhVl07OQTyivNkjtVWg07nUFPwr7WTlVuAUTXq4Er1FzMNqTAcXTd4kxo0r3gE9h5uwrMJTQ38HVwlSg1bhtSuS/O14VhEYAf7NbEbDbr7ehstkR/gagoqFUusQeV6vpUa3pB0MVAcWxFTRhEADFDAN62NShikTXjmmzi5EtYaR1wu77CVd0XHoziL+b2O95LebearDbdstxWjrU2UKU0ORG2t0dq72xbdwa8KtdOyY0VTyIjPullkpSKmbsjYVAR/UgHgFPfmS9u69imozSwzIYlBPpzWGa+zDwotFwIC0yx7vZcedmlvW4UGiRlFeskdlB5Fz11R/+GTpt9cRe2OggTV26JGPeqBtkpUjEthzVII7l49+IZcprwEorD8wC4bM5l6PD59OXw1ezU4HUz6o7boxugwJQmoxqIJB03k19TUtr1zfPEZvC9bJPGqdEekqEt0ALs7QG2q5e8XnsyYckdI0T0Fp3hx6GP2rrNBT3bZwSjE/Mbsn411Zi0tIKXE++lC3tTxJb86yJeFF4R5Ig8Dt5mfLVCVWBub1E9Dv94wtyfOZWMte2UZAkX2ldJpVoFOWPwL6kqzntLbwG+o7h+tK9I1FRNKMdqokDdE6LtzRONFQWpbhe4HT/JMx3bfJM+wq3MICWhTumMhnDNZE1SMuRQ9o5uPIdiQfJYXAQQQLPCUttEtlgQrAxGmu+KCi8vexGkGkcljeRaEAaRsJ5P3DKxyGdcdDKlk0dpSfRSpNlu2Fsjo6xlWYaEo2wN1CUkuxeK4Kw89cOkqD7NgvWGxUdRubueBapwRRyaS0lZFiUonKuV5fWhbbyrpTZBh8NpVxySmbpe9rPACJ+bgOKs6aNy06ZnMOjRgVZgl637ppLGzG954t8o5gTsC0pfgEi44tVOQ5M0UqFs8PREMqZ12tKvaazNpqZMmfL/NngvvsQMUcC7mfseq+YE6D170xqO+NfU89uiMjy7F9WyRqZBsh7ezPANLwZs2VqtNHOBaoeNeEez+IYwgfJVGruMRXj+SfkAIEkQtTkQhOQLG8SgriNsaDdmOFRYa7MaIpN1SfUSqLay+OxZtCEV/KIjIjs131VikyvUv/zsJMjxO3hGIyveMeKovC4CeWFDIRMQainVnXpLBRkkJXkKwuAMlnkCIZ2GKuAHJe5mrojQ0PUfioFoTCuYGWosufulFl8oHQ8UDxeESlMwVJohZfAfG8EJzimoVk0m5EkjZZ8nc2PnGZNHLStk0kLEldQVd6XYpMQMLuwCUV/kaCOTzK916KEq4Dvucp9TxpSKMqE4ZkBnI1h/ktsktJOmS2G5XXlHRYQ5h/VzK2lM6TfACcR0Zr3T2RyMJQTs0YajmVUNtznX7mg1OXw1PB+qc+rmR4JSjmDzPq1ijYYl34mm3O3eTBI+ng+Pz4bvh+fsfSZKJZyfCxmfwD951/MG80ng0VbIirOR+JG0xJ7RbNFzE4p26LkXSJ82xOJnF+y+miTQp6GGHxpMd4BvpgsxWjbzGJejRxrbNgW1vaOlqe6v7MmFY3iuLxala2SlJyna7Z/JjOOU2rJodj8XVxlLrHpdxUCLfxpu6sBa8CHkZr5wpQ8Gn8xW8ESpbScllvsJPCmB9vqJaExeTC9H96UfFWbNy1o8fs6r7flTXEtnpfGELIxXbMHFBpyz9YWLxsppNuE2Dk5WD0Y3G2aqG7br7IidUClVaEbJq2nZguUOatqmh9hCN661plVngban1HyChIq36I/a/27GVVbFWNGuFARkPcusOr6iNWpxfPXQCuKmLICgutFDeIP3/qu969Udmmyu7hy7GeILtspQSKvU1DvjU4sqXXeCUblvZDQzzhkE/urVuCpgnazJXrWmeb2vMVVtO6mjb6CjY7s9bB+ZbFSHApqvnnBsYhF8IPSiD6vo76pLqd3Co7NEfhkOw6505JD+Quj+TdtpfxV18z3YEiTWb6EPFYX70I6/AkO/NL5fiuMns4O0kdx3AxJuFbaL3oI/RapZ/+LTprk5ZL8pv6Rvc8go31lqLPMO2N3jlNPB5YrYu9PU6fcev/eHT5tZeibf7Yk+spoNbNiupgDBWuYStjoJBe83+oAgcpc+npIwrH1aprzuMj81Ua7zoSWty61rOoOU60TYo+QyF9YxH2GttVW5DoCcGwFCB02p0whecHF2eubJxgV+iaHCVvqYgsSaoYXX17OCZ0l/7e0GYa5yKVgBducwz2QYQVof9KX1TxmbhB/VZHV5yej3onwwmxeFX81jc1XtKSQoIew3WR9rSRTY01alcRapF6qlZXXcvWnFEHOwXWbbB1jar+/ud7dP96zN1HmK8orZZ9DRM8iTHMYFXbVAlDXGAb8MlaftcSlsu7Oh7ghrPPf8qeJRmsm/0YZD8Zsb4rgrcmO8T71qNiRQrfaQj/U8DfytDxKeOiUEKKo/oZnxlojgdjr08W86U3ohPe8TVdIkUL69X7L10jbLgqJ3roZwsBJDvxRJui5JsQzENK91ypX4jhyRGYpHC/6FJH91+AvZg67tnz9E3tp9QBPr61S42WYG+0UJrcFHIgcIb3MYg8ulKQPVL/hfP9/4L3RJiwg==</source>
+    <source>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</source>
   </file>
   <file path="lib/ConfigType.php" generated-path="lib.ConfigType.html" hash="9d912ebf2e26fbf4e295033fdbd57afa" package="Default">
     <docblock line="0">
@@ -3528,16 +3506,10 @@ one of the class constants should be used as the report_type parameter.</long-de
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="149" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of isValidWritableReportConfigType</error>
-      <error line="156" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of isValidReportConfigType</error>
-      <error line="166" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of isValidWritableGeneralConfigType</error>
-      <error line="173" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of isValidGeneralConfigType</error>
-      <error line="183" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of isAllowanceConfigType</error>
-      <error line="191" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of isBuzzerConfigType</error>
     </parse_markers>
     <source>eJztWG1vozgQ/pz8ijlppd1W3abbtw/tVXs04VJ0KYkoba+fkANOsJYCZ0yi7N7997NNQiCG0pdsPy2qVAU/zzAznmfG8PvX2I/bIXrESYxcDF1EH9GAhN/O2+1WZ3e33YJdsBcxhmiyXgQ3CidkmlLESBTuC5AE3vs4hH9STBcknALzMWgjA8YLwIT/oEAxowTPxKKHGIKIQoIZW4Fz+3vSWhTKp4oVN0BJIp6aMBSyBBI/SgMPxhjSBHuAEomiOI4oc5hwN0aUB8UwXXv3R2alK30XMYm7nXZr8zb84LG35MOgOzT/NPqO0RsYZt+5Nkzj+vba0QaD4b1mdnW4gJODg4Nz6HTghMfCSV6ySb6xNfv2JiePuKVqHid2OlkQ5QyDCEmx2zP6hq0NHMMc3drO39zmR49MCUOBQ8I4Zc7H86cpByrloInzReV8aeIcqpzDJs6Ryjlq4hyrnOMmzonKOWninKqc0wqOZdzpljMY9kFegkPJDFMniKYqvG/puulcamYvh08pxqEzRqGnwq80q+do3a4+yOE+op6DXBcHNfBLS/tLFF8BPqboG5dfDaE7tEzdkpQVwY1oiGklJatzyC9O4XJlaaJCMz2VoMQLKq0OeRJvRrreW3se8SQmMcZeJWGkWSJKGa2eEXgzEFHKaHGF47pmX+oDu+g4RmyMA6aCbcsYOZY+Glr2CsybWuxkuq1IpK4N7KtSqDPsEzfAjo9RwPzaCIqUZQQqVjf7hqmvs8SxOJySEDt5lqpi0MwbEYHeW8eAwkREIPGbBFO/d3r6aDB8uNZNWxJCPHc8HAfR4hGHWdyyf00xrw8ULBtYdefq67ysuJwy59dRZp5XaGOJ5z9NvWsbd4b9IPAcFGKXkRlhi3rWcMT/2cbQXJVPjLO2Wuv0FDNAQcAHShKl1MX7MMHM9XEi74pRs0Eg4STisyvr1RGn+3LwVPoDpYv7w23mnoiJK2eV0DGfSnE6Doi7vDdDFBClaLEcVqXpAHNeVL6Yh9LBcfr9O5+4MRXRssW+NMGHXSuzCEKZ/N+HDOdkcTiZpYvsKZ84upXgYHJ2VpLtnnK/qFF1tdh7albzRlOzLhudulaSurq80rW6sqkaDtiRVZ9vwAwFxOMFgLzPc0rY6nCxWdaNW1WXd2nfofNl33jmBmzMbzWwjWHdBDhsAhw1AY6bACdNgNMKQD461bX1nHxZrbytCrPZtgd1klAXSppQl19duoX5UxGGHDa1QmkWQtXz8lmRqUSKBO6kPixd630emoOHnySPl6mjPKVqvL23DFvf6N+8kRLGGykOvTgi/AVjfyvSXj7kmd6Xh2JF4VcMwXpUPvT2nto1JQ1ynuRpqMoCvHQLX5WFotOlYSfe9BCTY47PzWiOQvdtlZZb+dWCf7XZl5wQrnDAj1b8uAee+M7wyE+uQCaAeGWJ9yPgx8HsyLg8SxS6T+07vrS8rFz5BWNp7N/C14lWoU6XUIpZSkMYR1FQU+aTNHTlU0gie8A9P9OgcYAt6cna+qcPBes78AOWpj9JNTj8tYi6fgm0B1nenjzR7MBvFxcwQUGCd87hv7eksTZ3+zAn/HTuoxmW5zbI2sG7pbQxlaLGtp5O+AqMphjOpHmouJ7/rKadkx35TZv31AQujZ53F0I/c2e7SqgafVuUQnUKM1fmhPlFGey/W0abM/lKITRkc6tKaNq5t0uhooG9xxZpq+POViq9+vC0WeLPSpOaD3HIS+o/ZvzkRF3KZ24lSxXfWJQuwP/a/wOVq8Rp</source>
   </file>
-  <file path="lib/ReportConfig.php" generated-path="lib.ReportConfig.html" hash="cbbc9aa49620034dd76e9b4bdb50f544" package="Default">
+  <file path="lib/ReportConfig.php" generated-path="lib.ReportConfig.html" hash="02c4a78b614674ab09465ad7452a93a1" package="Default">
     <docblock line="0">
       <description></description>
       <long-description></long-description>
@@ -4074,13 +4046,7 @@ one of the class constants should be used as the report_type parameter.</long-de
     </class>
     <parse_markers>
       <error line="0" code="PPC:ERR-50000">No summary was found for this file</error>
-      <error line="103" code="PPC:ERR-50015">Argument $id is missing from the Docblock of __construct</error>
       <error line="103" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of __construct</error>
-      <error line="120" code="PPC:ERR-50015">Argument $config_type is missing from the Docblock of setReportConfigType</error>
-      <error line="163" code="PPC:ERR-50015">Argument $device is missing from the Docblock of setupConfigParams</error>
-      <error line="185" code="PPC:ERR-50015">Argument $device is missing from the Docblock of createConfigFromDevice</error>
-      <error line="345" code="PPC:ERR-50015">Argument $device is missing from the Docblock of getConfigArray</error>
-      <error line="357" code="PPC:ERR-50015">Argument $obj is missing from the Docblock of Factory</error>
       <error line="35" code="PPC:ERR-50007">No summary for property $id</error>
       <error line="41" code="PPC:ERR-50007">No summary for property $threshold</error>
       <error line="47" code="PPC:ERR-50007">No summary for property $allowance</error>
@@ -4092,7 +4058,7 @@ one of the class constants should be used as the report_type parameter.</long-de
       <error line="83" code="PPC:ERR-50007">No summary for property $_config_type</error>
       <error line="89" code="PPC:ERR-50007">No summary for property $__api_version</error>
     </parse_markers>
-    <source>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</source>
+    <source>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</source>
   </file>
   <package name="Default" full_name="Default"/>
   <package name="global" full_name="global"/>

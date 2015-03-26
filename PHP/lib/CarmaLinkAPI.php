@@ -144,7 +144,7 @@ namespace CarmaLink;
 		 * @param string		consumer_key		Valid API key provided by CarmaSys
 		 * @param string 		consumer_secret		Valid API secret provided by CarmaSys
 		 * @param array 		server_options		Array of 'HOST','PORT', and 'HTTPS' which the API will use
-		 * @param bool 			debug				Enable debugging
+		 * @param bool 			is_debug_mode		Enable debugging
 		 * @return void
 		 */
 		public function __construct($consumer_key = null, $consumer_secret = null, $server_options = array(), $is_debug_mode = false, $log_path = NULL) {

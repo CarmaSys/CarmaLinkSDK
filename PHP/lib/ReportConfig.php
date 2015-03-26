@@ -245,11 +245,11 @@ namespace CarmaLink;
 					break;
 				
 				case ConfigType::CONFIG_STATUS:
-					if($device->getPingTime_Msec() === NULL) {
+					if($device->getStatusPingTime_Msec() === NULL) {
 						return NULL;
 					}
-					if ((int)$device->getPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
-					$config->threshold = $device->getPingTime_Msec();
+					if ((int)$device->getStatusPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
+					$config->threshold = $device->getStatusPingTime_Msec();
 					$optParams = array();
 					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
 					if($device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }

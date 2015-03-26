@@ -39,6 +39,11 @@ namespace CarmaLink;
 		public $agpsConnectInterval_Hrs = NULL;
 		/**
 		 * @access public
+		 * @var int
+		 */
+		public $pingInteval_Mins = NULL;
+		/**
+		 * @access public
 		 * @var float
 		 */
 		public $chargingVoltage_V = NULL;
@@ -92,6 +97,7 @@ namespace CarmaLink;
 		 * @param bool                    isPaused
 		 * @param int                     connectInterval_Mins
 		 * @param int                     agpsConnectInterval_Hrs
+ 		 * @param int                     pingInterval_Mins
 		 * @param float|int               chargingVoltage_V
 		 * @param float|int               lowBatteryVoltage_V
 		 * @param int                     lowBatteryMinutes
@@ -102,8 +108,8 @@ namespace CarmaLink;
 		 * @param int                     maximumUptimeHours
 		 * @return void
 		 */
-		public function __construct($fuelType = NULL, $engineDisplacement_L = NULL, $isPaused = NULL,
-		                            $connectInterval_Mins = NULL, $agpsConnectInterval_Hrs = NULL, $chargingVoltage_V = NULL,
+		public function __construct($fuelType = NULL, $engineDisplacement_L = NULL, $isPaused = NULL, $connectInterval_Mins = NULL,
+		                            $agpsConnectInterval_Hrs = NULL, $pingInterval_Mins = NULL, $chargingVoltage_V = NULL,
 		                            $lowBatteryVoltage_V = NULL, $lowBatteryMinutes = NULL, $minimumRunVoltageEnergy = NULL,
 		                            $maximumOffVoltageEnergy = NULL, $obdDetection = NULL, $ledMode = NULL, $maximumUptimeHours = NULL) {
 			$this->__api_version = CarmaLinkAPI::API_VERSION;
@@ -112,6 +118,7 @@ namespace CarmaLink;
 			$this->isPaused                = $isPaused;
 			$this->connectInterval_Mins    = $connectInterval_Mins;
 			$this->agpsConnectInterval_Hrs = $agpsConnectInterval_Hrs;
+			$this->pingInterval_Mins       = $pingInterval_Mins;
 			$this->chargingVoltage_V       = $chargingVoltage_V;
 			$this->lowBatteryVoltage_V     = $lowBatteryVoltage_V;
 			$this->lowBatteryMinutes       = $lowBatteryMinutes;
@@ -135,6 +142,7 @@ namespace CarmaLink;
 				"isPaused"                => $this->isPaused,
 				"connectInterval"         => $this->connectInterval_Mins,
 				"agpsConnectInterval"     => $this->agpsConnectInterval_Hrs,
+				"pingInterval"            => $this->pingInterval_Mins,
 				"chargingVoltage"         => $this->chargingVoltage_V,
 				"lowBatteryVoltage"       => $this->lowBatteryVoltage_V,
 				"lowBatteryMinutes"       => $this->lowBatteryMinutes,
@@ -173,8 +181,7 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_GENERAL_ENGINE:
 				$configArray = array( 
 					"fuel"                    => $this->fuelType,
-					"displacement"            => $this->engineDisplacement_L,
-					
+					"displacement"            => $this->engineDisplacement_L
 				);
 				break;
 			case ConfigType::CONFIG_GENERAL_CONNECTIVITY:
@@ -182,6 +189,7 @@ namespace CarmaLink;
 					"isPaused"                => $this->isPaused,
 					"connectInterval"         => $this->connectInterval_Mins,
 					"agpsConnectInterval"     => $this->agpsConnectInterval_Hrs,
+					"pingInterval"            => $this->pingInterval_Mins
 				);
 				break;
 			case ConfigType::CONFIG_GENERAL_OPERATION:
@@ -229,6 +237,7 @@ namespace CarmaLink;
 			$config->isPaused                = $device->getDevicePaused();
 			$config->connectInterval_Mins    = $device->getConnectInterval_Mins();
 			$config->agpsConnectInterval_Hrs = $device->getAGPSConnectInterval_Hrs();
+			$config->pingInterval_Mins       = $device->getPingInterval_Mins();
 			$config->chargingVoltage_V       = $device->getChargingVoltage_V();
 			$config->lowBatteryVoltage_V     = $device->getLowBatteryVoltage_V();
 			$config->lowBatteryMinutes       = $device->getLowBatteryMinutes();
@@ -276,6 +285,7 @@ namespace CarmaLink;
 				isset($obj->isPaused)                ? $obj->isPaused                : NULL,
 				isset($obj->connectInterval)         ? $obj->connectInterval         : NULL,
 				isset($obj->agpsConnectInterval)     ? $obj->agpsConnectInterval     : NULL,
+				isset($obj->pingInterval)            ? $obj->pingInterval            : NULL,
 				isset($obj->chargingVoltage)         ? $obj->chargingVoltage         : NULL,
 				isset($obj->lowBatteryVoltage)       ? $obj->lowBatteryVoltage       : NULL,
 				isset($obj->lowBatteryMinutes)       ? $obj->lowBatteryMinutes       : NULL,

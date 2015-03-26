@@ -1,4 +1,9 @@
 <?php
+/**
+	 * CarmaLink Device Class
+	 * 
+	 * 
+	 */
 namespace CarmaLink;
 /**
 	 * "Abstract" class representing minimum properties of a CarmaLink
@@ -12,7 +17,7 @@ namespace CarmaLink;
 	abstract class CarmaLink {
 		/**
 		 * Set CarmaLink serial number
-		 * @param int	id	serial number of CarmaLink
+		 * @param int	serialNumber of CarmaLink
 		 * @return void
 		 */
 		public function setSerialNumber($serialNumber) { if ($this->serialNumber !== $serialNumber) { $this->serialNumber = (int)$serialNumber; } }
@@ -253,16 +258,16 @@ namespace CarmaLink;
 
 		/**
 		 * Sets the CarmaLink's update interval
-		 * @param int	pingTime_Msec	The update interval in milliseconds
+		 * @param int	statusPingTime_Msec	The update interval in milliseconds
 		 * @return void
 		 */
-		public function setPingTime_Msec($pingTime_Msec = 5000) { $this->pingTime_Msec = (int)$pingTime_Msec; }
+		public function setStatusPingTime_Msec($statusPingTime_Msec = 5000) { $this->statusPingTime_Msec = (int)$statusPingTime_Msec; }
 
 		/**
 		 * Gets the CarmaLink's update interval
 		 * @return int	milliseconds
 		 */
-		public function getPingTime_Msec() { return $this->pingTime_Msec; }
+		public function getStatusPingTime_Msec() { return $this->statusPingTime_Msec; }
 
 		/**
 		 * Set CarmaLink speed limit
@@ -592,6 +597,19 @@ namespace CarmaLink;
 		
 		
 		/**
+		 * Set state of device ping interval in munytes
+		 * @param int pingInterval_Mins
+		 * @return void
+		 */
+		public function setPingInterval_Mins($pingInterval_Mins = 0) { $this->pingInterval_Mins = $pingInterval_Mins; }
+		/**
+		 * Get device agps connect interval
+		 * @return int pingInterval_Mins
+		 */
+		public function getPingInterval_Mins() { return $this->pingInterval_Mins; }
+		
+		
+		/**
 		 * Set device charging battery voltage of generalconfig
 		 * @param int chargingVoltage_V
 		 * @return void
@@ -692,5 +710,5 @@ namespace CarmaLink;
 		 */
 		public function getMaximumUptimeHours() { return $this->maximumUptimeHours; }
 		
-	}
+	} //End of class CarmaLink
 ?>
