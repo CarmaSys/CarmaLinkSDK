@@ -56,7 +56,7 @@ namespace CarmaLink;
 		 * @access public
 		 * @var string
 		 */
-		public $buzzer = BuzzerVolume::BUZZER_OFF;
+		public $buzzer = NULL;
 
 		/**
 		 * @access public
@@ -139,19 +139,10 @@ namespace CarmaLink;
 			if ($this->params !== NULL)     { $a[self::API_PARAMS] = (!empty($this->params) ? $this->params : null); }
 			if ($this->location !== NULL)   { $a[self::API_LOCATION]   = (bool)$this->location; }
 			if ($this->conditions !== NULL) { $a[self::API_CONDITIONS] = $this->conditions; }
+			if ($this->buzzer !== NULL)     { $a[self::API_BUZZER] = (string)$this->buzzer; }
 
-			if      ($this->hasBuzzerConfig() && ($this->buzzer !== NULL))
-			                                  { $a[self::API_BUZZER]     = (string)$this->buzzer; }
 			return $a;
 		}
-
-		/**
-		 * Determines if current configuration type utilizes a buzzer property.
-		 *
-		 * @return bool
-		 */
-		public function hasBuzzerConfig() { return (bool)ConfigType::isBuzzerConfigType($this->_config_type); }
-
 
 		/**
 		 * Utility to setup a config's optional parameters based on a device
@@ -188,9 +179,6 @@ namespace CarmaLink;
 			if (!$config->setReportConfigType($config_type)) {
 				throw new CarmaLinkAPIException("Invalid configuration type : " . $config_type);
 			}
-			if($config->hasBuzzerConfig()) {
-				$config->buzzer   = (string)$device->getBuzzerVolume();
-			}
 			$config->location = (bool)  $device->getUseGps();
 
 			switch ($config->_config_type) {
@@ -217,39 +205,31 @@ namespace CarmaLink;
 					break;
 				
 				case ConfigType::CONFIG_HARD_ACCEL:
-					if ($device->getAccelLimit_Mpss() === NULL ||
-						$device->getAccelLimitAllowance_Msec() === NULL) { return null; }
-					if ((int)$device->getAccelLimit_Mpss() === 0) { return FALSE; }
+					if (!$device->getAccelLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getAccelLimit_Mpss();
 					$config->allowance = $device->getAccelLimitAllowance_Msec();
+					$config->buzzer    = $device->getAccelLimitBuzzer_Volume();
 					break;
 
 				case ConfigType::CONFIG_HARD_BRAKING:
-					if($device->getBrakeLimit_Mpss() === NULL ||
-					   $device->getBrakeLimitAllowance_Msec() === NULL) {
-						return NULL;
-					}
-					if ((int)$device->getBrakeLimit_Mpss() === 0) { return FALSE; }
+					if (!$device->getBrakeLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getBrakeLimit_Mpss();
 					$config->allowance = $device->getBrakeLimitAllowance_Msec();
+					$config->buzzer    = $device->getBrakeLimitBuzzer_Volume();
 					break;
 
 				case ConfigType::CONFIG_HARD_CORNERING:
-					if($device->getCorneringLimit_Mpss() === NULL ||
-					   $device->getCorneringLimitAllowance_Msec() === NULL) {
-						return NULL;
-					}
-					if ((int)$device->getCorneringLimit_Mpss() === 0) { return FALSE; }
+					if (!$device->getCorneringLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getCorneringLimit_Mpss();
 					$config->allowance = $device->getCorneringLimitAllowance_Msec();
+					$config->buzzer    = $device->getCorneringLimitBuzzer_Volume();
 					break;
 				
 				case ConfigType::CONFIG_STATUS:
-					if($device->getStatusPingTime_Msec() === NULL) {
-						return NULL;
-					}
 					if ((int)$device->getStatusPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
+					if (!$device->getStatusPingTimeReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getStatusPingTime_Msec();
+					$config->allowance = $device->getStatusPingTimeAllowance_Msec();
 					$optParams = array();
 					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
 					if($device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }
@@ -257,61 +237,47 @@ namespace CarmaLink;
 					break;
 
 				case ConfigType::CONFIG_IDLING:
-					if($device->getIdleTimeLimit_Msec() === NULL) {
-						return NULL;
-					}
-					if ((int)$device->getIdleTimeLimit_Msec() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
-					$config->allowance = $device->getIdleTimeLimit_Msec();
+					if ((int)$device->getIdleTimeLimitAllowance_Msec() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
+					if (!$device->getIdleTimeLimitReport_Enabled()) { return FALSE; }
+					$config->threshold = $device->getIdleTimeLimit_kmph();
+					$config->allowance = $device->getIdleTimeLimitAllowance_Msec();
+					$config->buzzer    = $device->getIdleTimeLimitBuzzer_Volume();
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING:
-					if($device->getSpeedLimit_kmph() === NULL) {
-						return NULL;
-					}
-					if ((int)$device->getSpeedLimit_kmph() === 0) { return FALSE; }
+					if (!$device->getSpeedLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getSpeedLimit_kmph();
 					$config->allowance = $device->getSpeedLimitAllowance_Msec();
+					$config->buzzer    = $device->getSpeedLimitBuzzer_Volume();
 					break;
 				case ConfigType::CONFIG_ENGINE_OVERSPEED:
-					if($device->getEngineSpeedLimit_rpm() === NULL) {
-						return NULL;
-					}
-					if((int)$device->getEngineSpeedLimit_rpm() === 0) { return FALSE; }
+					if(!$device->getEngineSpeedLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getEngineSpeedLimit_rpm();
 					$config->allowance = $device->getEngineSpeedLimitAllowance_Msec();
+					$config->buzzer    = $device->getEngineSpeedLimitBuzzer_Volume();
 					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
-					if($device->getParkingBrakeLimit_kmph() === NULL) {
-						return NULL;
-					}
-					if ($device->getParkingBrakeLimit_kmph() === FALSE) { return FALSE; }
+					if (!$device->getParkingBrakeLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getParkingBrakeLimit_kmph();
 					$config->allowance = $device->getParkingBrakeLimitAllowance_Msec();
+					$config->buzzer    = $device->getParkingBrakeLimitBuzzer_Volume();
 					break;
 				case ConfigType::CONFIG_PARKING:
-					if($device->getParkingTimeoutThreshold_Msec() === NULL) {
-						return NULL;
-					}
-					if($device->getParkingTimeoutThreshold_Msec() == FALSE) { return FALSE; }
+					if(!$device->getParkingTimeoutReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getParkingTimeoutThreshold_Msec();
+					$config->allowance = $device->getParkingTimeoutAllowance_Msec();
 					$optParams = array();
 					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
 					$config->params = $optParams;
 					break;
 				case ConfigType::CONFIG_SEATBELT:
-					if($device->getSeatbeltLimit_kmph() === NULL ||
-					   $device->getSeatbeltLimitAllowance_Msec() === NULL) {
-						return NULL;
-					}
-					if ($device->getSeatbeltLimit_kmph() === FALSE) { return FALSE; }
+					if (!$device->getSeatbeltLimitReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getSeatbeltLimit_kmph();
 					$config->allowance = $device->getSeatbeltLimitAllowance_Msec();
+					$config->buzzer    = $device->getSeatbeltLimitBuzzer_Volume();
 					break;
 				case ConfigType::CONFIG_TRANSPORTED:
-					if($device->getTransportedPingTime_Msec() === NULL ||
-					   $device->getTransportedPingTimeAllowance_Msec() === NULL) {
-					   return NULL;
-					}
+					if(!$device->getTransportedPingTimeReport_Enabled()) { return FALSE; }
 					$config->threshold = $device->getTransportedPingTime_Msec();
 					$config->allowance = $device->getTransportedPingTimeAllowance_Msec();
 					$optParams = array();

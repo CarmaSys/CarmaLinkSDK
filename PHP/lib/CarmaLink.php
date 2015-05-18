@@ -219,14 +219,16 @@ namespace CarmaLink;
 		/**
 		 * Set CarmaLink global buzzer volume
 		 * Can be used to override when setting a configuration which supports buzzer.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/OFF
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @deprecated deprecated since version 1.8.0, no longer does anything.
 		 * @return void
 		 */
 		public function setBuzzerVolume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->buzzerVolume = $buzzerVolume; }
 
 		/**
 		 * Get global CarmaLink volume setting
-		 * @return BuzzerVolume	HIGH/MED/OFF
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 * @deprecated deprecated since version 1.8.0, no longer does anything.
 		 */
 		public function getBuzzerVolume() { return $this->buzzerVolume; }
 
@@ -261,6 +263,7 @@ namespace CarmaLink;
 		 * @param int	statusPingTime_Msec	The update interval in milliseconds
 		 * @return void
 		 */
+
 		public function setStatusPingTime_Msec($statusPingTime_Msec = 5000) { $this->statusPingTime_Msec = (int)$statusPingTime_Msec; }
 
 		/**
@@ -268,6 +271,33 @@ namespace CarmaLink;
 		 * @return int	milliseconds
 		 */
 		public function getStatusPingTime_Msec() { return $this->statusPingTime_Msec; }
+		
+		/**
+		 * Sets the CarmaLink's status ping update allowance
+		 * @param int	statusPingTime_Msec	The update interval offset in milliseconds
+		 * @return void
+		 */
+		 
+		public function setStatusPingTimeAllowance_Msec($statusPingTimeAllowance_Msec = 0) { $this->statusPingTimeAllowance_Msec = (int)$statusPingTimeAllowance_Msec; }
+
+		/**
+		 * Gets the CarmaLink's update interval allowance offset.
+		 * @return int	milliseconds
+		 */
+		public function getStatusPingTimeAllowance_Msec() { return $this->statusPingTimeAllowance_Msec; }
+
+		/**
+		 * Sets if status pings are to be reported by the device
+		 * @param int statusPingTimeReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setStatusPingTimeReport_Enabled($statusPingTimeReport_Enabled = false) { $this->statusPingTimeReport_Enabled = $statusPingTimeReport_Enabled; }
+
+		/**
+		 * Gets if report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getStatusPingTimeReport_Enabled() { return $this->statusPingTimeReport_Enabled; }
 
 		/**
 		 * Set CarmaLink speed limit
@@ -281,7 +311,6 @@ namespace CarmaLink;
 		 * @return int	Km/h limit
 		 */
 		public function getSpeedLimit_kmph() { return $this->speedLimit_kmph; }
-
 		/**
 		 * Set CarmaLink speed limit allowance
 		 * @param float		allowance		allowance time in ms
@@ -290,10 +319,36 @@ namespace CarmaLink;
 		public function setSpeedLimitAllowance_Msec($allowance_Msec = 0.0) { $this->speedLimitAllowance_Msec = (float)$allowance_Msec; }
 
 		/**
-		 * Get CarmaLink speed limit allowance
+		 * Get CarmaLink speedLimit allowance
 		 * @return float allowance time in ms
 		 */
 		public function getSpeedLimitAllowance_Msec() { return $this->speedLimitAllowance_Msec; }
+
+		/**
+		 * Set CarmaLink buzzer volume for speedLimit Alert.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+		public function setSpeedLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->speedLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for speedLimit Reports
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getSpeedLimitBuzzer_Volume() { return $this->speedLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if speedLimit reports are to be reported by the device
+		 * @param int speedLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setSpeedLimitReport_Enabled($speedLimitReport_Enabled = false) { $this->speedLimitReport_Enabled = $speedLimitReport_Enabled; }
+
+		/**
+		 * Gets if speedLimit is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getSpeedLimitReport_Enabled() { return $this->speedLimitReport_Enabled; }
 
 		/**
 		 * Set CarmaLink engine speed limit
@@ -316,10 +371,36 @@ namespace CarmaLink;
 		public function setEngineSpeedLimitAllowance_Msec($allowance_Msec = 0.0) { $this->engineSpeedLimitAllowance_Msec = (float)$allowance_Msec; }
 
 		/**
-		 * Get CarmaLink speed limit allowance
+		 * Get CarmaLink engine speed limit allowance
 		 * @return float allowance time in ms
 		 */
 		public function getEngineSpeedLimitAllowance_Msec() { return $this->engineSpeedLimitAllowance_Msec; }
+
+		/**
+		 * Set CarmaLink buzzer volume for engineSpeedLimit Report.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+		public function setEngineSpeedLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->engineSpeedLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for engineSpeed limit
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getEngineSpeedLimitBuzzer_Volume() { return $this->engineSpeedLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if engineSpeed Reports are to be reported by the device
+		 * @param int engineSpeedLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setEngineSpeedLimitReport_Enabled($engineSpeedLimitReport_Enabled = false) { $this->engineSpeedLimitReport_Enabled = $engineSpeedLimitReport_Enabled; }
+
+		/**
+		 * Gets if EngineSpeed report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getEngineSpeedLimitReport_Enabled() { return $this->engineSpeedLimitReport_Enabled; }
 
 		/**
 		 * Set CarmaLink parking brake limit
@@ -348,10 +429,37 @@ namespace CarmaLink;
 		public function getParkingBrakeLimitAllowance_Msec() { return $this->parkingBrakeLimitAllowance_Msec; }
 
 		/**
+		 * Set CarmaLink buzzer volume for parkingBrakeLimit Alert.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+		public function setParkingBrakeLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->parkingBrakeLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for parkingBrake Alerts
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getParkingBrakeLimitBuzzer_Volume() { return $this->parkingBrakeLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if parkingBrake reports are to be reported by the device
+		 * @param int statusPingReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setParkingBrakeLimitReport_Enabled($parkingBrakeLimitReport_Enabled = false) { $this->parkingBrakeLimitReport_Enabled = $parkingBrakeLimitReport_Enabled; }
+
+		/**
+		 * Gets if parkingBrake is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getParkingBrakeLimitReport_Enabled() { return $this->parkingBrakeLimitReport_Enabled; }
+
+		/**
 		 * Set CarmaLink seatbelt limit
 		 * @param int|bool		speedLimit_kmph		Speed in Km/h
 		 * @return void
 		 */
+
 		public function setSeatbeltLimit_kmph($speedLimit_kmph = 0) { $this->seatbeltLimit_kmph = ($speedLimit_kmph === FALSE) ? FALSE : (int)$speedLimit_kmph; }
 
 		/**
@@ -373,9 +481,35 @@ namespace CarmaLink;
 		 */
 		public function getSeatbeltLimitAllowance_Msec() { return $this->seatbeltLimitAllowance_Msec; }
 
+		/**
+		 * Set CarmaLink buzzer volume for seatbeltLimit Report.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+		public function setSeatbeltLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->seatbeltLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for seatbelt limit
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getSeatbeltLimitBuzzer_Volume() { return $this->seatbeltLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if seatbelt Reports are to be reported by the device
+		 * @param int seatbeltLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setSeatbeltLimitReport_Enabled($seatbeltLimitReport_Enabled = false) { $this->seatbeltLimitReport_Enabled = $seatbeltLimitReport_Enabled; }
+
+		/**
+		 * Gets if Seatbelt report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getSeatbeltLimitReport_Enabled() { return $this->seatbeltLimitReport_Enabled; }
 
 		/**
 		 * Set CarmaLink reverse speed limit
+		 * @deprecated since version 1.8.0, to be removed soon
 		 * @param int|bool	reverseLimit		Speed in Km/h or FALSE to disable report
 		 * @return void
 		 */
@@ -383,12 +517,14 @@ namespace CarmaLink;
 
 		/**
 		 * Get CarmaLink speed limit
+		 * @deprecated since version 1.8.0, to be removed soon
 		 * @return int|bool		Km/h limit or FALSE if report disabled
 		 */
 		public function getReverseLimit_kmph() { return $this->reverseLimit_kmph; }
 
 		/**
 		 * Set CarmaLink reverse speed limit allowance
+		 * @deprecated since version 1.8.0, to be removed soon
 		 * @param float		allowance		allowance time in ms
 		 * @return void
 		 */
@@ -396,6 +532,7 @@ namespace CarmaLink;
 
 		/**
 		 * Get CarmaLink reverse speed limit allowance
+		 * @deprecated since version 1.8.0, to be removed soon
 		 * @return float allowance time in ms
 		 */
 		public function getReverseLimitAllowance_Msec() { return $this->reverseLimitAllowance_Msec; }
@@ -425,7 +562,32 @@ namespace CarmaLink;
 		 * @return float allowance time in ms
 		 */
 		public function getBrakeLimitAllowance_Msec() { return $this->brakeLimitAllowance_Msec; }
-		
+				/**
+		 * Set CarmaLink buzzer volume for brakeLimit Report.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+		public function setBrakeLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->brakeLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for brake limit
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getBrakeLimitBuzzer_Volume() { return $this->brakeLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if brake Reports are to be reported by the device
+		 * @param int brakeLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setBrakeLimitReport_Enabled($brakeLimitReport_Enabled = false) { $this->brakeLimitReport_Enabled = $brakeLimitReport_Enabled; }
+
+		/**
+		 * Gets if Brake report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getBrakeLimitReport_Enabled() { return $this->brakeLimitReport_Enabled; }
+
 		/**
 		 * Set CarmaLink hard conering limit
 		 * @param float		cornerLimit		Limit in Meters per second^2
@@ -451,6 +613,32 @@ namespace CarmaLink;
 		 * @return float allowance time in ms
 		 */
 		public function getCorneringLimitAllowance_Msec() { return $this->corneringLimitAllowance_Msec; }
+		/**
+		 * Set CarmaLink buzzer volume for corneringLimit Report.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+
+		public function setCorneringLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->corneringLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for cornering limit
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getCorneringLimitBuzzer_Volume() { return $this->corneringLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if cornering Reports are to be reported by the device
+		 * @param int coneringLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setCorneringLimitReport_Enabled($corneringLimitReport_Enabled = false) { $this->corneringLimitReport_Enabled = $corneringLimitReport_Enabled; }
+
+		/**
+		 * Gets if Cornering report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getCorneringLimitReport_Enabled() { return $this->corneringLimitReport_Enabled; }
 
 		/**
 		 * Set CarmaLink acceleration limit
@@ -479,17 +667,84 @@ namespace CarmaLink;
 		public function getAccelLimitAllowance_Msec() { return $this->accelLimitAllowance_Msec; }
 
 		/**
-		 * Set CarmaLink idle time limit
-		 * @param int	idleTimeLimit	in milliseconds
+		 * Set CarmaLink buzzer volume for accelLimit Report.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
 		 * @return void
 		 */
-		public function setIdleTimeLimit_Msec($idleTimeLimit_Msec = 0) { $this->idleTimeLimit_Msec = (int)$idleTimeLimit_Msec; }
+		public function setAccelLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->accelLimitBuzzer_Volume = $buzzerVolume; }
 
 		/**
-		 * Get CarmaLink idle time limit
-		 * @return int	milliseconds
+		 * Get CarmaLink buzzer volume setting for accel limit
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
 		 */
-		public function getIdleTimeLimit_Msec() { return $this->idleTimeLimit_Msec; }
+		public function getAccelLimitBuzzer_Volume() { return $this->accelLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if accel Reports are to be reported by the device
+		 * @param int accelLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setAccelLimitReport_Enabled($accelLimitReport_Enabled = false) { $this->accelLimitReport_Enabled = $accelLimitReport_Enabled; }
+
+		/**
+		 * Gets if Accel report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getAccelLimitReport_Enabled() { return $this->accelLimitReport_Enabled; }
+
+		/**
+		 * Set CarmaLink idle time threshold
+		 * @param int	idleTimeLimit	in kmp/h
+		 * NOTE: currently ignored by the API
+		 * @return void
+		 */
+		public function setIdleTimeLimit_kmph($idleTimeLimit_kmph = 0) { $this->idleTimeLimit_kmph = (int)$idleTimeLimit_kmph; }
+
+		/**
+		 * Get CarmaLink idle time limit threshold (kmph)
+		 * NOTE: Currently ignore by the api.
+		 * @return int	km/h
+		 */
+		public function getIdleTimeLimit_kmph() { return $this->idleTimeLimit_kmph; }
+
+		/**
+		 * Set CarmaLink idleTime limit allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setIdleTimeLimitAllowance_Msec($allowance_Msec = 0.0) { $this->idleTimeLimitAllowance_Msec = (float)$allowance_Msec; }
+
+		/**
+		 * Get CarmaLink idleTime limit allowance
+		 * @return float allowance time in ms
+		 */
+		public function getIdleTimeLimitAllowance_Msec() { return $this->idleTimeLimitAllowance_Msec; }
+
+		/**
+		 * Set CarmaLink buzzer volume for idleTimeLimit Report.
+		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
+		 * @return void
+		 */
+		public function setIdleTimeLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->idleTimeLimitBuzzer_Volume = $buzzerVolume; }
+
+		/**
+		 * Get CarmaLink buzzer volume setting for idleTime limit
+		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
+		 */
+		public function getIdleTimeLimitBuzzer_Volume() { return $this->idleTimeLimitBuzzer_Volume; }
+
+		/**
+		 * Sets if idleTime Reports are to be reported by the device
+		 * @param int idleTimeLimitReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setIdleTimeLimitReport_Enabled($idleTimeLimitReport_Enabled = false) { $this->idleTimeLimitReport_Enabled = $idleTimeLimitReport_Enabled; }
+
+		/**
+		 * Gets if IdleTime report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getIdleTimeLimitReport_Enabled() { return $this->idleTimeLimitReport_Enabled; }
 
 		/**
 		 * Set CarmaLink parking Timeout Threshold_Msec
@@ -503,6 +758,32 @@ namespace CarmaLink;
 		 * @return int	milliseconds
 		 */
 		public function getParkingTimeoutThreshold_Msec() { return $this->parkingTimeoutThreshold_Msec; }
+		
+		/**
+		 * Set CarmaLink parkingTimeout limit allowance
+		 * @param float		allowance		allowance time in ms
+		 * @return void
+		 */
+		public function setParkingTimeoutAllowance_Msec($allowance_Msec = 0.0) { $this->parkingTimeoutAllowance_Msec = (float)$allowance_Msec; }
+
+		/**
+		 * Get CarmaLink parkingTimeout limit allowance
+		 * @return float allowance time in ms
+		 */
+		public function getParkingTimeoutAllowance_Msec() { return $this->parkingTimeoutAllowance_Msec; }
+
+		/**
+		 * Sets if parking Reports are to be reported by the device
+		 * @param int parkingTimeoutReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setParkingTimeoutReport_Enabled($parkingTimeoutReport_Enabled = false) { $this->parkingTimeoutReport_Enabled = $parkingTimeoutReport_Enabled; }
+
+		/**
+		 * Gets if Parking report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getParkingTimeoutReport_Enabled() { return $this->parkingTimeoutReport_Enabled; }
 
 		/**
 		 * Set CarmaLink transport ping
@@ -529,6 +810,19 @@ namespace CarmaLink;
 		 * @return void
 		 */
 		public function setTransportedPingTimeAllowance_Msec($transportedPingTimeAllowance_Msec = 0) { $this->transportedPingTimeAllowance_Msec = (int)$transportedPingTimeAllowance_Msec; }
+
+		/**
+		 * Sets if transported Reports are to be reported by the device
+		 * @param int transportedPingTimeReport_Enabled True/False if report is to be used.
+		 * @return void
+		 */
+		public function setTransportedPingTimeReport_Enabled($transportedPingTimeReport_Enabled = false) { $this->transportedPingTimeReport_Enabled = $parkingTimeoutReport_Enabled; }
+
+		/**
+		 * Gets if Transported report is enabled
+		 * @return bool Report_Is_Enabled
+		 */
+		public function getTransportedPingTimeReport_Enabled() { return $this->transportedPingTimeReport_Enabled; }
 
 		/**
 		 * Set attached automobile's fuel type

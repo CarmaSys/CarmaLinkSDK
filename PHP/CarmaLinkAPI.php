@@ -6,7 +6,7 @@
  * @version 1.5.0
  *
  * @author Christopher Najewicz <chris.najewicz@carmasys.com>
- * @version 1.7.0-prerelease1
+ * @version 1.8.0
  * @author Ryan Gerstein <ryan.gerstein@carmasys.com>
  * @license MIT
  *
