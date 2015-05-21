@@ -233,7 +233,7 @@ namespace CarmaLink;
 					$optParams = array();
 					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
 					if($device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }
-					$config->optParams = $optParams;
+					$config->params = $optParams;
 					break;
 
 				case ConfigType::CONFIG_IDLING:
