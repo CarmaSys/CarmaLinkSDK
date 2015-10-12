@@ -146,22 +146,40 @@ namespace CarmaLink;
 
 		/**
 		 * Utility to setup a config's optional parameters based on a device
-		 *
 		 * @param CarmaLink 	device 	Custom data object representing CarmaLink
 		 * @param Config 		config 	Config object to setup
 		 * @return array|NULL
 		 */
-		protected static function setupConfigParams(CarmaLink $device, $config) {
+		protected static function setupConfigParams($parameters) {
+			if (!$parameters) { return NULL; }
 			$a = array();
 			//all functions are set.
-			if ($device->getUseOdometer())            { $a[] = self::ODOMETER; }
-			if ($device->getUseNextServiceDistance()) { $a[] = self::DISTANCE_TO_SERVICE; }
-			if ($device->getUseNextServiceDuration()) { $a[] = self::DURATION_TO_SERVICE; }
-			if ($device->getUseBatteryVoltage())	  { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
-			if ($device->getUseTirePressure())	      { $a[] = self::TIRE_PRESSURE_LOW; }
-			if ($device->getUseEmissionMonitors())    { $a[] = self::EMISSION_MONITORS; }
-			if ($device->getUseFuelLevel())           { $a[] = self::FUEL_LEVEL; }
-			if ($device->getUseFuelRate())            { $a[] = self::FUEL_RATE; }
+			if ($parameters->odometer)            { $a[] = self::ODOMETER; }
+			if ($parameters->distanceToService)   { $a[] = self::DISTANCE_TO_SERVICE; }
+			if ($parameters->durationToService)   { $a[] = self::DURATION_TO_SERVICE; }
+			if ($parameters->batteryVoltage)      { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
+			if ($parameters->tirePressure)        { $a[] = self::TIRE_PRESSURE_LOW; }
+			if ($parameters->emissionMonitors)    { $a[] = self::EMISSION_MONITORS; }
+			if ($parameters->fuelLevel)           { $a[] = self::FUEL_LEVEL; }
+			if ($parameters->fuelRate)            { $a[] = self::FUEL_RATE; }
+
+			return $a;
+		}
+		
+		/**
+		 * Utility to setup a config's optional conditions based on booleans sent in from a device.
+		 * @param bool useBatteryVoltage	is low battery voltage condition set?
+		 * @param bool useTirePressure		is low tire pressure condition set?
+		 * @param bool useEmissionMonitors	is emission Monitors condition set?
+		 * @return array|NULL
+		 */
+		protected static function setupConfigConds($conditions) {
+			if(!$conditions) { return NULL; }
+			$a = array();
+			//all functions are set.
+			if ($conditions->batteryVoltage)      { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
+			if ($conditions->tirePressure)        { $a[] = self::TIRE_PRESSURE_LOW; }
+			if ($conditions->emissionMonitors)    { $a[] = self::EMISSION_MONITORS; }
 
 			return $a;
 		}
@@ -206,93 +224,106 @@ namespace CarmaLink;
 				
 				case ConfigType::CONFIG_HARD_ACCEL:
 					if (!$device->getAccelLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getAccelLimit_Mpss();
-					$config->allowance = $device->getAccelLimitAllowance_Msec();
-					$config->buzzer    = $device->getAccelLimitBuzzer_Volume();
+					$config->threshold  = $device->getAccelLimit_Mpss();
+					$config->allowance  = $device->getAccelLimitAllowance_Msec();
+					$config->buzzer     = $device->getAccelLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getAccelLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getAccelLimitOptionalConditions());
 					break;
 
 				case ConfigType::CONFIG_HARD_BRAKING:
 					if (!$device->getBrakeLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getBrakeLimit_Mpss();
-					$config->allowance = $device->getBrakeLimitAllowance_Msec();
-					$config->buzzer    = $device->getBrakeLimitBuzzer_Volume();
+					$config->threshold  = $device->getBrakeLimit_Mpss();
+					$config->allowance  = $device->getBrakeLimitAllowance_Msec();
+					$config->buzzer     = $device->getBrakeLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getBrakeLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getBrakeLimitOptionalConditions());
 					break;
 
 				case ConfigType::CONFIG_HARD_CORNERING:
 					if (!$device->getCorneringLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getCorneringLimit_Mpss();
-					$config->allowance = $device->getCorneringLimitAllowance_Msec();
-					$config->buzzer    = $device->getCorneringLimitBuzzer_Volume();
+					$config->threshold  = $device->getCorneringLimit_Mpss();
+					$config->allowance  = $device->getCorneringLimitAllowance_Msec();
+					$config->buzzer     = $device->getCorneringLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getCorneringLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getCorneringLimitOptionalConditions());
 					break;
 				
 				case ConfigType::CONFIG_STATUS:
 					if ((int)$device->getStatusPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
 					if (!$device->getStatusPingTimeReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getStatusPingTime_Msec();
-					$config->allowance = $device->getStatusPingTimeAllowance_Msec();
-					$optParams = array();
-					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
-					if($device->getUseFuelRate())       { array_push($optParams, self::FUEL_RATE);       }
-					$config->params = $optParams;
+					$config->threshold  = $device->getStatusPingTime_Msec();
+					$config->allowance  = $device->getStatusPingTimeAllowance_Msec();
+					$config->params     = self::setupConfigParams($device->getStatusPingTimeOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getStatusPingTimeOptionalConditions());
 					break;
 
 				case ConfigType::CONFIG_IDLING:
 					if ((int)$device->getIdleTimeLimitAllowance_Msec() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
 					if (!$device->getIdleTimeLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getIdleTimeLimit_kmph();
-					$config->allowance = $device->getIdleTimeLimitAllowance_Msec();
-					$config->buzzer    = $device->getIdleTimeLimitBuzzer_Volume();
+					$config->threshold  = $device->getIdleTimeLimit_kmph();
+					$config->allowance  = $device->getIdleTimeLimitAllowance_Msec();
+					$config->buzzer     = $device->getIdleTimeLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getIdleTimeLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getIdleTimeLimitOptionalConditions());
 					break;
 
 				case ConfigType::CONFIG_OVERSPEEDING:
 					if (!$device->getSpeedLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getSpeedLimit_kmph();
-					$config->allowance = $device->getSpeedLimitAllowance_Msec();
-					$config->buzzer    = $device->getSpeedLimitBuzzer_Volume();
+					$config->threshold  = $device->getSpeedLimit_kmph();
+					$config->allowance  = $device->getSpeedLimitAllowance_Msec();
+					$config->buzzer     = $device->getSpeedLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getSpeedLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getSpeedLimitOptionalConditions());
 					break;
 				case ConfigType::CONFIG_ENGINE_OVERSPEED:
 					if(!$device->getEngineSpeedLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getEngineSpeedLimit_rpm();
-					$config->allowance = $device->getEngineSpeedLimitAllowance_Msec();
-					$config->buzzer    = $device->getEngineSpeedLimitBuzzer_Volume();
+					$config->threshold  = $device->getEngineSpeedLimit_rpm();
+					$config->allowance  = $device->getEngineSpeedLimitAllowance_Msec();
+					$config->buzzer     = $device->getEngineSpeedLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getEngineSpeedLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getEngineSpeedLimitOptionalConditions());
 					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
 					if (!$device->getParkingBrakeLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getParkingBrakeLimit_kmph();
-					$config->allowance = $device->getParkingBrakeLimitAllowance_Msec();
-					$config->buzzer    = $device->getParkingBrakeLimitBuzzer_Volume();
+					$config->threshold  = $device->getParkingBrakeLimit_kmph();
+					$config->allowance  = $device->getParkingBrakeLimitAllowance_Msec();
+					$config->buzzer     = $device->getParkingBrakeLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getParkingBrakeLimitOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getParkingBrakeLimitOptionalConditions());
 					break;
 				case ConfigType::CONFIG_PARKING:
 					if(!$device->getParkingTimeoutReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getParkingTimeoutThreshold_Msec();
-					$config->allowance = $device->getParkingTimeoutAllowance_Msec();
-					$optParams = array();
-					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
-					$config->params = $optParams;
+					$config->threshold  = $device->getParkingTimeoutThreshold_Msec();
+					$config->allowance  = $device->getParkingTimeoutAllowance_Msec();
+					$config->params     = self::setupConfigParams($device->getParkingTimeoutOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getParkingTimeoutOptionalConditions());
 					break;
 				case ConfigType::CONFIG_SEATBELT:
 					if (!$device->getSeatbeltLimitReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getSeatbeltLimit_kmph();
-					$config->allowance = $device->getSeatbeltLimitAllowance_Msec();
-					$config->buzzer    = $device->getSeatbeltLimitBuzzer_Volume();
+					$config->threshold  = $device->getSeatbeltLimit_kmph();
+					$config->allowance  = $device->getSeatbeltLimitAllowance_Msec();
+					$config->buzzer     = $device->getSeatbeltLimitBuzzer_Volume();
+					$config->params     = self::setupConfigParams($device->getSeatbeltLimitOptionalParameters();
+					$config->conditions = self::setupConfigConds($device->getSeatbeltLimitOptionalConditions());
 					break;
 				case ConfigType::CONFIG_TRANSPORTED:
 					if(!$device->getTransportedPingTimeReport_Enabled()) { return FALSE; }
-					$config->threshold = $device->getTransportedPingTime_Msec();
-					$config->allowance = $device->getTransportedPingTimeAllowance_Msec();
-					$optParams = array();
-					if($device->getUseBatteryVoltage()) { array_push($optParams, self::BATTERY_VOLTAGE); }
-					$config->params = $optParams;
+					$config->threshold  = $device->getTransportedPingTime_Msec();
+					$config->allowance  = $device->getTransportedPingTimeAllowance_Msec();
+					$config->params     = self::setupConfigParams($device->getTransportedPingTimeOptionalParameters();
+					$config->conditions = self::setupConfigConds($device->getTransportedPingTimeOptionalConditions());
 					break;
 				case ConfigType::CONFIG_TRIP_REPORT:
 					if ($device->getUseTrips() == FALSE) { return FALSE; }
-					$config->params = self::setupConfigParams($device, $config);
+					$config->params     = self::setupConfigParams($device->getTripOptionalParameters();
+					$config->conditions = self::setupConfigConds($device->getTripOptionalConditions());
 					break;
 
 				case ConfigType::CONFIG_HEALTH:
 					if ($device->getUseHealth() === FALSE) { return FALSE; }
-					$config->params     = self::setupConfigParams($device, $config);
-					$config->conditions = $device->getHealthConditions();
+					$config->params     = self::setupConfigParams($device->getTripOptionalParameters());
+					$config->conditions = self::setupConfigConds($device->getTripOptionalConditions());
 					break;
 			}
 			return $config;

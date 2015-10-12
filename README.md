@@ -1,4 +1,4 @@
-Carma Systems Inc. CarmaLinkSDK 1.8.0
+Carma Systems Inc. CarmaLinkSDK 1.8.1
 ===============================
 
 CarmaLink is a vehicle telematics device providing users with programmable access to their car's onboard data through OBD2, Unified Diagnostic Service (UDS) and other manufacturer specific protocols. CarmaLink also contains onboard GPS and accelerometer chipsets providing users with high quality up to the second data about vehicles and their driver's behavior. 

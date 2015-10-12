@@ -28,6 +28,44 @@ namespace CarmaLink;
 		 */
 		public function getSerialNumber() { return $this->serialNumber; }
 		
+		/**
+		 * Set CarmaLink optional parameters for trip Alert
+		 * @param array	optParams	List of optional parameters for trip Event
+		 */
+		public function setTripOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to trip optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->tripOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns tripOptionalParameters parameters.
+		 * @return array|null TripOptionalParameters
+		 */
+		public function getTripOptionalParameters() {
+			if(isset($this->tripOptionalParameters) && $this->tripOptionalParameters !== NULL) {
+				return $this->tripOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for trip Alert
+		 * @param array optConditions List of conditions for the tripEvent
+		 */
+		public function setTripOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to trip optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->tripOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns trip optional conditions.
+		 * @return array|null TripOptionalConditions
+		 */
+		public function getTripOptionalConditions() {
+			if($this->tripOptionalConditions) {
+				return $this->tripOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Getter for useTrips
@@ -59,178 +97,71 @@ namespace CarmaLink;
 		 * @return void
 		 */
 		public function setUseHealth($use) { $this->useHealth = $use; }
+
+
 		/**
 		 * Getter for HealthConditions
-		 *
+		 * @deprecated in 1.8.1, please use getHealthOptionalConditions. This also no longer has supported behaviour.
 		 * @return array|bool
 		 */
-
-
 		public function getHealthConditions()
 		{
-			if (!$this->healthConditions) { //small check.
+			if (!$this->healthOptionalConditions) { //small check.
 				$this->setHealthConditions(array());
 			}
-		    return $this->healthConditions;
+		    return $this->healthOptionalConditions;
 		}
 		
 		/**
 		 * Setter for useHealthConditions
-		 *
+		 * @deprecated in 1.8.1, please use setHealthOptionalConditions
 		 * @param array|string conditions A string or array representing any conditions to set on the health report
 		 * @return void
 		 */
 		public function setHealthConditions($conditions = NULL)
 		{
 			if (!$conditions) { throw new CarmaLinkAPIException("Trying to set healthConditions NULL"); }
-		    $this->healthConditions = is_array($conditions) ? $conditions : array($conditions);
+		    $this->healthOptionalConditions = is_array($conditions) ? $conditions : array($conditions);
 		}
-		
-		/**
-		 * Getter for useBatteryVoltage
-		 *
-		 * @return bool
-		 */
-		public function getUseBatteryVoltage() { return $this->useBatteryVoltage; }
-		
-		/**
-		 * Setter for useBatteryVoltage
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseBatteryVoltage($use = TRUE) { $this->useBatteryVoltage = $use; }
-		
-		/**
-		 * Getter for useEmissionMonitors
-		 *
-		 * @return bool
-		 */
-		public function getUseEmissionMonitors() { return $this->useEmissionMonitors; }
-		
-		/**
-		 * Setter for useEmissionMonitors
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseEmissionMonistors($use = TRUE) { $this->useEmissionMonitors = $use; }
-		
-		/**
-		 * Getter for useFuelLevel
-		 *
-		 * @return bool
-		 */
-		public function getUseFuelLevel() { return $this->useFuelLevel; }
-		
-		/**
-		 * Setter for useFuelLevel
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseFuelLevel($use = TRUE) { $this->useFuelLevel = $use; }
-	
-		/**
-		 * Getter for useFuelRate
-		 *
-		 * @return bool
-		 */
-		public function getUseFuelRate() { return $this->useFuelRate; }
-		
-		/**
-		 * Setter for useFuelRate
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseFuelRate($use = TRUE) { $this->useFuelRate = TRUE; }
-	
-		/**
-		 * Getter for useNextServiceDuration
-		 *
-		 * @return bool
-		 */
-		public function getUseNextServiceDuration() { return $this->useNextServiceDuration; }
-		
-		/**
-		 * Setter for useNextServiceDuration
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseNextServiceDuration($use = TRUE) { $this->useNextServiceDuration = $use; }
 
 		/**
-		 * Getter for useNextServiceDistance
-		 *
-		 * @return bool
+		 * Set CarmaLink optional parameters for health Alert
+		 * @param array	optParams	List of optional parameters for health Event
 		 */
-		public function getUseNextServiceDistance() { return $this->useNextServiceDistance; }
-		
-		/**
-		 * Setter for useNextServiceDistance
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseNextServiceDistance($use = TRUE) { $this->useNextServiceDistance = $use; }
-		
-		/**
-		 * Shortcut to set useNextService(s)
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseNextService($use)
-		{
-		    $this->useNextServiceDistance = $use;
-  		    $this->useNextServiceDuration = $use;
+		public function setHealthOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to health optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->healthOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
 		}
-		
-		/**
-		 * Getter for useOdometer
-		 *
-		 * @return bool
-		 */
-		public function getUseOdometer() { return $this->useOdometer; }
-		
-		/**
-		 * Setter for useOdometer
-		 *
-		 * @param bool $Use Value to set
-		 * @return void
-		 */
-		public function setUseOdometer($use) { $this->useOdometer = $use; }
 
 		/**
-		 * Set CarmaLink engine fault
-		 * @param bool		checkEngineLight	Use engine fault
-		 * @return void
+		 * Returns healthOptionalParameters parameters.
+		 * @return array|null HealthOptionalParameters
 		 */
-		public function setCheckEngineLight($checkEngineLight = TRUE) { $this->checkEngineLight = (bool)$checkEngineLight; }
+		public function getHealthOptionalParameters() {
+			if(isset($this->healthOptionalParameters) && $this->healthOptionalParameters !== NULL) {
+				return $this->healthOptionalParameters;
+			}
+			return null;
+		}
 
 		/**
-		 * Get CarmaLink engine fault config
-		 * @return bool
+		 * Set CarmaLink optional conditions for health Alert
+		 * @param array optConditions List of conditions for the healthEvent
 		 */
-		public function getCheckEngineLight() { return $this->checkEngineLight; }
-
+		public function setHealthOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to health optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->healthOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
 		/**
-		 * Set CarmaLink global buzzer volume
-		 * Can be used to override when setting a configuration which supports buzzer.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @deprecated deprecated since version 1.8.0, no longer does anything.
-		 * @return void
+		 * Returns health optional conditions.
+		 * @return array|null HealthOptionalConditions
 		 */
-		public function setBuzzerVolume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->buzzerVolume = $buzzerVolume; }
-
-		/**
-		 * Get global CarmaLink volume setting
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 * @deprecated deprecated since version 1.8.0, no longer does anything.
-		 */
-		public function getBuzzerVolume() { return $this->buzzerVolume; }
+		public function getHealthOptionalConditions() {
+			if($this->healthOptionalConditions) {
+				return $this->healthOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink location tracking / GPS functionality
@@ -244,19 +175,6 @@ namespace CarmaLink;
 		 * @return bool
 		 */
 		public function getUseGps() { return $this->useGps; }
-
-		/**
-		 * Set CarmaLink low tire pressure report
-		 * @param bool	useTirePressure	On/Off
-		 * @return void
-		 */
-		public function setUseTirePressure($useTirePressure = TRUE) { $this->useTirePressure = (bool)$useTirePressure; }
-
-		/**
-		 * Get CarmaLink low tire pressure report enabled
-		 * @return bool
-		 */
-		public function getUseTirePressure() { return $this->useTirePressure; }
 
 		/**
 		 * Sets the CarmaLink's update interval
@@ -298,6 +216,45 @@ namespace CarmaLink;
 		 * @return bool Report_Is_Enabled
 		 */
 		public function getStatusPingTimeReport_Enabled() { return $this->statusPingTimeReport_Enabled; }
+
+		/**
+		 * Set CarmaLink optional parameters for statusPingTime Alert
+		 * @param array	optParams	List of optional parameters for statusPingTime Event
+		 */
+		public function setStatusPingTimeOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to statusPingTime optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->statusPingTimeOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns statusPingTimeOptionalParameters parameters.
+		 * @return array|null StatusPingTimeOptionalParameters
+		 */
+		public function getStatusPingTimeOptionalParameters() {
+			if(isset($this->statusPingTimeOptionalParameters) && $this->statusPingTimeOptionalParameters !== NULL) {
+				return $this->statusPingTimeOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for statusPingTime Alert
+		 * @param array optConditions List of conditions for the statusPingTimeEvent
+		 */
+		public function setStatusPingTimeOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to statusPingTime optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->statusPingTimeOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns statusPingTime optional conditions.
+		 * @return array|null StatusPingTimeOptionalConditions
+		 */
+		public function getStatusPingTimeOptionalConditions() {
+			if($this->statusPingTimeOptionalConditions) {
+				return $this->statusPingTimeOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink speed limit
@@ -349,6 +306,45 @@ namespace CarmaLink;
 		 * @return bool Report_Is_Enabled
 		 */
 		public function getSpeedLimitReport_Enabled() { return $this->speedLimitReport_Enabled; }
+
+		/**
+		 * Set CarmaLink optional parameters for speedLimit Alert
+		 * @param array	optParams	List of optional parameters for speedLimit Event
+		 */
+		public function setSpeedLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to speedLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->speedLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns speedLimitOptionalParameters parameters.
+		 * @return array|null SpeedLimitOptionalParameters
+		 */
+		public function getSpeedLimitOptionalParameters() {
+			if(isset($this->speedLimitOptionalParameters) && $this->speedLimitOptionalParameters !== NULL) {
+				return $this->speedLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for speedLimit Alert
+		 * @param array optConditions List of conditions for the speedLimitEvent
+		 */
+		public function setSpeedLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to speedLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->speedLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns speedLimit optional conditions.
+		 * @return array|null SpeedLimitOptionalConditions
+		 */
+		public function getSpeedLimitOptionalConditions() {
+			if($this->speedLimitOptionalConditions) {
+				return $this->speedLimitOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink engine speed limit
@@ -403,6 +399,45 @@ namespace CarmaLink;
 		public function getEngineSpeedLimitReport_Enabled() { return $this->engineSpeedLimitReport_Enabled; }
 
 		/**
+		 * Set CarmaLink optional parameters for engineSpeedLimit Alert
+		 * @param array	optParams	List of optional parameters for engineSpeedLimit Event
+		 */
+		public function setEngineSpeedLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to engineSpeedLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->engineSpeedLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns engineSpeedLimitOptionalParameters parameters.
+		 * @return array|null EngineSpeedLimitOptionalParameters
+		 */
+		public function getEngineSpeedLimitOptionalParameters() {
+			if(isset($this->engineSpeedLimitOptionalParameters) && $this->engineSpeedLimitOptionalParameters !== NULL) {
+				return $this->engineSpeedLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for engineSpeedLimit Alert
+		 * @param array optConditions List of conditions for the engineSpeedLimitEvent
+		 */
+		public function setEngineSpeedLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to engineSpeedLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->engineSpeedLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns engineSpeedLimit optional conditions.
+		 * @return array|null EngineSpeedLimitOptionalConditions
+		 */
+		public function getEngineSpeedLimitOptionalConditions() {
+			if($this->engineSpeedLimitOptionalConditions) {
+				return $this->engineSpeedLimitOptionalConditions;
+			}
+			return null;
+		}
+
+		/**
 		 * Set CarmaLink parking brake limit
 		 * @param int|bool		speedLimit_kmph		Speed in Km/h
 		 * @return void
@@ -453,6 +488,45 @@ namespace CarmaLink;
 		 * @return bool Report_Is_Enabled
 		 */
 		public function getParkingBrakeLimitReport_Enabled() { return $this->parkingBrakeLimitReport_Enabled; }
+
+		/**
+		 * Set CarmaLink optional parameters for parkingBrakeLimit Alert
+		 * @param array	optParams	List of optional parameters for parkingBrakeLimit Event
+		 */
+		public function setParkingBrakeLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingBrakeLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->parkingBrakeLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns parkingBrakeLimitOptionalParameters parameters.
+		 * @return array|null ParkingBrakeLimitOptionalParameters
+		 */
+		public function getParkingBrakeLimitOptionalParameters() {
+			if(isset($this->parkingBrakeLimitOptionalParameters) && $this->parkingBrakeLimitOptionalParameters !== NULL) {
+				return $this->parkingBrakeLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for parkingBrakeLimit Alert
+		 * @param array optConditions List of conditions for the parkingBrakeLimitEvent
+		 */
+		public function setParkingBrakeLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingBrakeLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->parkingBrakeLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns parkingBrake optional conditions.
+		 * @return array|null ParkingBrakeLimitOptionalConditions
+		 */
+		public function getParkingBrakeLimitOptionalConditions() {
+			if($this->parkingBrakeLimitOptionalConditions) {
+				return $this->parkingBrakeLimitOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink seatbelt limit
@@ -508,34 +582,43 @@ namespace CarmaLink;
 		public function getSeatbeltLimitReport_Enabled() { return $this->seatbeltLimitReport_Enabled; }
 
 		/**
-		 * Set CarmaLink reverse speed limit
-		 * @deprecated since version 1.8.0, to be removed soon
-		 * @param int|bool	reverseLimit		Speed in Km/h or FALSE to disable report
-		 * @return void
+		 * Set CarmaLink optional parameters for seatbeltLimit Alert
+		 * @param array	optParams	List of optional parameters for seatbeltLimit Event
 		 */
-		public function setReverseLimit_kmph($reverseLimit_kmph = 0) { $this->reverseLimit_kmph = ($reverseLimit_kmph < 0) ? FALSE : $reverseLimit_kmph; }
+		public function setSeatbeltLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to seatbeltLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->seatbeltLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
 
 		/**
-		 * Get CarmaLink speed limit
-		 * @deprecated since version 1.8.0, to be removed soon
-		 * @return int|bool		Km/h limit or FALSE if report disabled
+		 * Returns seatbeltLimitOptionalParameters parameters.
+		 * @return array|null SeatbeltLimitOptionalParameters
 		 */
-		public function getReverseLimit_kmph() { return $this->reverseLimit_kmph; }
+		public function getSeatbeltLimitOptionalParameters() {
+			if(isset($this->seatbeltLimitOptionalParameters) && $this->seatbeltLimitOptionalParameters !== NULL) {
+				return $this->seatbeltLimitOptionalParameters;
+			}
+			return null;
+		}
 
 		/**
-		 * Set CarmaLink reverse speed limit allowance
-		 * @deprecated since version 1.8.0, to be removed soon
-		 * @param float		allowance		allowance time in ms
-		 * @return void
+		 * Set CarmaLink optional conditions for seatbeltLimit Alert
+		 * @param array optConditions List of conditions for the seatbeltLimitEvent
 		 */
-		public function setReverseLimitAllowance_Msec($allowance_Msec = 0.0) { $this->reverseLimitAllowance_Msec = (float)$allowance_Msec; }
-
+		public function setSeatbeltLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to seatbeltLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->seatbeltLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
 		/**
-		 * Get CarmaLink reverse speed limit allowance
-		 * @deprecated since version 1.8.0, to be removed soon
-		 * @return float allowance time in ms
+		 * Returns seatbelt optional conditions.
+		 * @return array|null SeatbeltLimitOptionalConditions
 		 */
-		public function getReverseLimitAllowance_Msec() { return $this->reverseLimitAllowance_Msec; }
+		public function getSeatbeltLimitOptionalConditions() {
+			if($this->seatbeltLimitOptionalConditions) {
+				return $this->seatbeltLimitOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink brake limit
@@ -587,6 +670,45 @@ namespace CarmaLink;
 		 * @return bool Report_Is_Enabled
 		 */
 		public function getBrakeLimitReport_Enabled() { return $this->brakeLimitReport_Enabled; }
+
+		/**
+		 * Set CarmaLink optional parameters for brakeLimit Alert
+		 * @param array	optParams	List of optional parameters for brakeLimit Event
+		 */
+		public function setBrakeLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to brakeLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->brakeLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns brakeLimitOptionalParameters parameters.
+		 * @return array|null BrakeLimitOptionalParameters
+		 */
+		public function getBrakeLimitOptionalParameters() {
+			if(isset($this->brakeLimitOptionalParameters) && $this->brakeLimitOptionalParameters !== NULL) {
+				return $this->brakeLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for brakeLimit Alert
+		 * @param array optConditions List of conditions for the brakeLimitEvent
+		 */
+		public function setBrakeLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to brakeLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->brakeLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns brakeLimit optional conditions.
+		 * @return array|null BrakeLimitOptionalConditions
+		 */
+		public function getBrakeLimitOptionalConditions() {
+			if($this->brakeLimitOptionalConditions) {
+				return $this->brakeLimitOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink hard conering limit
@@ -641,6 +763,45 @@ namespace CarmaLink;
 		public function getCorneringLimitReport_Enabled() { return $this->corneringLimitReport_Enabled; }
 
 		/**
+		 * Set CarmaLink optional parameters for corneringLimit Alert
+		 * @param array	optParams	List of optional parameters for corneringLimit Event
+		 */
+		public function setCorneringLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to corneringLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->corneringLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns corneringLimitOptionalParameters parameters.
+		 * @return array|null CorneringLimitOptionalParameters
+		 */
+		public function getCorneringLimitOptionalParameters() {
+			if(isset($this->corneringLimitOptionalParameters) && $this->corneringLimitOptionalParameters !== NULL) {
+				return $this->corneringLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for corneringLimit Alert
+		 * @param array optConditions List of conditions for the corneringLimitEvent
+		 */
+		public function setCorneringLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to corneringLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->corneringLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns corneringLimit optional conditions.
+		 * @return array|null CorneringLimitOptionalConditions
+		 */
+		public function getCorneringLimitOptionalConditions() {
+			if($this->corneringLimitOptionalConditions) {
+				return $this->corneringLimitOptionalConditions;
+			}
+			return null;
+		}
+
+		/**
 		 * Set CarmaLink acceleration limit
 		 * @param float		accelLimit		Limit in Meters per second^2
 		 * @return void
@@ -691,6 +852,45 @@ namespace CarmaLink;
 		 * @return bool Report_Is_Enabled
 		 */
 		public function getAccelLimitReport_Enabled() { return $this->accelLimitReport_Enabled; }
+
+		/**
+		 * Set CarmaLink optional parameters for accelLimit Alert
+		 * @param array	optParams	List of optional parameters for accelLimit Event
+		 */
+		public function setAccelLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to accelLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->accelLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns accelLimitOptionalParameters parameters.
+		 * @return array|null AccelLimitOptionalParameters
+		 */
+		public function getAccelLimitOptionalParameters() {
+			if(isset($this->accelLimitOptionalParameters) && $this->accelLimitOptionalParameters !== NULL) {
+				return $this->accelLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for accelLimit Alert
+		 * @param array optConditions List of conditions for the accelLimitEvent
+		 */
+		public function setAccelLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to accelLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->accelLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns accelLimit optional conditions.
+		 * @return array|null AccelLimitOptionalConditions
+		 */
+		public function getAccelLimitOptionalConditions() {
+			if($this->accelLimitOptionalConditions) {
+				return $this->accelLimitOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set CarmaLink idle time threshold
@@ -747,6 +947,45 @@ namespace CarmaLink;
 		public function getIdleTimeLimitReport_Enabled() { return $this->idleTimeLimitReport_Enabled; }
 
 		/**
+		 * Set CarmaLink optional parameters for idleTimeLimit Alert
+		 * @param array	optParams	List of optional parameters for idleTimeLimit Event
+		 */
+		public function setIdleTimeLimitOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to idleTimeLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->idleTimeLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns idleTimeLimitOptionalParameters parameters.
+		 * @return array|null IdleTimeLimitOptionalParameters
+		 */
+		public function getIdleTimeLimitOptionalParameters() {
+			if(isset($this->idleTimeLimitOptionalParameters) && $this->idleTimeLimitOptionalParameters !== NULL) {
+				return $this->idleTimeLimitOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for idleTimeLimit Alert
+		 * @param array optConditions List of conditions for the idleTimeLimitEvent
+		 */
+		public function setIdleTimeLimitOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to idleTimeLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->idleTimeLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns idleTimeLimit optional conditions.
+		 * @return array|null IdleTimeLimitOptionalConditions
+		 */
+		public function getIdleTimeLimitOptionalConditions() {
+			if($this->idleTimeLimitOptionalConditions) {
+				return $this->idleTimeLimitOptionalConditions;
+			}
+			return null;
+		}
+
+		/**
 		 * Set CarmaLink parking Timeout Threshold_Msec
 		 * @param int	parkingTimeoutThreshold_Msec	in milliseconds
 		 * @return void
@@ -786,6 +1025,45 @@ namespace CarmaLink;
 		public function getParkingTimeoutReport_Enabled() { return $this->parkingTimeoutReport_Enabled; }
 
 		/**
+		 * Set CarmaLink optional parameters for parkingTimeout Alert
+		 * @param array	optParams	List of optional parameters for parkingTimeout Event
+		 */
+		public function setParkingTimeoutOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingTimeout optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->parkingTimeoutOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns parkingTimeoutOptionalParameters parameters.
+		 * @return array|null ParkingTimeoutOptionalParameters
+		 */
+		public function getParkingTimeoutOptionalParameters() {
+			if(isset($this->parkingTimeoutOptionalParameters) && $this->parkingTimeoutOptionalParameters !== NULL) {
+				return $this->parkingTimeoutOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for parkingTimeout Alert
+		 * @param array optConditions List of conditions for the parkingTimeoutEvent
+		 */
+		public function setParkingTimeoutOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingTimeout optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->parkingTimeoutOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns parkingTimeout optional conditions.
+		 * @return array|null ParkingTimeoutOptionalConditions
+		 */
+		public function getParkingTimeoutOptionalConditions() {
+			if($this->parkingTimeoutOptionalConditions) {
+				return $this->parkingTimeoutOptionalConditions;
+			}
+			return null;
+		}
+
+		/**
 		 * Set CarmaLink transport ping
 		 * @param int	transportedPingTime_Msec	in milliseconds
 		 * @return void
@@ -823,6 +1101,45 @@ namespace CarmaLink;
 		 * @return bool Report_Is_Enabled
 		 */
 		public function getTransportedPingTimeReport_Enabled() { return $this->transportedPingTimeReport_Enabled; }
+
+		/**
+		 * Set CarmaLink optional parameters for transportedPingTime Alert
+		 * @param array	optParams	List of optional parameters for transportedPingTime Event
+		 */
+		public function setTransportedPingTimeOptionalParameters($optParams = NULL) {
+			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to transportedPingTime optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
+			$this->transportedPingTimeOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		}
+
+		/**
+		 * Returns transportedPingTimeOptionalParameters parameters.
+		 * @return array|null TransportedPingTimeOptionalParameters
+		 */
+		public function getTransportedPingTimeOptionalParameters() {
+			if(isset($this->transportedPingTimeOptionalParameters) && $this->transportedPingTimeOptionalParameters !== NULL) {
+				return $this->transportedPingTimeOptionalParameters;
+			}
+			return null;
+		}
+
+		/**
+		 * Set CarmaLink optional conditions for transportedPingTime Alert
+		 * @param array optConditions List of conditions for the transportedPingTimeEvent
+		 */
+		public function setTransportedPingTimeOptionalParameters($optConditions = NULL) {
+			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to transportedPingTime optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
+			$this->transportedPingTimeOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		}
+		/**
+		 * Returns transportedPingTime optional conditions.
+		 * @return array|null TransportedPingTimeOptionalConditions
+		 */
+		public function getTransportedPingTimeOptionalConditions() {
+			if($this->transportedPingTimeOptionalConditions) {
+				return $this->transportedPingTimeOptionalConditions;
+			}
+			return null;
+		}
 
 		/**
 		 * Set attached automobile's fuel type
