@@ -27,141 +27,6 @@ namespace CarmaLink;
 		 * @return int
 		 */
 		public function getSerialNumber() { return $this->serialNumber; }
-		
-		/**
-		 * Set CarmaLink optional parameters for trip Alert
-		 * @param array	optParams	List of optional parameters for trip Event
-		 */
-		public function setTripOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to trip optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->tripOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns tripOptionalParameters parameters.
-		 * @return array|null TripOptionalParameters
-		 */
-		public function getTripOptionalParameters() {
-			if(isset($this->tripOptionalParameters) && $this->tripOptionalParameters !== NULL) {
-				return $this->tripOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for trip Alert
-		 * @param array optConditions List of conditions for the tripEvent
-		 */
-		public function setTripOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to trip optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->tripOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns trip optional conditions.
-		 * @return array|null TripOptionalConditions
-		 */
-		public function getTripOptionalConditions() {
-			if($this->tripOptionalConditions) {
-				return $this->tripOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Getter for useTrips
-		 *
-		 * @return bool
-		 */
-		public function getUseTrips() { return $this->useTrips; }
-		
-		/**
-		 * Shortcut to set useTrips
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseTrips($use) { $this->useTrips = $use; }
-
-
-		/**
-		 * Getter for useHealth
-		 *
-		 * @return bool
-		 */
-		public function getUseHealth() { return $this->useHealth; }
-		
-		/**
-		 * Shortcut to set useHealth
-		 *
-		 * @param bool $use Value to set
-		 * @return void
-		 */
-		public function setUseHealth($use) { $this->useHealth = $use; }
-
-
-		/**
-		 * Getter for HealthConditions
-		 * @deprecated in 1.8.1, please use getHealthOptionalConditions. This also no longer has supported behaviour.
-		 * @return array|bool
-		 */
-		public function getHealthConditions()
-		{
-			if (!$this->healthOptionalConditions) { //small check.
-				$this->setHealthConditions(array());
-			}
-		    return $this->healthOptionalConditions;
-		}
-		
-		/**
-		 * Setter for useHealthConditions
-		 * @deprecated in 1.8.1, please use setHealthOptionalConditions
-		 * @param array|string conditions A string or array representing any conditions to set on the health report
-		 * @return void
-		 */
-		public function setHealthConditions($conditions = NULL)
-		{
-			if (!$conditions) { throw new CarmaLinkAPIException("Trying to set healthConditions NULL"); }
-		    $this->healthOptionalConditions = is_array($conditions) ? $conditions : array($conditions);
-		}
-
-		/**
-		 * Set CarmaLink optional parameters for health Alert
-		 * @param array	optParams	List of optional parameters for health Event
-		 */
-		public function setHealthOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to health optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->healthOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns healthOptionalParameters parameters.
-		 * @return array|null HealthOptionalParameters
-		 */
-		public function getHealthOptionalParameters() {
-			if(isset($this->healthOptionalParameters) && $this->healthOptionalParameters !== NULL) {
-				return $this->healthOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for health Alert
-		 * @param array optConditions List of conditions for the healthEvent
-		 */
-		public function setHealthOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to health optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->healthOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns health optional conditions.
-		 * @return array|null HealthOptionalConditions
-		 */
-		public function getHealthOptionalConditions() {
-			if($this->healthOptionalConditions) {
-				return $this->healthOptionalConditions;
-			}
-			return null;
-		}
 
 		/**
 		 * Set CarmaLink location tracking / GPS functionality
@@ -176,969 +41,734 @@ namespace CarmaLink;
 		 */
 		public function getUseGps() { return $this->useGps; }
 
-		/**
-		 * Sets the CarmaLink's update interval
-		 * @param int	statusPingTime_Msec	The update interval in milliseconds
-		 * @return void
-		 */
 
-		public function setStatusPingTime_Msec($statusPingTime_Msec = 5000) { $this->statusPingTime_Msec = (int)$statusPingTime_Msec; }
-
-		/**
-		 * Gets the CarmaLink's update interval
-		 * @return int	milliseconds
+		//functions that are being called to perform all of the above functions.
+		/*
+		 * Sets threshold of values passed in based on configuration type.
+		 * @param	ConfigType	configType	valid config type to change
+		 * @param	int|float	value	value to set threshold too.
 		 */
-		public function getStatusPingTime_Msec() { return $this->statusPingTime_Msec; }
+		public function setThreshold($configType, $value = 0.0) {
+			if(!is_numeric($value)) { throw new CarmaLinkAPIException("Error: setThreshold for ".$configType." expected value to be numeric, ".$value." received"); }
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				$this->speedLimit_kmph = (float)$value;
+				break;
+			case ConfigType::CONFIG_IDLING:
+				$this->idleTimeLimit_kmph = (float)$value;
+				break;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				$this->accelLimit_Mpss = (float)$value;
+				break;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				$this->brakeLimit_Mpss = (float)$value;
+				break;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				$this->corneringLimit_Mpss = (float)$value;
+				break;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				$this->engineSpeedLimit_rpm = (int)$value;
+				break;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				$this->parkingBrakeLimit_kmph = (float)$value;
+				break;
+			case ConfigType::CONFIG_SEATBELT:
+				$this->seatbeltLimit_kmph = (float)$value;
+				break;
+			case ConfigType::CONFIG_PARKING:
+				$this->parkingTimeoutThreshold_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_TRANSPORTED:
+				$this->transportedPingTime_Msec = (int)$value;	
+				break;
+			case ConfigType::CONFIG_STATUS:
+				$this->statusPingTime_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_HEALTH:
+			case ConfigType::CONFIG_TRIP_REPORT:
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				throw new CarmaLinkAPIException("Error: setThreshold for '".$configType."' is illegal, as it does not support the threshold parameter.");
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setThreshold for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
+		}
 		
-		/**
-		 * Sets the CarmaLink's status ping update allowance
-		 * @param int	statusPingTime_Msec	The update interval offset in milliseconds
-		 * @return void
+		/*
+		 * Gets threshold for config type
+		 * @return null|int|float	null if not supported, otherwise expect a numeral
 		 */
-		 
-		public function setStatusPingTimeAllowance_Msec($statusPingTimeAllowance_Msec = 0) { $this->statusPingTimeAllowance_Msec = (int)$statusPingTimeAllowance_Msec; }
-
-		/**
-		 * Gets the CarmaLink's update interval allowance offset.
-		 * @return int	milliseconds
-		 */
-		public function getStatusPingTimeAllowance_Msec() { return $this->statusPingTimeAllowance_Msec; }
-
-		/**
-		 * Sets if status pings are to be reported by the device
-		 * @param int statusPingTimeReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setStatusPingTimeReport_Enabled($statusPingTimeReport_Enabled = false) { $this->statusPingTimeReport_Enabled = $statusPingTimeReport_Enabled; }
-
-		/**
-		 * Gets if report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getStatusPingTimeReport_Enabled() { return $this->statusPingTimeReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for statusPingTime Alert
-		 * @param array	optParams	List of optional parameters for statusPingTime Event
-		 */
-		public function setStatusPingTimeOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to statusPingTime optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->statusPingTimeOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns statusPingTimeOptionalParameters parameters.
-		 * @return array|null StatusPingTimeOptionalParameters
-		 */
-		public function getStatusPingTimeOptionalParameters() {
-			if(isset($this->statusPingTimeOptionalParameters) && $this->statusPingTimeOptionalParameters !== NULL) {
-				return $this->statusPingTimeOptionalParameters;
+		public function getThreshold($configType) {
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				return $this->speedLimit_kmph;
+			case ConfigType::CONFIG_IDLING:
+				return $this->idleTimeLimit_kmph;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				return $this->accelLimit_Mpss;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				return $this->brakeLimit_Mpss;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				return $this->corneringLimit_Mpss;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				return $this->engineSpeedLimit_rpm;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				return $this->parkingBrakeLimit_kmph;
+			case ConfigType::CONFIG_SEATBELT:
+				return $this->seatbeltLimit_kmph;
+			case ConfigType::CONFIG_PARKING:
+				return $this->parkingTimeoutThreshold_Msec;
+			case ConfigType::CONFIG_TRANSPORTED:
+				return $this->transportedPingTime_Msec;	
+			case ConfigType::CONFIG_STATUS:
+				return $this->statusPingTime_Msec;
+			case ConfigType::CONFIG_HEALTH:
+			case ConfigType::CONFIG_TRIP_REPORT:
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				return NULL;
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: getThreshold for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
 			}
-			return null;
 		}
-
-		/**
-		 * Set CarmaLink optional conditions for statusPingTime Alert
-		 * @param array optConditions List of conditions for the statusPingTimeEvent
+		
+		/*
+		 * Sets allowance of values passed in based on configuration type.
+		 * @param	ConfigType	configType	valid config type to change
+		 * @param	int	value	value to set allowance too.
 		 */
-		public function setStatusPingTimeOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to statusPingTime optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->statusPingTimeOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns statusPingTime optional conditions.
-		 * @return array|null StatusPingTimeOptionalConditions
-		 */
-		public function getStatusPingTimeOptionalConditions() {
-			if($this->statusPingTimeOptionalConditions) {
-				return $this->statusPingTimeOptionalConditions;
+		public function setAllowance($configType, $value = 0) {
+			if(!is_integer($value)) { throw new CarmaLinkAPIException("Error: setAllowance for ".$configType." expected value to be integer, ".$value." received"); }
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				$this->speedLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_IDLING:
+				$this->idleTimeLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				$this->accelLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				$this->brakeLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				$this->corneringLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				$this->engineSpeedLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				$this->parkingBrakeLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_SEATBELT:
+				$this->seatbeltLimitAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_PARKING:
+				$this->parkingTimeoutAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_TRANSPORTED:
+				$this->transportedPingTimeAllowance_Msec = (int)$value;	
+				break;
+			case ConfigType::CONFIG_STATUS:
+				$this->statusPingTimeAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_HEALTH:
+			case ConfigType::CONFIG_TRIP_REPORT:
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				throw new CarmaLinkAPIException("Error: setAllowance for '".$configType."' is illegal, as it does not support the allowance parameter.");
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setAllowance for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
 			}
-			return null;
+		}
+		
+		
+		/*
+		 * Gets allowance for config type
+		 * @return null|int	null if not supported, otherwise expect an int
+		 */
+		public function getAllowance($configType) {
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				return $this->speedLimitAllowance_Msec;
+			case ConfigType::CONFIG_IDLING:
+				return $this->idleTimeLimitAllowance_Msec;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				return $this->accelLimitAllowance_Msec;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				return $this->brakeLimitAllowance_Msec;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				return $this->corneringLimitAllowance_Msec;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				return $this->engineSpeedLimitAllowance_Msec;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				return $this->parkingBrakeLimitAllowance_Msec;
+			case ConfigType::CONFIG_SEATBELT:
+				return $this->seatbeltLimitAllowance_Msec;
+			case ConfigType::CONFIG_PARKING:
+				return $this->parkingTimeoutAllowance_Msec;
+			case ConfigType::CONFIG_TRANSPORTED:
+				return $this->transportedPingTimeAllowance_Msec;
+			case ConfigType::CONFIG_STATUS:
+				return $this->statusPingTimeAllowance_Msec;
+			case ConfigType::CONFIG_HEALTH:
+			case ConfigType::CONFIG_TRIP_REPORT:
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				return NULL;
+			default:
+				throw new CarmaLinkAPIException("Error: getAllowance for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
 		}
 
-		/**
-		 * Set CarmaLink speed limit
-		 * @param int		speedLimit_kmph		Speed in Km/h
-		 * @return void
+		/*
+		 * Sets buzzer volume for use by report events, is called by other functions.
+		 * @param	ConfigType	configType	valid config type to change
+		 * @param	BuzzerVolume	value	valid buzzer volume to set.
 		 */
-		public function setSpeedLimit_kmph($speedLimit_kmph = 0) { $this->speedLimit_kmph = (int)$speedLimit_kmph; }
+		public function setBuzzerVolume($configType, $value) {
+			switch($value) {
+			case BuzzerVolume::HIGH:
+			case BuzzerVolume::MED:
+			case BuzzerVolume::OFF:
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setBuzzer for ".$configType." expected value to be of type 'BuzzerVolume' - ".$value." received");
+			}
 
-		/**
-		 * Get CarmaLink speed limit
-		 * @return int	Km/h limit
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+					$this->speedLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_IDLING:
+				$this->idleTimeLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				$this->accelLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				$this->brakeLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				$this->corneringLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				$this->engineSpeedLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				$this->parkingBrakeLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_SEATBELT:
+				$this->seatbeltLimitBuzzer_Volume = $value;
+				break;
+			case ConfigType::CONFIG_PARKING:
+			case ConfigType::CONFIG_TRANSPORTED:
+			case ConfigType::CONFIG_STATUS:
+			case ConfigType::CONFIG_HEALTH:
+			case ConfigType::CONFIG_TRIP_REPORT:
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				throw new CarmaLinkAPIException("Error: setBuzzerVolume for '".$configType."' ' is illegal, as it does not support the buzzer parameter");
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setBuzzer for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
+		}
+		
+		/*
+		 * Gets buzzer volume for config type if supported, null if not set or unsupported
+		 * @param	ConfigType	configType	valid config type
+		 * @return	BuzzerVolume|null	returns buzzer volume if set, otherwise null.
 		 */
-		public function getSpeedLimit_kmph() { return $this->speedLimit_kmph; }
-		/**
-		 * Set CarmaLink speed limit allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setSpeedLimitAllowance_Msec($allowance_Msec = 0.0) { $this->speedLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink speedLimit allowance
-		 * @return float allowance time in ms
-		 */
-		public function getSpeedLimitAllowance_Msec() { return $this->speedLimitAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink buzzer volume for speedLimit Alert.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setSpeedLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->speedLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for speedLimit Reports
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getSpeedLimitBuzzer_Volume() { return $this->speedLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if speedLimit reports are to be reported by the device
-		 * @param int speedLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setSpeedLimitReport_Enabled($speedLimitReport_Enabled = false) { $this->speedLimitReport_Enabled = $speedLimitReport_Enabled; }
-
-		/**
-		 * Gets if speedLimit is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getSpeedLimitReport_Enabled() { return $this->speedLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for speedLimit Alert
-		 * @param array	optParams	List of optional parameters for speedLimit Event
-		 */
-		public function setSpeedLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to speedLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->speedLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		public function getBuzzerVolume($configType) {
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				return $this->speedLimitBuzzer_Volume;
+			case ConfigType::CONFIG_IDLING:
+				return $this->idleTimeLimitBuzzer_Volume;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				return $this->accelLimitBuzzer_Volume;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				return $this->brakeLimitBuzzer_Volume;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				return $this->corneringLimitBuzzer_Volume;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				return $this->engineSpeedLimitBuzzer_Volume;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				return $this->parkingBrakeLimitBuzzer_Volume;
+			case ConfigType::CONFIG_SEATBELT:
+				return $this->seatbeltLimitBuzzer_Volume;
+			case ConfigType::CONFIG_PARKING:
+			case ConfigType::CONFIG_TRANSPORTED:
+			case ConfigType::CONFIG_STATUS:
+			case ConfigType::CONFIG_HEALTH:
+			case ConfigType::CONFIG_TRIP_REPORT:
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				return NULL;
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setBuzzer for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
 		}
 
-		/**
-		 * Returns speedLimitOptionalParameters parameters.
-		 * @return array|null SpeedLimitOptionalParameters
+		/*
+		 * Sets optional parameters for use by report events
+		 * @param	ConfigType	configType	valid config type to change
+		 * @param	array	valueArray	array object of all optional parameters.
 		 */
-		public function getSpeedLimitOptionalParameters() {
-			if(isset($this->speedLimitOptionalParameters) && $this->speedLimitOptionalParameters !== NULL) {
+		public function setOptionalParameters($configType, $valueArray) {
+			if(!is_array($valueArray)) { throw new CarmaLinkAPIException("Error: setOptionalParameters for '".$configType."' must be of type array."); }
+			
+			$properFormattedArray;
+			if(isset($valueArray[0]) && is_string($valueArray[0]) && !is_bool($valueArray[0])) {
+				$properFormattedArray = array();
+				foreach($valueArray as $value) {
+					$properFormattedArray[$value] = true;
+				}
+				//convert to proper array.
+			} else{
+				$properFormattedArray = $valueArray;
+			}
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				$this->speedLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_IDLING:
+				$this->idleTimeLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				$this->accelLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				$this->brakeLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				$this->corneringLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				$this->engineSpeedLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				$this->parkingBrakeLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_SEATBELT:
+				$this->seatbeltLimitOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_PARKING:
+				$this->parkingTimeoutOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_TRANSPORTED:
+				$this->transportedPingTimeOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_STATUS:
+				$this->statusPingTimeOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HEALTH:
+				$this->healthOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_TRIP_REPORT:
+				$this->tripOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				throw new CarmaLinkAPIException("Error: setOptionalParameters for '".$configType."' ' is illegal, as it does not support optional parameters");
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setOptionalParameters for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
+		}
+		
+		
+		/*
+		 * Gets optional parameters used by report events
+		 * @param	ConfigType	configType	valid config type to get optoinal parameters are
+		 * @return	array|null	valueArray	array object of all optional parameters.
+		 */
+		public function getOptionalParameters($configType) {
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
 				return $this->speedLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for speedLimit Alert
-		 * @param array optConditions List of conditions for the speedLimitEvent
-		 */
-		public function setSpeedLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to speedLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->speedLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns speedLimit optional conditions.
-		 * @return array|null SpeedLimitOptionalConditions
-		 */
-		public function getSpeedLimitOptionalConditions() {
-			if($this->speedLimitOptionalConditions) {
-				return $this->speedLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink engine speed limit
-		 * @param int		engineSpeedLimit_rpm		Speed in Rotations per minute
-		 * @return void
-		 */
-		public function setEngineSpeedLimit_rpm($engineSpeedLimit_rpm = 0) { $this->engineSpeedLimit_rpm = (int)$engineSpeedLimit_rpm; }
-
-		/**
-		 * Get CarmaLink engine speed limit
-		 * @return int	Rotations per Minute limit
-		 */
-		public function getEngineSpeedLimit_rpm() { return $this->engineSpeedLimit_rpm; }
-
-		/**
-		 * Set CarmaLink engine speed limit allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setEngineSpeedLimitAllowance_Msec($allowance_Msec = 0.0) { $this->engineSpeedLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink engine speed limit allowance
-		 * @return float allowance time in ms
-		 */
-		public function getEngineSpeedLimitAllowance_Msec() { return $this->engineSpeedLimitAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink buzzer volume for engineSpeedLimit Report.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setEngineSpeedLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->engineSpeedLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for engineSpeed limit
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getEngineSpeedLimitBuzzer_Volume() { return $this->engineSpeedLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if engineSpeed Reports are to be reported by the device
-		 * @param int engineSpeedLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setEngineSpeedLimitReport_Enabled($engineSpeedLimitReport_Enabled = false) { $this->engineSpeedLimitReport_Enabled = $engineSpeedLimitReport_Enabled; }
-
-		/**
-		 * Gets if EngineSpeed report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getEngineSpeedLimitReport_Enabled() { return $this->engineSpeedLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for engineSpeedLimit Alert
-		 * @param array	optParams	List of optional parameters for engineSpeedLimit Event
-		 */
-		public function setEngineSpeedLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to engineSpeedLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->engineSpeedLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns engineSpeedLimitOptionalParameters parameters.
-		 * @return array|null EngineSpeedLimitOptionalParameters
-		 */
-		public function getEngineSpeedLimitOptionalParameters() {
-			if(isset($this->engineSpeedLimitOptionalParameters) && $this->engineSpeedLimitOptionalParameters !== NULL) {
-				return $this->engineSpeedLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for engineSpeedLimit Alert
-		 * @param array optConditions List of conditions for the engineSpeedLimitEvent
-		 */
-		public function setEngineSpeedLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to engineSpeedLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->engineSpeedLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns engineSpeedLimit optional conditions.
-		 * @return array|null EngineSpeedLimitOptionalConditions
-		 */
-		public function getEngineSpeedLimitOptionalConditions() {
-			if($this->engineSpeedLimitOptionalConditions) {
-				return $this->engineSpeedLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink parking brake limit
-		 * @param int|bool		speedLimit_kmph		Speed in Km/h
-		 * @return void
-		 */
-		public function setParkingBrakeLimit_kmph($speedLimit_kmph = 0) { $this->parkingBrakeLimit_kmph = ($speedLimit_kmph === FALSE) ? FALSE : (int)$speedLimit_kmph; }
-
-		/**
-		 * Get CarmaLink parking brake limit
-		 * @return int|bool	Km/h limit or false if disabled
-		 */
-		public function getParkingBrakeLimit_kmph() { return ($this->parkingBrakeLimit_kmph === FALSE || $this->parkingBrakeLimit_kmph < 0) ? FALSE : (int)$this->parkingBrakeLimit_kmph; }
-
-		/**
-		 * Set CarmaLink parking brake allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setParkingBrakeLimitAllowance_Msec($allowance_Msec = 0.0) { $this->parkingBrakeLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink parking brake allowance
-		 * @return float allowance time in ms
-		 */
-		public function getParkingBrakeLimitAllowance_Msec() { return $this->parkingBrakeLimitAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink buzzer volume for parkingBrakeLimit Alert.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setParkingBrakeLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->parkingBrakeLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for parkingBrake Alerts
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getParkingBrakeLimitBuzzer_Volume() { return $this->parkingBrakeLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if parkingBrake reports are to be reported by the device
-		 * @param int statusPingReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setParkingBrakeLimitReport_Enabled($parkingBrakeLimitReport_Enabled = false) { $this->parkingBrakeLimitReport_Enabled = $parkingBrakeLimitReport_Enabled; }
-
-		/**
-		 * Gets if parkingBrake is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getParkingBrakeLimitReport_Enabled() { return $this->parkingBrakeLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for parkingBrakeLimit Alert
-		 * @param array	optParams	List of optional parameters for parkingBrakeLimit Event
-		 */
-		public function setParkingBrakeLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingBrakeLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->parkingBrakeLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns parkingBrakeLimitOptionalParameters parameters.
-		 * @return array|null ParkingBrakeLimitOptionalParameters
-		 */
-		public function getParkingBrakeLimitOptionalParameters() {
-			if(isset($this->parkingBrakeLimitOptionalParameters) && $this->parkingBrakeLimitOptionalParameters !== NULL) {
-				return $this->parkingBrakeLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for parkingBrakeLimit Alert
-		 * @param array optConditions List of conditions for the parkingBrakeLimitEvent
-		 */
-		public function setParkingBrakeLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingBrakeLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->parkingBrakeLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns parkingBrake optional conditions.
-		 * @return array|null ParkingBrakeLimitOptionalConditions
-		 */
-		public function getParkingBrakeLimitOptionalConditions() {
-			if($this->parkingBrakeLimitOptionalConditions) {
-				return $this->parkingBrakeLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink seatbelt limit
-		 * @param int|bool		speedLimit_kmph		Speed in Km/h
-		 * @return void
-		 */
-
-		public function setSeatbeltLimit_kmph($speedLimit_kmph = 0) { $this->seatbeltLimit_kmph = ($speedLimit_kmph === FALSE) ? FALSE : (int)$speedLimit_kmph; }
-
-		/**
-		 * Get CarmaLink seatbelt limit
-		 * @return int|bool	Km/h limit or false if disabled
-		 */
-		public function getSeatbeltLimit_kmph() { return ($this->seatbeltLimit_kmph === FALSE || $this->seatbeltLimit_kmph < 0) ? FALSE : (int)$this->seatbeltLimit_kmph; }
-
-		/**
-		 * Set CarmaLink seatbelt allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setSeatbeltLimitAllowance_Msec($allowance_Msec = 0.0) { $this->seatbeltLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink seatbelt allowance
-		 * @return float allowance time in ms
-		 */
-		public function getSeatbeltLimitAllowance_Msec() { return $this->seatbeltLimitAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink buzzer volume for seatbeltLimit Report.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setSeatbeltLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->seatbeltLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for seatbelt limit
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getSeatbeltLimitBuzzer_Volume() { return $this->seatbeltLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if seatbelt Reports are to be reported by the device
-		 * @param int seatbeltLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setSeatbeltLimitReport_Enabled($seatbeltLimitReport_Enabled = false) { $this->seatbeltLimitReport_Enabled = $seatbeltLimitReport_Enabled; }
-
-		/**
-		 * Gets if Seatbelt report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getSeatbeltLimitReport_Enabled() { return $this->seatbeltLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for seatbeltLimit Alert
-		 * @param array	optParams	List of optional parameters for seatbeltLimit Event
-		 */
-		public function setSeatbeltLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to seatbeltLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->seatbeltLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns seatbeltLimitOptionalParameters parameters.
-		 * @return array|null SeatbeltLimitOptionalParameters
-		 */
-		public function getSeatbeltLimitOptionalParameters() {
-			if(isset($this->seatbeltLimitOptionalParameters) && $this->seatbeltLimitOptionalParameters !== NULL) {
-				return $this->seatbeltLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for seatbeltLimit Alert
-		 * @param array optConditions List of conditions for the seatbeltLimitEvent
-		 */
-		public function setSeatbeltLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to seatbeltLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->seatbeltLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns seatbelt optional conditions.
-		 * @return array|null SeatbeltLimitOptionalConditions
-		 */
-		public function getSeatbeltLimitOptionalConditions() {
-			if($this->seatbeltLimitOptionalConditions) {
-				return $this->seatbeltLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink brake limit
-		 * @param float		brakeLimit		Limit in Meters per second^2
-		 * @return void
-		 */
-		public function setBrakeLimit_Mpss($brakeLimit_Mpss = 0.0) { $this->brakeLimit_Mpss = (float)$brakeLimit_Mpss; }
-
-		/**
-		 * Get CarmaLink brake limit
-		 * @return float	In Meters per second^2
-		 */
-		public function getBrakeLimit_Mpss() { return $this->brakeLimit_Mpss; }
-
-		/**
-		 * Set CarmaLink brake limit allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setBrakeLimitAllowance_Msec($allowance_Msec = 0.0) { $this->brakeLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink brake limit allowance
-		 * @return float allowance time in ms
-		 */
-		public function getBrakeLimitAllowance_Msec() { return $this->brakeLimitAllowance_Msec; }
-				/**
-		 * Set CarmaLink buzzer volume for brakeLimit Report.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setBrakeLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->brakeLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for brake limit
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getBrakeLimitBuzzer_Volume() { return $this->brakeLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if brake Reports are to be reported by the device
-		 * @param int brakeLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setBrakeLimitReport_Enabled($brakeLimitReport_Enabled = false) { $this->brakeLimitReport_Enabled = $brakeLimitReport_Enabled; }
-
-		/**
-		 * Gets if Brake report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getBrakeLimitReport_Enabled() { return $this->brakeLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for brakeLimit Alert
-		 * @param array	optParams	List of optional parameters for brakeLimit Event
-		 */
-		public function setBrakeLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to brakeLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->brakeLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns brakeLimitOptionalParameters parameters.
-		 * @return array|null BrakeLimitOptionalParameters
-		 */
-		public function getBrakeLimitOptionalParameters() {
-			if(isset($this->brakeLimitOptionalParameters) && $this->brakeLimitOptionalParameters !== NULL) {
-				return $this->brakeLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for brakeLimit Alert
-		 * @param array optConditions List of conditions for the brakeLimitEvent
-		 */
-		public function setBrakeLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to brakeLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->brakeLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns brakeLimit optional conditions.
-		 * @return array|null BrakeLimitOptionalConditions
-		 */
-		public function getBrakeLimitOptionalConditions() {
-			if($this->brakeLimitOptionalConditions) {
-				return $this->brakeLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink hard conering limit
-		 * @param float		cornerLimit		Limit in Meters per second^2
-		 * @return void
-		 */
-		public function setCorneringLimit_Mpss($corneringLimit_Mpss = 0.0) { $this->corneringLimit_Mpss = (float)$corneringLimit_Mpss; }
-
-		/**
-		 * Get CarmaLink hard cornering limit
-		 * @return float	In Meters per second^2
-		 */
-		public function getCorneringLimit_Mpss() { return $this->corneringLimit_Mpss; }
-
-		/**
-		 * Set CarmaLink hard cornering allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setCorneringLimitAllowance_Msec($allowance_Msec = 0.0) { $this->corneringLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink hard cornering allowance
-		 * @return float allowance time in ms
-		 */
-		public function getCorneringLimitAllowance_Msec() { return $this->corneringLimitAllowance_Msec; }
-		/**
-		 * Set CarmaLink buzzer volume for corneringLimit Report.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-
-		public function setCorneringLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->corneringLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for cornering limit
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getCorneringLimitBuzzer_Volume() { return $this->corneringLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if cornering Reports are to be reported by the device
-		 * @param int coneringLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setCorneringLimitReport_Enabled($corneringLimitReport_Enabled = false) { $this->corneringLimitReport_Enabled = $corneringLimitReport_Enabled; }
-
-		/**
-		 * Gets if Cornering report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getCorneringLimitReport_Enabled() { return $this->corneringLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for corneringLimit Alert
-		 * @param array	optParams	List of optional parameters for corneringLimit Event
-		 */
-		public function setCorneringLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to corneringLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->corneringLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns corneringLimitOptionalParameters parameters.
-		 * @return array|null CorneringLimitOptionalParameters
-		 */
-		public function getCorneringLimitOptionalParameters() {
-			if(isset($this->corneringLimitOptionalParameters) && $this->corneringLimitOptionalParameters !== NULL) {
-				return $this->corneringLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for corneringLimit Alert
-		 * @param array optConditions List of conditions for the corneringLimitEvent
-		 */
-		public function setCorneringLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to corneringLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->corneringLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns corneringLimit optional conditions.
-		 * @return array|null CorneringLimitOptionalConditions
-		 */
-		public function getCorneringLimitOptionalConditions() {
-			if($this->corneringLimitOptionalConditions) {
-				return $this->corneringLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink acceleration limit
-		 * @param float		accelLimit		Limit in Meters per second^2
-		 * @return void
-		 */
-		public function setAccelLimit_Mpss($accelLimit_Mpss = 0.0) { $this->accelLimit_Mpss = (float)$accelLimit_Mpss; }
-
-		/**
-		 * Get CarmaLink acceleration limit
-		 * @return float	In Meters per second^2
-		 */
-		public function getAccelLimit_Mpss() { return $this->accelLimit_Mpss; }
-		
-		/**
-		 * Set CarmaLink accel limit allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setAccelLimitAllowance_Msec($allowance_Msec = 0.0) { $this->accelLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink accel limit allowance
-		 * @return float allowance time in ms
-		 */
-		public function getAccelLimitAllowance_Msec() { return $this->accelLimitAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink buzzer volume for accelLimit Report.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setAccelLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->accelLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for accel limit
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getAccelLimitBuzzer_Volume() { return $this->accelLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if accel Reports are to be reported by the device
-		 * @param int accelLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setAccelLimitReport_Enabled($accelLimitReport_Enabled = false) { $this->accelLimitReport_Enabled = $accelLimitReport_Enabled; }
-
-		/**
-		 * Gets if Accel report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getAccelLimitReport_Enabled() { return $this->accelLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for accelLimit Alert
-		 * @param array	optParams	List of optional parameters for accelLimit Event
-		 */
-		public function setAccelLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to accelLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->accelLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns accelLimitOptionalParameters parameters.
-		 * @return array|null AccelLimitOptionalParameters
-		 */
-		public function getAccelLimitOptionalParameters() {
-			if(isset($this->accelLimitOptionalParameters) && $this->accelLimitOptionalParameters !== NULL) {
-				return $this->accelLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for accelLimit Alert
-		 * @param array optConditions List of conditions for the accelLimitEvent
-		 */
-		public function setAccelLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to accelLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->accelLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns accelLimit optional conditions.
-		 * @return array|null AccelLimitOptionalConditions
-		 */
-		public function getAccelLimitOptionalConditions() {
-			if($this->accelLimitOptionalConditions) {
-				return $this->accelLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink idle time threshold
-		 * @param int	idleTimeLimit	in kmp/h
-		 * NOTE: currently ignored by the API
-		 * @return void
-		 */
-		public function setIdleTimeLimit_kmph($idleTimeLimit_kmph = 0) { $this->idleTimeLimit_kmph = (int)$idleTimeLimit_kmph; }
-
-		/**
-		 * Get CarmaLink idle time limit threshold (kmph)
-		 * NOTE: Currently ignore by the api.
-		 * @return int	km/h
-		 */
-		public function getIdleTimeLimit_kmph() { return $this->idleTimeLimit_kmph; }
-
-		/**
-		 * Set CarmaLink idleTime limit allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setIdleTimeLimitAllowance_Msec($allowance_Msec = 0.0) { $this->idleTimeLimitAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink idleTime limit allowance
-		 * @return float allowance time in ms
-		 */
-		public function getIdleTimeLimitAllowance_Msec() { return $this->idleTimeLimitAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink buzzer volume for idleTimeLimit Report.
-		 * @param BuzzerVolume	buzzerVolume	HIGH/MED/LOW/OFF
-		 * @return void
-		 */
-		public function setIdleTimeLimitBuzzer_Volume($buzzerVolume = BuzzerVolume::BUZZER_OFF) { $this->idleTimeLimitBuzzer_Volume = $buzzerVolume; }
-
-		/**
-		 * Get CarmaLink buzzer volume setting for idleTime limit
-		 * @return BuzzerVolume	HIGH/MED/LOW/OFF
-		 */
-		public function getIdleTimeLimitBuzzer_Volume() { return $this->idleTimeLimitBuzzer_Volume; }
-
-		/**
-		 * Sets if idleTime Reports are to be reported by the device
-		 * @param int idleTimeLimitReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setIdleTimeLimitReport_Enabled($idleTimeLimitReport_Enabled = false) { $this->idleTimeLimitReport_Enabled = $idleTimeLimitReport_Enabled; }
-
-		/**
-		 * Gets if IdleTime report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getIdleTimeLimitReport_Enabled() { return $this->idleTimeLimitReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for idleTimeLimit Alert
-		 * @param array	optParams	List of optional parameters for idleTimeLimit Event
-		 */
-		public function setIdleTimeLimitOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to idleTimeLimit optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->idleTimeLimitOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns idleTimeLimitOptionalParameters parameters.
-		 * @return array|null IdleTimeLimitOptionalParameters
-		 */
-		public function getIdleTimeLimitOptionalParameters() {
-			if(isset($this->idleTimeLimitOptionalParameters) && $this->idleTimeLimitOptionalParameters !== NULL) {
+			case ConfigType::CONFIG_IDLING:
 				return $this->idleTimeLimitOptionalParameters;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for idleTimeLimit Alert
-		 * @param array optConditions List of conditions for the idleTimeLimitEvent
-		 */
-		public function setIdleTimeLimitOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to idleTimeLimit optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->idleTimeLimitOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns idleTimeLimit optional conditions.
-		 * @return array|null IdleTimeLimitOptionalConditions
-		 */
-		public function getIdleTimeLimitOptionalConditions() {
-			if($this->idleTimeLimitOptionalConditions) {
-				return $this->idleTimeLimitOptionalConditions;
-			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink parking Timeout Threshold_Msec
-		 * @param int	parkingTimeoutThreshold_Msec	in milliseconds
-		 * @return void
-		 */
-		public function setParkingTimeoutThreshold_Msec($parkingTimeoutThreshold_Msec = 0) { $this->parkingTimeoutThreshold_Msec = (int)$parkingTimeoutThreshold_Msec; }
-
-		/**
-		 * Get CarmaLink parking Timeout Allowance_Msec
-		 * @return int	milliseconds
-		 */
-		public function getParkingTimeoutThreshold_Msec() { return $this->parkingTimeoutThreshold_Msec; }
-		
-		/**
-		 * Set CarmaLink parkingTimeout limit allowance
-		 * @param float		allowance		allowance time in ms
-		 * @return void
-		 */
-		public function setParkingTimeoutAllowance_Msec($allowance_Msec = 0.0) { $this->parkingTimeoutAllowance_Msec = (float)$allowance_Msec; }
-
-		/**
-		 * Get CarmaLink parkingTimeout limit allowance
-		 * @return float allowance time in ms
-		 */
-		public function getParkingTimeoutAllowance_Msec() { return $this->parkingTimeoutAllowance_Msec; }
-
-		/**
-		 * Sets if parking Reports are to be reported by the device
-		 * @param int parkingTimeoutReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setParkingTimeoutReport_Enabled($parkingTimeoutReport_Enabled = false) { $this->parkingTimeoutReport_Enabled = $parkingTimeoutReport_Enabled; }
-
-		/**
-		 * Gets if Parking report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getParkingTimeoutReport_Enabled() { return $this->parkingTimeoutReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for parkingTimeout Alert
-		 * @param array	optParams	List of optional parameters for parkingTimeout Event
-		 */
-		public function setParkingTimeoutOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingTimeout optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->parkingTimeoutOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
-		}
-
-		/**
-		 * Returns parkingTimeoutOptionalParameters parameters.
-		 * @return array|null ParkingTimeoutOptionalParameters
-		 */
-		public function getParkingTimeoutOptionalParameters() {
-			if(isset($this->parkingTimeoutOptionalParameters) && $this->parkingTimeoutOptionalParameters !== NULL) {
+			case ConfigType::CONFIG_HARD_ACCEL:
+				return $this->accelLimitOptionalParameters;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				return $this->brakeLimitOptionalParameters;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				return $this->corneringLimitOptionalParameters;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				return $this->engineSpeedLimitOptionalParameters;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				return $this->parkingBrakeLimitOptionalParameters;
+			case ConfigType::CONFIG_SEATBELT:
+				return $this->seatbeltLimitOptionalParameters;
+			case ConfigType::CONFIG_PARKING:
 				return $this->parkingTimeoutOptionalParameters;
+			case ConfigType::CONFIG_TRANSPORTED:
+				return $this->transportedPingTimeOptionalParameters;
+			case ConfigType::CONFIG_STATUS:
+				return $this->statusPingTimeOptionalParameters;
+			case ConfigType::CONFIG_HEALTH:
+				return $this->healthOptionalParameters;
+			case ConfigType::CONFIG_TRIP_REPORT:
+				return $this->tripOptionalParameters;
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				return null;
+			default:
+				throw new CarmaLinkAPIException("Error: getOptionalParameters for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
 			}
-			return null;
 		}
-
-		/**
-		 * Set CarmaLink optional conditions for parkingTimeout Alert
-		 * @param array optConditions List of conditions for the parkingTimeoutEvent
+		
+		/*
+		 * Sets optional conditions for use by report events
+		 * @param	ConfigType	configType	valid config type to change
+		 * @param	array	valueArray	array object of all optional conditions.
 		 */
-		public function setParkingTimeoutOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to parkingTimeout optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->parkingTimeoutOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
+		public function setOptionalConditions($configType, $valueArray) {
+			if(!is_array($valueArray)) { throw new CarmaLinkAPIException("Error: setOptionalParameters for '".$configType."' must be of type array."); }
+			
+			$properFormattedArray;
+			if(isset($valueArray[0]) && is_string($valueArray[0]) && !is_bool($valueArray[0])) {
+				$properFormattedArray = array();
+				foreach($valueArray as $value) {
+					$properFormattedArray[$value] = true;
+				}
+				//convert to proper array.
+			} else{
+				$properFormattedArray = $valueArray;
+			}
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				$this->speedLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_IDLING:
+				$this->idleTimeLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				$this->accelLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				$this->brakeLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				$this->corneringLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				$this->engineSpeedLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				$this->parkingBrakeLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_SEATBELT:
+				$this->seatbeltLimitOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_PARKING:
+				$this->parkingTimeoutOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_TRANSPORTED:
+				$this->transportedPingTimeOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_STATUS:
+				$this->statusPingTimeOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_HEALTH:
+				$this->healthOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_TRIP_REPORT:
+				$this->tripOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				throw new CarmaLinkAPIException("Error: setOptionalConditions for '".$configType."' ' is illegal, as it does not support optional conditions");
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setOptionalConditions for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
 		}
-		/**
-		 * Returns parkingTimeout optional conditions.
-		 * @return array|null ParkingTimeoutOptionalConditions
+		
+		
+		/*
+		 * Gets optional conditions used by report events
+		 * @param	ConfigType	configType	valid config type to get optoinal conditoins are
+		 * @return	array|null	valueArray	array object of all optional conditions.
 		 */
-		public function getParkingTimeoutOptionalConditions() {
-			if($this->parkingTimeoutOptionalConditions) {
+		public function getOptionalConditions($configType) {
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				return $this->speedLimitOptionalConditions;
+			case ConfigType::CONFIG_IDLING:
+				return $this->idleTimeLimitOptionalConditions;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				return $this->accelLimitOptionalConditions;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				return $this->brakeLimitOptionalConditions;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				return $this->corneringLimitOptionalConditions;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				return $this->engineSpeedLimitOptionalConditions;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				return $this->parkingBrakeLimitOptionalConditions;
+			case ConfigType::CONFIG_SEATBELT:
+				return $this->seatbeltLimitOptionalConditions;
+			case ConfigType::CONFIG_PARKING:
 				return $this->parkingTimeoutOptionalConditions;
+			case ConfigType::CONFIG_TRANSPORTED:
+				return $this->transportedPingTimeOptionalConditions;
+			case ConfigType::CONFIG_STATUS:
+				return $this->statusPingTimeOptionalConditions;
+			case ConfigType::CONFIG_HEALTH:
+				return $this->healthOptionalConditions;
+			case ConfigType::CONFIG_TRIP_REPORT:
+				return $this->tripOptionalConditions;
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				return NULL;
+			default:
+				throw new CarmaLinkAPIException("Error: getOptionalConditions for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
 			}
-			return null;
 		}
 
-		/**
-		 * Set CarmaLink transport ping
-		 * @param int	transportedPingTime_Msec	in milliseconds
-		 * @return void
+				/*
+		 * Sets if the report is enabled or disabled
+		 * @param	ConfigType	configType	valid config type to change
+		 * @param	bool	value	is report enabled or not?
 		 */
-		public function setTransportedPingTime_Msec($transportedPingTime_Msec = 0) { $this->transportedPingTime_Msec = (int)$transportedPingTime_Msec; }
+		public function setReportEnabled($configType, $value = FALSE) {
+			$rVal = ($value === FALSE);
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				$this->speedLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_IDLING:
+				$this->idleTimeLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				$this->accelLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				$this->brakeLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				$this->corneringLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				$this->engineSpeedLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				$this->parkingBrakeLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_SEATBELT:
+				$this->seatbeltLimitReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_PARKING:
+				$this->parkingTimeoutReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_TRANSPORTED:
+				$this->transportedPingTimeReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_STATUS:
+				$this->statusPingTimeReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_HEALTH:
+				$this->healthReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_TRIP_REPORT:
+				$this->tripReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				throw new CarmaLinkAPIException("Error: setReportEnabled for '".$configType."' ' is illegal, as these reports are not properly implemented.");
+				break;
+			default:
+				throw new CarmaLinkAPIException("Error: setReportEnabled for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
+		}
+		
+		
+		/*
+		 * Gets optional conditions used by report events
+		 * @param	ConfigType	configType	valid config type to get if the report is enabled or not
+		 * @return	bool|null	boolean of if the report is enabled, null is report is unset.
+		 */
+		public function getReportEnabled($configType) {
+			switch($configType) {
+			case ConfigType::CONFIG_OVERSPEEDING:
+				return $this->speedLimitReportEnabled;
+			case ConfigType::CONFIG_IDLING:
+				return $this->idleTimeLimitReportEnabled;
+			case ConfigType::CONFIG_HARD_ACCEL:
+				return $this->accelLimitReportEnabled;
+			case ConfigType::CONFIG_HARD_BRAKING:
+				return $this->brakeLimitReportEnabled;
+			case ConfigType::CONFIG_HARD_CORNERING:
+				return $this->corneringLimitReportEnabled;
+			case ConfigType::CONFIG_ENGINE_OVERSPEED:
+				return $this->engineSpeedLimitReportEnabled;
+			case ConfigType::CONFIG_PARKING_BRAKE:
+				return $this->parkingBrakeLimitReportEnabled;
+			case ConfigType::CONFIG_SEATBELT:
+				return $this->seatbeltLimitReportEnabled;
+			case ConfigType::CONFIG_PARKING:
+				return $this->parkingTimeoutReportEnabled;
+			case ConfigType::CONFIG_TRANSPORTED:
+				return $this->transportedPingTimeReportEnabled;
+			case ConfigType::CONFIG_STATUS:
+				return $this->statusPingTimeReportEnabled;
+			case ConfigType::CONFIG_HEALTH:
+				return $this->healthReportEnabled;
+			case ConfigType::CONFIG_TRIP_REPORT:
+				return $this->tripReportEnabled;
+			case ConfigType::CONFIG_DIGITAL_INPUT_0:
+			case ConfigType::CONFIG_DIGITAL_INPUT_1:
+			case ConfigType::CONFIG_DIGITAL_INPUT_2:
+			case ConfigType::CONFIG_DIGITAL_INPUT_3:
+			case ConfigType::CONFIG_DIGITAL_INPUT_4:
+			case ConfigType::CONFIG_DIGITAL_INPUT_5:
+			case ConfigType::CONFIG_DIGITAL_INPUT_6:
+			case ConfigType::CONFIG_DRIVER_LOG:
+			case ConfigType::CONFIG_GREEN_BAND:
+				return NULL;
+			default:
+				throw new CarmaLinkAPIException("Error: getReportEnabled for '".$configType."' has failed since '".$configType."' is not recognized as valid.");
+			}
+		}
 		
 		/**
-		 * Get CarmaLink transportedPingTime_Msec
-		 * @return int	milliseconds
+		 * Set a full config based on a series on inputs.
+		 * If a field is null, it is skipped
+		 *@uses setThreshold
+		 *@uses setAllowance
+		 *@uses setBuzzer
+		 *@uses setOptionalParameters
+		 *@uses setOptionalConditions
+		 *@uses setReportEnabled
+		 *@param	ConfigType	configType	ConfigType to be updated
+		 *@param	float|null	threshold	Optional param of setting threshold
+		 *@param	int|null	allowance	Null if skipped, else sets allowance parameter
+		 *@param	BuzzerVolume|null	buzzer	Null if skipped, else sets buzzer_volume parameter
+		 *@param	array|null	optionalParameters	Null if skipped, else sets OptionalParameters to a proper array.
+		 *@param	array|null	optionalConditions	Null if skipped, else sets OptionalConditions to a proper array.
+		 *@param	bool|null	reportEnabled	is the report enabled or not?
 		 */
-		public function getTransportedPingTime_Msec() { return $this->transportedPingTime_Msec; }
-
-		/**
-		 * Get CarmaLink transportedPingTimeAllowance_Msec
-		 * @return int	milliseconds
-		 */
-		public function getTransportedPingTimeAllowance_Msec() { return $this->transportedPingTimeAllowance_Msec; }
-
-		/**
-		 * Set CarmaLink transport ping allowance
-		 * @param int	transportedPingTimeAllowance_Msec	in milliseconds
-		 * @return void
-		 */
-		public function setTransportedPingTimeAllowance_Msec($transportedPingTimeAllowance_Msec = 0) { $this->transportedPingTimeAllowance_Msec = (int)$transportedPingTimeAllowance_Msec; }
-
-		/**
-		 * Sets if transported Reports are to be reported by the device
-		 * @param int transportedPingTimeReport_Enabled True/False if report is to be used.
-		 * @return void
-		 */
-		public function setTransportedPingTimeReport_Enabled($transportedPingTimeReport_Enabled = false) { $this->transportedPingTimeReport_Enabled = $parkingTimeoutReport_Enabled; }
-
-		/**
-		 * Gets if Transported report is enabled
-		 * @return bool Report_Is_Enabled
-		 */
-		public function getTransportedPingTimeReport_Enabled() { return $this->transportedPingTimeReport_Enabled; }
-
-		/**
-		 * Set CarmaLink optional parameters for transportedPingTime Alert
-		 * @param array	optParams	List of optional parameters for transportedPingTime Event
-		 */
-		public function setTransportedPingTimeOptionalParameters($optParams = NULL) {
-			if($optParams === NULL) { throw new CarmaLinkAPIException("Cannot set to transportedPingTime optionalParameters to NULL, NULL is default, only for unset or ignored values"); }
-			$this->transportedPingTimeOptionalParameters = (is_array($optParams) ? $optParams : array($optParams));
+		public function setConfig($configType, $threshold = NULL, $allowance = NULL, $buzzer = NULL,
+		                          $optionalParameters = NULL, $optionalConditions = NULL, $reportEnabled = NULL) {
+		   	if($threshold          !== NULL) { $this->setThreshold($configType, $threshold); }
+		   	if($allowance          !== NULL) { $this->setAllowance($configType, $allowance); }
+		   	if($buzzer             !== NULL) { $this->setBuzzerVolume($configType, $buzzer); }
+		   	if($optionalParameters !== NULL) { $this->setOptionalParameters($configType, $optionalParameters); }
+		   	if($optionalConditions !== NULL) { $this->setOptionalConditions($configType, $optionalConditions); }
+		   	if($reportEnabled      !== NULL) { $this->setReportEnabled($configType, $reportEnabled); }
 		}
-
-		/**
-		 * Returns transportedPingTimeOptionalParameters parameters.
-		 * @return array|null TransportedPingTimeOptionalParameters
+		
+		
+		/*
+		 * Gets Object of a conglomoration of the configuration's setting in the device.
+		 *@param	ConfigType	configType	configuration to get.
+		 *@return StdObj	object containing all relevant configuration information
 		 */
-		public function getTransportedPingTimeOptionalParameters() {
-			if(isset($this->transportedPingTimeOptionalParameters) && $this->transportedPingTimeOptionalParameters !== NULL) {
-				return $this->transportedPingTimeOptionalParameters;
+		public function getConfig($configType) {
+			$obj = new \StdObj();
+			$obj->threshold          = $this->getThreshold($configType);
+			$obj->allowance          = $this->getAllowance($configType);
+			$obj->buzzerVolume       = $this->getBuzzerVolume($configType);
+			$obj->optionalParameters = $this->getOptionalParameters($configType);
+			$obj->optionalConditions = $this->getOptionalConditions($configType);
+			$obj->reportEnabled      = $this->getReportEnabled($configType);
+			
+			if($obj->threshold === NULL && $obj->allowance === NULL && $obj->buzzerVolume === NULL &&
+			   $obj->optionalParameters === NULL && $obj->optionalConditions === NULL && $obj->reportEnabled !== FALSE) {
+			   unset($obj);
+			   return NULL;
 			}
-			return null;
-		}
-
-		/**
-		 * Set CarmaLink optional conditions for transportedPingTime Alert
-		 * @param array optConditions List of conditions for the transportedPingTimeEvent
-		 */
-		public function setTransportedPingTimeOptionalParameters($optConditions = NULL) {
-			if($optConditions === NULL) { throw new CarmaLinkAPIException("Cannot set to transportedPingTime optionalConditions to NULL, NULL is default, only for unset or ignored values"); }
-			$this->transportedPingTimeOptionalConditions = (is_array($optConditions) ? $optConditions : array($optConditions));
-		}
-		/**
-		 * Returns transportedPingTime optional conditions.
-		 * @return array|null TransportedPingTimeOptionalConditions
-		 */
-		public function getTransportedPingTimeOptionalConditions() {
-			if($this->transportedPingTimeOptionalConditions) {
-				return $this->transportedPingTimeOptionalConditions;
-			}
-			return null;
+			$obj->configType         = $configType;
+			//this setting is global
+			$obj->location           = $this->getUseGps();
+			
+			
+			return $obj;
 		}
 
 		/**

@@ -208,122 +208,37 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_DIGITAL_INPUT_4:
 				case ConfigType::CONFIG_DIGITAL_INPUT_5:
 				case ConfigType::CONFIG_DIGITAL_INPUT_6:
-					/* TBD */
-					return NULL;
-					break;
-				
 				case ConfigType::CONFIG_DRIVER_LOG:
-					/* TBD */
-					return NULL;
-					break;
-
 				case ConfigType::CONFIG_GREEN_BAND:
-					/* TBD */
+					/* These are not supported yet*/
 					return NULL;
 					break;
-				
 				case ConfigType::CONFIG_HARD_ACCEL:
-					if (!$device->getAccelLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getAccelLimit_Mpss();
-					$config->allowance  = $device->getAccelLimitAllowance_Msec();
-					$config->buzzer     = $device->getAccelLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getAccelLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getAccelLimitOptionalConditions());
-					break;
-
 				case ConfigType::CONFIG_HARD_BRAKING:
-					if (!$device->getBrakeLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getBrakeLimit_Mpss();
-					$config->allowance  = $device->getBrakeLimitAllowance_Msec();
-					$config->buzzer     = $device->getBrakeLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getBrakeLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getBrakeLimitOptionalConditions());
-					break;
-
 				case ConfigType::CONFIG_HARD_CORNERING:
-					if (!$device->getCorneringLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getCorneringLimit_Mpss();
-					$config->allowance  = $device->getCorneringLimitAllowance_Msec();
-					$config->buzzer     = $device->getCorneringLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getCorneringLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getCorneringLimitOptionalConditions());
-					break;
-				
 				case ConfigType::CONFIG_STATUS:
-					if ((int)$device->getStatusPingTime_Msec() < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
-					if (!$device->getStatusPingTimeReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getStatusPingTime_Msec();
-					$config->allowance  = $device->getStatusPingTimeAllowance_Msec();
-					$config->params     = self::setupConfigParams($device->getStatusPingTimeOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getStatusPingTimeOptionalConditions());
-					break;
-
 				case ConfigType::CONFIG_IDLING:
-					if ((int)$device->getIdleTimeLimitAllowance_Msec() < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
-					if (!$device->getIdleTimeLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getIdleTimeLimit_kmph();
-					$config->allowance  = $device->getIdleTimeLimitAllowance_Msec();
-					$config->buzzer     = $device->getIdleTimeLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getIdleTimeLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getIdleTimeLimitOptionalConditions());
-					break;
-
 				case ConfigType::CONFIG_OVERSPEEDING:
-					if (!$device->getSpeedLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getSpeedLimit_kmph();
-					$config->allowance  = $device->getSpeedLimitAllowance_Msec();
-					$config->buzzer     = $device->getSpeedLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getSpeedLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getSpeedLimitOptionalConditions());
-					break;
 				case ConfigType::CONFIG_ENGINE_OVERSPEED:
-					if(!$device->getEngineSpeedLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getEngineSpeedLimit_rpm();
-					$config->allowance  = $device->getEngineSpeedLimitAllowance_Msec();
-					$config->buzzer     = $device->getEngineSpeedLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getEngineSpeedLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getEngineSpeedLimitOptionalConditions());
-					break;
 				case ConfigType::CONFIG_PARKING_BRAKE:
-					if (!$device->getParkingBrakeLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getParkingBrakeLimit_kmph();
-					$config->allowance  = $device->getParkingBrakeLimitAllowance_Msec();
-					$config->buzzer     = $device->getParkingBrakeLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getParkingBrakeLimitOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getParkingBrakeLimitOptionalConditions());
-					break;
 				case ConfigType::CONFIG_PARKING:
-					if(!$device->getParkingTimeoutReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getParkingTimeoutThreshold_Msec();
-					$config->allowance  = $device->getParkingTimeoutAllowance_Msec();
-					$config->params     = self::setupConfigParams($device->getParkingTimeoutOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getParkingTimeoutOptionalConditions());
-					break;
 				case ConfigType::CONFIG_SEATBELT:
-					if (!$device->getSeatbeltLimitReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getSeatbeltLimit_kmph();
-					$config->allowance  = $device->getSeatbeltLimitAllowance_Msec();
-					$config->buzzer     = $device->getSeatbeltLimitBuzzer_Volume();
-					$config->params     = self::setupConfigParams($device->getSeatbeltLimitOptionalParameters();
-					$config->conditions = self::setupConfigConds($device->getSeatbeltLimitOptionalConditions());
-					break;
 				case ConfigType::CONFIG_TRANSPORTED:
-					if(!$device->getTransportedPingTimeReport_Enabled()) { return FALSE; }
-					$config->threshold  = $device->getTransportedPingTime_Msec();
-					$config->allowance  = $device->getTransportedPingTimeAllowance_Msec();
-					$config->params     = self::setupConfigParams($device->getTransportedPingTimeOptionalParameters();
-					$config->conditions = self::setupConfigConds($device->getTransportedPingTimeOptionalConditions());
-					break;
 				case ConfigType::CONFIG_TRIP_REPORT:
-					if ($device->getUseTrips() == FALSE) { return FALSE; }
-					$config->params     = self::setupConfigParams($device->getTripOptionalParameters();
-					$config->conditions = self::setupConfigConds($device->getTripOptionalConditions());
-					break;
-
 				case ConfigType::CONFIG_HEALTH:
-					if ($device->getUseHealth() === FALSE) { return FALSE; }
-					$config->params     = self::setupConfigParams($device->getTripOptionalParameters());
-					$config->conditions = self::setupConfigConds($device->getTripOptionalConditions());
+					$deviceConfig = $device->getConfig($configType);
+					if($deviceConfig === NULL) { return NULL; }
+					if ($deviceConfig->reportEnabled === FALSE) { return FALSE; }
+					if($deviceConfig->configType === ConfigType::CONFIG_STATUS) {
+						if ((int)$deviceConfig->threshold < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
+					} else if($deviceConfig->configType === ConfigType::CONFIG_IDLING) {
+						if ((int)$deviceConfig->allowance < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
+					}
+					$config->threshold  = $deviceConfig->threshold;
+					$config->allowance  = $deviceConfig->allowance;
+					$config->buzzer     = $deviceConfig->buzzerVolume;
+					$config->params     = self::setupConfigParams($deviceConfig->optionalParameters);
+					$config->conditions = self::setupConfigConds($deviceConfig->optionalConditions);
 					break;
 			}
 			return $config;
