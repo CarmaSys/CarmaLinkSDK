@@ -753,17 +753,17 @@ namespace CarmaLink;
 			$obj = new \StdObj();
 			$obj->threshold          = $this->getThreshold($configType);
 			$obj->allowance          = $this->getAllowance($configType);
-			$obj->buzzerVolume       = $this->getBuzzerVolume($configType);
+			$obj->buzzer_volume       = $this->getBuzzerVolume($configType);
 			$obj->optionalParameters = $this->getOptionalParameters($configType);
 			$obj->optionalConditions = $this->getOptionalConditions($configType);
 			$obj->reportEnabled      = $this->getReportEnabled($configType);
 			
-			if($obj->threshold === NULL && $obj->allowance === NULL && $obj->buzzerVolume === NULL &&
+			if($obj->threshold === NULL && $obj->allowance === NULL && $obj->buzzer_volume === NULL &&
 			   $obj->optionalParameters === NULL && $obj->optionalConditions === NULL && $obj->reportEnabled !== FALSE) {
 			   unset($obj);
 			   return NULL;
 			}
-			$obj->configType         = $configType;
+			$obj->config_type         = $configType;
 			//this setting is global
 			$obj->location           = $this->getUseGps();
 			

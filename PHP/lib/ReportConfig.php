@@ -226,17 +226,17 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_TRANSPORTED:
 				case ConfigType::CONFIG_TRIP_REPORT:
 				case ConfigType::CONFIG_HEALTH:
-					$deviceConfig = $device->getConfig($configType);
+					$deviceConfig = $device->getConfig($config_type);
 					if($deviceConfig === NULL) { return NULL; }
 					if ($deviceConfig->reportEnabled === FALSE) { return FALSE; }
-					if($deviceConfig->configType === ConfigType::CONFIG_STATUS) {
+					if($deviceConfig->config_type === ConfigType::CONFIG_STATUS) {
 						if ((int)$deviceConfig->threshold < ConfigType::CONFIG_STATUS_MINIMUM_PING) { return FALSE; }
-					} else if($deviceConfig->configType === ConfigType::CONFIG_IDLING) {
+					} else if($deviceConfig->config_type === ConfigType::CONFIG_IDLING) {
 						if ((int)$deviceConfig->allowance < ConfigType::CONFIG_IDLING_MINIMUM_ALLOWANCE) { return FALSE; }
 					}
 					$config->threshold  = $deviceConfig->threshold;
 					$config->allowance  = $deviceConfig->allowance;
-					$config->buzzer     = $deviceConfig->buzzerVolume;
+					$config->buzzer     = $deviceConfig->buzzer_volume;
 					$config->params     = self::setupConfigParams($deviceConfig->optionalParameters);
 					$config->conditions = self::setupConfigConds($deviceConfig->optionalConditions);
 					break;
