@@ -177,7 +177,7 @@ namespace CarmaLink;
 			if(!$conditions) { return NULL; }
 			$a = array();
 			//all functions are set.
-			if ($conditions->batteryVoltage)      { $a[] = self::BATTERY_VOLTAGE; $a[] = self::BATTERY_VOLTAGE_LOW; }
+			if ($conditions->batteryVoltage)      { $a[] = self::BATTERY_VOLTAGE_LOW; }
 			if ($conditions->tirePressure)        { $a[] = self::TIRE_PRESSURE_LOW; }
 			if ($conditions->emissionMonitors)    { $a[] = self::EMISSION_MONITORS; }
 
