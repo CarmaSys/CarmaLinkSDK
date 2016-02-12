@@ -8,11 +8,11 @@ Also included is an audible live feedback mechanism to notify drivers of unwante
 The CarmaLinkSDK represents a layer of abstraction for interfacing the CarmaLinkAPI which utilizes
 a RESTful style interface over HTTPS. Authentication is handled by a two-legged OAuth 1.0a implementation.
 
-The latest CarmaLinkAPI documentation can be found ([here](https://github.com/CarmaSys/CarmaLinkAPI/blob/1.6/README.md))
+The latest CarmaLinkAPI documentation can be found ([here](https://github.com/CarmaSys/CarmaLinkAPI/tree/master))
 
 The SDK currently supports the following languages: 
 
-* PHP >= 5.3 ([docs](http://carmasys.github.io/CarmaLinkSDK/))
+* PHP >= 5.4 ([docs](http://carmasys.github.io/CarmaLinkSDK/))
 
 Future releases aim to support: 
 
