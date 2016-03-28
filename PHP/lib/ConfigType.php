@@ -38,6 +38,8 @@ namespace CarmaLink;
 		const CONFIG_PARKING         = 'parking';
 		const CONFIG_ENGINE_OVERSPEED= 'engine_overspeed';
 		const CONFIG_TRANSPORTED     = 'transported';
+		const CONFIG_PTO             = 'pto';
+		const CONFIG_STOPPED         = 'stopped';
 
 		const CONFIG_NEW_DEPLOYMENT  = 'new_deployment';
 		
@@ -91,7 +93,9 @@ namespace CarmaLink;
 			self::CONFIG_HEALTH,
 			self::CONFIG_PARKING,
 			self::CONFIG_ENGINE_OVERSPEED,
-			self::CONFIG_TRANSPORTED
+			self::CONFIG_TRANSPORTED,
+			self::CONFIG_PTO,
+			self::CONFIG_STOPPED
 		);
 		/** Valid READ-ONLY report config types
 		 * @access public
@@ -115,29 +119,6 @@ namespace CarmaLink;
 		 */
 		public static $valid_r_general_config_types = array(
 			self::CONFIG_GENERAL
-		);
-		/** Configurations that use allowances
-		 * @access public
-		 * @var array
-		 */
-		public static $allowance_config_types = array(
-			self::CONFIG_DIGITAL_INPUT_0,
-			self::CONFIG_DIGITAL_INPUT_1,
-			self::CONFIG_DIGITAL_INPUT_2,
-			self::CONFIG_DIGITAL_INPUT_3,
-			self::CONFIG_DIGITAL_INPUT_4,
-			self::CONFIG_DIGITAL_INPUT_5,
-			self::CONFIG_DIGITAL_INPUT_6,
-			self::CONFIG_GREEN_BAND,
-			self::CONFIG_HARD_ACCEL,
-			self::CONFIG_HARD_BRAKING,
-			self::CONFIG_HARD_CORNERING,
-			self::CONFIG_STATUS, 
-			self::CONFIG_IDLING, 
-			self::CONFIG_OVERSPEEDING, 
-			self::CONFIG_PARKING_BRAKE,
-			self::CONFIG_SEATBELT,
-			self::CONFIG_ENGINE_OVERSPEED
 		);
 
 		/**
@@ -174,13 +155,6 @@ namespace CarmaLink;
 			return (array_search($config_type, self::$valid_rw_general_config_types) !== false ? true : 
 			                    (array_search($config_type, self::$valid_r_general_config_types) !== false));
 		}
-		/**
-		 * Helper to determine if a string matches a valid configuration type.
-		 *
-		 * @param string|ConfigType 	config_type
-		 * @return bool
-		 */
-		public static function isAllowanceConfigType($config_type) { return (array_search($config_type, self::$allowance_config_types) !== false); }
 
 		/**
 		 * Helper to determine if a configuration type uses the buzzer property.

@@ -84,6 +84,8 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_STATUS:
 				$this->statusPingTime_Msec = (int)$value;
 				break;
+			case ConfigType::CONFIG_PTO:
+			case ConfigType::CONFIG_STOPPED:
 			case ConfigType::CONFIG_HEALTH:
 			case ConfigType::CONFIG_TRIP_REPORT:
 			case ConfigType::CONFIG_DIGITAL_INPUT_0:
@@ -130,6 +132,8 @@ namespace CarmaLink;
 				return $this->transportedPingTime_Msec;	
 			case ConfigType::CONFIG_STATUS:
 				return $this->statusPingTime_Msec;
+			case ConfigType::CONFIG_PTO:
+			case ConfigType::CONFIG_STOPPED:
 			case ConfigType::CONFIG_HEALTH:
 			case ConfigType::CONFIG_TRIP_REPORT:
 			case ConfigType::CONFIG_DIGITAL_INPUT_0:
@@ -183,6 +187,12 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_PARKING:
 				$this->parkingTimeoutAllowance_Msec = (int)$value;
 				break;
+			case ConfigType::CONFIG_PTO:
+				$this->powerTakeOffAllowance_Msec = (int)$value;
+				break;
+			case ConfigType::CONFIG_STOPPED:
+				$this->stoppedTimeLimitAllowance_Msec = (int)$value;
+				break;
 			case ConfigType::CONFIG_TRANSPORTED:
 				$this->transportedPingTimeAllowance_Msec = (int)$value;	
 				break;
@@ -232,6 +242,10 @@ namespace CarmaLink;
 				return $this->seatbeltLimitAllowance_Msec;
 			case ConfigType::CONFIG_PARKING:
 				return $this->parkingTimeoutAllowance_Msec;
+			case ConfigType::CONFIG_PTO:
+				return $this->powerTakeOffAllowance_Msec;
+			case ConfigType::CONFIG_STOPPED:
+				return $this->stoppedTimeLimitAllowance_Msec;
 			case ConfigType::CONFIG_TRANSPORTED:
 				return $this->transportedPingTimeAllowance_Msec;
 			case ConfigType::CONFIG_STATUS:
@@ -294,6 +308,8 @@ namespace CarmaLink;
 				$this->seatbeltLimitBuzzer_Volume = $value;
 				break;
 			case ConfigType::CONFIG_PARKING:
+			case ConfigType::CONFIG_PTO:
+			case ConfigType::CONFIG_STOPPED:
 			case ConfigType::CONFIG_TRANSPORTED:
 			case ConfigType::CONFIG_STATUS:
 			case ConfigType::CONFIG_HEALTH:
@@ -338,6 +354,8 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_SEATBELT:
 				return $this->seatbeltLimitBuzzer_Volume;
 			case ConfigType::CONFIG_PARKING:
+			case ConfigType::CONFIG_PTO:
+			case ConfigType::CONFIG_STOPPED:
 			case ConfigType::CONFIG_TRANSPORTED:
 			case ConfigType::CONFIG_STATUS:
 			case ConfigType::CONFIG_HEALTH:
@@ -404,6 +422,12 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_PARKING:
 				$this->parkingTimeoutOptionalParameters = $properFormattedArray;
 				break;
+			case ConfigType::CONFIG_PTO:
+				$this->powerTakeOffOptionalParameters = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_STOPPED:
+				$this->stoppedTimeLimitOptionalParameters = $properFormattedArray;
+				break;
 			case ConfigType::CONFIG_TRANSPORTED:
 				$this->transportedPingTimeOptionalParameters = $properFormattedArray;
 				break;
@@ -458,6 +482,10 @@ namespace CarmaLink;
 				return $this->seatbeltLimitOptionalParameters;
 			case ConfigType::CONFIG_PARKING:
 				return $this->parkingTimeoutOptionalParameters;
+			case ConfigType::CONFIG_PTO:
+				return $this->powerTakeOffOptionalParameters;
+			case ConfigType::CONFIG_STOPPED:
+				return $this->stoppedTimeLimitOptionalParameters;
 			case ConfigType::CONFIG_TRANSPORTED:
 				return $this->transportedPingTimeOptionalParameters;
 			case ConfigType::CONFIG_STATUS:
@@ -527,6 +555,12 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_PARKING:
 				$this->parkingTimeoutOptionalConditions = $properFormattedArray;
 				break;
+			case ConfigType::CONFIG_PTO:
+				$this->powerTakeOffOptionalConditions = $properFormattedArray;
+				break;
+			case ConfigType::CONFIG_STOPPED:
+				$this->stoppedTimeLimitOptionalConditions = $properFormattedArray;
+				break;
 			case ConfigType::CONFIG_TRANSPORTED:
 				$this->transportedPingTimeOptionalConditions = $properFormattedArray;
 				break;
@@ -581,6 +615,10 @@ namespace CarmaLink;
 				return $this->seatbeltLimitOptionalConditions;
 			case ConfigType::CONFIG_PARKING:
 				return $this->parkingTimeoutOptionalConditions;
+			case ConfigType::CONFIG_PTO:
+				return $this->powerTakeOffOptionalConditions;
+			case ConfigType::CONFIG_STOPPED:
+				return $this->stoppedTimeLimitOptionalConditions;
 			case ConfigType::CONFIG_TRANSPORTED:
 				return $this->transportedPingTimeOptionalConditions;
 			case ConfigType::CONFIG_STATUS:
@@ -639,6 +677,12 @@ namespace CarmaLink;
 			case ConfigType::CONFIG_PARKING:
 				$this->parkingTimeoutReportEnabled = $rVal;
 				break;
+			case ConfigType::CONFIG_PTO:
+				$this->powerTakeOffReportEnabled = $rVal;
+				break;
+			case ConfigType::CONFIG_STOPPED:
+				$this->stoppedTimeLimitReportEnabled = $rVal;
+				break;
 			case ConfigType::CONFIG_TRANSPORTED:
 				$this->transportedPingTimeReportEnabled = $rVal;
 				break;
@@ -693,6 +737,10 @@ namespace CarmaLink;
 				return $this->seatbeltLimitReportEnabled;
 			case ConfigType::CONFIG_PARKING:
 				return $this->parkingTimeoutReportEnabled;
+			case ConfigType::CONFIG_PTO:
+				return $this->powerTakeOffReportEnabled;
+			case ConfigType::CONFIG_STOPPED:
+				return $this->stoppedTimeLimitReportEnabled;
 			case ConfigType::CONFIG_TRANSPORTED:
 				return $this->transportedPingTimeReportEnabled;
 			case ConfigType::CONFIG_STATUS:

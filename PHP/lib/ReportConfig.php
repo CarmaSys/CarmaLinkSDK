@@ -221,8 +221,8 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_OVERSPEEDING:
 				case ConfigType::CONFIG_ENGINE_OVERSPEED:
 				case ConfigType::CONFIG_PARKING_BRAKE:
-				case ConfigType::CONFIG_PARKING:
 				case ConfigType::CONFIG_SEATBELT:
+				case ConfigType::CONFIG_PARKING:
 				case ConfigType::CONFIG_TRANSPORTED:
 				case ConfigType::CONFIG_TRIP_REPORT:
 				case ConfigType::CONFIG_HEALTH:
