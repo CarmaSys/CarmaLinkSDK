@@ -37,7 +37,7 @@ namespace CarmaLink;
 		* @var string
 		* The current API version
 		*/
-		const API_VERSION = "1.8.1";
+		const API_VERSION = "1.8.2";
 
 		const API_NAME = "CarmaLinkAPI";
 		

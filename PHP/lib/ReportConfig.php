@@ -224,6 +224,8 @@ namespace CarmaLink;
 				case ConfigType::CONFIG_SEATBELT:
 				case ConfigType::CONFIG_PARKING:
 				case ConfigType::CONFIG_TRANSPORTED:
+				case ConfigType::CONFIG_PTO:
+				case ConfigType::CONFIG_STOPPED:
 				case ConfigType::CONFIG_TRIP_REPORT:
 				case ConfigType::CONFIG_HEALTH:
 					$deviceConfig = $device->getConfig($config_type);
@@ -240,6 +242,9 @@ namespace CarmaLink;
 					$config->params     = self::setupConfigParams($deviceConfig->optionalParameters);
 					$config->conditions = self::setupConfigConds($deviceConfig->optionalConditions);
 					break;
+				default:
+					//Catchall for all unrecognized (accidentally or otherwise)
+					return NULL;
 			}
 			return $config;
 		}
