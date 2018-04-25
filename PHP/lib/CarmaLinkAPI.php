@@ -196,20 +196,23 @@ namespace CarmaLink;
 		 * Gets a CarmaLink data view/report based on provided parameters.
 		 *
 		 * @param string|int|array 	serials			Serial number(s) of CarmaLink
-		 * @param string 			report_type 	Report/view type to query
+		 * @param string 			report_type 	Report/view type to query. if not provided, uses base query which returns ALL data.
 		 * @param array 			parameters		Key=>value parameters for data filtering to be added to the query string
 		 * @param bool				returnAllData	If set to true will return assoc. array of HTTP code and HTTP body
 		 * @return bool|string|array				If returnAllData param is true will return assoc. array of HTTP code and HTTP body
 		 * 											otherwise, will return false on error and a JSON string on success
 		 * @throws CarmaLink\CarmaLinkAPIException
 		 */
-		public function getReportData($serials = 0, $report_type, $parameters = array(), $returnAllData = FALSE) {
+		public function getReportData($serials = 0, $report_type = null, $parameters = array(), $returnAllData = FALSE) {
 			if ($serials === 0 || empty($serials)) { throw new CarmaLinkAPIException("Missing valid serial number for querying API for report data (given:".$serials.")"); }
-			if(!ConfigType::isValidReportConfigType($report_type)) { throw new CarmaLinkAPIException('API getReportData can only operate on valid report configs.'); }
 			$serials = $this->sanitizeSerials($serials);
+			$uri = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/data/";
+			//no param = an all query.
+			if ( $report_type ) {
+				if(!ConfigType::isValidReportConfigType($report_type)) { throw new CarmaLinkAPIException('API getReportData can only operate on valid report configs.'); }
+				$uri .= $report_type;
+			}
 			
-			
-			$uri = $this->getEndpointRootURI()."/".$this->getEndpointRelativeRoot()."/".$serials."/data/".$report_type;
 			$response_data = $this->get($uri, $parameters);
 			
 			if ($returnAllData === TRUE) { return $response_data; }
