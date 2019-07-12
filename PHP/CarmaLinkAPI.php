@@ -113,6 +113,18 @@ namespace CarmaLink {
 		const DEBUG     = "DEBUG";
 		const INSTALLER = "INSTALLER";
 	}
+	
+	/**
+	 * Type of compliance modes the device uses
+	 * 
+	 * When setting or getting the CONFIG_GENERAL_OPERATION complianceMode, use these values
+	 * 
+	 * @class ComplianceModeType
+	 */
+	class ComplianceModeType {
+		const NONE = "NONE";
+		const ELD  = "ELD";
+	}
 
 
 } // End of namespace CarmaLink

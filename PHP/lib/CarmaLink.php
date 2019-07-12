@@ -999,5 +999,29 @@ namespace CarmaLink;
 		 */
 		public function getMaximumUptimeHours() { return $this->maximumUptimeHours; }
 		
+		/**
+		 * Set device compliance mode
+		 * @param complianceMode
+		 * @return void
+		 */
+		public function setComplianceMode($complianceMode = "") { $this->complianceMode= $complianceMode; }
+		/**
+		 * Get device compliance mode
+		 * @return string|ComplianceModeType
+		 */
+		public function getComplianceMode() { return $this->complianceMode; }
+		
+		/**
+		 * Set device driver login required
+		 * @param driverLoginRequired
+		 * @return void
+		 */
+		public function setDriverLoginRequired($driverLoginRequired = true) { $this->driverLoginRequired= $driverLoginRequired; }
+		/**
+		 * Get device driver login required
+		 * @return bool driverLoginRequired
+		 */
+		public function getDriverLoginRequired() { return $this->driverLoginRequired; }
+		
 	} //End of class CarmaLink
 ?>

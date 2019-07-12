@@ -82,6 +82,16 @@ namespace CarmaLink;
 		 * @var int
 		 */
 		public $maximumUptimeHours = NULL;
+		/**
+		 * @access public
+		 * @var string|ComplianceModeType
+		 */
+		public $complianceMode = NULL;
+		/**
+		 * @access public
+		 * @var bool
+		 */
+		public $driverLogRequired = NULL;
 
 		/**
 		 * @access private
@@ -92,26 +102,29 @@ namespace CarmaLink;
 		/**
 		 * Constructor
 		 *
-		 * @param string|FuelType         fuelType     
-		 * @param float|int               engineDisplacement_L
-		 * @param bool                    isPaused
-		 * @param int                     connectInterval_Mins
-		 * @param int                     agpsConnectInterval_Hrs
- 		 * @param int                     pingInterval_Mins
-		 * @param float|int               chargingVoltage_V
-		 * @param float|int               lowBatteryVoltage_V
-		 * @param int                     lowBatteryMinutes
-		 * @param int                     minimumRunVoltageEnergy
-		 * @param int                     maximumOffVoltageEnergy
-		 * @param string|OBDDetectionType obdDetection
-		 * @param string|LEDModeType      ledMode
-		 * @param int                     maximumUptimeHours
+		 * @param string|FuelType           fuelType     
+		 * @param float|int                 engineDisplacement_L
+		 * @param bool                      isPaused
+		 * @param int                       connectInterval_Mins
+		 * @param int                       agpsConnectInterval_Hrs
+ 		 * @param int                       pingInterval_Mins
+		 * @param float|int                 chargingVoltage_V
+		 * @param float|int                 lowBatteryVoltage_V
+		 * @param int                       lowBatteryMinutes
+		 * @param int                       minimumRunVoltageEnergy
+		 * @param int                       maximumOffVoltageEnergy
+		 * @param string|OBDDetectionType   obdDetection
+		 * @param string|LEDModeType        ledMode
+		 * @param int                       maximumUptimeHours
+		 * @param string|ComplianceModeType complianceMode
+		 * @param bool                      driverLoginRequired
 		 * @return void
 		 */
 		public function __construct($fuelType = NULL, $engineDisplacement_L = NULL, $isPaused = NULL, $connectInterval_Mins = NULL,
 		                            $agpsConnectInterval_Hrs = NULL, $pingInterval_Mins = NULL, $chargingVoltage_V = NULL,
 		                            $lowBatteryVoltage_V = NULL, $lowBatteryMinutes = NULL, $minimumRunVoltageEnergy = NULL,
-		                            $maximumOffVoltageEnergy = NULL, $obdDetection = NULL, $ledMode = NULL, $maximumUptimeHours = NULL) {
+		                            $maximumOffVoltageEnergy = NULL, $obdDetection = NULL, $ledMode = NULL, $maximumUptimeHours = NULL,
+									$complianceMode = NULL, $driverLoginRequired = NULL) {
 			$this->__api_version = CarmaLinkAPI::API_VERSION;
 			$this->fuelType                = $fuelType;
 			$this->engineDisplacement_L    = $engineDisplacement_L;
@@ -127,6 +140,8 @@ namespace CarmaLink;
 			$this->obdDetection            = $obdDetection;
 			$this->ledMode                 = $ledMode;
 			$this->maximumUptimeHours      = $maximumUptimeHours;
+			$this->complianceMode          = $complianceMode;
+			$this->driverLoginRequired     = $driverLoginRequired;
 		}
 
 		/**
@@ -150,7 +165,9 @@ namespace CarmaLink;
 				"maximumOffVoltageEnergy" => $this->maximumOffVoltageEnergy,
 				"obdDetection"            => $this->obdDetection,
 				"ledMode"                 => $this->ledMode,
-				"maximumUptimeHours"      => $this->maximumUptimeHours);
+				"maximumUptimeHours"      => $this->maximumUptimeHours,
+				"complianceMode"          => $this->complianceMode,
+				"driverLoginRequired"     => $this->driverLoginRequired);
 			$nullVals = array();
 			foreach($arr as $key=>$value) {
 				if($value === NULL) {
@@ -201,7 +218,9 @@ namespace CarmaLink;
 					"maximumOffVoltageEnergy" => $this->maximumOffVoltageEnergy,
 					"obdDetection"            => $this->obdDetection,
 					"ledMode"                 => $this->ledMode,
-					"maximumUptimeHours"      => $this->maximumUptimeHours
+					"maximumUptimeHours"      => $this->maximumUptimeHours,
+					"complianceMode"          => $this->complianceMode,
+					"driverLoginRequired"     => $this->driverLoginRequired
 				);
 				break;
 			default:
@@ -246,6 +265,8 @@ namespace CarmaLink;
 			$config->obdDetection            = $device->getOBDDetection();
 			$config->ledMode                 = $device->getLEDMode();
 			$config->maximumUptimeHours      = $device->getMaximumUptimeHours();
+			$config->complianceMode          = $device->getComplianceMode();
+			$config->driverLoginRequired     = $device->getDriverLoginRequired();
 			
 			return $config;
 		}
@@ -293,7 +314,9 @@ namespace CarmaLink;
 				isset($obj->maximumOffVoltageEnergy) ? $obj->maximumOffVoltageEnergy : NULL,
 				isset($obj->obdDetection)            ? $obj->obdDetection            : NULL,
 				isset($obj->ledMode)                 ? $obj->ledMode                 : NULL,
-				isset($obj->maximumUptimeHours)      ? $obj->maximumUptimeHours      : NULL
+				isset($obj->maximumUptimeHours)      ? $obj->maximumUptimeHours      : NULL,
+				isset($obj->complianceMode)          ? $obj->complianceMode          : NULL,
+				isset($obj->driverLoginRequired)     ? $obj->driverLoginRequired     : NULL
 			);
 
 			return $config;
