@@ -91,7 +91,7 @@ namespace CarmaLink;
 		 * @access public
 		 * @var bool
 		 */
-		public $driverLogRequired = NULL;
+		public $driverLoginRequired = NULL;
 
 		/**
 		 * @access private
