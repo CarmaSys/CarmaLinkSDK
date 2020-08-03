@@ -403,7 +403,7 @@ class OAuthRequester extends OAuthRequestSigner
 		curl_setopt($ch, CURLOPT_URL, 			 $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_HEADER, 		 true);
-		curl_setopt($ch, CURLOPT_TIMEOUT, 		 40);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 		 60);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0); //no timeout
 	
 		foreach ($opts as $k => $v)
