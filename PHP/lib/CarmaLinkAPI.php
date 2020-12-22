@@ -1,9 +1,9 @@
 <?php
-namespace CarmaLink;	
+namespace CarmaLink;
 
 	/**
 	 * Monolog for debug/info logging (MIT license)
-	 * 
+	 *
 	 * @see https://github.com/Seldaek/monolog.git
 	 */
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Logger.php');
@@ -11,10 +11,12 @@ namespace CarmaLink;
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Handler/AbstractHandler.php');
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Handler/AbstractProcessingHandler.php');
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Handler/StreamHandler.php');
+	/*
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Formatter/FormatterInterface.php');
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Formatter/NormalizerFormatter.php');
 	require_once realpath(__DIR__. '/../monolog/src/Monolog/Formatter/LineFormatter.php');
-	
+	*/
+
 	use Monolog\Logger;
 	use Monolog\Handler\StreamHandler;
 
@@ -40,7 +42,7 @@ namespace CarmaLink;
 		const API_VERSION = "1.8.2";
 
 		const API_NAME = "CarmaLinkAPI";
-		
+
 		/**
 		* @access public
 		* @var string
